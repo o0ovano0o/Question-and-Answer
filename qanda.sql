@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 17, 2019 lúc 07:13 AM
+-- Thời gian đã tạo: Th9 17, 2019 lúc 07:43 AM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -184,8 +184,9 @@ CREATE TABLE `u_ans` (
 -- Chỉ mục cho bảng `ans_quest`
 --
 ALTER TABLE `ans_quest`
-  ADD PRIMARY KEY (`section_id`,`ans_id`) USING BTREE,
-  ADD UNIQUE KEY `question_id` (`question_id`,`section_id`) USING BTREE;
+  ADD PRIMARY KEY (`ans_id`) USING BTREE,
+  ADD UNIQUE KEY `question_id` (`question_id`,`section_id`) USING BTREE,
+  ADD KEY `section_id` (`section_id`);
 
 --
 -- Chỉ mục cho bảng `aquest`
@@ -199,7 +200,8 @@ ALTER TABLE `aquest`
 --
 ALTER TABLE `cmt_ans`
   ADD PRIMARY KEY (`cmt_id`) USING BTREE,
-  ADD UNIQUE KEY `question_id` (`question_id`,`ans_id`) USING BTREE;
+  ADD UNIQUE KEY `question_id` (`question_id`,`ans_id`) USING BTREE,
+  ADD KEY `ans_id` (`ans_id`);
 
 --
 -- Chỉ mục cho bảng `section`
@@ -265,7 +267,7 @@ ALTER TABLE `u_ans`
 -- Các ràng buộc cho bảng `ans_quest`
 --
 ALTER TABLE `ans_quest`
-  ADD CONSTRAINT `ans_quest_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
+  ADD CONSTRAINT `ans_quest_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `aquest` (`section_id`);
 
 --
 -- Các ràng buộc cho bảng `aquest`
@@ -273,6 +275,13 @@ ALTER TABLE `ans_quest`
 ALTER TABLE `aquest`
   ADD CONSTRAINT `aquest_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`),
   ADD CONSTRAINT `aquest_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `ans_quest` (`question_id`);
+
+--
+-- Các ràng buộc cho bảng `cmt_ans`
+--
+ALTER TABLE `cmt_ans`
+  ADD CONSTRAINT `cmt_ans_ibfk_1` FOREIGN KEY (`ans_id`) REFERENCES `ans_quest` (`ans_id`),
+  ADD CONSTRAINT `cmt_ans_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `ans_quest` (`question_id`);
 
 --
 -- Các ràng buộc cho bảng `squest_ans`
