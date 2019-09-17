@@ -14,6 +14,8 @@
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="./bootstrap-4.3.1/bootstrap.min.js"></script>
+  <script src="./bootstrap-4.3.1/jquery-3.2.1.min.js"></script>
+  <script src="./bootstrap-4.3.1/bootstrap-4.0.0.min.js"></script>
 </head>
 
 <body>
@@ -32,18 +34,25 @@
             <a class="nav-link" href="#">Quản lý</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Trợ giúp</a>
+            <a class="nav-link" href="#">Trợ giúp</a>
           </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
           <input id="search" class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm..." aria-label="Search">
         </form>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" style="display: contents;">
           <li class="nav-item">
             <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" style="color: whitesmoke" href="#"><img src="./images/avt.jpg" width="40" height="40" style="border-radius: 100%" >  Username</a>
+          <li>
+            <div class="thumb" style="background-image:url(./images/avt.jpg);width: 40px;height: 40px"></div>
+          </li>  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Username</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Quản lý</a>
+              <a class="dropdown-item" href="#">Đăng xuất</a>
+            </div>
           </li>
         </ul>
       </div>
@@ -57,126 +66,124 @@
     <div id="border_main" class="container marketing">
       <div id="main">
         <div class="row">
-          <div class="col-md-4">
-            <img src="./images/avt.jpg" width="200" height="200" style="border-radius: 100%">
+            <div class="thumb" style="background-image:url(./images/avt.jpg);width: 200px;height: 200px"></div>
+            <div class="col-md-8">
+              <h3>Username</h3>
+              <ul>
+                <li>Chức vụ: Thành viên </li>
+                <li>Tổng số câu hỏi: 0 </li>
+                <li>Câu hỏi chưa được trả lời: 0 </li>
+                <li>Lần cuối đặt câu hỏi: N/A</li>
+              </ul>
+            </div>
           </div>
-          <div class="col-md-8">
-            <h3>Username</h3>
-            <ul>
-              <li>Chức vụ: Thành viên </li>
-              <li>Tổng số câu hỏi: 0 </li>
-              <li>Câu hỏi chưa được trả lời: 0 </li>
-              <li>Lần cuối đặt câu hỏi: N/A</li>
-            </ul>
+
+          <hr class="featurette-divider">
+
+          <h2 style="font-weight: bold;">Danh sách câu hỏi của bạn:</h2>
+          <h2>Phiên hỏi đáp đang hoạt động:</h2>
+          <div class="row post">
+            <div class="col-md-1" style="padding-left: 25px;">
+              <div class="thumb" style="background-image:url(./images/avt.jpg);width: 40px;height: 40px"></div>
+            </div>
+            <div class="col-md-6">
+              <a href=""><h4>Bạn muốn lạc trôi về đâu?</h4></a>
+              <p>Người theo hương hoa mây mù giăng lối. Làn sương khói phôi phai đưa bước ai xa rồi. Đơn côi mình ta vấn vương. Hồi ức, trong men say chiều mưa buồn</p>
+            </div>
+            <div class="col-md-5" style="display: flex;">
+              <table style="text-align: center;">
+                <tr>
+                  <td>
+                    <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                </tr>
+                <tr>
+                  <td><p>300 lượt xem</p></td>
+                  <td><p>11 phản hồi</p></td>
+                  <td><p>Đánh giá: 3.4</p></td>
+                </tr>
+              </table>
+            </div>
+            <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
           </div>
+
+          <div style="text-align: -webkit-right;">
+            <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
+            <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
+            <a href="">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a >...</a>
+            <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
+            <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
+          </div>
+
+          <hr class="featurette-divider">
+
+          <h2>Phiên hỏi đáp đã đóng:</h2>
+          <div class="row post">
+            <div class="col-md-1" style="padding-left: 25px;">
+              <div class="thumb" style="background-image:url(./images/avt.jpg);width: 40px;height: 40px"></div>
+            </div>
+            <div class="col-md-6">
+              <a href=""><h4>Bạn muốn lạc trôi về đâu?</h4></a>
+              <p>Người theo hương hoa mây mù giăng lối. Làn sương khói phôi phai đưa bước ai xa rồi. Đơn côi mình ta vấn vương. Hồi ức, trong men say chiều mưa buồn</p>
+            </div>
+            <div class="col-md-5" style="display: flex;">
+              <table style="text-align: center;">
+                <tr>
+                  <td>
+                    <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td rowspan="2" style="margin: 0"><img src="./images/icons/lock.png" width="30" height="30"></td>
+                </tr>
+                <tr>
+                  <td><p>300 lượt xem</p></td>
+                  <td><p>11 phản hồi</p></td>
+                  <td><p>Đánh giá: 3.4</p></td>
+                </tr>
+              </table>
+            </div>
+            <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
+          </div>
+
+          <div style="text-align: -webkit-right;">
+            <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
+            <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
+            <a href="">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a >...</a>
+            <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
+            <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
+          </div>
+
+          <!-- /END THE FEATURETTES -->
+          <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
         </div>
+      </div><!-- /.container -->
+    </main>
 
-        <hr class="featurette-divider">
+    <!-- FOOTER -->
+    <footer id="footer">
+      <ul style="padding: 15px; margin-bottom: 0px;">
+        <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
 
-        <h2 style="font-weight: bold;">Danh sách câu hỏi của bạn:</h2>
-        <h2>Phiên hỏi đáp đang hoạt động:</h2>
-        <div class="row post">
-          <div class="col-md-1" style="padding-left: 25px;">
-            <img src="./images/avt.jpg" width="40" height="40" style="border-radius: 100%">
-          </div>
-          <div class="col-md-6">
-            <a href=""><h4>Bạn muốn lạc trôi về đâu?</h4></a>
-            <p>Người theo hương hoa mây mù giăng lối. Làn sương khói phôi phai đưa bước ai xa rồi. Đơn côi mình ta vấn vương. Hồi ức, trong men say chiều mưa buồn</p>
-          </div>
-          <div class="col-md-5" style="display: flex;">
-            <table style="text-align: center;">
-              <tr>
-                <td>
-                  <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                </td>
-                <td>
-                  <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                </td>
-                <td>
-                  <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                </td>
-                <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
-              </tr>
-              <tr>
-                <td><p>300 lượt xem</p></td>
-                <td><p>11 phản hồi</p></td>
-                <td><p>Đánh giá: 3.4</p></td>
-              </tr>
-            </table>
-          </div>
-          <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
-        </div>
-
-        <div style="text-align: -webkit-right;">
-          <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-          <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-          <a href="">1</a>
-          <a href="">2</a>
-          <a href="">3</a>
-          <a >...</a>
-          <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-          <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <h2>Phiên hỏi đáp đã đóng:</h2>
-        <div class="row post">
-          <div class="col-md-1" style="padding-left: 25px;">
-            <img src="./images/avt.jpg" width="40" height="40" style="border-radius: 100%">
-          </div>
-          <div class="col-md-6">
-            <a href=""><h4>Bạn muốn lạc trôi về đâu?</h4></a>
-            <p>Người theo hương hoa mây mù giăng lối. Làn sương khói phôi phai đưa bước ai xa rồi. Đơn côi mình ta vấn vương. Hồi ức, trong men say chiều mưa buồn</p>
-          </div>
-          <div class="col-md-5" style="display: flex;">
-            <table style="text-align: center;">
-              <tr>
-                <td>
-                  <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                </td>
-                <td>
-                  <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                </td>
-                <td>
-                  <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                </td>
-                <td rowspan="2" style="margin: 0"><img src="./images/icons/lock.png" width="30" height="30"></td>
-              </tr>
-              <tr>
-                <td><p>300 lượt xem</p></td>
-                <td><p>11 phản hồi</p></td>
-                <td><p>Đánh giá: 3.4</p></td>
-              </tr>
-            </table>
-          </div>
-          <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
-        </div>
-
-        <div style="text-align: -webkit-right;">
-          <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-          <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-          <a href="">1</a>
-          <a href="">2</a>
-          <a href="">3</a>
-          <a >...</a>
-          <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-          <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-        </div>
-
-        <!-- /END THE FEATURETTES -->
-        <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
-      </div>
-    </div><!-- /.container -->
-  </main>
-
-  <!-- FOOTER -->
-  <footer id="footer">
-    <ul style="padding: 15px; margin-bottom: 0px;">
-      <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-
-      <p style="font-size: 12px"> @2019 design by Team 5</p>
-    </ul>
-  </footer>
-</body>
-</html>
+        <p style="font-size: 12px"> @2019 design by Team 5</p>
+      </ul>
+    </footer>
+  </body>
+  </html>

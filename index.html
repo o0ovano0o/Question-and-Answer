@@ -14,6 +14,8 @@
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="./bootstrap-4.3.1/bootstrap.min.js"></script>
+  <script src="./bootstrap-4.3.1/jquery-3.2.1.min.js"></script>
+  <script src="./bootstrap-4.3.1/bootstrap-4.0.0.min.js"></script>
 </head>
 
 <body>
@@ -32,18 +34,25 @@
             <a class="nav-link" href="#">Quản lý</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Trợ giúp</a>
+            <a class="nav-link" href="#">Trợ giúp</a>
           </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
           <input id="search" class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm..." aria-label="Search">
         </form>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" style="display: contents;">
           <li class="nav-item">
             <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" style="color: whitesmoke" href="#"><img src="./images/avt.jpg" width="40" height="40" style="border-radius: 100%" >  Username</a>
+          <li>
+            <div class="thumb" style="background-image:url(./images/avt.jpg);width: 40px;height: 40px"></div>
+          </li>  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Username</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Quản lý</a>
+              <a class="dropdown-item" href="#">Đăng xuất</a>
+            </div>
           </li>
         </ul>
       </div>
@@ -60,7 +69,7 @@
         <h2>Tạo chủ đề mới:</h2>
         <div id="new_post" class="row">
           <div class="col-md-2">
-            <img src="./images/avt.jpg" width="100" height="100" style="border-radius: 100%; margin: 10px;">
+            <div class="thumb" style="background-image:url(./images/avt.jpg);width: 100px;height: 100px"></div>
           </div>
 
           <div class="col-md-10">
@@ -79,7 +88,7 @@
         <h2>Phiên hỏi đáp hoạt động:</h2>
         <div class="row post">
           <div class="col-md-1" style="padding-left: 25px;">
-            <img src="./images/avt.jpg" width="40" height="40" style="border-radius: 100%">
+            <div class="thumb" style="background-image:url(./images/avt.jpg);width: 40px;height: 40px"></div>
           </div>
           <div class="col-md-6">
             <a href=""><h4>Bạn muốn lạc trôi về đâu?</h4></a>
@@ -125,7 +134,7 @@
         <h2>Phiên hỏi đáp đã đóng:</h2>
         <div class="row post">
           <div class="col-md-1" style="padding-left: 25px;">
-            <img src="./images/avt.jpg" width="40" height="40" style="border-radius: 100%">
+            <div class="thumb" style="background-image:url(./images/avt.jpg);width: 40px;height: 40px"></div>
           </div>
           <div class="col-md-6">
             <a href=""><h4>Bạn muốn lạc trôi về đâu?</h4></a>
