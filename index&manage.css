@@ -16,7 +16,7 @@ body {
 
 #search{
   border-radius: 15px;
-  width: 400px;
+  width: 300px;
 }
 .nav-item{
   margin: 0px 10px;
@@ -64,13 +64,20 @@ table{
   width: 100%;
   padding: 8px 0px;
 }
+.thumb {
+  border-radius: 100%;
+  background-color: #3e3e3e;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+} 
 
 /*Footer css*/
 
 #footer{
   text-align: center;
   color: #ffffff;
-  background-color: #bbbbbb;
+  background-color: #736f6f;
   margin-top: 100px;
 }
 /* MARKETING CONTENT
@@ -94,7 +101,8 @@ table{
 ------------------------- */
 
 .featurette-divider {
-  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  margin: 4rem 0;
+ /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
@@ -126,3 +134,20 @@ table{
     margin-top: 7rem;
   }
 }
+
+/*Dũng thêm*/
+#column{
+  padding-top: 3%;
+}
+#column2{
+  margin-top: -3%;
+}
+#user{
+  float: left;
+  padding-top: 1%;
+}
+#search2{
+    border-radius: 15px;
+    width: 700px;
+}
+/*Dũng thêm*/
