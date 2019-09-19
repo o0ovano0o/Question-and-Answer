@@ -10,7 +10,14 @@ body {
     line-height: 1.428571429;
     color: #333333;
 }
-.button{
-	background-color: #BBBBBB;
-}
 
+/*Css cho phan Signin1*/
+#quenmatkhau{
+	float: right;
+}
+#facebook{
+	background-color: #4267b2;
+}
+#google{
+	background-color: #EA4335;
+}
