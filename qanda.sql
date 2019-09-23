@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 17, 2019 lúc 07:43 AM
+-- Thời gian đã tạo: Th9 23, 2019 lúc 06:26 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -156,11 +156,24 @@ CREATE TABLE `s_ans` (
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
-  `username` int(11) NOT NULL,
-  `password` int(11) NOT NULL,
-  `email` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `isadmin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `email`, `isadmin`) VALUES
+(1, '0', '0', '0', 0),
+(2, 'VanVan', '12345', 'van005618@gmail.com', 0),
+(3, 'VanVan', '12345', 'van005618@gmail.com', 0),
+(4, 'VanVan1123', '1244', 'van005618@gmail.com', 0),
+(5, 'VanVan112', 'j2LbMc7G9duuCU7', 'van005618@gmail.com', 0),
+(6, 'VanVan112', '1244', 'van005618@gmail.com', 0),
+(7, 'Van123', '1244', 'van005618@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -254,10 +267,20 @@ ALTER TABLE `user`
 -- Chỉ mục cho bảng `u_ans`
 --
 ALTER TABLE `u_ans`
-  ADD PRIMARY KEY (`surveyid`,`squest_id`,`ans_id`,`user_id`),
-  ADD KEY `user_id` (`user_id`),
+  ADD PRIMARY KEY (`surveyid`,`squest_id`,`ans_id`) USING BTREE,
+  ADD UNIQUE KEY `user_id` (`user_id`),
   ADD KEY `ans_id` (`ans_id`),
   ADD KEY `squest_id` (`squest_id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -308,10 +331,10 @@ ALTER TABLE `survey_question`
 -- Các ràng buộc cho bảng `u_ans`
 --
 ALTER TABLE `u_ans`
-  ADD CONSTRAINT `u_ans_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `u_ans_ibfk_2` FOREIGN KEY (`surveyid`) REFERENCES `squest_ans` (`surveyid`),
   ADD CONSTRAINT `u_ans_ibfk_3` FOREIGN KEY (`ans_id`) REFERENCES `squest_ans` (`ans_id`),
-  ADD CONSTRAINT `u_ans_ibfk_4` FOREIGN KEY (`squest_id`) REFERENCES `squest_ans` (`squest_id`);
+  ADD CONSTRAINT `u_ans_ibfk_4` FOREIGN KEY (`squest_id`) REFERENCES `squest_ans` (`squest_id`),
+  ADD CONSTRAINT `u_ans_ibfk_5` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
