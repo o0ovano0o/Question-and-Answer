@@ -1,0 +1,26 @@
+{
+  "name": "question-and-answer",
+  "version": "1.0.0",
+  "description": "<h1>Phát triển ứng dụng web</h1> \r Thầy Nguyễn Việt Anh\r <br>\r Hệ Thống Hỏi Đáp Q&A\r <br>Tài liệu của nhóm </br>\r https://docs.google.com/document/d/172p0sQ2pLQmuVvKe6vH5oiJBShR71fZn__eNneTMEfo/edit?usp=sharing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o0ovano0o/Question-and-Answer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/o0ovano0o/Question-and-Answer/issues"
+  },
+  "homepage": "https://github.com/o0ovano0o/Question-and-Answer#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "mysql": "^2.17.1"
+  }
+}
