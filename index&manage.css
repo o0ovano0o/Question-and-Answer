@@ -100,6 +100,9 @@ table{
 
 /* Featurettes
 ------------------------- */
+#phienhoidap{
+  margin: 1rem 0;
+}
 
 .featurette-divider {
   margin: 4rem 0;
@@ -151,4 +154,3 @@ table{
     border-radius: 15px;
     width: 700px;
 }
-
