@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 23, 2019 lúc 06:26 PM
+-- Thời gian đã tạo: Th9 24, 2019 lúc 02:06 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `qanda`
+-- Cơ sở dữ liệu: `questionandanswer`
 --
 
 -- --------------------------------------------------------
@@ -58,6 +58,18 @@ CREATE TABLE `aquest` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `choice_multichoices`
+--
+
+CREATE TABLE `choice_multichoices` (
+  `ans_id` int(11) NOT NULL,
+  `response_id` int(11) NOT NULL,
+  `quest_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `cmt_ans`
 --
 
@@ -68,6 +80,29 @@ CREATE TABLE `cmt_ans` (
   `author` varchar(20) NOT NULL,
   `cmt` varchar(500) NOT NULL,
   `cmt_time` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `multichoices`
+--
+
+CREATE TABLE `multichoices` (
+  `reponse_id` int(11) NOT NULL,
+  `quest_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `questiontype`
+--
+
+CREATE TABLE `questiontype` (
+  `quest_type_id` int(11) NOT NULL,
+  `quest_type_name` varchar(64) NOT NULL,
+  `quest_type_choice` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -89,24 +124,26 @@ CREATE TABLE `section` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `squest`
+-- Cấu trúc bảng cho bảng `singlechoicereponse`
 --
 
-CREATE TABLE `squest` (
-  `squest_id` int(11) NOT NULL,
-  `squest_text` text NOT NULL
+CREATE TABLE `singlechoicereponse` (
+  `reponse_id` int(11) NOT NULL,
+  `quest_id` int(11) NOT NULL,
+  `choice_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `squest_ans`
+-- Cấu trúc bảng cho bảng `squest`
 --
 
-CREATE TABLE `squest_ans` (
-  `surveyid` int(11) NOT NULL,
+CREATE TABLE `squest` (
+  `survey_id` int(11) NOT NULL,
   `squest_id` int(11) NOT NULL,
-  `ans_id` int(11) NOT NULL
+  `squest_text` text NOT NULL,
+  `quest_type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -129,23 +166,25 @@ CREATE TABLE `survey` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `survey_question`
+-- Cấu trúc bảng cho bảng `s_ans`
 --
 
-CREATE TABLE `survey_question` (
-  `survey_id` int(11) NOT NULL,
-  `squest_id` int(11) NOT NULL
+CREATE TABLE `s_ans` (
+  `question_id` int(11) NOT NULL,
+  `ans_id` int(11) NOT NULL,
+  `ans_text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `s_ans`
+-- Cấu trúc bảng cho bảng `textreponse`
 --
 
-CREATE TABLE `s_ans` (
-  `ans_id` int(11) NOT NULL,
-  `ans_text` text NOT NULL
+CREATE TABLE `textreponse` (
+  `reponse_id` int(11) NOT NULL,
+  `quest_id` int(11) NOT NULL,
+  `textreponse` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -178,15 +217,27 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `email`, `isadmin`) VALUE
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `u_ans`
+-- Cấu trúc bảng cho bảng `user_reponse`
 --
 
-CREATE TABLE `u_ans` (
+CREATE TABLE `user_reponse` (
   `surveyid` int(11) NOT NULL,
   `squest_id` int(11) NOT NULL,
-  `ans_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `othertext` text NOT NULL
+  `reponse_id` int(11) NOT NULL,
+  `reponse_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `yesnoreponse`
+--
+
+CREATE TABLE `yesnoreponse` (
+  `reponse_id` int(11) NOT NULL,
+  `quest_id` int(11) NOT NULL,
+  `yesnovalue` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -209,6 +260,14 @@ ALTER TABLE `aquest`
   ADD KEY `question_id` (`question_id`);
 
 --
+-- Chỉ mục cho bảng `choice_multichoices`
+--
+ALTER TABLE `choice_multichoices`
+  ADD PRIMARY KEY (`ans_id`,`response_id`,`quest_id`),
+  ADD KEY `response_id` (`response_id`),
+  ADD KEY `quest_id` (`quest_id`);
+
+--
 -- Chỉ mục cho bảng `cmt_ans`
 --
 ALTER TABLE `cmt_ans`
@@ -217,24 +276,39 @@ ALTER TABLE `cmt_ans`
   ADD KEY `ans_id` (`ans_id`);
 
 --
+-- Chỉ mục cho bảng `multichoices`
+--
+ALTER TABLE `multichoices`
+  ADD PRIMARY KEY (`reponse_id`,`quest_id`),
+  ADD KEY `quest_id` (`quest_id`);
+
+--
+-- Chỉ mục cho bảng `questiontype`
+--
+ALTER TABLE `questiontype`
+  ADD PRIMARY KEY (`quest_type_id`);
+
+--
 -- Chỉ mục cho bảng `section`
 --
 ALTER TABLE `section`
   ADD PRIMARY KEY (`section_id`);
 
 --
+-- Chỉ mục cho bảng `singlechoicereponse`
+--
+ALTER TABLE `singlechoicereponse`
+  ADD PRIMARY KEY (`reponse_id`,`quest_id`,`choice_id`),
+  ADD KEY `choice_id` (`choice_id`),
+  ADD KEY `quest_id` (`quest_id`);
+
+--
 -- Chỉ mục cho bảng `squest`
 --
 ALTER TABLE `squest`
-  ADD PRIMARY KEY (`squest_id`);
-
---
--- Chỉ mục cho bảng `squest_ans`
---
-ALTER TABLE `squest_ans`
-  ADD PRIMARY KEY (`surveyid`,`squest_id`,`ans_id`),
-  ADD KEY `ans_id` (`ans_id`),
-  ADD KEY `squest_id` (`squest_id`);
+  ADD PRIMARY KEY (`squest_id`),
+  ADD UNIQUE KEY `survey_id` (`survey_id`),
+  ADD KEY `quest_type_id` (`quest_type_id`);
 
 --
 -- Chỉ mục cho bảng `survey`
@@ -244,18 +318,18 @@ ALTER TABLE `survey`
   ADD KEY `survey_id` (`survey_id`);
 
 --
--- Chỉ mục cho bảng `survey_question`
---
-ALTER TABLE `survey_question`
-  ADD PRIMARY KEY (`survey_id`,`squest_id`),
-  ADD KEY `squest_id` (`squest_id`),
-  ADD KEY `survey_id` (`survey_id`);
-
---
 -- Chỉ mục cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
-  ADD PRIMARY KEY (`ans_id`);
+  ADD PRIMARY KEY (`ans_id`),
+  ADD KEY `question_id` (`question_id`);
+
+--
+-- Chỉ mục cho bảng `textreponse`
+--
+ALTER TABLE `textreponse`
+  ADD PRIMARY KEY (`reponse_id`,`quest_id`),
+  ADD KEY `quest_id` (`quest_id`);
 
 --
 -- Chỉ mục cho bảng `user`
@@ -264,13 +338,20 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Chỉ mục cho bảng `u_ans`
+-- Chỉ mục cho bảng `user_reponse`
 --
-ALTER TABLE `u_ans`
-  ADD PRIMARY KEY (`surveyid`,`squest_id`,`ans_id`) USING BTREE,
+ALTER TABLE `user_reponse`
+  ADD PRIMARY KEY (`reponse_id`) USING BTREE,
   ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD KEY `ans_id` (`ans_id`),
-  ADD KEY `squest_id` (`squest_id`);
+  ADD KEY `squest_id` (`squest_id`),
+  ADD KEY `surveyid` (`surveyid`);
+
+--
+-- Chỉ mục cho bảng `yesnoreponse`
+--
+ALTER TABLE `yesnoreponse`
+  ADD PRIMARY KEY (`reponse_id`,`quest_id`),
+  ADD KEY `quest_id` (`quest_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -300,6 +381,14 @@ ALTER TABLE `aquest`
   ADD CONSTRAINT `aquest_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `ans_quest` (`question_id`);
 
 --
+-- Các ràng buộc cho bảng `choice_multichoices`
+--
+ALTER TABLE `choice_multichoices`
+  ADD CONSTRAINT `choice_multichoices_ibfk_1` FOREIGN KEY (`ans_id`) REFERENCES `s_ans` (`ans_id`),
+  ADD CONSTRAINT `choice_multichoices_ibfk_2` FOREIGN KEY (`response_id`) REFERENCES `multichoices` (`reponse_id`),
+  ADD CONSTRAINT `choice_multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `multichoices` (`quest_id`);
+
+--
 -- Các ràng buộc cho bảng `cmt_ans`
 --
 ALTER TABLE `cmt_ans`
@@ -307,12 +396,26 @@ ALTER TABLE `cmt_ans`
   ADD CONSTRAINT `cmt_ans_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `ans_quest` (`question_id`);
 
 --
--- Các ràng buộc cho bảng `squest_ans`
+-- Các ràng buộc cho bảng `multichoices`
 --
-ALTER TABLE `squest_ans`
-  ADD CONSTRAINT `squest_ans_ibfk_1` FOREIGN KEY (`surveyid`) REFERENCES `survey_question` (`survey_id`),
-  ADD CONSTRAINT `squest_ans_ibfk_2` FOREIGN KEY (`ans_id`) REFERENCES `s_ans` (`ans_id`),
-  ADD CONSTRAINT `squest_ans_ibfk_3` FOREIGN KEY (`squest_id`) REFERENCES `survey_question` (`squest_id`);
+ALTER TABLE `multichoices`
+  ADD CONSTRAINT `multichoices_ibfk_1` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`),
+  ADD CONSTRAINT `multichoices_ibfk_2` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+
+--
+-- Các ràng buộc cho bảng `singlechoicereponse`
+--
+ALTER TABLE `singlechoicereponse`
+  ADD CONSTRAINT `singlechoicereponse_ibfk_1` FOREIGN KEY (`choice_id`) REFERENCES `s_ans` (`ans_id`),
+  ADD CONSTRAINT `singlechoicereponse_ibfk_2` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`),
+  ADD CONSTRAINT `singlechoicereponse_ibfk_3` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+
+--
+-- Các ràng buộc cho bảng `squest`
+--
+ALTER TABLE `squest`
+  ADD CONSTRAINT `squest_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`),
+  ADD CONSTRAINT `squest_ibfk_2` FOREIGN KEY (`quest_type_id`) REFERENCES `questiontype` (`quest_type_id`);
 
 --
 -- Các ràng buộc cho bảng `survey`
@@ -322,19 +425,32 @@ ALTER TABLE `survey`
   ADD CONSTRAINT `survey_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
 
 --
--- Các ràng buộc cho bảng `survey_question`
+-- Các ràng buộc cho bảng `s_ans`
 --
-ALTER TABLE `survey_question`
-  ADD CONSTRAINT `survey_question_ibfk_2` FOREIGN KEY (`squest_id`) REFERENCES `squest` (`squest_id`);
+ALTER TABLE `s_ans`
+  ADD CONSTRAINT `s_ans_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `squest` (`squest_id`);
 
 --
--- Các ràng buộc cho bảng `u_ans`
+-- Các ràng buộc cho bảng `textreponse`
 --
-ALTER TABLE `u_ans`
-  ADD CONSTRAINT `u_ans_ibfk_2` FOREIGN KEY (`surveyid`) REFERENCES `squest_ans` (`surveyid`),
-  ADD CONSTRAINT `u_ans_ibfk_3` FOREIGN KEY (`ans_id`) REFERENCES `squest_ans` (`ans_id`),
-  ADD CONSTRAINT `u_ans_ibfk_4` FOREIGN KEY (`squest_id`) REFERENCES `squest_ans` (`squest_id`),
-  ADD CONSTRAINT `u_ans_ibfk_5` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `textreponse`
+  ADD CONSTRAINT `textreponse_ibfk_1` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`),
+  ADD CONSTRAINT `textreponse_ibfk_2` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+
+--
+-- Các ràng buộc cho bảng `user_reponse`
+--
+ALTER TABLE `user_reponse`
+  ADD CONSTRAINT `user_reponse_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `user_reponse_ibfk_2` FOREIGN KEY (`squest_id`) REFERENCES `squest` (`squest_id`),
+  ADD CONSTRAINT `user_reponse_ibfk_3` FOREIGN KEY (`surveyid`) REFERENCES `survey` (`survey_id`);
+
+--
+-- Các ràng buộc cho bảng `yesnoreponse`
+--
+ALTER TABLE `yesnoreponse`
+  ADD CONSTRAINT `yesnoreponse_ibfk_1` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`),
+  ADD CONSTRAINT `yesnoreponse_ibfk_2` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
