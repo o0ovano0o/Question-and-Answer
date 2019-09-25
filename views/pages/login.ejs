@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang = "vi">
+
+<!-- HEAD -->
+<head>
+	<meta charset ="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Đăng nhập Q&A</title>
+	<link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+	<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" href="signin.css">
+	
+	<!--CSS tự định nghĩa-->	
+	<style type="text/css">
+		.center-img {
+
+		  display: block;
+		  margin-left: auto;
+		  margin-right: auto;
+		  height: auto; 
+		  width: 100px;
+
+		}
+	</style>
+</head>
+
+
+
+<!-- BODY -->
+<body>
+	<br><br>
+	<div class="row">
+	<div class="col-0 col-xl-4 col-sm-1 col-md-4 col-lg-4"></div>
+	<div class="col-12 col-xl-4 col-sm-10 col-md-4 col-lg-4">
+	
+	<!-- code ngắn hơn nhưng hơi đơn giản so với code trước -->
+	<a href="main.html">
+		<img src="./images/logo.png" class="center-img" alt="Responsive image">
+	</a>
+	<h2 style="text-align: center; margin-bottom: 20px;">Question & Answer</h2>
+	
+
+	<div class="box-container box-top box-space-around box-row-wrap">
+		<div class="box-md-68 box-sm-80 box-xs-100">
+			<div class="box-container box-top box-space-around box-row-wrap box-md-reverse">
+
+				<div class="box-md-44 box-xs-100">
+					<div class="panel panel-default box-xs-100">
+						<div class="panel-body panel-body-custom">
+							<div class="mx-auto" style="width: 60%;">
+
+								<form class="new_user" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="" />
+
+									<div class="form-group margin-bottom-15px">
+										<label for="user_email">Tên người dùng: </label>
+										<input class="form-control" placeholder="" autofocus="autofocus" required="required" type="email" value="" name="user[email]" id="user_email" />
+									</div>
+
+									<div class="form-group margin-bottom-15px">
+										<label for="user_password">Mật khẩu: </label>
+
+										<input class="form-control" placeholder="" required="required" type="password" name="user[password]" id="user_password" />
+									</div>
+
+								<div class="margin-bottom-15px">
+									<div class="row">
+										<div class="col-6 col-sm-6 col-md-6">
+										<input name="user[remember_me]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
+										<label for="user_remember_me">Nhớ tài khoản</label>
+										</div>
+
+										<div class="col-6 col-sm-6 col-md-6">
+											<a id="quenmatkhau" href="/users/password/new">Quên mật khẩu?</a>
+										</div>
+									</div>
+								</div>
+									<a href="/home" class="btn btn-info btn-block" role="button">Đăng nhập</a>
+									<a href="/signin" class="btn btn-info btn-block" role="button">Đăng ký</a>
+									<hr>
+									<div class="text-center margin-bottom-15px">Hoặc đăng nhập bằng</div><br>
+
+									<div class="box-container box-space-around margin-bottom-20px">
+										
+											<div class="row">
+												<div class="col-6 col-sm-6 col-md-6">
+											<a id="facebook"class="btn btn-block btn-social btn-facebook" href="/users/auth/facebook">
+												
+												<font color="white">Facebook</font>
+											</a>  
+												</div>
+												<div class="col-6 col-sm-6 col-md-6">
+												<a id="google" class="btn btn-block btn-social btn-google" href="/users/auth/google_oauth2">
+													
+													<font color="white">Google</font>
+												</a>  
+											</div>
+											</div>
+										</div>
+
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-0 col-xl-4 col-sm-1 col-md-4 col-lg-4"></div>
+	</div>
+
+		</body>
+		</html>
