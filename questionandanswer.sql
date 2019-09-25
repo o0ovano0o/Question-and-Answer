@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 24, 2019 lúc 02:06 PM
+-- Thời gian đã tạo: Th9 25, 2019 lúc 04:08 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -153,7 +153,6 @@ CREATE TABLE `squest` (
 --
 
 CREATE TABLE `survey` (
-  `section_id` int(11) NOT NULL,
   `survey_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `startdate` date NOT NULL,
@@ -161,6 +160,17 @@ CREATE TABLE `survey` (
   `isopen` tinyint(1) NOT NULL,
   `pass` varchar(12) NOT NULL,
   `author` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `survey_section`
+--
+
+CREATE TABLE `survey_section` (
+  `section_id` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -314,6 +324,13 @@ ALTER TABLE `squest`
 -- Chỉ mục cho bảng `survey`
 --
 ALTER TABLE `survey`
+  ADD PRIMARY KEY (`survey_id`),
+  ADD KEY `survey_id` (`survey_id`);
+
+--
+-- Chỉ mục cho bảng `survey_section`
+--
+ALTER TABLE `survey_section`
   ADD PRIMARY KEY (`section_id`,`survey_id`),
   ADD KEY `survey_id` (`survey_id`);
 
@@ -421,8 +438,14 @@ ALTER TABLE `squest`
 -- Các ràng buộc cho bảng `survey`
 --
 ALTER TABLE `survey`
-  ADD CONSTRAINT `survey_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey_question` (`survey_id`),
-  ADD CONSTRAINT `survey_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
+  ADD CONSTRAINT `survey_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey_question` (`survey_id`);
+
+--
+-- Các ràng buộc cho bảng `survey_section`
+--
+ALTER TABLE `survey_section`
+  ADD CONSTRAINT `survey_section_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`),
+  ADD CONSTRAINT `survey_section_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
 
 --
 -- Các ràng buộc cho bảng `s_ans`
