@@ -50,21 +50,23 @@
 						<div class="panel-body panel-body-custom">
 							<div class="mx-auto" style="width: 60%;">
 
-								<form class="new_user" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="" />
+								<form class="new_user" id="new_user" action="" accept-charset="UTF-8" ><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="" />
 
 									<div class="form-group margin-bottom-10px">
 										<label for="user_email">Họ tên: </label>
-										<input class="form-control" placeholder="" autofocus="autofocus" required="required" type="name" value="" name="user[name]" id="user_name" />
+										<input class="form-control" placeholder="" autofocus="autofocus" required="required" type="text" value="" name="user[name]" id="user_name" />
+									
 									</div>
 									<div class="form-group margin-bottom-10px">
 										<label for="user_password">Tên người dùng: </label>
 
-										<input class="form-control" placeholder="" required="required" type="password" name="user[nickname]" id="user_nickname" />
+										<input class="form-control" placeholder="" required="required" type="text" name="user[nickname]" id="user_nickname" />
+										
 									</div>
 									<div class="form-group margin-bottom-10px">
 										<label for="user_password">Email: </label>
 
-										<input class="form-control" placeholder="" required="required" type="password" name="user[email]" id="user_email" />
+										<input class="form-control" placeholder="" required="required" type="email" name="user[email]" id="user_email" />
 									</div>
 
 									<div class="form-group margin-bottom-10px">
@@ -76,6 +78,13 @@
 										<label for="user_password">Nhập lại mật khẩu: </label>
 
 										<input class="form-control" placeholder="" required="required" type="password" name="user[repassword]" id="user_repassword" />
+										<div class="alert alert-warning alert-dismissible fade show" role="alert" style="visibility:hidden;" id="er_pass">
+										  Mời bạn nhập lại mật khẩu
+										  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										    <span aria-hidden="true">&times;</span>
+										  </button>
+										</div>
+																					
 									</div>
 
 								<div class="margin-bottom-10px">
@@ -88,7 +97,7 @@
 									</div>
 								</div>
 									<hr>
-									<a href="" class="btn btn-info btn-block" role="button">Đăng ký</a>
+									<input type="button"  class="btn btn-info btn-block"  onclick="chapnhan();return false;" value="Đăng ký"/>
 
 										</form>
 									</div>
@@ -106,4 +115,5 @@
 	</div>
 
 		</body>
+		<script type="text/javascript" src="signin.js"></script>
 		</html>
