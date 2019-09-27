@@ -10,6 +10,7 @@ router.use('/question', require(__dirname + '/new_session_plus.js'));
 router.use('/createsurvey', require(__dirname + '/new_survey.js'));
 router.use('/yourprofile', require(__dirname + '/student_manage.js'));
 router.use('/teacher_manage', require(__dirname + '/teacher_manage.js'));
+router.use('/list_survey', require(__dirname + '/list_survey.js'));
 
 
 module.exports = router;
