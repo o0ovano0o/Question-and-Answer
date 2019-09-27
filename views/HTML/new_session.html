@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/index&manage.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-  <title>Tạo phiên mới</title>
+  <title>Tạo phiên hỏi đáp</title>
 
   <!-- Thư viện online cho Bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -76,11 +76,10 @@
     ================================================== -->
   <main role="main">
 
-     <a href="teacher_manage.html" style="margin-left: 40px;" type="button" class="btn btn-info">Quay về trang cá nhân</a>
     <div id="border_main" class="container marketing">
       <div id="main">
 
-        <h2>Tạo chủ đề mới:</h2>
+        <h2>Tạo phiên hỏi đáp:</h2>
         <div id="new_post" class="row">
           <div class="col-md-2">
             <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 100px;height: 100px"></div>
@@ -89,7 +88,9 @@
           <div class="col-md-10">
             <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Chủ đề phiên hỏi đáp...">
             <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Mật khẩu">
-            <button type="submit" style="border-radius: 5px; float: right;">Đăng</button>
+            <a href="/session">
+            <button  type="submit" style="border-radius: 5px; float: right;">Tạo</button>
+            </a>
             <br/>
             <textarea placeholder="   Nội dung..." style="width: 100%; border-radius: 5px; height: 75px;"></textarea>
           </div>
@@ -106,61 +107,17 @@
           </div>
 
           <div class="col-md-10">
-            <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Chủ đề...">
+            <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Chủ đề phiếu khảo sát...">
             <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Mật khẩu">
-            <button type="submit" style="border-radius: 5px; float: right;">Đăng</button>
-            <br>
-            <div class="row">
-          <div class="col-0 col-sm-1 col-md-2"></div>
-          <div class="col-12 col-sm-10 col-md-8">
-            <div class="form-group" >
-              <p>
-                <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Tạo phiếu khảo sát
-                </button>
-              </p>
-              <div class="collapse" id="collapseExample">
-                <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
-                <div class="card card-body">
-                  <div class="accordion" id="accordionExample">
-                    <div class="card" >
-                      <div class="card-header" id="headingOne">
-                       
-                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Câu hỏi 1:
-                          </button>
-                          <img src="./images/icons/next.png" width="30" height="30">
-                        
-                      </div>
-
-                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                          <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi...">
-                        <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số đáp án">
-                        <img src="./images/icons/back.png" width="30" height="30">
-                        <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Đáp án">
-                        <img src="./images/icons/next.png" width="30" height="30">
-                        <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
-                        </div>
-                          
-                        </div>
-                      </div>
-                    </div>
-                   
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
+            <a href="/survey">
+            <button  type="submit" style="border-radius: 5px; float: right;">Tạo</button>
+            </a>
+            <br/>
+            <textarea placeholder="   Nội dung..." style="width: 100%; border-radius: 5px; height: 75px;"></textarea>
           </div>
         </div>
-
-        <!-- /END THE FEATURETTES -->
-       
-      </div>
-      <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
-    </div><!-- /.container -->
-
+    </div>
+  </div>
   </main>
 
   <!-- FOOTER -->
