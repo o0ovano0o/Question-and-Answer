@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/index&manage.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-  <title>Hiển thị phiên hỏi đáp</title>
+  <title>Hiển thị phiếu khảo sát</title>
 
   <!-- Thư viện online cho Bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -28,7 +28,7 @@
 
     <!--Navbars -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a id="logo" class="navbar-brand" href="#">Q&A</a>
+      <a id="logo" class="navbar-brand" href="/home">Q&A</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -66,21 +66,21 @@
     <div class="container marketing">
       <br>
       <div class="card">
-        <div class="card-header" style="background-color: #bbbbbb">
-          <h5><b>Phiên hỏi đáp</b></h5>
+        <div class="card-header" style="background-color: #00cccc">
+          <h5><b>Phiếu khảo sát</b></h5>
         </div>
         <div class="card-body">
           <div class="row padding">
             <div class="col-3 col-sm-2 col-md-2">
               <div class="card">
-                <img class="card-img-top" src="./images/soccer.jpg">
+                <img class="card-img-top" src="./images/logo.png">
               </div>
             </div>
             <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h4 class="card-title">Khảo sát sinh viên khóa mới QH2019 (K64)</h4>
-                <p class="card-text">Mô tả: Khảo sát sinh viên khóa mới QH2019 (K64)<br>
-                  Đăng bởi: <a href="">Nguyễn Việt Anh</a><br>
+                <h4 class="card-title">Khảo sát năng lực lập trình của sinh viên</h4>
+                <p class="card-text">Mô tả: Khảo sát kĩ năng lập trình các ngôn ngữ C, C++, Java,...<br>
+                  Đăng bởi: <a href="/yourprofile">Nguyễn Việt Anh</a><br>
                   Thời gian tạo: 1 tháng trước
                 </p>
               </div>
@@ -89,14 +89,13 @@
         </div>
       </div><br>
       <div class="card">
-        <div class="card-header" style="background-color: #bbbbbb">
+        <div class="card-header" style="background-color: #00cccc">
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Danh sách câu hỏi
+              Danh sách lựa chọn
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="/session">Danh sách câu hỏi</a>
-              <a class="dropdown-item" href="/createsurvey">Phiếu khảo sát</a>
+              <a class="dropdown-item" href="/session">Danh sách câu hỏi- phiên hỏi đáp</a>
             </div>
 
           </div>
@@ -108,60 +107,55 @@
           </form><br>
           <div class="card">
             <div class="row padding">
-              
               <div class="col-3 col-sm-3 col-md-2">
                 <div class="card">
-                 <img class="card-img-top" src="./images/soccer.jpg" >
+                  <a href="/createsurvey"> 
+                   <img class= "card-img-top" src="./images/logo2.jpg" >
+                 </a>
                </div>
              </div>
              <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
-                <p class="card-text">Có: 01 câu trả lời<br>
-                  Đăng bởi: <a href="">Đinh Việt Cường </a>
-                  - 03 lượt thích
+                <h5 class="card-title"><a href="/createsurvey">Khảo sát, đánh giá sự khác biệt giữa C và C++</a></h5>
+                <p class="card-text">Có: 1999 lượt khảo sát<br>
                 </p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="card-body">
+        </div><br>
+
         <div class="card">
           <div class="row padding">
-            
             <div class="col-3 col-sm-3 col-md-2">
               <div class="card">
-               <img class="card-img-top" src="./images/soccer.jpg" >
+                <a href="/createsurvey"> 
+                 <img class= "card-img-top" src="./images/logo2.jpg" >
+               </a>
              </div>
            </div>
            <div class="col-9 col-sm-9 col-md-9">
             <div class="card-body">
-              <h5 class="card-title"><a href="">Có bạn nào gần trường muốn ở ghép không???</a></h5>
-              <p class="card-text">Có: 01 câu trả lời<br>
-                Đăng bởi: <a href="">Đinh Việt Cường </a>
-                - 03 lượt thích
+              <h5 class="card-title"><a href="/createsurvey">Khảo sát, đánh giá sự khác biệt giữa C và C++</a></h5>
+              <p class="card-text">Có: 1999 lượt khảo sát<br>
               </p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="card-body">
+      </div><br>
+
       <div class="card">
         <div class="row padding">
-          
           <div class="col-3 col-sm-3 col-md-2">
             <div class="card">
-             <img class="card-img-top" src="./images/soccer.jpg" >
+              <a href="/createsurvey"> 
+               <img class= "card-img-top" src="./images/logo2.jpg" >
+             </a>
            </div>
          </div>
          <div class="col-9 col-sm-9 col-md-9">
           <div class="card-body">
-            <h5 class="card-title"><a href="">Có bạn nào gần trường muốn ở ghép không???</a></h5>
-            <p class="card-text">Có: 01 câu trả lời<br>
-              Đăng bởi: <a href="">Đinh Việt Cường </a>
-              - 03 lượt thích
+            <h5 class="card-title"><a href="/createsurvey">Khảo sát, đánh giá sự khác biệt giữa C và C++</a></h5>
+            <p class="card-text">Có: 1999 lượt khảo sát<br>
             </p>
           </div>
         </div>

@@ -28,7 +28,7 @@
 
     <!--Navbars -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a id="logo" class="navbar-brand" href="#">Q&A</a>
+      <a id="logo" class="navbar-brand" href="/home">Q&A</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -73,14 +73,14 @@
           <div class="row padding">
             <div class="col-3 col-sm-2 col-md-2">
               <div class="card">
-                <img class="card-img-top" src="./images/soccer.jpg">
+                <img class="card-img-top" src="./images/logo.png">
               </div>
             </div>
             <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
                 <h4 class="card-title">Khảo sát sinh viên khóa mới QH2019 (K64)</h4>
                 <p class="card-text">Mô tả: Khảo sát sinh viên khóa mới QH2019 (K64)<br>
-                  Đăng bởi: <a href="">Nguyễn Việt Anh</a><br>
+                  Đăng bởi: <a href="/yourprofile">Nguyễn Việt Anh</a><br>
                   Thời gian tạo: 1 tháng trước
                 </p>
               </div>
@@ -92,75 +92,93 @@
         <div class="card-header" style="background-color: #bbbbbb">
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Danh sách câu hỏi
+              Danh sách lựa chọn
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="/session">Danh sách câu hỏi</a>
-              <a class="dropdown-item" href="/createsurvey">Phiếu khảo sát</a>
+              <a class="dropdown-item" href="/survey">Danh sách phiếu khảo sát</a>
             </div>
 
           </div>
         </div>
         <div class="card-body">
-          <form id="search" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-          </form><br>
+          <div class="row" style="margin-bottom: 3%;">
+            <div class="col-12 col-sm-6 col-md-6" >
+              <div class="row">
+                  <div class="col-8 col-sm-7 col-md-7" style="margin-bottom: 3%;">
+                    <input type="tim" class="form-control" id="search2" placeholder="Tìm kiếm ...">
+                  </div>
+                  <div class="col-1 col-sm-1 col-md-1">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                  </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <div class="row">
+                  <div class="col-8 col-sm-9 col-md-9">
+                    <input type="nhap" class="form-control" id="search2" placeholder="Đặt câu hỏi ...">
+                  </div>
+                  <div class="col-1 col-sm-1 col-md-1">
+                    <button class="btn btn-outline-secondary" type="submit">Gửi</button>
+                  </div>
+              </div>
+            </div>
+          </div>
           <div class="card">
             <div class="row padding">
-              
               <div class="col-3 col-sm-3 col-md-2">
                 <div class="card">
-                 <img class="card-img-top" src="./images/soccer.jpg" >
+                  <a href="/question">
+                   <img class="card-img-top" src="./images/logo2.jpg" >
+                 </a>
                </div>
              </div>
              <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
                 <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
                 <p class="card-text">Có: 01 câu trả lời<br>
-                  Đăng bởi: <a href="">Đinh Việt Cường </a>
+                  Đăng bởi: <a href="/yourprofile">Đinh Việt Cường </a>
                   - 03 lượt thích
                 </p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="card-body">
+        </div><br>
+
         <div class="card">
           <div class="row padding">
-            
             <div class="col-3 col-sm-3 col-md-2">
               <div class="card">
-               <img class="card-img-top" src="./images/soccer.jpg" >
+                <a href="/question">
+                 <img class="card-img-top" src="./images/logo2.jpg" >
+               </a>
              </div>
            </div>
            <div class="col-9 col-sm-9 col-md-9">
             <div class="card-body">
-              <h5 class="card-title"><a href="">Có bạn nào gần trường muốn ở ghép không???</a></h5>
+              <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
               <p class="card-text">Có: 01 câu trả lời<br>
-                Đăng bởi: <a href="">Đinh Việt Cường </a>
+                Đăng bởi: <a href="/yourprofile">Đinh Việt Cường </a>
                 - 03 lượt thích
               </p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="card-body">
+      </div><br>
+
       <div class="card">
         <div class="row padding">
-          
           <div class="col-3 col-sm-3 col-md-2">
             <div class="card">
-             <img class="card-img-top" src="./images/soccer.jpg" >
+              <a href="/question">
+               <img class="card-img-top" src="./images/logo2.jpg" >
+             </a>
            </div>
          </div>
          <div class="col-9 col-sm-9 col-md-9">
           <div class="card-body">
-            <h5 class="card-title"><a href="">Có bạn nào gần trường muốn ở ghép không???</a></h5>
+            <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
             <p class="card-text">Có: 01 câu trả lời<br>
-              Đăng bởi: <a href="">Đinh Việt Cường </a>
+              Đăng bởi: <a href="/yourprofile">Đinh Việt Cường </a>
               - 03 lượt thích
             </p>
           </div>

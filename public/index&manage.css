@@ -15,6 +15,10 @@ body {
   border-radius: 15px;
   width: 300px;
 }
+#search2{
+  border-radius: 6px;
+  width: 100%;
+}
 .nav-item{
   margin: 0px 10px;
 }
@@ -102,6 +106,9 @@ table{
   margin: 4rem 0;
  /* Space out the Bootstrap <hr> more */
 }
+#phienhoidap{
+  margin: 1rem 0;
+}
 
 /* Thin out the marketing headings */
 .featurette-heading {
@@ -133,19 +140,4 @@ table{
   }
 }
 
-/*content*/
-#column{
-  padding-top: 3%;
-}
-#column2{
-  margin-top: -3%;
-}
-#user{
-  float: left;
-  padding-top: 1%;
-}
-#search2{
-    border-radius: 15px;
-    width: 700px;
-}
 
