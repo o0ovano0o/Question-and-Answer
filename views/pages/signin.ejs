@@ -8,15 +8,15 @@
 	<link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
 	<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 	<link rel="stylesheet" href="signin.css">
-	
-	<!--CSS tự định nghĩa-->	
+
+	<!--CSS tự định nghĩa-->
 	<style type="text/css">
 		.center-img {
 
 		  display: block;
 		  margin-left: auto;
 		  margin-right: auto;
-		  height: auto; 
+		  height: auto;
 		  width: 100px;
 
 		}
@@ -33,13 +33,13 @@
 	<div class="row">
 	<div class="col-1 col-xl-4 col-sm-2 col-md-4 col-lg-4"></div>
 	<div class="col-10 col-xl-4 col-sm-8 col-md-4 col-lg-4">
-	
+
 	<!-- code ngắn hơn nhưng hơi đơn giản so với code trước -->
 	<a href="main.html">
 		<img src="./images/logo.png" class="center-img" alt="Responsive image">
 	</a>
 	<h2 style="text-align: center; margin-bottom: 20px;">Question & Answer</h2>
-	
+
 
 	<div class="box-container box-top box-space-around box-row-wrap">
 		<div class="box-md-68 box-sm-80 box-xs-100">
@@ -50,41 +50,41 @@
 						<div class="panel-body panel-body-custom">
 							<div class="mx-auto" style="width: 60%;">
 
-								<form class="new_user" id="new_user" action="" accept-charset="UTF-8" ><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="" />
+								<form class="new_user" id="new_user" action="#" accept-charset="UTF-8" ><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="" />
 
 									<div class="form-group margin-bottom-10px">
 										<label for="user_email">Họ tên: </label>
-										<input class="form-control" placeholder="" autofocus="autofocus" required="required" type="text" value="" name="user[name]" id="user_name" />
-									
+										<input class="form-control" placeholder="" autofocus="autofocus"  type="text" value="" name="user[name]" id="user_name" onfocus="javascript: col_uname()" onblur="this.value=titleCase(this.value)" required="required"/>
+
 									</div>
 									<div class="form-group margin-bottom-10px">
 										<label for="user_password">Tên người dùng: </label>
 
-										<input class="form-control" placeholder="" required="required" type="text" name="user[nickname]" id="user_nickname" />
-										
+										<input class="form-control" placeholder="" required="required" type="text" name="user[nickname]" id="user_nickname" onfocus="javascript: col_unname()" onblur="this.value=titleCase2(this.value)" />
+
 									</div>
 									<div class="form-group margin-bottom-10px">
 										<label for="user_password">Email: </label>
 
-										<input class="form-control" placeholder="" required="required" type="email" name="user[email]" id="user_email" />
+										<input class="form-control" placeholder="" required="required" type="email" name="user[email]" id="user_email" onfocus="javascript: col_email()"  />
 									</div>
 
 									<div class="form-group margin-bottom-10px">
 										<label for="user_password">Mật khẩu: </label>
 
-										<input class="form-control" placeholder="" required="required" type="password" name="user[password]" id="user_password" />
+										<input class="form-control" placeholder="" required="required" type="password" name="user[password]" id="user_password" onfocus="javascript: col_pass()" />
 									</div>
 									<div class="form-group margin-bottom-10px">
 										<label for="user_password">Nhập lại mật khẩu: </label>
 
-										<input class="form-control" placeholder="" required="required" type="password" name="user[repassword]" id="user_repassword" />
-										<div class="alert alert-warning alert-dismissible fade show" role="alert" style="visibility:hidden;" id="er_pass">
+										<input class="form-control" placeholder="" required="required" type="password" name="user[repassword]" id="user_repassword" onfocus="javascript: col_repass()"/>
+										<div class="alert alert-warning alert-dismissible fade show" role="alert" style="visibility:hidden; margin-top: 10px;" id="er_pass">
 										  Mời bạn nhập lại mật khẩu
-										  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										  <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="javascript: Buttonclick();">
 										    <span aria-hidden="true">&times;</span>
 										  </button>
 										</div>
-																					
+
 									</div>
 
 								<div class="margin-bottom-10px">
@@ -97,7 +97,7 @@
 									</div>
 								</div>
 									<hr>
-									<input type="button"  class="btn btn-info btn-block"  onclick="chapnhan();return false;" value="Đăng ký"/>
+									<input type="button" id="signin_" class="btn btn-info btn-block" role="alert"  onclick="javascript: SubmitClick() ; " value="Đăng ký"/>
 
 										</form>
 									</div>
