@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 26, 2019 lúc 05:55 AM
--- Phiên bản máy phục vụ: 10.1.37-MariaDB
--- Phiên bản PHP: 5.6.40
+-- Thời gian đã tạo: Th9 29, 2019 lúc 03:25 PM
+-- Phiên bản máy phục vụ: 10.1.38-MariaDB
+-- Phiên bản PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -153,6 +153,7 @@ CREATE TABLE `squest` (
 --
 
 CREATE TABLE `survey` (
+  `section_id` int(11) NOT NULL,
   `survey_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `startdate` date NOT NULL,
@@ -160,17 +161,6 @@ CREATE TABLE `survey` (
   `isopen` tinyint(1) NOT NULL,
   `pass` varchar(12) NOT NULL,
   `author` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `survey_section`
---
-
-CREATE TABLE `survey_section` (
-  `section_id` int(11) NOT NULL,
-  `survey_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -206,6 +196,7 @@ CREATE TABLE `textreponse` (
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `password` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `isadmin` tinyint(1) NOT NULL
@@ -215,14 +206,14 @@ CREATE TABLE `user` (
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `password`, `email`, `isadmin`) VALUES
-(1, '0', '0', '0', 0),
-(2, 'VanVan', '12345', 'van005618@gmail.com', 0),
-(3, 'VanVan', '12345', 'van005618@gmail.com', 0),
-(4, 'VanVan1123', '1244', 'van005618@gmail.com', 0),
-(5, 'VanVan112', 'j2LbMc7G9duuCU7', 'van005618@gmail.com', 0),
-(6, 'VanVan112', '1244', 'van005618@gmail.com', 0),
-(7, 'Van123', '1244', 'van005618@gmail.com', 0);
+INSERT INTO `user` (`user_id`, `username`, `name`, `password`, `email`, `isadmin`) VALUES
+(1, '0', '', '0', '0', 0),
+(2, 'VanVan', '', '12345', 'van005618@gmail.com', 0),
+(3, 'VanVan', '', '12345', 'van005618@gmail.com', 0),
+(4, 'VanVan1123', '', '1244', 'van005618@gmail.com', 0),
+(5, 'VanVan112', '', 'j2LbMc7G9duuCU7', 'van005618@gmail.com', 0),
+(6, 'VanVan112', '', '1244', 'van005618@gmail.com', 0),
+(7, 'Van123', '', '1244', 'van005618@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -324,13 +315,6 @@ ALTER TABLE `squest`
 -- Chỉ mục cho bảng `survey`
 --
 ALTER TABLE `survey`
-  ADD PRIMARY KEY (`survey_id`),
-  ADD KEY `survey_id` (`survey_id`);
-
---
--- Chỉ mục cho bảng `survey_section`
---
-ALTER TABLE `survey_section`
   ADD PRIMARY KEY (`section_id`,`survey_id`),
   ADD KEY `survey_id` (`survey_id`);
 
@@ -438,14 +422,8 @@ ALTER TABLE `squest`
 -- Các ràng buộc cho bảng `survey`
 --
 ALTER TABLE `survey`
-  ADD CONSTRAINT `survey_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey_question` (`survey_id`);
-
---
--- Các ràng buộc cho bảng `survey_section`
---
-ALTER TABLE `survey_section`
-  ADD CONSTRAINT `survey_section_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`),
-  ADD CONSTRAINT `survey_section_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
+  ADD CONSTRAINT `survey_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey_question` (`survey_id`),
+  ADD CONSTRAINT `survey_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
 
 --
 -- Các ràng buộc cho bảng `s_ans`
