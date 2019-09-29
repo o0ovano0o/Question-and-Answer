@@ -1,6 +1,30 @@
+/*body, html {
+    height: 100%;
+}
+.title{
+	font-size: 40px;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.428571429;
+    color: #333333;
+}
+
+#quenmatkhau{
+	float: right;
+}
+#facebook{
+	background-color: #4267b2;
+}
+#google{
+	background-color: #EA4335;
+}*/
+
 body, html {
     height: 100%;
 }
+
 .title{
 	font-size: 40px;
 }
@@ -20,4 +44,35 @@ body {
 }
 #google{
 	background-color: #EA4335;
+}
+
+.round-button{
+	border-radius: 12px;
+}
+
+#orange{
+    background-color: orange;
+}
+#white{
+    background-color: white;
+}
+.white-text{
+    color: white;
+}
+.orange{
+    color: orange;
+}
+.hero-image{
+  background-image: url("images/food-background.jpg");
+
+  /* Set a specific height */
+  
+  height: 100%
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+ 
+  
 }
