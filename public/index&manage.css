@@ -108,6 +108,13 @@ table{
 #phienhoidap{
   margin: 1rem 0;
 }
+#sp{
+  max-width: 250px;
+  border-top: solid 5px;
+  text-align: center;
+  font-size: 300px;
+  margin: 25px auto 30px;
+}
 
 /* Thin out the marketing headings */
 .featurette-heading {

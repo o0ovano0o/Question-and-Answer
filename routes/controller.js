@@ -11,7 +11,7 @@ router.use('/createsurvey', require(__dirname + '/new_survey.js'));
 router.use('/yourprofile', require(__dirname + '/student_manage.js'));
 router.use('/teacher_manage', require(__dirname + '/teacher_manage.js'));
 router.use('/survey', require(__dirname + '/list_survey.js'));
-
+router.use('/support', require(__dirname + '/support.js'));
 
 module.exports = router;
 
