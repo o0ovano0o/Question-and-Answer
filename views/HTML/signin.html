@@ -1,119 +1,129 @@
 <!DOCTYPE html>
-<html lang = "vi">
-<!-- HEAD -->
+<html lang="en">
 <head>
-	<meta charset ="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Đăng ký tài khoản Q&A</title>
-	<link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
-	<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" href="signin.css">
-	
-	<!--CSS tự định nghĩa-->	
-	<style type="text/css">
-		.center-img {
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		  display: block;
-		  margin-left: auto;
-		  margin-right: auto;
-		  height: auto; 
-		  width: 100px;
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./bootstrap-4.3.1/bootstrap.min.css">
+  <link rel="stylesheet" href="signin.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!--   <link rel="stylesheet" href="index&content.css"> -->
 
-		}
-		.text-green {
-		  color: green;
-		}
-	</style>
+
+  <title>Đăng ký</title>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./bootstrap-4.3.1/bootstrap.min.js"></script>
+  <script src="./bootstrap-4.3.1/jquery-3.2.1.min.js"></script>
+  <script src="./bootstrap-4.3.1/bootstrap-4.0.0.min.js"></script>
 </head>
 
+<body class="hero-image" >
+  <header>
+    <div class="pt-0 text-center">
+    <img src="./images/logo.png" style="width: 200px; height:auto;"></div>
+  </header>
+  <main>
+    <div class="container my-3">  
+    <div id="white" class="border" style="border-radius: 10px;">
+    <div id="orange" class="panel-heading p-4 white-text text-center" style="color: "><h2>Đăng ký tài khoản</h2></div>
+  
+    
+    <form action="/signin" method="POST">
+      <div class="form-group">
+        <div class="form-group now">  
+          <%if (data && data.error) {%>
+          <div id="signuperror" class="alert alert-danger">
+          <span> <%=data.error%> </span>
+          </div>
+          <%}%>
 
+        <div class="row" >
+          <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6">
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputName" class="col-form-label">Họ tên:</label></div>
+          <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+          <input type="text" name="username" class="form-control" id="InputName" placeholder="Nhập họ tên...">
+          </div>
+          </div><br>
 
-<!-- BODY -->
-<body>
-	<div class="row">
-	<div class="col-1 col-xl-4 col-sm-2 col-md-4 col-lg-4"></div>
-	<div class="col-10 col-xl-4 col-sm-8 col-md-4 col-lg-4">
-	
-	<!-- code ngắn hơn nhưng hơi đơn giản so với code trước -->
-	<a>
-		<img src="./images/logo.png" class="center-img" alt="Responsive image">
-	</a>
-	<h2 style="text-align: center; margin-bottom: 20px;">Question & Answer</h2>
-	
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputName" class="col-form-label">Địa chỉ email:</label></div>
+          <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+          <input type="text" name="usernickname" class="form-control" id="InputName" placeholder="Nhập email...">
+          </div>
+          </div><br>
 
-	<div class="box-container box-top box-space-around box-row-wrap">
-		<div class="box-md-68 box-sm-80 box-xs-100">
-			<div class="box-container box-top box-space-around box-row-wrap box-md-reverse">
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputPhoneNum" class="col-form-label d-inline">Điện thoại:</label></div>
+          <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+          <input type="text" class="form-control" id="InputPhoneNum" placeholder="">
+          </div>
+          </div><br>
+          </div>
 
-				<div class="box-md-44 box-xs-100">
-					<div class="panel panel-default box-xs-100">
-						<div class="panel-body panel-body-custom">
-							<div class="mx-auto" style="width: 60%;">
+          <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6">
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputName" class="col-form-label">Tên đăng nhập:</label></div>
+          <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+          <input type="text" name="usernickname" class="form-control" id="InputName" placeholder="Nhập tên đăng nhập...">
+          </div>
+          </div><br>
 
-								<form class="new_user" id="new_user" action="" accept-charset="UTF-8" ><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="" />
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputPhoneNum" class="col-form-label d-inline">Mật khẩu:</label></div>
+          <div class="col-6 col-sm-6 col-md-6 col-xl- col-lg-6">
+          <input type="password" name="userpassword" class="form-control" id="InputPhoneNum" placeholder="">
+          </div>
+          </div><br>
 
-									<div class="form-group margin-bottom-10px">
-										<label for="user_email">Họ tên: </label>
-										<input class="form-control" placeholder="" autofocus="autofocus" required="required" type="text" value="" name="user[name]" id="user_name" />
-									
-									</div>
-									<div class="form-group margin-bottom-10px">
-										<label for="user_password">Tên người dùng: </label>
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputPhoneNum" class="col-form-label d-inline">Nhập lại mật khẩu:</label></div>
+          <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+          <input type="password" class="form-control" id="InputPhoneNum" placeholder="">
+          </div>
+          </div>
+          </div>
+        </div>
 
-										<input class="form-control" placeholder="" required="required" type="text" name="user[nickname]" id="user_nickname" />
-										
-									</div>
-									<div class="form-group margin-bottom-10px">
-										<label for="user_password">Email: </label>
+        <div class="row pt-3">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+          <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+          <div class="form-check">
+            
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label d-inline" for="exampleRadios1">
+              Tôi đồng ý với <a class="orange" href="">các điều khoản</a> của Q&A.
+            </label>
+            </div>
+          </div>
+        </div>
+       
 
-										<input class="form-control" placeholder="" required="required" type="email" name="user[email]" id="user_email" />
-									</div>
-
-									<div class="form-group margin-bottom-10px">
-										<label for="user_password">Mật khẩu: </label>
-
-										<input class="form-control" placeholder="" required="required" type="password" name="user[password]" id="user_password" />
-									</div>
-									<div class="form-group margin-bottom-10px">
-										<label for="user_password">Nhập lại mật khẩu: </label>
-
-										<input class="form-control" placeholder="" required="required" type="password" name="user[repassword]" id="user_repassword" />
-										<div class="alert alert-warning alert-dismissible fade show" role="alert" style="visibility:hidden;" id="er_pass">
-										  Mời bạn nhập lại mật khẩu
-										  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										    <span aria-hidden="true">&times;</span>
-										  </button>
-										</div>
-																					
-									</div>
-
-								<div class="margin-bottom-10px">
-									<div class="row">
-										<div class="col-1 col-sm-1 col-md-1" style="display: inline-block;">
-										<input type="hidden" value="0" /><input type="checkbox" value="1" id="license" /></div>
-										<div class="col-10 col-sm-10 col-md-10">
-										Tôi đồng ý với các <a class="text-green" href="#">điều khoản và dịch vụ</a> của Q&A</div>
-
-									</div>
-								</div>
-									<hr>
-									<input type="button"  class="btn btn-info btn-block"  onclick="chapnhan();return false;" value="Đăng ký"/>
-
-										</form>
-									</div>
-								</div>
-							</div>
-
-						</div>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-1 col-xl-4 col-sm-2 col-md-4 col-lg-4"></div>
+        </div>
+      </div>
+      <!-- Hàng 6 -->  
+      <div class="row py-3  justify-content-center">
+        <input type="submit" class="btn btn-success px-5 round-button" value="Đăng ký" />
+      </div>
+    </form>
+      
+    </div>
+    </div><br><br>
+    <div class="container">
+    <a href="/login" style="float: right;">Quay lại đăng nhập</a>
 	</div>
+    <br><br><br>
+  </main>
 
-		</body>
-		<script type="text/javascript" src="signin.js"></script>
-		</html>
+</body>
+</html>
