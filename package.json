@@ -24,6 +24,8 @@
     "express-generator": "^4.16.1",
     "express-session": "^1.16.2",
     "mysql": "^2.17.1",
-    "nodemon": "^1.19.2"
+    "node-q": "^2.4.4",
+    "nodemon": "^1.19.2",
+    "q": "^1.5.1"
   }
 }

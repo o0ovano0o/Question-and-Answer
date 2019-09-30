@@ -64,23 +64,29 @@
                   <div class="panel-body panel-body-custom">
                     <div>
 
-                      <form class="new_user" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="/gpz+p9FcwYP8fBJ2VgSlWFgkQsehFfzFQsgcc50FRYx2fFCb9XP5Tjux4riYQEakeslGHnO75upC6T7hfMOgQ==" />
+                      <form class="new_user" id="new_user" action="/login" accept-charset="UTF-8" method="POST">
+                        <%if (data && data.error) {%>
+                        <div id="signinerror" class="alert alert-danger">
+                        <%=data.error%>
+                        </div>
+                        <%}%>
+                        <input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="/gpz+p9FcwYP8fBJ2VgSlWFgkQsehFfzFQsgcc50FRYx2fFCb9XP5Tjux4riYQEakeslGHnO75upC6T7hfMOgQ==" />
 
                         <div class="form-group margin-bottom-15px">
                           <label for="user_email">Tên đăng nhập</label>:
-                          <input class="form-control" placeholder="Username" autofocus="autofocus" required="required" type="email" value="" name="user[email]" id="user_email" />
+                          <input class="form-control" placeholder="Username" autofocus="autofocus" required="required" value="" name="username" id="user_email" />
                         </div>
 
                         <div class="form-group margin-bottom-15px">
                           <label for="user_password">Mật khẩu</label>:
 
-                          <input class="form-control" placeholder="Password" required="required" type="password" name="user[password]" id="user_password" />
+                          <input class="form-control" placeholder="Password" required="required" type="password" name="userpassword" id="user_password" />
                         </div>
 
                       <div class="margin-bottom-15px">
                         <div class="row">
                           <div class="col-6 col-sm-6 col-md-6">
-                          <input name="user[remember_me]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
+                          <input name="userremember_me" type="hidden" value="0" /><input type="checkbox" value="1" name="userremember_me" id="user_remember_me" />
                           <label for="user_remember_me">Nhớ tài khoản</label>
                           </div>
 
@@ -91,7 +97,7 @@
                       </div>
                         <div class="button">
                           <div class="form-group">
-                            <button type="button" class="btn btn-success btn-block round-button">Đăng nhập</button>
+                            <button type="submit" class="btn btn-success btn-block round-button">Đăng nhập</button>
 
                           </div>
                         </div>
