@@ -11,40 +11,64 @@ router.get('/', function (req, res) {
 
 router.post('/', function(req, res) {
 	var signup = req.body;
+	var check = true;
 	
-	if (true) {
-		users = {
+	
+	users = {
 		username: signup.usernickname,
 		name: signup.username,
 		email: signup.useremail,
 		password: signup.userpassword,
 		isadmin: 0
 	};
-
-		if (users) {
-
-			var defer = q.defer();
-			var query = conn.query("INSERT INTO user SET ?", users, function(err,results) {
-				if (err) {
-					defer.reject(err);
-				}
-				else {
-					defer.resolve(results);
-				}
-			});
-			var check = defer.promise;
-		}
-		else {
-			var check = false;
-		}
-
-		if (!check) {
-			res.render('signin', {data: {error:  "Không thể tạo tài khoản"}});
-		}
-		else {
-			res.render('login', {data: {}});
-		}
+	if (signup.usernickname) {
+		var defer = q.defer();
+		var query = conn.query("SELECT * FROM user WHERE ?", {username: signup.usernickname}, function(err,results) {
+			if (err) {
+				defer.reject(err);
+			}
+			else {
+				defer.resolve(results);
+			}
+		});
+		var dt = defer.promise;
 	}
+	else {
+		var dt = false;
+	}
+	
+	dt.then(function(usercheck){
+		var user = usercheck[0];
+	
+		if (user != null) {
+				res.render('signin', {data: {error:  "Tài khoản đã tồn tại"}});
+			}
+		else  {
+
+			if (users) {
+				var defer1 = q.defer();
+				var query1 = conn.query("INSERT INTO user SET ?", users, function(err,results) {
+					if (err) {
+						defer1.reject(err);
+					}
+					else {
+						defer1.resolve(results);
+					}
+				});
+				var checkInsert = defer1.promise;
+			}
+			else {
+				var checkInsert = false;
+			}
+			
+			if (!checkInsert) {
+				res.render('signin', {data: {error:  "Không thể tạo tài khoản"}});
+			}
+			else {
+				res.render('login', {data: {}});
+			}
+		}
+	});
 });
 
 module.exports = router;
