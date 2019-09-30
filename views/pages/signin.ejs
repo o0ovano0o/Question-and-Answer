@@ -29,7 +29,7 @@
   <main>
     <div class="container my-3">  
     <div id="white" class="border" style="border-radius: 10px;">
-    <div id="orange" class="panel-heading p-4 white-text text-center" style="color: "><h3>Đăng ký tài khoản</h3></div>
+    <div id="orange" class="panel-heading p-4 white-text text-center" style="color: "><h2>Đăng ký tài khoản</h2></div>
   
     
     <form action="/signin" method="POST">
@@ -40,49 +40,61 @@
           <span> <%=data.error%> </span>
           </div>
           <%}%>
-        <!-- Hàng 1 -->
-        <div class="row pt-3">
-          <div class="col-2 col-sm-2 col-md-2 col-xl-2 col-lg-2 text-right">
-          <label for="InputName" class="col-form-label">Tên:</label></div>
-          <div class="col-6 col-sm-6 col-md-4 col-xl-4 col-lg-4">
-          <input type="text" name="username" class="form-control" id="InputName" placeholder="Nhập tên...">
+
+        <div class="row" >
+          <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6">
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputName" class="col-form-label">Họ tên:</label></div>
+          <div class="col-6 col-sm-6 col-md-8 col-xl-8 col-lg-8">
+          <input type="text" name="username" class="form-control" id="InputName" placeholder="Nhập họ tên...">
           </div>
-          <div class="col-2 col-sm-2 col-md-2 col-xl-2 col-lg-2 text-right">
-          <label for="InputName" class="col-form-label">Tên đăng nhập:</label></div>
-          <div class="col-4 col-sm-4 col-md-3 col-xl-3 col-lg-3">
-          <input type="text" name="usernickname" class="form-control" id="InputName" placeholder="Nhập tên đăng nhập.">
+          </div><br>
+
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputName" class="col-form-label">Địa chỉ email:</label></div>
+          <div class="col-6 col-sm-6 col-md-8 col-xl-8 col-lg-8">
+          <input type="text" name="usernickname" class="form-control" id="InputName" placeholder="Nhập email...">
           </div>
-        </div>
-        <!-- Hàng 2 -->  
-        <div class="row pt-3">
-          <div class="col-2 col-md-2 col-md-2 col-xl-2 col-lg-2 text-right">
-          <label for="InputName" class="col-form-label">Email:</label></div>
-          <div class="col-6 col-md-4 col-xl-4 col-lg-4">
-          <input type="text" name="useremail" class="form-control" id="InputName" placeholder="Nhập email...">
-          </div>
-        </div>
-        <!-- Hàng 3 -->  
-        <div class="row pt-3">  
-          <div class="col-2 col-sm-2 col-md-2 col-xl-2 col-lg-2 text-right">
+          </div><br>
+
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputPhoneNum" class="col-form-label d-inline">Điện thoại:</label></div>
-          <div class="col-6 col-sm-6 col-md-3 col-xl-3 col-lg-3">
+          <div class="col-6 col-sm-6 col-md-8 col-xl-8 col-lg-8">
           <input type="text" class="form-control" id="InputPhoneNum" placeholder="">
           </div>
-        </div>
-        <!-- Hàng 4 -->  
-        <div class="row pt-3">  
-          <div class="col-2 col-sm-2 col-md-2 col-xl-2 col-lg-2 text-right">
+          </div><br>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6">
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="InputName" class="col-form-label">Tên đăng nhập:</label></div>
+          <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+          <input type="text" name="usernickname" class="form-control" id="InputName" placeholder="Nhập tên đăng nhập...">
+          </div>
+          </div><br>
+
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputPhoneNum" class="col-form-label d-inline">Mật khẩu:</label></div>
-          <div class="col-4 col-sm-4 col-md-3 col-xl-3 col-lg-3">
+          <div class="col-6 col-sm-6 col-md-6 col-xl- col-lg-6">
           <input type="password" name="userpassword" class="form-control" id="InputPhoneNum" placeholder="">
           </div>
-          <div class="col-2 col-sm-2 col-md-2 col-xl-2 col-lg-2 text-right">
+          </div><br>
+
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputPhoneNum" class="col-form-label d-inline">Nhập lại mật khẩu:</label></div>
-          <div class="col-4 col-sm-4 col-md-3 col-xl-3 col-lg-3">
+          <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
           <input type="password" class="form-control" id="InputPhoneNum" placeholder="">
           </div>
+          </div>
+          </div>
         </div>
-        <!-- Hàng 5 -->  
+
         <div class="row pt-3">
           <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
           <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
