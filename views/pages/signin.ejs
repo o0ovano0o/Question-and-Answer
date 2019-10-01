@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -9,7 +10,7 @@
   <link rel="stylesheet" href="./bootstrap-4.3.1/bootstrap.min.css">
   <link rel="stylesheet" href="signin.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!--   <link rel="stylesheet" href="index&content.css"> -->
+  <!--   <link rel="stylesheet" href="index&content.css"> -->
 
 
   <title>Đăng ký</title>
@@ -21,25 +22,27 @@
   <script src="./bootstrap-4.3.1/bootstrap-4.0.0.min.js"></script>
 </head>
 
-<body class="hero-image" >
+<body class="hero-image">
   <header>
     <div class="pt-0 text-center">
-    <img src="./images/logo.png" style="width: 200px; height:auto;"></div>
+      <img src="./images/logo.png" style="width: 200px; height:auto;"></div>
   </header>
   <main>
-    <div class="container my-3">  
-    <div id="white" class="border" style="border-radius: 10px;background-color: #eeeeee;">
-    <div id="orange" class="panel-heading p-4 white-text text-center" style="color: "><h2>Đăng ký tài khoản</h2></div>
-  
-    
-    <form action="/signin" method="POST">
-      <div class="form-group">
-        <div class="form-group now">  
-          <%if (data && data.error) {%>
-          <div id="signuperror" class="alert alert-danger">
-          <span> <%=data.error%> </span>
-          </div>
-          <%}%>
+    <div class="container my-3">
+      <div id="white" class="border" style="border-radius: 10px;">
+        <div id="orange" class="panel-heading p-4 white-text text-center" style="color: ">
+          <h2>Đăng ký tài khoản</h2>
+        </div>
+
+
+        <form action="/signin" method="POST">
+          <div class="form-group">
+            <div class="form-group now">
+              <%if (data && data.error) {%>
+              <div id="signuperror" class="alert alert-danger">
+                <span> <%=data.error%> </span>
+              </div>
+              <%}%>
 
         <div class="row" >
           <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6">
@@ -47,23 +50,23 @@
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputName" class="col-form-label">Họ tên:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="text" name="username" class="form-control" id="InputName" placeholder="Nhập họ tên...">
+          <input type="text" name="username" class="form-control" id="InputName" placeholder="Nhập họ tên..." onblur="this.value= titleCase(this.value);">
           </div>
           </div><br>
 
           <div class="row">
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
-          <label for="InputName" class="col-form-label">Địa chỉ email:</label></div>
+          <label for="InputEmail" class="col-form-label">Địa chỉ email:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="text" name="usernickname" class="form-control" id="InputName" placeholder="Nhập email...">
+          <input type="text" name="email" class="form-control" id="InputEmail" placeholder="Nhập email..." onblur="javascript: Email_()">
           </div>
           </div><br>
 
           <div class="row">
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
-          <label for="InputPhoneNum" class="col-form-label d-inline">Điện thoại:</label></div>
+          <label for="InputPassword" class="col-form-label d-inline">Mật khẩu:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="text" class="form-control" id="InputPhoneNum" placeholder="">
+          <input type="password" class="form-control" id="InputPassword" placeholder="Nhập mật khẩu...">
           </div>
           </div><br>
           </div>
@@ -73,23 +76,23 @@
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputName" class="col-form-label">Tên đăng nhập:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="text" name="usernickname" class="form-control" id="InputName" placeholder="Nhập tên đăng nhập...">
+          <input type="text" name="usernickname" class="form-control" id="InputNName" placeholder="Nhập tên đăng nhập..." onblur="this.value=titleCase2(this.value);">
           </div>
           </div><br>
 
           <div class="row">
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
-          <label for="InputPhoneNum" class="col-form-label d-inline">Mật khẩu:</label></div>
+          <label for="InputPhoneNum" class="col-form-label d-inline">Số điện thoại:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl- col-lg-6">
-          <input type="password" name="userpassword" class="form-control" id="InputPhoneNum" placeholder="">
+          <input type="type"  class="form-control" id="InputPhoneNum" placeholder="Nhập số điện thoại...." onblur="javascript: checkPhone()">
           </div>
           </div><br>
 
           <div class="row">
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
-          <label for="InputPhoneNum" class="col-form-label d-inline">Nhập lại mật khẩu:</label></div>
+          <label for="InputRePassW" class="col-form-label d-inline">Nhập lại mật khẩu:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="password" class="form-control" id="InputPhoneNum" placeholder="">
+          <input type="password" class="form-control" id="InputRePassW" placeholder="Nhập lại mật khẩu...." onblur="javascript: checkpass()">
           </div>
           </div>
           </div>
@@ -99,7 +102,7 @@
           <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
           <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
           <div class="form-check">
-            
+
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
             <label class="form-check-label d-inline" for="exampleRadios1">
               Tôi đồng ý với <a class="orange" href="">các điều khoản</a> của Q&A.
@@ -107,16 +110,16 @@
             </div>
           </div>
         </div>
-       
+
 
         </div>
       </div>
-      <!-- Hàng 6 -->  
+      <!-- Hàng 6 -->
       <div class="row py-3  justify-content-center">
-        <input type="submit" class="btn btn-success px-5 round-button" value="Đăng ký" />
+        <input type="button" id ="submit" class="btn btn-success px-5 round-button notPullRight" value="Đăng ký" />
       </div>
     </form>
-      
+
     </div>
     </div><br><br>
     <div class="container">
@@ -124,6 +127,7 @@
 	</div>
     <br><br><br>
   </main>
+<script src="/signin.js"></script>
 
 </body>
 </html>
