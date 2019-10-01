@@ -20,6 +20,23 @@
 
 
 <!-- CSS tự định nghĩa -->
+<style type="text/css">
+    .nav-pills>a.active, .nav-pills>a:focus, .nav-pills>a:hover {
+            cursor: default;
+            font-weight: bold;
+            background-color: #009999 !important;
+            border-bottom: 3px solid #ff0066;
+            color: black;
+            border-radius: 0px;
+        }
+        .nav-pills>a {
+            
+            font-weight: normal;
+            border-bottom: 3px solid #ff0066;
+            color: black;
+            border-radius: 0px;
+        }
+</style>
 
 <body style="background-color: #EEEEEE">
 
@@ -213,193 +230,134 @@
                 </div>
               </div>
             </div>
+     </div><br>         
+    </div>
+  </div>
+</div>
 
-            <!-- Thêm câu hỏi  -->      
-            <hr id = "phienhoidap" class="featurette-divider">
 
-            <a href="" style="margin-left: 0%;" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#2" aria-expanded="false" aria-controls="2">Thêm câu hỏi</a><br>
 
-            <div class="form-group" >
-              <p>
-              </p>
-              <div class="collapse" id="2">
-                <p>
-                  <div class="row">
-                    <div class="col-6 col-sm-6 col-md-3">
-                      <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;">
-                          Trắc nghiệm
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" data-toggle="collapse" href="#TN1" role="button" aria-expanded="false" aria-controls="TN1">Trắc nghiệm 1 đáp án</a>
-                          <a class="dropdown-item" data-toggle="collapse" href="#TN2" role="button" aria-expanded="false" aria-controls="TN2">Trắc nghiệm đúng/sai</a>
-                          <a class="dropdown-item" data-toggle="collapse" href="#TN3" role="button" aria-expanded="false" aria-controls="TN3">Trắc nghiệm nhiều đáp án</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-3">
-                      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#3" aria-expanded="false" aria-controls="3" style="width: 100%;">Tự luận</button>
-                    </div>
-                  </div>
-                </p>
+ <div class="container" style="margin-top: 50px;">
+  
+  <nav class="nav nav-pills nav-justified">
+  <a class="nav-item nav-link active" data-toggle="tab" href="#tn1">Trắc nghiệm</a>
+  <a class="nav-item nav-link"  data-toggle="tab" href="#tn3">Đúng/sai</a>
+  <a class="nav-item nav-link"  data-toggle="tab" href="#tl4">Tự luận</a>
+  </nav>
 
-                <!-- Trắc nghiệm 1 -->
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="collapse multi-collapse" id="TN1">
-                      <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
+
+  <!-- Nội dung các tabs-->
+    <div class="tab-content">
+      
+      <div id="tn1" class="tab-pane active">
+        
+        <div class="row post" style="margin-top: 20px;">
+                     <input  type="number" name="topic"  style="border-radius: 5px; margin: 10px; width: 50%;padding: 5px;" placeholder="Số câu hỏi" onblur="socauhoi(this.value);">
+                      <div style="border-radius: 5px; margin: 10px; width: 40%;padding: 5px;">
+                    
+                     <select class="form-control" id="sel1">
+                        <option>Một đáp án</option>
+                        <option>Nhiều đáp án</option>
+                      </select>
+                     </div>
                       <div class="card card-body">
                         <div class="accordion" id="accordionExampleTN1">
                           <div class="card" >
                             <div class="card-header" id="headingOneTN1">
-
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOneTN1" aria-expanded="false" aria-controls="collapseOneTN1">
+                             <p style="margin-left: 10px;">
                                 Câu hỏi 1:
-                              </button>
-                              <a href="#">
-                                <img src="./images/icons/next.png" width="30" height="30">
-                              </a>
+                              </p>
                             </div>
 
-                            <div id="collapseOneTN1" class="collapse" aria-labelledby="headingOneTN1" data-parent="#accordionExampleTN1">
+                            <div  data-parent="#accordionExampleTN1">
                               <div class="card-body">
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi...">
-                                <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/back.png" width="30" height="30">
-                                </a>
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 10px;" placeholder="Đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/next.png" width="30" height="30">
-                                </a>
-                                <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
+                                <textarea name="topic" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
+                                <input  type="number" name="1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onblur="sodapan(this);">
+                                  <div id="dapan1" style="width: 90%;"></div>
+                                
                               </div>
                             </div>
                           </div>
                         </div><br>
+                           <div id="cauhoi" style="width: 100%;"></div>
                         <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
                         </button>
                       </div>
                     </div>
-                  </div><br>
+          </div>
+      
+      
 
-                  <!-- Tự luận -->
-                  <div class="col-md-6">
-                    <div class="collapse multi-collapse" id="3">
-                      <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
-                      <div class="card card-body">
-                        <div class="accordion" id="accordionExample3">
-                          <div class="card" >
-                            <div class="card-header" id="headingOne3">
-
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="false" aria-controls="collapseOne3">
-                                Câu hỏi 1:
-                              </button>
-                              <a href="#">
-                                <img src="./images/icons/next.png" width="30" height="30">
-                              </a>
-
-                            </div>
-
-                            <div id="collapseOne3" class="collapse" aria-labelledby="headingOne3" data-parent="#accordionExample3">
-                              <div class="card-body">
-                                <textarea class="col-md-10" rows = "3" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi..."></textarea>
-                                <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div><br>
-                        <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Trắc nghiệm 2 -->
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="collapse multi-collapse" id="TN2">
-                      <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
-                      <div class="card card-body">
-                        <div class="accordion" id="accordionExampleTN2">
-                          <div class="card" >
-                            <div class="card-header" id="headingOneTN2">
-
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOneTN2" aria-expanded="false" aria-controls="collapseOneTN2">
-                                Câu hỏi 1:
-                              </button>
-                              <a href="#">
-                                <img src="./images/icons/next.png" width="30" height="30">
-                              </a>
-                            </div>
-
-                            <div id="collapseOneTN2" class="collapse" aria-labelledby="headingOneTN2" data-parent="#accordionExampleTN2">
-                              <div class="card-body">
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi..."><br>
-                                <a href="#">
-                                  <img src="./images/icons/back.png" width="30" height="30">
-                                </a>
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 10px;" placeholder="Đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/next.png" width="30" height="30">
-                                </a>
-                                <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div><br>
-                        <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Trắc nghiệm 3 -->
-                  <div class="col-md-6">
-                    <div class="collapse multi-collapse" id="TN3">
-                      <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
-                      <div class="card card-body">
+      <div id="tn3" class="tab-pane tab-panel fade">
+        
+        <div class="row post" style="margin-top: 20px;">
+                      <input  type="text" name="topic" style="border-radius: 5px; margin: 10px; width: 70%;padding: 5px;" placeholder="Số câu hỏi" onblur="socauhoi2(this.value);">
+                      <div class="card card-body" style="width: 100%">
                         <div class="accordion" id="accordionExampleTN3">
                           <div class="card" >
                             <div class="card-header" id="headingOneTN3">
 
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOneTN3" aria-expanded="false" aria-controls="collapseOneTN3">
+                              <p style="margin-left: 10px;">
                                 Câu hỏi 1:
-                              </button>
-                              <a href="#">
-                                <img src="./images/icons/next.png" width="30" height="30">
-                              </a>
+                              </p>
                             </div>
 
-                            <div id="collapseOneTN3" class="collapse" aria-labelledby="headingOneTN3" data-parent="#accordionExampleTN3">
+                            <div aria-labelledby="headingOneTN3" >
                               <div class="card-body">
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi...">
-                                <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/back.png" width="30" height="30">
-                                </a>
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 10px;" placeholder="Đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/next.png" width="30" height="30">
-                                </a>
-                                <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
+                                 <textarea name="topic" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
+                                <input type="radio" name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="true">Đúng
+                                 <input type="radio" name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="flase">Sai
                               </div>
                             </div>
                           </div>
+
                         </div><br>
+                        <div id="cauhoi2" style="width: 100%;"></div>
                         <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
                         </button>
                       </div>
                     </div>
                   </div>
+                    
+                  
+
+      <div id="tl4" class="tab-pane tab-panel fade">
+        <div class="row post" style="margin-top: 20px;">
+                      <input  type="text" name="topic" style="border-radius: 5px; margin: 10px; width: 70%;padding: 5px;" placeholder="Số câu hỏi" onblur="socauhoi3(this.value);">
+                      <div class="card card-body" style="width: 100%">
+                <div class="accordion" id="accordionExampleTN4">
+                          <div class="card" >
+                            <div class="card-header" id="headingOne4">
+
+                              <p style="margin-left: 10px;" >
+                                Câu hỏi 1:
+                              </p>
+
+                            </div>
+                        <div data-parent="#accordionExampleTN4">
+                              <div class="card-body">
+                                <textarea name="topic" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div><br>
+                        <div id="cauhoi3" style="width: 100%;"></div>
+                        <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
+                        </button>
+                      </div>
+                    </div>
+                  
+
+
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div><br>         
-    </div>
+              
+         
+
+      
+ 
+
+
 
     <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
   </div>
@@ -412,4 +370,61 @@
   </ul>
 </footer> 
 </body>
+<script type="text/javascript">
+  function sodapan(sodapan){
+      var i=0;
+      var num=sodapan.value;
+      var dapan="<input type='text' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' />"
+      var code="";
+      for(i=0;i<num;i++){
+          code+=dapan;
+      }
+      var key = sodapan.name;
+      console.log(key);
+      console.log(num);
+      var res="dapan"+key;
+      document.getElementById(res).innerHTML=code;
+
+  }
+  function socauhoi(num){
+    var i=0;
+    var cauhoi="<div class='card card-body'> <div class='accordion' id='accordionExampleTN1'><div class='card' ><div class='card-header' id='headingOneTN1'><p style='margin-left: 10px;'> Câu hỏi "
+      var cauhoi2=":</p></div><div  data-parent='#accordionExampleTN1'><div class='card-body'><textarea name='topic' rows='2' class='col-sm-12' style='border-radius: 5px; margin: 10px; padding: 5px;' placeholder='Nội dung câu hỏi...' ></textarea><input  type='text' name='"
+      var cauhoi3="' style='border-radius: 5px; margin:  10px; width: 31%;padding: 5px;' placeholder='Số đáp án' onblur='sodapan(this);'><div id='dapan";
+      var cauhoi4="' style='width: 90%;'></div></div></div></div></div><br></div>";
+      var code="";
+      for(i=1;i<num;i++){
+        var t=i+1;
+          code+=cauhoi+t+cauhoi2+t+cauhoi3+t+cauhoi4;
+      }
+      document.getElementById('cauhoi').innerHTML=code;
+
+
+  }
+  function socauhoi2(num){
+    var i=0;
+    var cauhoi= ' <div class="card card-body" style="width: 100%"><div class="accordion" id="accordionExampleTN3"><div class="card" ><div class="card-header" id="headingOneTN3"><p style="margin-left: 10px;">Câu hỏi ';
+    var cauhoi2=':</p></div><div aria-labelledby="headingOneTN3" ><div class="card-body"><textarea name="topic" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea><input type="radio" name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="true">Đúng<input type="radio" name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="flase">Sai</div> </div></div></div></div>';
+      var code="";
+      for(i=1;i<num;i++){
+        var t=i+1;
+          code+=cauhoi+(t)+cauhoi2;
+      }
+      document.getElementById('cauhoi2').innerHTML=code;
+
+
+  }
+  function socauhoi3(num){
+    var i=0;
+    var cauhoi='<div class="card card-body" style="width: 100%"><div class="accordion" id="accordionExampleTN4"><div class="card" ><div class="card-header" id="headingOne4"><p style="margin-left: 10px;" >Câu hỏi ';
+    var cauhoi2=':</p></div><div data-parent="#accordionExampleTN4"><div class="card-body"><textarea name="topic" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea></div></div></div></div><br><div id="cauhoi3" style="width: 100%;"></div></div>';
+      var code="";
+      for(i=1;i<num;i++){
+        var t=i+1;
+          code+=cauhoi+(t)+cauhoi2;
+      }
+      document.getElementById('cauhoi3').innerHTML=code;
+
+  }
+</script>
 </html>
