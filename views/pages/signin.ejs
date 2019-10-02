@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="./bootstrap-4.3.1/bootstrap.min.css">
+  <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="signin.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <!--   <link rel="stylesheet" href="index&content.css"> -->
@@ -17,9 +17,8 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="./bootstrap-4.3.1/bootstrap.min.js"></script>
-  <script src="./bootstrap-4.3.1/jquery-3.2.1.min.js"></script>
-  <script src="./bootstrap-4.3.1/bootstrap-4.0.0.min.js"></script>
+  <script src="./bootstrap/jquery-3.2.1.min.js"></script>
+  <script src="./bootstrap/bootstrap-4.0.0.min.js"></script>
 </head>
 
 <body class="hero-image">
@@ -50,16 +49,16 @@
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputName" class="col-form-label">Họ tên:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="text" name="username" class="form-control" id="InputName" placeholder="Nhập họ tên..." onblur="this.value= titleCase(this.value);">
+          <input type="text" name="username" class="form-control" id="InputName" placeholder="Nhập họ tên..." onblur="this.value= titleCase(this.value);" required>
           </div>
           </div><br>
 
           <div class="row">
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
 
-          <label for="InputPhoneNum" class="col-form-label d-inline">Ngày sinh:</label></div>
+          <label for="InputDate" class="col-form-label d-inline">Ngày sinh:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl- col-lg-6">
-          <input type="type"  class="form-control" id="InputPhoneNum" placeholder="Nhập ngày sinh...." onblur="javascript: checkPhone()">
+          <input type="date" name="date"  class="form-control" id="InputDate" placeholder="Nhập ngày sinh...." onblur="javascript: checkDate(this);" required>
           </div>
           </div><br>
 
@@ -67,7 +66,7 @@
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputEmail" class="col-form-label">Địa chỉ email:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="email" name="email" class="form-control" id="InputEmail" placeholder="Nhập email..." onblur="javascript: Email_()">
+          <input type="email" name="useremail" class="form-control" id="InputEmail" placeholder="Nhập email..." onblur="javascript: Email_()" required>
           </div>
           </div><br>
           </div>
@@ -77,7 +76,7 @@
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputName" class="col-form-label">Tên đăng nhập:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="text" name="usernickname" class="form-control" id="InputNName" placeholder="Nhập tên đăng nhập..." onblur="this.value=titleCase2(this.value);">
+          <input type="text" name="usernickname" class="form-control" id="InputNName" placeholder="Nhập tên đăng nhập..." onblur="this.value=titleCase2(this.value);" required>
           </div>
           </div><br>
 
@@ -85,7 +84,7 @@
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputPassword" class="col-form-label d-inline">Mật khẩu:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="password" class="form-control" id="InputPassword" placeholder="Nhập mật khẩu...">
+          <input type="password" name="userpassword" class="form-control" id="InputPassword" placeholder="Nhập mật khẩu..." required>
           </div>
           </div><br>
 
@@ -93,7 +92,7 @@
           <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
           <label for="InputRePassW" class="col-form-label d-inline">Nhập lại mật khẩu:</label></div>
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-          <input type="password" class="form-control" id="InputRePassW" placeholder="Nhập lại mật khẩu...." onblur="javascript: checkpass()">
+          <input type="password" class="form-control" id="InputRePassW" placeholder="Nhập lại mật khẩu...." onblur="javascript: checkpass()" required>
           </div>
           </div>
           </div>
@@ -104,7 +103,7 @@
           <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
           <div class="form-check">
 
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked required>
             <label class="form-check-label d-inline" for="exampleRadios1">
               Tôi đồng ý với <a class="orange" href="">các điều khoản</a> của Q&A.
             </label>

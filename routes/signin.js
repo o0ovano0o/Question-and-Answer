@@ -19,6 +19,7 @@ router.post('/', function(req, res) {
 		name: signup.username,
 		email: signup.useremail,
 		password: signup.userpassword,
+		date: signup.date,
 		isadmin: 0
 	};
 	if (signup.usernickname) {

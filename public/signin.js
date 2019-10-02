@@ -1,15 +1,15 @@
 document.getElementById("InputName").focus();
 
 document.getElementById("InputName").onkeyup = function(e) {
-  KeyUp(e, this, "InputNName");
+  KeyUp(e, this, "InputDate");
 }
-document.getElementById("InputNName").onkeyup = function(e) {
+document.getElementById("InputDate").onkeyup = function(e) {
   KeyUp(e, this, "InputEmail");
 }
 document.getElementById("InputEmail").onkeyup = function(e) {
-  KeyUp(e, this, "InputPhoneNum");
+  KeyUp(e, this, "InputNName");
 }
-document.getElementById("InputPhoneNum").onkeyup = function(e) {
+document.getElementById("InputNName").onkeyup = function(e) {
   KeyUp(e, this, "InputPassword");
 }
 document.getElementById("InputPassword").onkeyup = function(e) {
@@ -75,14 +75,26 @@ function checkpass() {
   }
 }
 
-function checkPhone() {
-  var phone = document.getElementById("InputPhoneNum").value;
-  var phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-  if (phone == '') return false;
-  if (phone.match(phoneNum)) {
-    return true;
-  } else {
-    alert("số điện thoại không hợp lệ");
-    return false;
+function checkDate(t) {
+  var d = t.value;
+   console.log(d);
+   var date= new Date(d);
+   console.log(date);
+   var now = new Date();
+   var diff = now.getYear() - date.getYear();
+   console.log(diff);
+  if(diff<15)
+  {
+    alert("Bạn chưa đủ tuổi");
+     t.value="";
+    
+  } 
+  if(t.value==""){
+
+  }
+  else if(date=="Invalid Date"&&t.value!=""){
+    alert("Ngày sinh không đúng");
+    t.value="";
+
   }
 }
