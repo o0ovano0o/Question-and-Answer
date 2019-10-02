@@ -58,7 +58,7 @@
             <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
           </li>  
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Việt Cường</a>
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=signinUser.username%></a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
               <a class="dropdown-item" href="/login">Đăng xuất</a>
@@ -89,8 +89,10 @@
             </div>
             
             <div class="col-md-8">
-              <h3>Việt Cường</h3>
+              <h3>Tài khoản: <%=signinUser.username%></h3>
+              <h3>Tên: <%=signinUser.name%></h3>
               <ul>
+                <li id="age"></li>
                 <li>Cấp bậc: Tân sinh viên </li>
                 <li>Tổng số câu hỏi: 20 </li>
                 <li>Câu hỏi chưa được trả lời: 10 </li>
@@ -163,4 +165,13 @@
       </ul>
     </footer>
   </body>
+  <script type="text/javascript">
+    <% var n =  JSON.stringify(signinUser.date)%> 
+    var text = <%- n%> ;
+    var date = new Date(text);
+    var d = new Date();
+    var tuoi=d.getYear()-date.getYear();
+    document.getElementById("age").innerHTML="Tuổi: "+ tuoi;
+
+  </script>
   </html>

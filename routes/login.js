@@ -36,6 +36,8 @@ router.post('/', function (req, res) {
 			}
 			else if (user.password == signin.userpassword) {
 				signinUser = user;
+				req.session.user=user.username;
+				req.session.id=user.user_id;
 				res.render('main', {signinUser});
 			}
 			else {
