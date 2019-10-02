@@ -17,6 +17,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+window.history.pushState("", "", '/home');
+</script>
   </head>
 
 
@@ -38,7 +41,6 @@
             border-radius: 0px;
         }
 </style>
-
 
 
 
@@ -76,14 +78,14 @@
           </li>
           <li>
             <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
-          </li>  
+          </li>
+     
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=signinUser.name%> </a>
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=signinUser.username %> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
               <a class="dropdown-item" href="/login">Đăng xuất</a>
             </div>
-          </li>
         </ul>
       </div>
     </nav>

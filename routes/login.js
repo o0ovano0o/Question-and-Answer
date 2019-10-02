@@ -7,6 +7,7 @@ var q = require('q');
 
 router.get('/', function (req, res) {
 	res.render('login', {data: {}});
+
 });
 
 router.post('/', function (req, res) {
@@ -35,7 +36,6 @@ router.post('/', function (req, res) {
 			else if (user.password == signin.userpassword) {
 				signinUser = user;
 				res.render('main', {signinUser});
-				
 			}
 			else {
 				res.render('login', {data: {error:  "Tài khoản hoặc mật khẩu không đúng"}});
