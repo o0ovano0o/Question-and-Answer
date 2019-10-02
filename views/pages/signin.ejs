@@ -116,7 +116,7 @@
       </div>
       <!-- Hàng 6 -->
       <div class="row py-3  justify-content-center">
-        <input type="submit" id ="submit" class="btn btn-success px-5 round-button notPullRight" value="Đăng ký" />
+        <input type="submit" id ="submit" class="btn btn-success px-5 round-button notPullRight" value="Đăng ký">
       </div>
     </form>
 
@@ -128,6 +128,19 @@
     <br><br><br>
   </main>
 <script src="/signin.js"></script>
-
+<script type="text/javascript">
+$('form').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  var mysub = document.getElementById('submit');
+  var isFocused = (document.activeElement === mysub);
+  if(isFocused){
+   return true;
+  }
+  else if (keyCode == 13) { 
+    e.preventDefault();
+    return false;
+  }
+});
+</script>
 </body>
 </html>

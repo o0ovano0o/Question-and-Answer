@@ -70,6 +70,11 @@
                         <%=data.error%>
                         </div>
                         <%}%>
+                        <%if (data && data.message) {%>
+                        <div id="signinerror" class="alert alert-success">
+                        <%=data.message%>
+                        </div>
+                        <%}%>
                         <input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="/gpz+p9FcwYP8fBJ2VgSlWFgkQsehFfzFQsgcc50FRYx2fFCb9XP5Tjux4riYQEakeslGHnO75upC6T7hfMOgQ==" />
 
                         <div class="form-group margin-bottom-15px">

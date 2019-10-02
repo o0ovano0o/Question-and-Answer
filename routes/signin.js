@@ -66,7 +66,7 @@ router.post('/', function(req, res) {
 				res.render('signin', {data: {error:  "Không thể tạo tài khoản"}});
 			}
 			else {
-				res.render('login', {data: {}});
+				res.render('login', {data: {message: "Tạo tài khoản thành công"}});
 			}
 		}
 	});
