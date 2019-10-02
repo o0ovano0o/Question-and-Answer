@@ -6,6 +6,7 @@ var q = require('q');
 
 
 router.get('/', function (req, res) {
+	req.session.user=req.body.username;
 	res.render('login', {data: {}});
 
 });

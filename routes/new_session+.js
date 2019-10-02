@@ -5,6 +5,10 @@ var conn = db.getConnection();
 
 router.get('/', function (req, res) {
 	res.render('new_session+');
+		 if(req.session.user)
+	res.render('new_session+');
+	else
+	res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 });
 
 module.exports = router;

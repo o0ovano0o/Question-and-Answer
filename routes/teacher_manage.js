@@ -4,7 +4,11 @@ var db = require('../model/database');
 var conn = db.getConnection(); 
 
 router.get('/', function (req, res) {
+
+	 if(req.session.user)
 	res.render('teacher_manage');
+	else
+	res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 });
 
 module.exports = router;

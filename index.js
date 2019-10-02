@@ -14,7 +14,15 @@ app.set('trust proxy', 1);
 app.use(express.static(__dirname + '/public'));
 
 var signinUser;
-
+app.use(session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {secure: true,
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}));
 var controllers = require(__dirname + '/routes/controller.js');
 app.use(controllers);
 app.listen(port,function(){
