@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="./bootstrap-4.3.1/bootstrap.min.css">
+ 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="signin.css">
 <!--   <link rel="stylesheet" href="index&content.css"> -->
@@ -16,9 +16,13 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="./bootstrap-4.3.1/bootstrap.min.js"></script>
-  <script src="./bootstrap-4.3.1/jquery-3.2.1.min.js"></script>
-  <script src="./bootstrap-4.3.1/bootstrap-4.0.0.min.js"></script>
+   <script src="./bootstrap/jquery-3.2.1.min.js"></script>
+  <script src="./bootstrap/bootstrap.min.js"></script>
+ 
+  <script src="./bootstrap/bootstrap-4.0.0.min.js"></script>
+  <script>
+window.history.pushState("", "", '/login');
+</script>
 </head>
 
 <body class="hero-image" style="background-color: #eeeeee">
@@ -68,6 +72,11 @@
                         <%if (data && data.error) {%>
                         <div id="signinerror" class="alert alert-danger">
                         <%=data.error%>
+                        </div>
+                        <%}%>
+                        <%if (data && data.message) {%>
+                        <div id="signinerror" class="alert alert-success">
+                        <%=data.message%>
                         </div>
                         <%}%>
                         <input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="/gpz+p9FcwYP8fBJ2VgSlWFgkQsehFfzFQsgcc50FRYx2fFCb9XP5Tjux4riYQEakeslGHnO75upC6T7hfMOgQ==" />
@@ -141,7 +150,7 @@
     </div>
     </div>
   </div>
-</main>
+</main><br><br><br>
 
 </body>
 </html>
