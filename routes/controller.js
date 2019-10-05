@@ -13,5 +13,7 @@ router.use('/teacher_manage', require(__dirname + '/teacher_manage.js'));
 router.use('/survey', require(__dirname + '/list_survey.js'));
 router.use('/support', require(__dirname + '/support.js'));
 router.use('/rules', require(__dirname + '/rules.js'));
+router.use('/survey_question', require(__dirname + '/survey_question.js'));
+
 module.exports = router;
 

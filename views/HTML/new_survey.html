@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/index&manage.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-  <title>Hiển thị phiếu khảo sát</title>
+  <title>Hiển thị câu hỏi khảo sát</title>
 
   <!-- Thư viện online cho Bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -18,8 +18,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
-
 <!-- CSS tự định nghĩa -->
+<style type="text/css">
+  .nav-pills>a.active, .nav-pills>a:focus, .nav-pills>a:hover {
+    cursor: default;
+    font-weight: bold;
+    background-color: #009999 !important;
+    border-bottom: 3px solid #ff0066;
+    color: black;
+    border-radius: 0px;
+  }
+  .nav-pills>a {
+
+    font-weight: normal;
+    border-bottom: 3px solid #ff0066;
+    color: black;
+    border-radius: 0px;
+  }
+</style>
 
 <body style="background-color: #EEEEEE">
 
@@ -52,7 +68,7 @@
             <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
           </li>  
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Việt Cường</a>
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=signinUser.username%></a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
               <a class="dropdown-item" href="/signin">Đăng xuất</a>
@@ -97,312 +113,108 @@
 
           <div class="card">
             <div class="card-header" style="background-color: #99ccff">
-             <h6><b>Danh sách phiếu khảo sát</b></h6>
-           </div>
+             <h6><b>Danh sách câu hỏi khảo sát</b></h6>
+           </div><br>
+           <div class="container" style="margin-top: 20px;">
 
-           <!-- Hiển thị phiếu khảo sát -->
-           <div class="card-body">
-            <div class="form-group" >
-              <p>
-                <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Khảo sát về cuộc sống thường ngày
-                </button>
-              </p>
-              <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                  <div class="accordion" id="accordionExample">
-                    <div class="card" >
-                      <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Trắc nghiệm 1:
-                          </button>
-                        </h2>
-                      </div>
+            <nav class="nav nav-pills nav-justified">
+              <a class="nav-item nav-link active" data-toggle="tab" href="#c1">Câu 1</a>
+              <a class="nav-item nav-link"  data-toggle="tab" href="#c2">Câu 2</a>
+              <a class="nav-item nav-link"  data-toggle="tab" href="#c3">Câu 3</a>
+              <a class="nav-item nav-link"  data-toggle="tab" href="#c4">Câu 4</a>
+            </nav>
 
-                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                          <b>Bạn có thích mình không ^^</b> <br>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Mình thích bạn lắm <3
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Mình đéo thích bạn đâu !!
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="headingTwo">
-                        <h2 class="mb-0">
-                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Trắc nghiệm 2:
-                          </button>
-                        </h2>
-                      </div>
-                      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                        <div class="card-body">
-                          <b>Bạn thấy mình như thế nào ??</b> <br>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Đẹp trai, tốt bụng.
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Xấu xí, lười biếng.
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Đẹp trai, lười biếng.
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Xấu xí, tốt bụng.
-                            </label>
-                          </div>
 
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="headingThree">
-                        <h2 class="mb-0">
-                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Trắc nghiệm 3:
-                          </button>
-                        </h2>
-                      </div>
-                      <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="card-body">
-                          <b>Thời tiết hôm nay thế nào ??</b> <br>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Trời nắng, ít mây.
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Trời nhiều mây, mưa rải rác.
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                              Trời đẹp, không nắng, ít mây.
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            <!-- Nội dung các tabs-->
+            <div class="tab-content">
+
+              <div id="c1" class="tab-pane active">
+                <div class="card card body" style="margin-top: 20px;padding:15px;">
+                  <b> Hôm nay 37 độ đúng không ?</b> <br>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios1.1" value="option1.1" checked>
+                    <label class="form-check-label" for="Radios1.1">
+                      Đúng.
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios1.2" value="option1.2" checked>
+                    <label class="form-check-label" for="Radios1.2">
+                      Sai.
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+              <div id="c2" class="tab-pane">
+                <div class="card card body" style="margin-top: 20px;padding:15px;">   
+                  <b> Bạn thấy mình như thế nào ?</b> <br>
+                  <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="Radios2.1" value="option1">
+                    <label class="form-check-label" for="Radios2.1">
+                      Đẹp trai, tốt bụng.
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="Radios2.2" value="option1">
+                    <label class="form-check-label" for="Radios2.2">
+                      Xấu xí, lười biếng.
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="Radios2.3" value="option1">
+                    <label class="form-check-label" for="Radios2.3">
+                      Đẹp trai, lười biếng.
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="Radios2.4" value="option1">
+                    <label class="form-check-label" for="Radios2.4">
+                      Xấu xí, tốt bụng.
+                    </label>
+                  </div>
+                </div>
+              </div>   
+              <div id="c3" class="tab-pane">
+                <div class="card card body" style="margin-top: 20px;padding: 15px;">   
+                  <b> Thời tiết hôm nay thế nào ?</b> <br>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios3.1" value="option1" checked>
+                    <label class="form-check-label" for="Radios3.1">
+                      Trời nắng, ít mây.
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios3.2" value="option1" checked>
+                    <label class="form-check-label" for="Radios3.2">
+                      Trời nhiều mây, mưa rải rác.
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios3.3" value="option1" checked>
+                    <label class="form-check-label" for="Radios3.3">
+                      Trời đẹp, không nắng, ít mây.
+                    </label>
                   </div>
                 </div>
               </div>
-            </div>
+              <div id="c4" class="tab-pane">
+                <div class="card card body" style="margin-top: 20px;padding:15px;">   
+                 <b> Bạn hãy đưa ra 1 vài ý kiến phản hồi về ứng dụng Web của chúng tôi?</b>
+                 <textarea name="topic" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
+               </div>
+             </div>
+           </div><br>
+            <button class="btn btn-secondary" style="float: right;margin-right: 45%;">Kết thúc</button><br><br>
+         </div>
+       </div><br>
 
-            <!-- Thêm câu hỏi  -->      
-            <hr id = "phienhoidap" class="featurette-divider">
-
-            <a href="" style="margin-left: 0%;" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#2" aria-expanded="false" aria-controls="2">Thêm câu hỏi</a><br>
-
-            <div class="form-group" >
-              <p>
-              </p>
-              <div class="collapse" id="2">
-                <p>
-                  <div class="row">
-                    <div class="col-6 col-sm-6 col-md-3">
-                      <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;">
-                          Trắc nghiệm
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" data-toggle="collapse" href="#TN1" role="button" aria-expanded="false" aria-controls="TN1">Trắc nghiệm 1 đáp án</a>
-                          <a class="dropdown-item" data-toggle="collapse" href="#TN2" role="button" aria-expanded="false" aria-controls="TN2">Trắc nghiệm đúng/sai</a>
-                          <a class="dropdown-item" data-toggle="collapse" href="#TN3" role="button" aria-expanded="false" aria-controls="TN3">Trắc nghiệm nhiều đáp án</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-3">
-                      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#3" aria-expanded="false" aria-controls="3" style="width: 100%;">Tự luận</button>
-                    </div>
-                  </div>
-                </p>
-
-                <!-- Trắc nghiệm 1 -->
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="collapse multi-collapse" id="TN1">
-                      <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
-                      <div class="card card-body">
-                        <div class="accordion" id="accordionExampleTN1">
-                          <div class="card" >
-                            <div class="card-header" id="headingOneTN1">
-
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOneTN1" aria-expanded="false" aria-controls="collapseOneTN1">
-                                Câu hỏi 1:
-                              </button>
-                              <a href="#">
-                                <img src="./images/icons/next.png" width="30" height="30">
-                              </a>
-                            </div>
-
-                            <div id="collapseOneTN1" class="collapse" aria-labelledby="headingOneTN1" data-parent="#accordionExampleTN1">
-                              <div class="card-body">
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi...">
-                                <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/back.png" width="30" height="30">
-                                </a>
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 10px;" placeholder="Đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/next.png" width="30" height="30">
-                                </a>
-                                <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div><br>
-                        <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
-                        </button>
-                      </div>
-                    </div>
-                  </div><br>
-
-                  <!-- Tự luận -->
-                  <div class="col-md-6">
-                    <div class="collapse multi-collapse" id="3">
-                      <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
-                      <div class="card card-body">
-                        <div class="accordion" id="accordionExample3">
-                          <div class="card" >
-                            <div class="card-header" id="headingOne3">
-
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="false" aria-controls="collapseOne3">
-                                Câu hỏi 1:
-                              </button>
-                              <a href="#">
-                                <img src="./images/icons/next.png" width="30" height="30">
-                              </a>
-
-                            </div>
-
-                            <div id="collapseOne3" class="collapse" aria-labelledby="headingOne3" data-parent="#accordionExample3">
-                              <div class="card-body">
-                                <textarea class="col-md-10" rows = "3" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi..."></textarea>
-                                <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div><br>
-                        <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Trắc nghiệm 2 -->
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="collapse multi-collapse" id="TN2">
-                      <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
-                      <div class="card card-body">
-                        <div class="accordion" id="accordionExampleTN2">
-                          <div class="card" >
-                            <div class="card-header" id="headingOneTN2">
-
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOneTN2" aria-expanded="false" aria-controls="collapseOneTN2">
-                                Câu hỏi 1:
-                              </button>
-                              <a href="#">
-                                <img src="./images/icons/next.png" width="30" height="30">
-                              </a>
-                            </div>
-
-                            <div id="collapseOneTN2" class="collapse" aria-labelledby="headingOneTN2" data-parent="#accordionExampleTN2">
-                              <div class="card-body">
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi..."><br>
-                                <a href="#">
-                                  <img src="./images/icons/back.png" width="30" height="30">
-                                </a>
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 10px;" placeholder="Đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/next.png" width="30" height="30">
-                                </a>
-                                <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div><br>
-                        <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Trắc nghiệm 3 -->
-                  <div class="col-md-6">
-                    <div class="collapse multi-collapse" id="TN3">
-                      <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số câu hỏi">
-                      <div class="card card-body">
-                        <div class="accordion" id="accordionExampleTN3">
-                          <div class="card" >
-                            <div class="card-header" id="headingOneTN3">
-
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOneTN3" aria-expanded="false" aria-controls="collapseOneTN3">
-                                Câu hỏi 1:
-                              </button>
-                              <a href="#">
-                                <img src="./images/icons/next.png" width="30" height="30">
-                              </a>
-                            </div>
-
-                            <div id="collapseOneTN3" class="collapse" aria-labelledby="headingOneTN3" data-parent="#accordionExampleTN3">
-                              <div class="card-body">
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px;" placeholder="Nội dung câu hỏi...">
-                                <input class="col-md-4" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 0px; width: 31%" placeholder="Số đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/back.png" width="30" height="30">
-                                </a>
-                                <input class="col-md-7" type="text" name="topic" style="border-radius: 5px; margin: 0px 10px 10px 10px;" placeholder="Đáp án">
-                                <a href="#">
-                                  <img src="./images/icons/next.png" width="30" height="30">
-                                </a>
-                                <button type="submit" style="border-radius: 5px; float: right;">Xong</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div><br>
-                        <button type="submit" style="border-radius: 5px; float: right; ">Cập nhật
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div><br>         
-    </div>
-
-    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
-  </div>
+       <a href="#" style="margin-right: 3%;float: right;" type="button" class="btn btn-secondary">Xem kết quả khảo sát</a><br><br><br>       
+       <a href="/survey_question" style="float: right;margin-right: 43%;" type="button" class="btn btn-secondary">Thêm câu hỏi</a><br>
+     </div><br>
+   </div>        
+   <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+ </div>
 </main>        
 <footer id="footer">
   <ul style="padding: 15px; margin-bottom: 0px;">
