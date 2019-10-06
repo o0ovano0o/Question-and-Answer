@@ -5,7 +5,7 @@ var conn = db.getConnection();
 
 router.get('/', function (req, res) {
 	 if(req.session.user)
-	res.render('survey_question', {signinUser});
+	res.render('survey_question', {session: req.session.user});
 	else
 	res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 });

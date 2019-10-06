@@ -6,7 +6,7 @@ var conn = db.getConnection();
 router.get('/', function (req, res) {
 
 	 if(req.session.user)
-	res.render('teacher_manage', {signinUser});
+	res.render('teacher_manage', {session: req.session.user});
 	else
 	res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 });

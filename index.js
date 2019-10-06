@@ -13,11 +13,11 @@ app.set('view engine', 'ejs');
 app.set('trust proxy', 1);
 app.use(express.static(__dirname + '/public'));
 
-var signinUser;
 app.use(session({
     secret: "secret",
     resave: false,
     saveUninitialized: true,
+    cookie: {secure: false}
 }));
 app.use(function(req, res, next) {
    res.locals.session = req.session;
