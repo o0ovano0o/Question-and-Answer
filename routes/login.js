@@ -35,8 +35,7 @@ router.post('/', function (req, res) {
 				res.render('login', {data: {error:  "Tài khoản không tồn tại"}});
 			}
 			else if (user.password == signin.userpassword) {
-				signinUser = user;
-				req.session.user=user;
+				req.session.user = user;
 				res.render('main', {session: req.session.user});
 			}
 			else {

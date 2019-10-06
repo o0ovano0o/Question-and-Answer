@@ -4,8 +4,8 @@ var db = require('../model/database');
 var conn = db.getConnection(); 
 
 router.get('/', function (req, res) {
-	 if(req.session.user)
-	res.render('student_manage', {signinUser});
+	if(req.session.user)
+	res.render('student_manage', {session: req.session.user});
 	else
 	res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 });

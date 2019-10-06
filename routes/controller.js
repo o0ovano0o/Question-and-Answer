@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 router.use('/login', require(__dirname + '/login.js'));
-router.use('/logout', require(__dirname + '/logout.js'));
 router.use('/home', require(__dirname + '/main.js'));
 router.use('/signin', require(__dirname + '/signin.js'));
 router.use('/createsession', require(__dirname + '/new_session.js'));
@@ -15,6 +14,7 @@ router.use('/survey', require(__dirname + '/list_survey.js'));
 router.use('/support', require(__dirname + '/support.js'));
 router.use('/rules', require(__dirname + '/rules.js'));
 router.use('/survey_question', require(__dirname + '/survey_question.js'));
+router.use('/logout', require(__dirname + '/logout.js'));
 
 module.exports = router;
 

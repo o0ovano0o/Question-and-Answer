@@ -33,7 +33,7 @@
       <a id="logo" class="navbar-brand" href="/home">Q&A</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>      
+        </button>
       <div class="collapse navbar-collapse" style="margin: 0px 30px" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -49,22 +49,29 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
-        
+        <% if (session.username) {%>
         <ul class="navbar-nav" style="display: contents;">
           <li class="nav-item">
             <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
           </li>
           <li>
             <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
-          </li>  
+          </li>
+          
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=signinUser.username%></a>
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
               <a class="dropdown-item" href="/logout">Đăng xuất</a>
             </div>
+        </ul>
+        <%} else {%>
+  <ul class="navbar-nav" style="display: contents;">
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><Đăng nhập</a>
           </li>
         </ul>
+        <%}%>
       </div>
     </nav>
   </header>
@@ -89,8 +96,8 @@
             </div>
             
             <div class="col-md-8">
-              <h3>Tài khoản: <%=signinUser.username%></h3>
-              <h3>Tên: <%=signinUser.name%></h3>
+              <h3>Tài khoản: <%=session.username%></h3>
+              <h3>Tên: <%=session.name%></h3>
               <ul>
                 <li id="age"></li>
                 <li>Cấp bậc: Tân sinh viên </li>
@@ -166,7 +173,7 @@
     </footer>
   </body>
   <script type="text/javascript">
-    <% var n =  JSON.stringify(signinUser.date)%> 
+    <% var n =  JSON.stringify(session.date)%> 
     var text = <%- n%> ;
     var date = new Date(text);
     var d = new Date();
