@@ -15,6 +15,14 @@ function getConnection() {
 	}
 	return connection;
 }
+function getSurvey() {
+	var query = connection.query("SELECT * FROM survey", (err, surveys) => {
+    if(err) throw err;
+    else{
+    return surveys; }
+});
+}
 module.exports = {
-	getConnection: getConnection
+	getConnection: getConnection,
+	getSurvey: getSurvey
 }

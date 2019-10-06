@@ -95,7 +95,6 @@ window.history.pushState("", "", '/home');
         <%}%>
       </div>
     </nav>
-  </header>
 
     <!-- Nội dung khi ấn vào ô Tìm Kiếm -->
     <div id="search" class="collapse" style="float: right; margin-right: 80px;">  
@@ -229,25 +228,30 @@ window.history.pushState("", "", '/home');
           </div>
       </div>
     </div><br><br>
-
+<% if(session.isadmin){%>
+<a href="/createsurvey" class="btn btn-primary" style="margin:10px;" role="button">Tạo Phiếu khảo sát</a>
+<%}%>
   <nav class="nav nav-pills nav-justified">
   <a class="nav-item nav-link active" data-toggle="tab" href="#4">Khảo sát đang hoạt động</a>
   <a class="nav-item nav-link" data-toggle="tab" href="#5">Khảo sát đã kết thúc</a>
   </nav>
-
+  
 
   <!-- Nội dung các tabs-->
     <div class="tab-content">
+     <div id="4" class="tab-pane active"> 
+<% for(var i=0;i< surveys.length;i++) { 
+if(surveys[i].isopen){
+%>
       
-      <div id="4" class="tab-pane active">
         
         <div class="row post" style="margin-top: 20px;">
             <div class="col-md-1" style="padding-left: 25px;">
               <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
             </div>
             <div class="col-md-6">
-              <a href="/survey"><h4><%=surveys[0].survey_id %></h4></a>
-              <p>Ngôn ngữ nào dễ học nhất cho sinh viên năm 2???</p>
+              <a href="/survey/<%= surveys[i].survey_id%>"><h4><%= surveys[i].title %></h4></a>
+              <p><%= surveys[i].description %></p>
             </div>
             <div class="col-md-5" style="display: flex;">
               <table style="text-align: center;">
@@ -272,7 +276,8 @@ window.history.pushState("", "", '/home');
             </div>
             <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
           </div>
-
+     <%}}%>
+  
           <div style="text-align: -webkit-right;">
             <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
             <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
@@ -284,15 +289,19 @@ window.history.pushState("", "", '/home');
             <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
           </div>
       </div>
-      
+ 
       <div id="5" class="tab-pane tab-pane fade">
+        <% for(var i=0;i< surveys.length;i++) { 
+            if(!surveys[i].isopen){
+            %>
+  
         <div class="row post" style="margin-top: 20px;">
             <div class="col-md-1" style="padding-left: 25px;">
               <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
             </div>
             <div class="col-md-6">
-              <a href=""><h4>Khảo sát đánh giá sự khác biệt giữa C, C++, Java</h4></a>
-              <p>Đánh giá về cấu trúc, sự tiện nghe khi lập trình</p>
+             <a href="/survey/<%= surveys[i].survey_id%>"><h4><%= surveys[i].title %></h4></a>
+              <p><%= surveys[i].description %></p>
             </div>
             <div class="col-md-5" style="display: flex;">
               <table style="text-align: center;">
@@ -306,7 +315,7 @@ window.history.pushState("", "", '/home');
                   <td>
                     <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
                   </td>
-                  <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                  <td rowspan="2" style="margin: 0"><img src="./images/icons/lock.png" width="30" height="30"></td>
                 </tr>
                 <tr>
                   <td><p>1 lượt xem</p></td>
@@ -317,7 +326,7 @@ window.history.pushState("", "", '/home');
             </div>
             <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
           </div>
-
+ <%}}%>
           <div style="text-align: -webkit-right;">
             <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
             <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
@@ -331,21 +340,6 @@ window.history.pushState("", "", '/home');
         </div>
 
 
-      <div class="tab-pane tab-panel fade">
-        
-
-          <div style="text-align: -webkit-right;">
-            <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a >...</a>
-            <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-          </div>
-      </div>
-    </div>
     <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
     </div>
     </main>

@@ -10,4 +10,5 @@ router.get('/', function (req, res) {
 	res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 });
 
+
 module.exports = router;

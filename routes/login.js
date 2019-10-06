@@ -4,7 +4,6 @@ var db = require('../model/database');
 var conn = db.getConnection(); 
 var q = require('q');
 
-
 router.get('/', function (req, res) {
 	
 	res.render('login', {data: {}});
@@ -36,7 +35,12 @@ router.post('/', function (req, res) {
 			}
 			else if (user.password == signin.userpassword) {
 				req.session.user = user;
-				res.render('main', {session: req.session.user});
+				var query = conn.query("SELECT * FROM survey", (err, surveys) => {
+			    if(err) throw err;
+			    else{
+			    res.render('main',{session: req.session.user,surveys:surveys}); }
+			});
+			    
 			}
 			else {
 				res.render('login', {data: {error:  "Tài khoản hoặc mật khẩu không đúng"}});

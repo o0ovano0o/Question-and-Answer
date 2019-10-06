@@ -12,7 +12,6 @@ app.set('views', path.join(__dirname, 'views/pages'));
 app.set('view engine', 'ejs');
 app.set('trust proxy', 1);
 app.use(express.static(__dirname + '/public'));
-
 app.use(session({
     secret: "secret",
     resave: false,
@@ -25,6 +24,7 @@ app.use(function(req, res, next) {
 
   next();
 });
+var surveys;
 var controllers = require(__dirname + '/routes/controller.js');
 app.use(controllers);
 
