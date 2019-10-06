@@ -70,7 +70,7 @@ window.history.pushState("", "", '/home');
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
-        <% if (session.username) {%>
+        
         <ul class="navbar-nav" style="display: contents;">
           <li class="nav-item">
             <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
@@ -80,19 +80,13 @@ window.history.pushState("", "", '/home');
           </li>
           
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.username%> </a>
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=signinUser.username%> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
               <a class="dropdown-item" href="/login">Đăng xuất</a>
             </div>
         </ul>
-        <%} else {%>
-  <ul class="navbar-nav" style="display: contents;">
-          <li class="nav-item">
-            <a class="nav-link" href="/login"><Đăng nhập</a>
-          </li>
-        </ul>
-        <%}%>
+        
       </div>
     </nav>
   </header>
@@ -272,6 +266,72 @@ window.history.pushState("", "", '/home');
             </div>
             <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
           </div>
+      
+        
+        <div  class="row post" style="margin-top: 20px;">
+            <div class="col-md-1" style="padding-left: 25px;">
+              <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+            </div>
+            <div class="col-md-6">
+              <a href="/survey"><h4>Khảo sát năng lực lập trình của sinh viên</h4></a>
+              <p>Ngôn ngữ nào dễ học nhất cho sinh viên năm 2???</p>
+            </div>
+            <div class="col-md-5" style="display: flex;">
+              <table style="text-align: center;">
+                <tr>
+                  <td>
+                    <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                </tr>
+                <tr>
+                  <td><p>2000 lượt xem</p></td>
+                  <td><p>2000 phản hồi</p></td>
+                  <td><p>Đánh giá: 5</p></td>
+                </tr>
+              </table>
+            </div>
+            <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
+          </div>
+
+        
+        <div class="row post" style="margin-top: 20px;">
+            <div class="col-md-1" style="padding-left: 25px;">
+              <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+            </div>
+            <div class="col-md-6">
+              <a href="/survey"><h4>Khảo sát năng lực lập trình của sinh viên</h4></a>
+              <p>Ngôn ngữ nào dễ học nhất cho sinh viên năm 2???</p>
+            </div>
+            <div class="col-md-5" style="display: flex;">
+              <table style="text-align: center;">
+                <tr>
+                  <td>
+                    <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                </tr>
+                <tr>
+                  <td><p>2000 lượt xem</p></td>
+                  <td><p>2000 phản hồi</p></td>
+                  <td><p>Đánh giá: 5</p></td>
+                </tr>
+              </table>
+            </div>
+            <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
+          </div>
 
           <div style="text-align: -webkit-right;">
             <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
@@ -286,7 +346,38 @@ window.history.pushState("", "", '/home');
       </div>
       
       <div id="5" class="tab-pane tab-pane fade">
-        <div class="row post" style="margin-top: 20px;">
+        <div  class="row post" style="margin-top: 20px;">
+            <div class="col-md-1" style="padding-left: 25px;">
+              <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+            </div>
+            <div class="col-md-6">
+              <a href=""><h4>Khảo sát đánh giá sự khác biệt giữa C, C++, Java</h4></a>
+              <p>Đánh giá về cấu trúc, sự tiện nghe khi lập trình</p>
+            </div>
+            <div class="col-md-5" style="display: flex;">
+              <table style="text-align: center;">
+                <tr>
+                  <td>
+                    <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                </tr>
+                <tr>
+                  <td><p>1 lượt xem</p></td>
+                  <td><p>1 phản hồi</p></td>
+                  <td><p>Đánh giá: 1</p></td>
+                </tr>
+              </table>
+            </div>
+            <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
+          </div>
+           <div  class="row post" style="margin-top: 20px;">
             <div class="col-md-1" style="padding-left: 25px;">
               <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
             </div>
@@ -318,34 +409,50 @@ window.history.pushState("", "", '/home');
             <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
           </div>
 
-          <div style="text-align: -webkit-right;">
-            <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a >...</a>
-            <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
+           <div  class="row post" style="margin-top: 20px;">
+            <div class="col-md-1" style="padding-left: 25px;">
+              <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+            </div>
+            <div class="col-md-6">
+              <a href=""><h4>Khảo sát đánh giá sự khác biệt giữa C, C++, Java</h4></a>
+              <p>Đánh giá về cấu trúc, sự tiện nghe khi lập trình</p>
+            </div>
+            <div class="col-md-5" style="display: flex;">
+              <table style="text-align: center;">
+                <tr>
+                  <td>
+                    <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td>
+                    <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
+                  </td>
+                  <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                </tr>
+                <tr>
+                  <td><p>1 lượt xem</p></td>
+                  <td><p>1 phản hồi</p></td>
+                  <td><p>Đánh giá: 1</p></td>
+                </tr>
+              </table>
+            </div>
+            <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
           </div>
+
+
         </div>
+      </div>
+     
+
+
+     
+
+         
       
 
-      <div class="tab-pane tab-panel fade">
-        
-
-          <div style="text-align: -webkit-right;">
-            <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a >...</a>
-            <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-            <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-          </div>
-      </div>
-    </div>
+    
     <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
     </div>
     </main>
