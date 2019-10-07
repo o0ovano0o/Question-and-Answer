@@ -19,6 +19,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="/dirPagination.js"> </script>
+
   <script>
     window.history.pushState("", "", '/home');
   </script>
@@ -99,10 +100,11 @@
       </nav>
 
       <!-- Nội dung khi ấn vào ô Tìm Kiếm -->
-      <div id="search" class="collapse" style="float: right; margin-right: 80px;">
-        <div class="input-group-append">
-          <button class="btn btn-secondary" type="button">Tìm</button>
-          <input class="form-control" type="search" placeholder="Nhập vào đây..."></div>
+        <div id="search" class="collapse" style="float: right; margin-right: 80px;">
+          <div class="input-group-append">
+              <button class="btn btn-secondary" type="button">Tìm</button>
+              <input class="form-control" type="search" placeholder="Nhập vào đây...">
+          </div>
         </div>
 
 
@@ -122,7 +124,7 @@
 
             <!-- Nội dung các tabs-->
             <div class="tab-content">
-
+              <!--Phiên mở-->
                     <div id="1" class="tab-pane active" ng-app="paginationApp" ng-controller="listdata">
                               <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|itemsPerPage:2">
                                       <div class="col-md-1" style="padding-left: 25px;">
@@ -143,11 +145,11 @@
                                                   <tr>
                                                     <td><p>{{val.lxem}} lượt xem</p></td>
                                                     <td><p>{{val.phanhoi}} phản hồi</p></td>
-                                                    <td><p>Đánh giá: {{val.dgia}}</p></td>
+                                                    <td><p>Đánh giá: {{val.dagia}}</p></td>
                                                   </tr>
                                             </table>
                                       </div>
-                                <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
+                                <p style="padding-left: 20px; font-size: 12px">{{val.time}} giờ trước</p>
                               </div>
                               <dir-pagination-controls
                                 max-size="3"
@@ -161,66 +163,55 @@
 
                       app.controller('listdata', function($scope) {
                         var data=[
-                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
-                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
-                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
-                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
-                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
-                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
-                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2}
+                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2, "time": "15"},
+                          {"chude":"hello", "mota":"hi", "lxem": 100, "phanhoi": 4, "dagia": 2,"time": "16"},
+                          {"chude":"hello", "mota":"hi", "lxem": 20, "phanhoi": 5, "dagia": 2,"time": "17"},
+
                         ]
                         $scope.data =data;
                       });
                     </script>
 
+            <!--Phiên đã đóng-->
+              <div id="2" class="tab-pane tab-pane fade" >
+                    <div class="row post" style="margin-top: 20px;" >
+                          <div class="col-md-1" style="padding-left: 25px;">
+                                <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+                          </div>
+                          <div class="col-md-6">
+                                <a href="#"><h4>Hi</h4></a>
+                                <p>Hello</p>
+                          </div>
+                          <div class="col-md-5" style="display: flex;">
+                                <table style="text-align: center;">
+                                      <tr>
+                                        <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                        <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                        <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                        <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                                      </tr>
+                                  <tr>
+                                        <td><p>3 lượt xem</p></td>
+                                        <td><p>4 phản hồi</p></td>
+                                        <td><p>Đánh giá: 5</p></td>
+                                  </tr>
+                                </table>
+                          </div>
+                          <p style="padding-left: 20px; font-size: 12px">2 giờ trước</p>
+                    </div>
+                    <div style="text-align: -webkit-right;">
+                      <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
+                      <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
+                      <a href="">1</a>
+                      <a href="">2</a>
+                      <a href="">3</a>
+                      <a >...</a>
+                      <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
+                      <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
+                    </div>
 
-
-
-
-              <div id="2" class="tab-pane tab-pane fade">
-                <div class="row post" style="margin-top: 20px;">
-                  <div class="col-md-1" style="padding-left: 25px;">
-                    <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
-                  </div>
-                  <div class="col-md-6">
-                    <a href=""><h4>Tìm kiếm phương pháp học tập tốt</h4></a>
-                    <p>Các phương pháp học tập tốt ??</p>
-                  </div>
-                  <div class="col-md-5" style="display: flex;">
-                    <table style="text-align: center;">
-                      <tr>
-                        <td>
-                          <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                        </td>
-                        <td>
-                          <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                        </td>
-                        <td>
-                          <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                        </td>
-                        <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
-                      </tr>
-                      <tr>
-                        <td><p>1 lượt xem</p></td>
-                        <td><p>1 phản hồi</p></td>
-                        <td><p>Đánh giá: 1</p></td>
-                      </tr>
-                    </table>
-                  </div>
-                  <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
-                </div>
-
-                <div style="text-align: -webkit-right;">
-                  <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-                  <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-                  <a href="">1</a>
-                  <a href="">2</a>
-                  <a href="">3</a>
-                  <a >...</a>
-                  <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-                  <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-                </div>
               </div>
+
 
 
               <div class="tab-pane tab-panel fade">
