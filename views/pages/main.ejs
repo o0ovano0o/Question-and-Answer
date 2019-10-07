@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  
+
   <link rel="stylesheet" href="/index&manage.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -17,6 +17,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="/dirPagination.js"> </script>
   <script>
     window.history.pushState("", "", '/home');
   </script>
@@ -34,7 +36,7 @@
     border-radius: 0px;
   }
   .nav-pills>a {
-    
+
     font-weight: normal;
     border-bottom: 3px solid #ff0066;
     color: black;
@@ -45,7 +47,7 @@
 
 <!-- BODY -->
 <body>
-  
+
   <!-- HEADER -->
   <header>
 
@@ -60,12 +62,12 @@
           <li class="nav-item active">
             <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
           </li>
-          
+
           <li class="nav-item">
             <a class="nav-link" href="/support">Trợ giúp</a>
           </li>
         </ul>
-        
+
         <form id="search" class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -78,7 +80,7 @@
           <li>
             <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
           </li>
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -97,7 +99,7 @@
       </nav>
 
       <!-- Nội dung khi ấn vào ô Tìm Kiếm -->
-      <div id="search" class="collapse" style="float: right; margin-right: 80px;">  
+      <div id="search" class="collapse" style="float: right; margin-right: 80px;">
         <div class="input-group-append">
           <button class="btn btn-secondary" type="button">Tìm</button>
           <input class="form-control" type="search" placeholder="Nhập vào đây..."></div>
@@ -107,11 +109,11 @@
 
         <!-- MAIN -->
         <main>
-          
+
 
           <!-- Nav-tabs-->
           <div class="container" style="margin-top: 50px;">
-            
+
             <nav class="nav nav-pills nav-justified">
               <a class="nav-item nav-link active" data-toggle="tab" href="#1">Các phiên hoạt động</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#2">Các phiên đã đóng</a>
@@ -120,53 +122,61 @@
 
             <!-- Nội dung các tabs-->
             <div class="tab-content">
-              
-              <div id="1" class="tab-pane active">
-                
-                <div class="row post" style="margin-top: 20px;">
-                  <div class="col-md-1" style="padding-left: 25px;">
-                    <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
-                  </div>
-                  <div class="col-md-6">
-                    <a href="/session"><h4>Về vấn đề thu tiền học phí quá cao?</h4></a>
-                    <p>Cùng giải quyết vấn đề tiền học dưới góc nhìn của 1 UET-er</p>
-                  </div>
-                  <div class="col-md-5" style="display: flex;">
-                    <table style="text-align: center;">
-                      <tr>
-                        <td>
-                          <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                        </td>
-                        <td>
-                          <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                        </td>
-                        <td>
-                          <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                        </td>
-                        <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
-                      </tr>
-                      <tr>
-                        <td><p>2000 lượt xem</p></td>
-                        <td><p>2000 phản hồi</p></td>
-                        <td><p>Đánh giá: 5</p></td>
-                      </tr>
-                    </table>
-                  </div>
-                  <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
-                </div>
 
-                <div style="text-align: -webkit-right;">
-                  <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-                  <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-                  <a href="">1</a>
-                  <a href="">2</a>
-                  <a href="">3</a>
-                  <a >...</a>
-                  <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-                  <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-                </div>
-              </div>
-              
+                    <div id="1" class="tab-pane active" ng-app="paginationApp" ng-controller="listdata">
+                              <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|itemsPerPage:2">
+                                      <div class="col-md-1" style="padding-left: 25px;">
+                                            <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <a href="/session"><h4>{{val.chude}}</h4></a>
+                                        <p>{{val.mota}}</p>
+                                      </div>
+                                      <div class="col-md-5" style="display: flex;">
+                                            <table style="text-align: center;">
+                                                  <tr>
+                                                        <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                                        <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                                        <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                                        <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td><p>{{val.lxem}} lượt xem</p></td>
+                                                    <td><p>{{val.phanhoi}} phản hồi</p></td>
+                                                    <td><p>Đánh giá: {{val.dgia}}</p></td>
+                                                  </tr>
+                                            </table>
+                                      </div>
+                                <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
+                              </div>
+                              <dir-pagination-controls
+                                max-size="3"
+                                direction-links="true"
+                                boundary-links="true"  >
+                              </dir-pagination-controls>
+
+                    </div>
+                    <script type="text/javascript">
+                      var app = angular.module('paginationApp', ['angularUtils.directives.dirPagination']);
+
+                      app.controller('listdata', function($scope) {
+                        var data=[
+                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
+                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
+                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
+                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
+                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
+                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2},
+                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2}
+                        ]
+                        $scope.data =data;
+                      });
+                    </script>
+
+
+
+
+
               <div id="2" class="tab-pane tab-pane fade">
                 <div class="row post" style="margin-top: 20px;">
                   <div class="col-md-1" style="padding-left: 25px;">
@@ -211,10 +221,10 @@
                   <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
                 </div>
               </div>
-              
+
 
               <div class="tab-pane tab-panel fade">
-                
+
 
                 <div style="text-align: -webkit-right;">
                   <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
@@ -235,16 +245,16 @@
               <a class="nav-item nav-link active" data-toggle="tab" href="#4">Khảo sát đang hoạt động</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#5">Khảo sát đã kết thúc</a>
             </nav>
-            
+
 
             <!-- Nội dung các tabs-->
             <div class="tab-content">
-             <div id="4" class="tab-pane active"> 
-              <% for(var i=0;i< surveys.length;i++) { 
+             <div id="4" class="tab-pane active">
+              <% for(var i=0;i< surveys.length;i++) {
               if(surveys[i].isopen){
               %>
-              
-              
+
+
               <div class="row post" style="margin-top: 20px;">
                 <div class="col-md-1" style="padding-left: 25px;">
                   <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
@@ -277,7 +287,7 @@
                 <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
               </div>
               <%}}%>
-              
+
               <div style="text-align: -webkit-right;">
                 <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
                 <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
@@ -289,12 +299,12 @@
                 <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
               </div>
             </div>
-            
+
             <div id="5" class="tab-pane tab-pane fade">
-              <% for(var i=0;i< surveys.length;i++) { 
+              <% for(var i=0;i< surveys.length;i++) {
               if(!surveys[i].isopen){
               %>
-              
+
               <div class="row post" style="margin-top: 20px;">
                 <div class="col-md-1" style="padding-left: 25px;">
                   <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
@@ -349,6 +359,6 @@
 
           <p style="font-size: 12px"> @2019 design by Team 5</p>
         </ul>
-      </footer> 
+      </footer>
     </body>
     </html>
