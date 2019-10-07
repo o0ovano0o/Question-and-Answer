@@ -18,7 +18,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-  <script src="/dirPagination.js"> </script>
+  <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
+  <script src="/angular.ng-modules.js"></script> <!--nguồn code tham khảo https://github.com/luisperezphd/ngModule-->
 
   <script>
     window.history.pushState("", "", '/home');
@@ -123,9 +124,9 @@
 
 
             <!-- Nội dung các tabs-->
-            <div class="tab-content">
+            <div class="tab-content" >
               <!--Phiên mở-->
-                    <div id="1" class="tab-pane active" ng-app="paginationApp" ng-controller="listdata">
+                    <div id="1" class="tab-pane active" ng-module="paginationApp" ng-controller="listdata">
                               <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|itemsPerPage:2">
                                       <div class="col-md-1" style="padding-left: 25px;">
                                             <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
@@ -173,14 +174,14 @@
                     </script>
 
             <!--Phiên đã đóng-->
-              <div id="2" class="tab-pane tab-pane fade" >
-                    <div class="row post" style="margin-top: 20px;" >
+              <div id="2" class="tab-pane tab-pane fade" ng-module="paginationAppd"  ng-controller="listapp">
+                    <div class="row post" style="margin-top: 20px;" dir-paginate="value in name|orderBy:sortKey:reverse|itemsPerPage:2" >
                           <div class="col-md-1" style="padding-left: 25px;">
                                 <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
                           </div>
                           <div class="col-md-6">
-                                <a href="#"><h4>Hi</h4></a>
-                                <p>Hello</p>
+                                <a href="#"><h4>{{value.chuded}}</h4></a>
+                                <p>{{value.motad}}</p>
                           </div>
                           <div class="col-md-5" style="display: flex;">
                                 <table style="text-align: center;">
@@ -191,32 +192,36 @@
                                         <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
                                       </tr>
                                   <tr>
-                                        <td><p>3 lượt xem</p></td>
-                                        <td><p>4 phản hồi</p></td>
-                                        <td><p>Đánh giá: 5</p></td>
+                                        <td><p>{{value.lxemd}} lượt xem</p></td>
+                                        <td><p>{{value.phanhoid}} phản hồi</p></td>
+                                        <td><p>Đánh giá: {{value.dagiad}}</p></td>
                                   </tr>
                                 </table>
                           </div>
-                          <p style="padding-left: 20px; font-size: 12px">2 giờ trước</p>
+                          <p style="padding-left: 20px; font-size: 12px">{{value.timed}} giờ trước</p>
                     </div>
-                    <div style="text-align: -webkit-right;">
-                      <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-                      <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-                      <a href="">1</a>
-                      <a href="">2</a>
-                      <a href="">3</a>
-                      <a >...</a>
-                      <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-                      <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-                    </div>
+                    <dir-pagination-controls
+                      max-size="1"
+                      direction-links="true"
+                      boundary-links="true"  >
+                    </dir-pagination-controls>
 
               </div>
 
+              <script type="text/javascript">
+                var app = angular.module('paginationAppd', ['angularUtils.directives.dirPagination']);
+                app.controller('listapp', function($scope){
+                  var name=[
+                    {"chuded":"hello1", "motad":"hi", "lxemd": 200, "phanhoid": 3, "dagiad": 2, "timed": "15"},
+                    {"chuded":"hello1", "motad":"hi", "lxemd": 200, "phanhoid": 3, "dagiad": 2, "timed": "15"},
+                    {"chuded":"hello1", "motad":"hi", "lxemd": 200, "phanhoid": 3, "dagiad": 2, "timed": "15"}
 
+                  ]
+                   $scope.name=name;
+                });
+              </script>
 
-              <div class="tab-pane tab-panel fade">
-
-
+              <!-- <div class="tab-pane tab-panel fade">
                 <div style="text-align: -webkit-right;">
                   <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
                   <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
@@ -227,7 +232,7 @@
                   <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
                   <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
                 </div>
-              </div>
+              </div> -->
             </div><br><br>
             <% if(session.isadmin){%>
             <a href="/createsurvey" class="btn btn-primary" style="margin:10px;background-color:#009999 " role="button">Tạo Phiếu khảo sát</a>
@@ -240,116 +245,110 @@
 
             <!-- Nội dung các tabs-->
             <div class="tab-content">
-             <div id="4" class="tab-pane active">
-              <% for(var i=0;i< surveys.length;i++) {
-              if(surveys[i].isopen){
-              %>
+             <div id="4" class="tab-pane active" ng-module="paginationApppm"  ng-controller="listapppm">
 
-
-              <div class="row post" style="margin-top: 20px;">
-                <div class="col-md-1" style="padding-left: 25px;">
-                  <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
-                </div>
-                <div class="col-md-6">
-                  <a href="/survey/<%= surveys[i].survey_id%>"><h4><%= surveys[i].title %></h4></a>
-                  <p><%= surveys[i].description %></p>
-                </div>
-                <div class="col-md-5" style="display: flex;">
-                  <table style="text-align: center;">
-                    <tr>
-                      <td>
-                        <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                      </td>
-                      <td>
-                        <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                      </td>
-                      <td>
-                        <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                      </td>
-                      <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
-                    </tr>
-                    <tr>
-                      <td><p>2000 lượt xem</p></td>
-                      <td><p>2000 phản hồi</p></td>
-                      <td><p>Đánh giá: 5</p></td>
-                    </tr>
-                  </table>
-                </div>
-                <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
+              <div class="row post" style="margin-top: 20px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:2">
+                        <div class="col-md-1" style="padding-left: 25px;">
+                              <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+                        </div>
+                        <div class="col-md-6">
+                              <a href="#"><h4>{{vlue.tieudepm}}</h4></a>
+                              <p>{{vlue.motapm}}</p>
+                        </div>
+                        <div class="col-md-5" style="display: flex;">
+                              <table style="text-align: center;">
+                                    <tr>
+                                          <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                          <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                          <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                          <td rowspan="2" style="margin: 0"><img src="./images/icons/open.png" width="30" height="30"></td>
+                                    </tr>
+                                    <tr>
+                                            <td><p>{{vlue.lxempm}} lượt xem</p></td>
+                                            <td><p>{{vlue.phanhoipm}} phản hồi</p></td>
+                                            <td><p>Đánh giá: {{vlue.dgiapm}}</p></td>
+                                    </tr>
+                              </table>
+                        </div>
+                        <p style="padding-left: 20px; font-size: 12px">{{vlue.timepm}} giờ trước</p>
               </div>
-              <%}}%>
 
-              <div style="text-align: -webkit-right;">
-                <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-                <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-                <a href="">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a >...</a>
-                <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-                <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-              </div>
+                      <dir-pagination-controls
+                        max-size="1"
+                        direction-links="true"
+                        boundary-links="true"  >
+                      </dir-pagination-controls>
             </div>
+            <script type="text/javascript">
+              var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
+              app.controller('listapppm', function($scope){
+                var phieum=[
+                  { "tieudepm":"Hello","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
+                  { "tieudepm":"Hello every one","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
+                  { "tieudepm":"Hello how are you","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
+                  { "tieudepm":"Hello i am fine","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
+                  { "tieudepm":"Hello thank you","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
+                ]
+                 $scope.phieum=phieum;
+              });
+            </script>
 
-            <div id="5" class="tab-pane tab-pane fade">
-              <% for(var i=0;i< surveys.length;i++) {
-              if(!surveys[i].isopen){
-              %>
 
-              <div class="row post" style="margin-top: 20px;">
-                <div class="col-md-1" style="padding-left: 25px;">
-                  <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+            <div id="5" class="tab-pane tab-pane fade" ng-module="paginationApppd"  ng-controller="listapppd">
+
+              <div class="row post" style="margin-top: 20px;" dir-paginate="vlues in phieud|orderBy:sortKey:reverse|itemsPerPage:2">
+                      <div class="col-md-1" style="padding-left: 25px;">
+                        <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
+                      </div>
+                      <div class="col-md-6">
+                       <a href="#"><h4>{{vlues.tieudepd}}</h4></a>
+                       <p>{{values.motapd}}</p>
+                      </div>
+                       <div class="col-md-5" style="display: flex;">
+                              <table style="text-align: center;">
+                                    <tr>
+                                      <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                      <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                      <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                      <td rowspan="2" style="margin: 0"><img src="./images/icons/lock.png" width="30" height="30"></td>
+                                    </tr>
+                                    <tr>
+                                          <td><p>{{vlues.lxempd}} lượt xem</p></td>
+                                          <td><p>{{vlues.phoipd}} phản hồi</p></td>
+                                          <td><p>Đánh giá: {{vlues.dgiapd}}</p></td>
+                                    </tr>
+                              </table>
+                      </div>
+                      <p style="padding-left: 20px; font-size: 12px">{{vlues.timepd}} giờ trước</p>
                 </div>
-                <div class="col-md-6">
-                 <a href="/survey/<%= surveys[i].survey_id%>"><h4><%= surveys[i].title %></h4></a>
-                 <p><%= surveys[i].description %></p>
-               </div>
-               <div class="col-md-5" style="display: flex;">
-                <table style="text-align: center;">
-                  <tr>
-                    <td>
-                      <img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                    </td>
-                    <td>
-                      <img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                    </td>
-                    <td>
-                      <img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid">
-                    </td>
-                    <td rowspan="2" style="margin: 0"><img src="./images/icons/lock.png" width="30" height="30"></td>
-                  </tr>
-                  <tr>
-                    <td><p>1 lượt xem</p></td>
-                    <td><p>1 phản hồi</p></td>
-                    <td><p>Đánh giá: 1</p></td>
-                  </tr>
-                </table>
-              </div>
-              <p style="padding-left: 20px; font-size: 12px">15 giờ trước</p>
-            </div>
-            <%}}%>
-            <div style="text-align: -webkit-right;">
-              <a href=""><img src="./images/icons/first.png" width="30" height="30" style="border-radius: 100%"></a>
-              <a href=""><img src="./images/icons/back.png" width="30" height="30" style="border-radius: 100%"></a>
-              <a href="">1</a>
-              <a href="">2</a>
-              <a href="">3</a>
-              <a >...</a>
-              <a href=""><img src="./images/icons/next.png" width="30" height="30" style="border-radius: 100%"></a>
-              <a href=""><img src="./images/icons/last.png" width="30" height="30" style="border-radius: 100%"></a>
-            </div>
+
+                <dir-pagination-controls
+                  max-size="1"
+                  direction-links="true"
+                  boundary-links="true"  >
+                </dir-pagination-controls>
           </div>
+          <script type="text/javascript">
+            var app = angular.module('paginationApppd', ['angularUtils.directives.dirPagination']);
+            app.controller('listapppd', function($scope){
+              var phieud=[
+                { "tieudepd":"hello","motapd":"Hi","lxempd": 200, "phoipd": 3, "dgiapd": 2, "timepd": 15},
+                { "tieudepd":"hello every one","motapd":"Hi","lxempd": 200, "phoipd": 3, "dgiapd": 2, "timepd": 15},
+                { "tieudepd":"what is your name","motapd":"Hi","lxempd": 200, "phoipd": 3, "dgiapd": 2, "timepd": 15},
+              ]
+               $scope.phieud=phieud;
+            });
+          </script>
 
 
-          <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
-        </div>
-      </main>
-      <footer id="footer">
-        <ul style="padding: 15px; margin-bottom: 0px;">
-          <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-
-          <p style="font-size: 12px"> @2019 design by Team 5</p>
-        </ul>
-      </footer>
+            <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+      </div>
+  </main>
+            <footer id="footer">
+                  <ul style="padding: 15px; margin-bottom: 0px;">
+                    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+                    <p style="font-size: 12px"> @2019 design by Team 5</p>
+                  </ul>
+            </footer>
     </body>
     </html>
