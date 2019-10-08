@@ -32,7 +32,7 @@ window.history.pushState("", "", '/login');
     <div class="row py-4">
     
       <!-- Cột 1 -->
-      <div class="col-12 col-md-6 col-xl-6 col-lg-6 d-md-block border-right">
+      <div class="col-12 col-md-6 col-xl-6 col-lg-6 d-md-block d-sm-none d-none border-right">
         <div class="text-center pt-5">
           <img src="./images/logo.png" style="width: auto; height: 203px;">
           <br>
@@ -51,6 +51,9 @@ window.history.pushState("", "", '/login');
 
         <div class="box-container box-middle box-space-around box-row-wrap">
           <div class="box-md-40 box-sm-80 box-xs-100">
+            <div class="d-md-none d-xl-none d-lg-none text-center">
+              <img src="./images/logo.png" style="width: auto; height: 100px;">
+            </div>
             <div class="text-center">
               <h1 class="title orange">
                 Đăng nhập
@@ -107,6 +110,8 @@ window.history.pushState("", "", '/login');
                         <div class="button">
                           <div class="form-group">
                             <button type="submit" class="btn btn-success btn-block round-button">Đăng nhập</button>
+                            <input type="button" class="btn btn-success btn-block round-button d-md-none d-xl-none d-lg-none" 
+                            value="Đăng ký ngay" onclick="window.location.href='/signin'"/>
 
                           </div>
                         </div>

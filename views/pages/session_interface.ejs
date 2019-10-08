@@ -7,8 +7,10 @@
 
   <!-- Bootstrap CSS -->
   
-  <link rel="stylesheet" href="/index&manage.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="index&manage.css">
+  <link rel="stylesheet" href="./bootstrap/bootstrap-4.0.0.min.js">
+  <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+
 
   <title>Hiển thị phiên hỏi đáp</title>
 
@@ -19,11 +21,9 @@
 </head>
 
 
-<!-- CSS tự định nghĩa -->
-
 <body style="background-color: #EEEEEE">
   
-  <!-- HEADER -->
+<!-- HEADER -->
   <header>
 
     <!--Navbars -->
@@ -43,26 +43,42 @@
           </li>
         </ul>
         
+        <form id="search" class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
         
+        <% if (session.username) {%>
         <ul class="navbar-nav" style="display: contents;">
           <li class="nav-item">
             <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
           </li>
-          <li>
-            <div class="thumb" style="background-image:url(./images/soccer.jpg);width: 40px;height: 40px"></div>
-          </li>  
+          <!-- <li>
+            <div class="thumb" style="background-image:url(images/avatar1.jpg);width: 40px;height: 40px"></div>
+          </li>  --> 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Việt Cường</a>
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
-              <a class="dropdown-item" href="/login">Đăng xuất</a>
+              <a class="dropdown-item" href="/yourprofile">Quản lý</a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
+              <a class="dropdown-item" href="/logout">Đăng xuất</a>
             </div>
           </li>
         </ul>
+        <%} else {%>
+          <ul class="navbar-nav" style="display: contents;">
+            <li class="nav-item">
+              <a class="nav-link" href="/login"><Đăng nhập</a>
+            </li>
+          </ul>
+        <%}%>
       </div>
     </nav>
   </header>
+  
+<!-- MAIN -->
   <main role="main">
+    
     <div class="container marketing">
       <br>
       <div class="card">
@@ -73,7 +89,7 @@
           <div class="row padding">
             <div class="col-3 col-sm-2 col-md-2">
               <div class="card">
-                <img class="card-img-top" src="./images/logo.png">
+                <img class="card-img-top" src="./images/avatar2.jpg">
               </div>
             </div>
             <div class="col-9 col-sm-9 col-md-9">
@@ -88,17 +104,19 @@
           </div>
         </div>
       </div><br>
+      
       <div class="card">
-        <div class="card-header" style="background-color: #bbbbbb">
-          <div class="dropdown">
+        <div class="card-header d-inline" style="background-color: #bbbbbb">
+          <h5>Danh sách câu hỏi<h5>
+          <!-- <div class="dropdown" class="text-right">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Danh sách lựa chọn
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="/survey">Danh sách phiếu khảo sát</a>
             </div>
+          </div> -->
 
-          </div>
         </div>
         <div class="card-body">
           <div class="row" style="margin-bottom: 3%;">
@@ -189,6 +207,42 @@
 </div>
 <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
 </div>
+
+<!-- Cập nhật tài khoản -->
+        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="UserModalLabel">Tài khoản: Việt Cường</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                
+                <form>
+
+                  <div class="form-group">
+                    <label for="InputUserName">Họ tên:</label>
+                    <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
+                    
+                  </div>
+                  <div class="form-group">
+                    <label for="InputEmail">Email:</label>
+                    <input type="email" class="form-control" id="InputEmail" placeholder="">
+                  </div>
+                  
+                </form>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+
 </main>        
 <footer id="footer">
   <ul style="padding: 15px; margin-bottom: 0px;">
