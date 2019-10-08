@@ -21,10 +21,9 @@ app.use(session({
 app.use(function(req, res, next) {
    res.locals.session = req.session;
   res.locals.user = req.user;
-
-  next();
+	next();
 });
-var surveys;
+var survey;
 var controllers = require(__dirname + '/routes/controller.js');
 app.use(controllers);
 
