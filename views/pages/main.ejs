@@ -42,7 +42,7 @@
             <div class="collapse navbar-collapse" style="margin: 0px 30px" id="navbarCollapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="v/home">Trang chủ <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
                 </li>
                
                 <li class="nav-item">
@@ -110,7 +110,7 @@
                       <a class="nav-link" data-toggle="modal" href="#SessionModal"><img src="./images/icons/qa-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiên hỏi đáp</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
+                      <a class="nav-link" href="/createsurvey"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
                     </li>
                   </ul>
                 
@@ -171,7 +171,7 @@
                                             <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                                       </div>
                                       <div class="col-md-6">
-                                        <a href="/session"><h4>{{val.chude}}</h4></a>
+                                        <a href="{{val.link}}"><h4>{{val.chude}}</h4></a>
                                         <p>{{val.mota}}</p>
                                       </div>
                                       <div class="col-md-5" style="display: flex;">
@@ -197,7 +197,7 @@
                               </dir-pagination-controls>
 
                     </div>
-                    <script type="text/javascript">
+         <script type="text/javascript">
                       var app = angular.module('paginationApp', ['angularUtils.directives.dirPagination']);
 
                       app.controller('listdata', function($scope) {
@@ -207,10 +207,11 @@
                           {"chude":"hello", "mota":"hi", "lxem": 20, "phanhoi": 5, "dagia": 2,"time": "17"},
 
                         ]
-                        $scope.data =data;
+                        $scope.data=data;
                       });
+
                     </script>
-                      
+                       
                     </div>
                   </div>
                 </div>
@@ -232,7 +233,7 @@
                                   <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                             </div>
                             <div class="col-md-6">
-                                  <a href="#"><h4>{{value.chuded}}</h4></a>
+                                  <a href="{{value.linkd}}"><h4>{{value.chuded}}</h4></a>
                                   <p>{{value.motad}}</p>
                             </div>
                             <div class="col-md-5" style="display: flex;">
@@ -266,6 +267,7 @@
                             {"chuded":"hello1", "motad":"hi", "lxemd": 200, "phanhoid": 3, "dagiad": 2, "timed": "15"}
 
                           ]
+                          
                            $scope.name=name;
                         });
                       </script>
@@ -323,12 +325,12 @@
                     <div class="card-body">
                       
                       <div id="3" ng-module="paginationApppm"  ng-controller="listapppm">
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:2">
+                        <div class="row post" style="margin-top: 20px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:5">
                           <div class="col-md-1" style="padding-left: 25px;">
                               <div class="thumb" style="background-image:url(./images/logo3.jpg);width: 40px;height: 40px"></div>
                           </div>
                           <div class="col-md-6">
-                              <a href="/list_survey"><h4>{{vlue.tieudepm}}</h4></a>
+                              <a href="{{vlue.linkpm}}"><h4>{{vlue.tieudepm}}</h4></a>
                               <p>{{vlue.motapm}}</p>
                           </div>
                           <div class="col-md-5" style="display: flex;">
@@ -354,19 +356,29 @@
                           boundary-links="true"  >
                         </dir-pagination-controls>
                       </div>
-                      <script type="text/javascript">
-                        var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
-                        app.controller('listapppm', function($scope){
-                          var phieum=[
-                            { "tieudepm":"Hello","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
-                            { "tieudepm":"Hello every one","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
-                            { "tieudepm":"Hello how are you","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
-                            { "tieudepm":"Hello i am fine","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
-                            { "tieudepm":"Hello thank you","motapm":"hi","lxempm": 200, "phanhoipm": 3, "dgiapm": 2, "timepm": "15"},
-                          ]
-                           $scope.phieum=phieum;
-                        });
-                      </script>
+                       <script type="text/javascript">
+            var phieum=[];
+          </script>
+            <%for(var i=0;i< surveys.length;i++){
+                          if(surveys[i].isopen){ %>
+                            <script type="text/javascript">  
+                              phieum.push({
+                                "tieudepm":"<%=surveys[i].title%>",
+                                "motapm":"<%=surveys[i].description%>",
+                                "linkpm":"/survey/?id="+<%=surveys[i].survey_id%>+'"'
+                              });
+                              </script>
+                              <%}
+                            }%>
+                    <script type="text/javascript">
+                      var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
+                     app.controller('listapppm', function($scope){
+                        $scope.phieum=phieum;
+                      });
+
+                    </script>
+                       
+                     
                       
                     </div>
                   </div>
@@ -385,14 +397,14 @@
                      
                       <div id="4" ng-module="paginationApppd"  ng-controller="listapppd">
 
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="vlues in phieud|orderBy:sortKey:reverse|itemsPerPage:2">
+                        <div class="row post" style="margin-top: 20px;" dir-paginate="vlues in phieud|orderBy:sortKey:reverse|itemsPerPage:5">
                           <div class="col-md-1" style="padding-left: 25px;">
                             <div class="thumb" style="background-image:url(./images/logo3.jpg);width: 40px;height: 40px">
                             </div>
                           </div>
                           <div class="col-md-6">
-                           <a href="/list_survey"><h4>{{vlues.tieudepd}}</h4></a>
-                           <p>{{values.motapd}}</p>
+                           <a href="{{vlues.linkpd}}"><h4>{{vlues.tieudepd}}</h4></a>
+                           <p>{{vlues.motapd}}</p>
                           </div>
                            <div class="col-md-5" style="display: flex;">
                                   <table style="text-align: center;">
@@ -416,19 +428,27 @@
                           boundary-links="true"  >
                         </dir-pagination-controls>
                       </div>
-                      
-                      <script type="text/javascript">
-                        var app = angular.module('paginationApppd', ['angularUtils.directives.dirPagination']);
-                        app.controller('listapppd', function($scope){
-                          var phieud=[
-                            { "tieudepd":"hello","motapd":"Hi","lxempd": 200, "phoipd": 3, "dgiapd": 2, "timepd": 15},
-                            { "tieudepd":"hello every one","motapd":"Hi","lxempd": 200, "phoipd": 3, "dgiapd": 2, "timepd": 15},
-                            { "tieudepd":"what is your name","motapd":"Hi","lxempd": 200, "phoipd": 3, "dgiapd": 2, "timepd": 15},
-                          ]
-                           $scope.phieud=phieud;
-                        });
-                      </script>
-                      
+                    <script type="text/javascript">
+                      var phieud=[];
+                    </script>
+                      <%for(var i=0;i< surveys.length;i++){
+                          if(!surveys[i].isopen){ %>
+                            <script type="text/javascript">  
+                              phieud.push({
+                                "tieudepd":"<%=surveys[i].title%>",
+                                "motapd":"<%=surveys[i].description%>",
+                                "linkpd":"/survey/?id="+<%=surveys[i].survey_id%>+'"'
+                              });
+                              </script>
+                              <%}
+                            }%>
+                    <script type="text/javascript">
+                      var app = angular.module('paginationApppd', ['angularUtils.directives.dirPagination']);
+                     app.controller('listapppd', function($scope){
+                        $scope.phieud=phieud;
+                      });
+
+                    </script>
                     </div>
                   </div>
                 </div>
@@ -543,7 +563,7 @@
           </div>
         </div>
       </main>
-
+        
     <!-- Quay về đầu trang -->
     <br>
     <br>

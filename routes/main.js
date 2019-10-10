@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 { 	 var query = conn.query("SELECT * FROM survey", (err, surveys) => {
     if(err) throw err;
     else{
-    res.render('main',{session: req.session.user,surveys:surveys}); } 
+    res.render('main',{session: req.session.user,surveys}); } 
 });
     }
 	
