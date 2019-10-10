@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 06, 2019 lúc 12:36 PM
+-- Thời gian đã tạo: Th10 10, 2019 lúc 05:15 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -101,9 +101,19 @@ CREATE TABLE `multichoices` (
 
 CREATE TABLE `questiontype` (
   `quest_type_id` int(11) NOT NULL,
-  `quest_type_name` varchar(64) NOT NULL,
+  `quest_type_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `quest_type_choice` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `questiontype`
+--
+
+INSERT INTO `questiontype` (`quest_type_id`, `quest_type_name`, `quest_type_choice`) VALUES
+(1, 'Trắc nghiệm 1 đáp án', 0),
+(2, 'Trắc nghiệm nhiều đáp án', 1),
+(3, 'Đúng-Sai', 0),
+(4, 'Tự luận', 0);
 
 -- --------------------------------------------------------
 
@@ -142,9 +152,118 @@ CREATE TABLE `singlechoicereponse` (
 CREATE TABLE `squest` (
   `survey_id` int(11) NOT NULL,
   `squest_id` int(11) NOT NULL,
-  `squest_text` text NOT NULL,
+  `squest_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `quest_type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `squest`
+--
+
+INSERT INTO `squest` (`survey_id`, `squest_id`, `squest_text`, `quest_type_id`) VALUES
+(3, 1, '1', 1),
+(3, 2, '1', 1),
+(2, 3, 'cauau hỏi ', 1),
+(2, 4, 'câu hỏi 2', 1),
+(2, 5, 'câu hỏi 1', 1),
+(2, 6, 'câu vớ vẩn', 1),
+(2, 7, 'câu hỏi 2', 1),
+(2, 8, '23213123', 1),
+(2, 9, '23123', 1),
+(2, 10, '123', 1),
+(2, 11, 'okkk', 1),
+(3, 12, '3r2341', 1),
+(2, 13, 'câu hỏi 1', 1),
+(2, 14, 'caaaaaaaaaaaaaaaaaa', 1),
+(2, 15, 'caaaaaaaaaaaaaaaaaa', 1),
+(2, 16, 'câu hỏi mệt mỏi', 1),
+(2, 17, 'ôiiiiiii', 1),
+(3, 18, 'okkkkkkkkkkkk', 1),
+(2, 19, 'câu hỏi', 1),
+(2, 20, 'giọt lệ nam nhi', 1),
+(2, 21, 'qrwqrqerer', 1),
+(2, 22, 'câu hỏi 1', 1),
+(2, 23, 'câu hỏi 1', 1),
+(2, 24, 'câu hỏi', 1),
+(2, 25, '231', 1),
+(2, 26, 'câu hỏi 1', 1),
+(2, 27, 'câu hỏi 2', 1),
+(2, 28, '1213', 1),
+(2, 29, 'câu hỏi 1', 1),
+(2, 30, 'nàng', 1),
+(2, 31, 'câu hỏi 2', 1),
+(2, 32, 'câu hỏi iiiii', 1),
+(2, 33, 'mã 33', 1),
+(2, 34, 'mã 33', 1),
+(2, 35, 'câu 1', 1),
+(2, 36, 'câuuuu', 1),
+(2, 37, 'câu 1', 1),
+(2, 38, 'câu hỏi ', 1),
+(2, 39, '1', 1),
+(2, 40, '2', 1),
+(2, 41, 'tao mệt r', 1),
+(2, 42, '2312', 1),
+(2, 43, 'câu hỏi', 1),
+(2, 44, '2', 1),
+(2, 45, '231', 1),
+(2, 46, '3123', 1),
+(2, 47, '23', 1),
+(2, 48, '2', 1),
+(2, 49, '2313', 1),
+(2, 50, '231', 1),
+(2, 51, '23123', 1),
+(2, 52, '2412', 1),
+(2, 53, '123', 1),
+(2, 54, '3123', 1),
+(2, 55, 'câu', 1),
+(2, 56, '1', 1),
+(2, 57, '231', 1),
+(2, 58, '2413', 1),
+(2, 59, '21312', 1),
+(2, 60, '2312', 1),
+(2, 61, '1', 1),
+(2, 62, '213', 1),
+(2, 63, '213', 1),
+(2, 64, '213', 1),
+(2, 65, '213', 1),
+(2, 66, '142', 1),
+(2, 67, '2312', 1),
+(2, 68, '2312', 1),
+(2, 69, '2312', 1),
+(2, 70, '31', 1),
+(2, 71, '23423', 1),
+(2, 72, '123', 1),
+(2, 73, '23', 1),
+(2, 74, '21312', 1),
+(2, 75, '12312', 1),
+(2, 76, 'câu 1', 1),
+(2, 77, '231', 1),
+(2, 78, 'cauu 1', 1),
+(2, 79, '123', 1),
+(2, 80, '123123', 1),
+(2, 81, '1312', 1),
+(2, 82, '4124', 1),
+(2, 83, '231', 1),
+(2, 84, '21312', 1),
+(2, 85, '321', 1),
+(2, 86, 'câu hỏi 1 nè', 1),
+(2, 87, '23', 1),
+(2, 88, 'ádas', 1),
+(2, 89, '2312', 1),
+(2, 90, '2313', 1),
+(2, 91, 'fdfewf', 1),
+(2, 92, 'tự luận 1', 4),
+(2, 93, 'tự luận 2', 4),
+(2, 94, '31413', 4),
+(2, 95, '342342', 4),
+(2, 96, 'câu 1', 1),
+(2, 97, 'câu 2', 1),
+(2, 98, 'câu đúng sai', 3),
+(2, 99, 'câu 2', 3),
+(2, 100, 'câu 2', 3),
+(1, 101, 'câu nhiều đáp án 1', 2),
+(1, 102, 'câu nhiều đáp án 2', 2),
+(5, 103, 'etrtrdg', 1);
 
 -- --------------------------------------------------------
 
@@ -172,7 +291,11 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (1, 'Khảo sát khóa 64', 'Khảo sát thông tin về nguyện vọng, ước mơ...', '2019-09-30', '2019-10-03', 0, '', 0, 'taikhoan1'),
 (2, 'Khảo sát sinh viên', 'Khảo sát việc làm thêm của sinh viên', '2019-10-02', '2019-10-19', 1, '', 0, '1234'),
 (3, 'Khảo sát ngành CNTT', 'Khảo sát dành cho các sinh viên khoa CNTT', '2019-10-02', '2019-10-23', 1, '', 0, '12345'),
-(4, 'Khảo sát ngành CNTT', 'Khảo sát dành cho các sinh viên khoa CNTT K62', '2019-10-02', '2019-10-03', 0, '', 0, '12345');
+(4, 'Khảo sát ngành CNTT', 'Khảo sát dành cho các sinh viên khoa CNTT K62', '2019-10-02', '2019-10-03', 0, '', 0, '12345'),
+(5, 'Khảo sát 1', 'Mô tả này', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1'),
+(6, '123', 'Khảo sát aaaaaa', '0000-00-00', '2020-12-11', 1, '', 0, 'giaovien1'),
+(7, 'phiếu khảo sát 3', 'dugfwdgfkljwef', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1'),
+(8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 1, '', 0, 'giaovien1');
 
 -- --------------------------------------------------------
 
@@ -194,8 +317,96 @@ CREATE TABLE `survey_section` (
 CREATE TABLE `s_ans` (
   `question_id` int(11) NOT NULL,
   `ans_id` int(11) NOT NULL,
-  `ans_text` text NOT NULL
+  `ans_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `s_ans`
+--
+
+INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`) VALUES
+(22, 1, 'đáp án 1'),
+(22, 2, 'đáp án 2'),
+(23, 3, 'dù sao'),
+(23, 4, 'dù ngày sao ta vẫn muốn bên người'),
+(25, 5, '123123'),
+(25, 6, '23123123'),
+(25, 7, '123123'),
+(27, 8, '123123'),
+(27, 9, '23123123'),
+(27, 10, '123123'),
+(28, 11, '23'),
+(28, 12, '132'),
+(30, 13, '1'),
+(30, 14, '2'),
+(30, 15, '1'),
+(30, 16, '2'),
+(34, 17, 'mã 33'),
+(34, 18, 'câu 2'),
+(34, 19, 'mã 33'),
+(34, 20, 'câu 2'),
+(36, 21, 'tướng quân'),
+(38, 22, 'sầ'),
+(38, 23, 'sầ'),
+(38, 24, 'sầ'),
+(38, 25, 'sầ'),
+(40, 26, '123123'),
+(40, 27, '2'),
+(40, 28, '123123'),
+(40, 29, '2'),
+(42, 30, '31'),
+(42, 31, '2312'),
+(42, 32, '31'),
+(42, 33, '2312'),
+(46, 34, '23123'),
+(46, 35, '23123'),
+(46, 36, '23123'),
+(46, 37, '23123'),
+(50, 38, '312'),
+(50, 39, '312'),
+(52, 40, '23123'),
+(52, 41, '23123'),
+(52, 42, '23123'),
+(52, 43, '23123'),
+(54, 44, '131'),
+(54, 45, '131'),
+(75, 48, '123'),
+(75, 49, 'đáp án 2'),
+(76, 50, '23'),
+(76, 51, '213'),
+(78, 52, '213'),
+(78, 53, '1231'),
+(78, 54, '213'),
+(83, 55, '23'),
+(84, 56, '2312'),
+(85, 57, '231'),
+(85, 58, '123'),
+(85, 59, '1231'),
+(86, 60, 'chẳng'),
+(86, 61, 'cần'),
+(86, 62, '1'),
+(87, 63, 'ai'),
+(87, 64, 'nữa'),
+(88, 65, 'cũng như em hết thương cạn nhớ'),
+(89, 66, '213'),
+(90, 67, '213'),
+(90, 68, '41'),
+(90, 69, '4214'),
+(91, 70, 'fewf'),
+(91, 71, 'fwef'),
+(96, 72, '23'),
+(96, 73, '231'),
+(97, 74, '414'),
+(97, 75, '32523'),
+(97, 76, '23523'),
+(101, 77, '231'),
+(101, 78, '3123'),
+(101, 79, '3123'),
+(102, 80, '23123'),
+(102, 81, '3123'),
+(102, 82, '23123'),
+(103, 83, '1312'),
+(103, 84, '3123');
 
 -- --------------------------------------------------------
 
@@ -387,10 +598,22 @@ ALTER TABLE `yesnoreponse`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `squest`
+--
+ALTER TABLE `squest`
+  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+
+--
 -- AUTO_INCREMENT cho bảng `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT cho bảng `s_ans`
+--
+ALTER TABLE `s_ans`
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
@@ -419,9 +642,9 @@ ALTER TABLE `aquest`
 -- Các ràng buộc cho bảng `choice_multichoices`
 --
 ALTER TABLE `choice_multichoices`
-  ADD CONSTRAINT `choice_multichoices_ibfk_1` FOREIGN KEY (`ans_id`) REFERENCES `s_ans` (`ans_id`),
   ADD CONSTRAINT `choice_multichoices_ibfk_2` FOREIGN KEY (`response_id`) REFERENCES `multichoices` (`reponse_id`),
-  ADD CONSTRAINT `choice_multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `multichoices` (`quest_id`);
+  ADD CONSTRAINT `choice_multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `multichoices` (`quest_id`),
+  ADD CONSTRAINT `choice_multichoices_ibfk_4` FOREIGN KEY (`ans_id`) REFERENCES `s_ans` (`ans_id`);
 
 --
 -- Các ràng buộc cho bảng `cmt_ans`
@@ -434,16 +657,15 @@ ALTER TABLE `cmt_ans`
 -- Các ràng buộc cho bảng `multichoices`
 --
 ALTER TABLE `multichoices`
-  ADD CONSTRAINT `multichoices_ibfk_1` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`),
-  ADD CONSTRAINT `multichoices_ibfk_2` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+  ADD CONSTRAINT `multichoices_ibfk_2` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`),
+  ADD CONSTRAINT `multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`);
 
 --
 -- Các ràng buộc cho bảng `singlechoicereponse`
 --
 ALTER TABLE `singlechoicereponse`
-  ADD CONSTRAINT `singlechoicereponse_ibfk_1` FOREIGN KEY (`choice_id`) REFERENCES `s_ans` (`ans_id`),
-  ADD CONSTRAINT `singlechoicereponse_ibfk_2` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`),
-  ADD CONSTRAINT `singlechoicereponse_ibfk_3` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+  ADD CONSTRAINT `singlechoicereponse_ibfk_3` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`),
+  ADD CONSTRAINT `singlechoicereponse_ibfk_4` FOREIGN KEY (`choice_id`) REFERENCES `s_ans` (`ans_id`);
 
 --
 -- Các ràng buộc cho bảng `squest`
@@ -458,6 +680,18 @@ ALTER TABLE `squest`
 ALTER TABLE `survey_section`
   ADD CONSTRAINT `survey_section_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`),
   ADD CONSTRAINT `survey_section_ibfk_3` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`);
+
+--
+-- Các ràng buộc cho bảng `s_ans`
+--
+ALTER TABLE `s_ans`
+  ADD CONSTRAINT `s_ans_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `squest` (`squest_id`);
+
+--
+-- Các ràng buộc cho bảng `textreponse`
+--
+ALTER TABLE `textreponse`
+  ADD CONSTRAINT `textreponse_ibfk_1` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
