@@ -44,12 +44,12 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
                 </li>
-               
+
                 <li class="nav-item">
                   <a class="nav-link" href="/support">Trợ giúp</a>
                 </li>
               </ul>
-              
+
                 <form id="search" class="form-inline my-2 my-lg-0">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
                   <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
@@ -61,7 +61,7 @@
                 </li>
                 <!-- <li>
                   <div class="thumb d-none d-sm-none d-md-block" style="background-image:url(images/avatar1.jpg);width: 40px;height: 40px"></div>
-                </li> -->  
+                </li> -->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
                   <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -86,13 +86,13 @@
 
     <!-- MAIN -->
       <main class="pt-5">
-       
-       <!-- Container - Collapse --> 
+
+       <!-- Container - Collapse -->
         <div class="container">
           <div id="accordion">
-            
+
             <% if(session.isadmin){%>
-            <!-- Tạo hoạt động mới --> 
+            <!-- Tạo hoạt động mới -->
             <div class="card">
               <div class="card-header" id="headingOne">
                 <h3 class="mb-0">
@@ -104,7 +104,7 @@
 
               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
-                  
+
                   <ul class="nav nav-pills nav-fill">
                     <li class="nav-item">
                       <a class="nav-link" data-toggle="modal" href="#SessionModal"><img src="./images/icons/qa-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiên hỏi đáp</a>
@@ -113,20 +113,20 @@
                       <a class="nav-link" href="/createsurvey"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
                     </li>
                   </ul>
-                
+
 
                 </div>
               </div>
             </div>
             <br>
             <%}%>
-            
+
             <!-- Phiên hỏi đáp -->
             <div class="card">
               <div class="card-header" id="headingTwo">
                 <div class="row">
                   <div class="col-lg-6 col-md-6 col-5 col-sm-5 col-xl-6">
-                
+
                     <h3 class="mb-0">
                       <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" id="collapse1">
                         Các phiên hỏi đáp
@@ -143,7 +143,7 @@
                           <a class="dropdown-item" href="#" id="show1">Đang mở</a>
                           <a class="dropdown-item" href="#" id="show2">Đã đóng</a>
                           <a class="dropdown-item" href="#" id="showall1">Hiển thị tất cả phiên</a>
-                          
+
                         </div>
                       </div>
                   </div>
@@ -152,8 +152,8 @@
 
               <!-- Nội dung trong phiên hỏi đáp-->
               <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-                
-                <!-- Phiên hỏi đáp đang mở-->  
+
+                <!-- Phiên hỏi đáp đang mở-->
                 <div class="card-body" id="one">
                   <div class="card">
 
@@ -161,10 +161,10 @@
                       <img src="./images/icons/open.png" style="width: 50px;" class="pr-2">
                       <h5 class="pt-2 pb-2">Các phiên hỏi đáp đang mở</h5>
                     </div>
-                    
+
                     <!-- Nội dung -->
                     <div class="card-body">
-                      
+
                         <div id="1" ng-module="paginationApp" ng-controller="listdata">
                               <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|itemsPerPage:2">
                                       <div class="col-md-1" style="padding-left: 25px;">
@@ -182,9 +182,9 @@
                                                         <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                                   </tr>
                                                   <tr>
-                                                    <td><p>{{val.lxem}} lượt xem</p></td>
-                                                    <td><p>{{val.phanhoi}} phản hồi</p></td>
-                                                    <td><p>Đánh giá: {{val.dagia}}</p></td>
+                                                        <td><p>{{val.lxem}} lượt xem</p></td>
+                                                        <td><p>{{val.phanhoi}} phản hồi</p></td>
+                                                        <td><p>Đánh giá: {{val.dagia}}</p></td>
                                                   </tr>
                                             </table>
                                       </div>
@@ -197,7 +197,7 @@
                               </dir-pagination-controls>
 
                     </div>
-         <script type="text/javascript">
+                     <script type="text/javascript">
                       var app = angular.module('paginationApp', ['angularUtils.directives.dirPagination']);
 
                       app.controller('listdata', function($scope) {
@@ -205,13 +205,12 @@
                           {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2, "time": "15"},
                           {"chude":"hello", "mota":"hi", "lxem": 100, "phanhoi": 4, "dagia": 2,"time": "16"},
                           {"chude":"hello", "mota":"hi", "lxem": 20, "phanhoi": 5, "dagia": 2,"time": "17"},
-
                         ]
                         $scope.data=data;
                       });
 
                     </script>
-                       
+
                     </div>
                   </div>
                 </div>
@@ -226,7 +225,7 @@
 
                     <!-- Nội dung -->
                     <div class="card-body">
-                     
+
                       <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
                         <div class="row post" style="margin-top: 20px;" dir-paginate="value in name|orderBy:sortKey:reverse|itemsPerPage:2" >
                             <div class="col-md-1" style="padding-left: 25px;">
@@ -267,11 +266,11 @@
                             {"chuded":"hello1", "motad":"hi", "lxemd": 200, "phanhoid": 3, "dagiad": 2, "timed": "15"}
 
                           ]
-                          
+
                            $scope.name=name;
                         });
                       </script>
-                      
+
                     </div>
                   </div>
                 </div>
@@ -285,7 +284,7 @@
               <div class="card-header" id="headingThree">
                 <div class="row">
                   <div class="col-lg-6 col-md-6 col-5 col-sm-5 col-xl-6">
-                
+
                     <h3 class="mb-0">
                       <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" id="collapse2">
                         Các phiếu khảo sát
@@ -302,28 +301,28 @@
                           <a class="dropdown-item" href="#" id="show3">Đang mở</a>
                           <a class="dropdown-item" href="#" id="show4">Đã đóng</a>
                           <a class="dropdown-item" href="#" id="showall2">Hiển thị tất cả phiếu</a>
-                          
+
                         </div>
                       </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Nội dung trong phiếu khảo sát -->  
+              <!-- Nội dung trong phiếu khảo sát -->
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                
-                <!-- Phiếu đang mở -->  
+
+                <!-- Phiếu đang mở -->
                 <div class="card-body" id="three">
                   <div class="card">
-                    
+
                     <div class="card-header d-flex align-items-start">
                       <img src="images/icons/open.png" style="width: 50px;" class="pr-2">
                       <h5 class="pt-2 pb-2">Các phiếu khảo sát đang mở</h5>
                     </div>
-                    
+
                     <!-- Nội dung -->
                     <div class="card-body">
-                      
+
                       <div id="3" ng-module="paginationApppm"  ng-controller="listapppm">
                         <div class="row post" style="margin-top: 20px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:5">
                           <div class="col-md-1" style="padding-left: 25px;">
@@ -357,11 +356,11 @@
                         </dir-pagination-controls>
                       </div>
                        <script type="text/javascript">
-            var phieum=[];
-          </script>
-            <%for(var i=0;i< surveys.length;i++){
+                            var phieum=[];
+                        </script>
+                        <%for(var i=0;i< surveys.length;i++){
                           if(surveys[i].isopen){ %>
-                            <script type="text/javascript">  
+                            <script type="text/javascript">
                               phieum.push({
                                 "tieudepm":"<%=surveys[i].title%>",
                                 "motapm":"<%=surveys[i].description%>",
@@ -370,16 +369,16 @@
                               </script>
                               <%}
                             }%>
-                    <script type="text/javascript">
-                      var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
-                     app.controller('listapppm', function($scope){
-                        $scope.phieum=phieum;
-                      });
+                        <script type="text/javascript">
+                          var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
+                           app.controller('listapppm', function($scope){
+                            $scope.phieum=phieum;
+                            });
 
-                    </script>
-                       
-                     
-                      
+                        </script>
+
+
+
                     </div>
                   </div>
                 </div>
@@ -394,7 +393,7 @@
 
                     <!-- Nội dung -->
                     <div class="card-body">
-                     
+
                       <div id="4" ng-module="paginationApppd"  ng-controller="listapppd">
 
                         <div class="row post" style="margin-top: 20px;" dir-paginate="vlues in phieud|orderBy:sortKey:reverse|itemsPerPage:5">
@@ -433,7 +432,7 @@
                     </script>
                       <%for(var i=0;i< surveys.length;i++){
                           if(!surveys[i].isopen){ %>
-                            <script type="text/javascript">  
+                            <script type="text/javascript">
                               phieud.push({
                                 "tieudepd":"<%=surveys[i].title%>",
                                 "motapd":"<%=surveys[i].description%>",
@@ -471,25 +470,25 @@
                 </button>
               </div>
               <div class="modal-body">
-                
+
                 <form>
-                  
+
                   <div class="form-group">
                     <label for="InputUserName">Họ tên:</label>
                     <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
-                    
+
                   </div>
                   <div class="form-group">
                     <label for="InputEmail">Email:</label>
                     <input type="email" class="form-control" id="InputEmail" placeholder="">
                   </div>
-                  
+
                 </form>
               </div>
-              
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
-              
+
               </div>
             </div>
           </div>
@@ -506,7 +505,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                
+
                 <form>
                   <div class="form-group">
                     <label for="InputTitle">Tiêu đề:</label>
@@ -534,43 +533,43 @@
                       <label for="DateEnd">Ngày kết thúc:</label>
                       <input type="date" name="date_begin" class="form-control" id="DateEnd">
                   </div>
-                  
-                  <div class="form">     
+
+                  <div class="form">
                       <div class="checkbox">
                         <label data-toggle="collapse" data-target="#collapsePas" aria-expanded="false" aria-controls="collapsePas">
                           <input type="checkbox"/> Đặt mật khẩu
                         </label>
                         </div>
-                      
+
                       <div id="collapsePas" aria-expanded="false" class="collapse">
                         <div>
                           <input type="text" class="form-control" id="InputPas" placeholder="Nhập mật khẩu...">
                         </div>
                       </div>
-                      
+
                       <div class="checkbox">
                         <input type="checkbox"/> Không đặt mật khẩu
                       </div>
                   </div>
                 </form>
               </div>
-              
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
-              
+
               </div>
             </div>
           </div>
         </div>
       </main>
-        
+
     <!-- Quay về đầu trang -->
     <br>
     <br>
     <br>
-    <div class="text-center">     
+    <div class="text-center">
     <a href="#"><h5>Back to top</h5></a>
-    </div>  
+    </div>
 
 
     <!-- FOOTER -->
@@ -579,7 +578,7 @@
           <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
           <p style="font-size: 12px"> @2019 design by Team 5</p>
         </ul>
-      </footer> 
+      </footer>
 
 
   <!-- Nút ẩn và hiện nội dung -->
@@ -596,7 +595,7 @@
       });
 
        $('#show2').click(function() {
-       
+
         $('#two').show("fast");
         $('#one').hide("fast");
       });
@@ -612,12 +611,12 @@
       });
 
        $('#show4').click(function() {
-       
+
         $('#four').show("fast");
         $('#three').hide("fast");
       });
     });
     </script>
-    
+
   </body>
 </html>

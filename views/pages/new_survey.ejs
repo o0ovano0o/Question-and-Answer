@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  
+
   <link rel="stylesheet" href="/index&manage.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -16,6 +16,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="/dirPagination.js"> </script>
+  <script src="/angular.ng-modules.js"></script>
 </head>
 
 <!-- CSS tự định nghĩa -->
@@ -53,12 +56,12 @@
           <li class="nav-item active">
             <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
           </li>
-         
+
           <li class="nav-item">
             <a class="nav-link" href="/support">Trợ giúp</a>
           </li>
         </ul>
-        
+
           <form id="search" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -69,9 +72,9 @@
             <a class="nav-link" href="#"><img src="/images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
           </li>
           <li>
-            <div class="thumb" style="background-image:url(/images/soccer.jpg);width: 40px;height: 40px"></div>
+            <div class="thumb" style="background-image:url(/images/avatar2.jpg);width: 40px;height: 40px"></div>
           </li>
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -120,133 +123,199 @@
         </div>
       </div><br>
       <div class="card">
-        <div class="card-header" style="background-color: #00cccc">
-          <h5><b>Đăng bởi: <%=survey.author%></b></h5>
-        </div>
-        <div class="card-body">
-          <a href="/survey" style="margin-left: 0%;" type="button" class="btn btn-info">Trở về danh sách phiếu</a><br><br>
-          <div class="card">
-            <div class="card-header" style="background-color: #99ccff">
-             <h6><b>Danh sách câu hỏi khảo sát</b></h6>
-           </div><br>
-           <div class="container" style="margin-top: 20px;">
+          <div class="card-header" style="background-color: #00cccc">
+              <h5><b>Đăng bởi: <%=survey.author%></b></h5>
+          </div>
+          <div class="card-body">
+                <a href="/survey" style="margin-left: 0%;" type="button" class="btn btn-info">Trở về danh sách phiếu</a><br><br>
+                <div class="card">
+                   <div class="card-header" style="background-color: #99ccff">
+                       <h6><b>Danh sách câu hỏi khảo sát</b></h6>
+                   </div><br>
+                   <div class="container" >
+                        <div id="c1" class="tab-pane active" ng-module="TNloai1" ng-controller="data1">
+                            <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="val in loai1"  ><!--viết lặp lại ở đây-->
+                                <b> Câu {{val.cau}}: {{val.ques}}</b> <br>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.1" value="option1.1" checked="checked">
+                                      <label class="form-check-label" for="Radios1.1">Đúng.</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.2" value="option1.2"  >
+                                      <label class="form-check-label" for="Radios1.2">Sai.</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                             var loai1=[];
+                        </script>
+                        <%for(var i=0;i< 2;i++){
+                            if(true){ %>
+                                <script type="text/javascript">
+                                     loai1.push({
+                                       "cau":1,
+                                       "ques":"Lý do bạn chọn ngành học này là gì?",
+                                       "name1":"answer1"+<%=i%>+'"'
+                                     });
+                                </script>
+                            <%}
+                        }%>
+                         <script type="text/javascript">
+                           var app = angular.module('TNloai1', []);
+                            app.controller('data1', function($scope){
+                             $scope.loai1=loai1;
+                             });
+                         </script>
 
-            <nav class="nav nav-pills nav-justified">
-              <a class="nav-item nav-link active" data-toggle="tab" href="#c1">Câu 1</a>
-              <a class="nav-item nav-link"  data-toggle="tab" href="#c2">Câu 2</a>
-              <a class="nav-item nav-link"  data-toggle="tab" href="#c3">Câu 3</a>
-              <a class="nav-item nav-link"  data-toggle="tab" href="#c4">Câu 4</a>
-            </nav>
+                        <div id="c2" class="tab-pane" ng-module="TNloai2,Answer2" ng-controller="data2">
+                            <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="value in loai2">
+                                <b>Câu {{value.cau2}} : {{value.ques2}}</b> <br>
+                                <div class="form-check" ng-controller="dataans" >
+                                  <div ng-repeat="value_2 in ans">
+                                    <input class="form-check-input position-static" type="checkbox" id="Radios2.1" value="option1">
+                                    <label class="form-check-label" for="Radios2.1">{{value_2.ans1}}</label></div>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                             var loai2=[];
+                        </script>
+                        <script type="text/javascript">
+                              var ans=[];
+                        </script>
+                        <%for(var i=0;i< 5;i++){
+                            if(true){ %>
+                                <script type="text/javascript">
+                                   ans.push({
+                                       "ans1":"hello"
+                                   });
+                                </script>
+                            <%}
+                        }%>
+                        <%for(var i=0;i< 2;i++){
+                            if(true){ %>
+                                <script type="text/javascript">
+                                     loai2.push({
+                                       "cau2":1,
+                                       "ques2":"hi",
+                                     });
+                                </script>
+                            <%}
+                        }%>
+                        <script type="text/javascript">
+                          var app = angular.module('Answer2', []);
+                           app.controller('dataans', function($scope){
+                            $scope.ans=ans;
+                            });
+                        </script>
+                         <script type="text/javascript">
+                           var app = angular.module('TNloai2', []);
+                            app.controller('data2', function($scope){
+                             $scope.loai2=loai2;
+                             });
+                         </script>
 
-
-            <!-- Nội dung các tabs-->
-            <div class="tab-content">
-
-              <div id="c1" class="tab-pane active">
-                <div class="card card body" style="margin-top: 20px;padding:15px;">
-                  <b> Hôm nay 37 độ đúng không ?</b> <br>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios1.1" value="option1.1" checked>
-                    <label class="form-check-label" for="Radios1.1">
-                      Đúng.
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios1.2" value="option1.2" checked>
-                    <label class="form-check-label" for="Radios1.2">
-                      Sai.
-                    </label>
-                  </div>
-                </div>
-
-              </div>
-              <div id="c2" class="tab-pane">
-                <div class="card card body" style="margin-top: 20px;padding:15px;">   
-                  <b> Bạn thấy mình như thế nào ?</b> <br>
-                  <div class="form-check">
-                    <input class="form-check-input position-static" type="checkbox" id="Radios2.1" value="option1">
-                    <label class="form-check-label" for="Radios2.1">
-                      Đẹp trai, tốt bụng.
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input position-static" type="checkbox" id="Radios2.2" value="option1">
-                    <label class="form-check-label" for="Radios2.2">
-                      Xấu xí, lười biếng.
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input position-static" type="checkbox" id="Radios2.3" value="option1">
-                    <label class="form-check-label" for="Radios2.3">
-                      Đẹp trai, lười biếng.
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input position-static" type="checkbox" id="Radios2.4" value="option1">
-                    <label class="form-check-label" for="Radios2.4">
-                      Xấu xí, tốt bụng.
-                    </label>
-                  </div>
-                </div>
-              </div>   
-              <div id="c3" class="tab-pane">
-                <div class="card card body" style="margin-top: 20px;padding: 15px;">   
-                  <b> Thời tiết hôm nay thế nào ?</b> <br>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios3.1" value="option1" checked>
-                    <label class="form-check-label" for="Radios3.1">
-                      Trời nắng, ít mây.
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios3.2" value="option1" checked>
-                    <label class="form-check-label" for="Radios3.2">
-                      Trời nhiều mây, mưa rải rác.
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="Radios3.3" value="option1" checked>
-                    <label class="form-check-label" for="Radios3.3">
-                      Trời đẹp, không nắng, ít mây.
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div id="c4" class="tab-pane">
-                <div class="card card body" style="margin-top: 20px;padding:15px;">   
-                 <b> Bạn hãy đưa ra 1 vài ý kiến phản hồi về ứng dụng Web của chúng tôi?</b>
-                 <textarea name="topic" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
-               </div>
-             </div>
-           </div><br>
-           <button class="btn btn-secondary" style="float: right;margin-right: 45%;">Kết thúc</button><br><br>
-         </div>
-       </div><br>
-
-       <a href="#" style="margin-right: 3%;float: right;" type="button" class="btn btn-secondary">Xem kết quả khảo sát</a><br><br><br>       
-       <a href="/survey" style="float: right;margin-right: 43%;" type="button" class="btn btn-secondary">Thêm câu hỏi</a><br>
-     </div><br>
-   </div>        
+                        <div id="c3" class="tab-pane" ng-module="TNloai3,Answer3" ng-controller="data3">
+                            <div class="card card body" style="margin-top: 20px;padding: 15px;" ng-repeat="value3 in loai3">
+                                <b> Câu {{value3.cau3}}: {{value3.ques3}}</b> <br>
+                                <div class="form-check" ng-controller="dataans3">
+                                  <div ng-repeat="value_3 in ans3">
+                                    <input class="form-check-input" type="radio" name="{{value3.name}}" id="Radios3.1" value="option1" checked>
+                                    <label class="form-check-label" for="Radios3.1">{{value_3.ans3}}</label></div>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                             var loai3=[];
+                        </script>
+                        <script type="text/javascript">
+                              var ans3=[];
+                        </script>
+                        <%for(var i=0;i< 5;i++){
+                            if(true){ %>
+                                <script type="text/javascript">
+                                   ans3.push({
+                                       "ans3":"Hi"
+                                   });
+                                </script>
+                            <%}
+                        }%>
+                        <%for(var i=0;i< 2;i++){
+                            if(true){ %>
+                                <script type="text/javascript">
+                                     loai3.push({
+                                       "cau3":5,
+                                       "ques3":"Chào bạn thời tiết hôm nay thế nào?",
+                                       "name":"answer"+<%=i%>+'"'
+                                     });
+                                </script>
+                            <%}
+                        }%>
+                        <script type="text/javascript">
+                           var app = angular.module('Answer3', []);
+                           app.controller('dataans3', function($scope){
+                            $scope.ans3=ans3;
+                            });
+                        </script>
+                         <script type="text/javascript">
+                           var app = angular.module('TNloai3', []);
+                            app.controller('data3', function($scope){
+                             $scope.loai3=loai3;
+                             });
+                         </script>
+                        <div id="c4" class="tab-pane" ng-module="Tuluan" ng-controller="data4">
+                           <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="value4 in loai4">
+                               <b>Câu {{value4.cau4}}: {{value4.ques4}}</b>
+                               <textarea name="topic" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
+                           </div>
+                       </div>
+                       <script type="text/javascript">
+                            var loai4=[];
+                       </script>
+                       <%for(var i=0;i< 2;i++){
+                           if(true){ %>
+                               <script type="text/javascript">
+                                    loai4.push({
+                                      "cau4":6,
+                                      "ques3":"Lý do bạn chọn ngành học này là gì?",
+                                    });
+                               </script>
+                           <%}
+                       }%>
+                        <script type="text/javascript">
+                          var app = angular.module('Tuluan', []);
+                           app.controller('data4', function($scope){
+                            $scope.loai4=loai4;
+                            });
+                        </script>
+                       <button class="btn btn-secondary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
+                   </div>
+             </div><br>
+             <a href="#" style="margin-right: 3%;float: right;" type="button" class="btn btn-secondary">Xem kết quả khảo sát</a><br><br><br>
+             <a href="/survey" style="float: right;margin-right: 43%;" type="button" class="btn btn-secondary">Thêm câu hỏi</a><br>
+        </div><br>
+   </div>
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
  </div>
-</main>        
+</main>
 <footer id="footer">
   <ul style="padding: 15px; margin-bottom: 0px;">
     <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-
     <p style="font-size: 12px"> @2019 design by Team 5</p>
   </ul>
-</footer> 
+</footer>
 </body>
+
+
 <script type="text/javascript">
-    <% var n =  JSON.stringify(survey.startdate)%>; 
+    <% var n =  JSON.stringify(survey.startdate)%>;
     <% var m =  JSON.stringify(survey.enddate)%> ;
     var text1 = <%- n%> ;
     var text2 = <%- m%> ;
     var date1 = new Date(text1);
     var date2 = new Date(text2);
-    document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1); 
-    document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2); 
+    document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
+    document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
 function formatdate(d){
   var dd = d.getDate();
   var mm = d.getMonth() + 1; //January is 0!
@@ -254,13 +323,12 @@ function formatdate(d){
   var yyyy = d.getFullYear();
   if (dd < 10) {
     dd = '0' + dd;
-  } 
+  }
   if (mm < 10) {
     mm = '0' + mm;
-  } 
+  }
   var today = dd + '/' + mm + '/' + yyyy;
   return today;
 }
-
   </script>
 </html>

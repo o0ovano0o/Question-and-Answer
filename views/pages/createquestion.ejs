@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  
+
   <link rel="stylesheet" href="/index&manage.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -60,7 +60,7 @@
             <a class="nav-link" href="/support">Trợ giúp</a>
           </li>
         </ul>
-        
+
         <form id="search" class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -71,9 +71,9 @@
             <a class="nav-link" href="#"><img src="/images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
           </li>
           <li>
-            <div class="thumb" style="background-image:url(/images/soccer.jpg);width: 40px;height: 40px"></div>
+            <div class="thumb" style="background-image:url(/images/avatar2.jpg);width: 40px;height: 40px"></div>
           </li>
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -92,35 +92,27 @@
       </nav>
     </header>
     <main role="main">
-
       <div class="container marketing">
-
        <div class="container" style="margin-top: 50px;background-color: white;border-radius: 20px;">
         <div >
          <div >
           <br>
           <label for="title" class="col-form-label">
             <h3>Tên phiếu khảo sát: <%=survey.title%> </h3></label>
-          </div>        
+          </div>
         </div>
         <div >
          <div >
           <label for="description" class="col-form-label"><h4>Mô tả khảo sát: <%=survey.description%></h4> </label>
-        </div>           
+        </div>
       </div><br>
       <div class="row">
         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-
           <p id="date1"></p>
-
         </div>
-
         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-
-
          <p id="date2"></p>
        </div>
-
      </div>
    </div><br/>
 
@@ -140,127 +132,107 @@
 
   <!-- Nội dung các tabs-->
   <div class="tab-content">
-    <div id="tn1" class="tab-pane active">
-     <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=1" id="form1" method="POST">
-        <div class="row post" style="margin-top: 20px;">
-         <input  type="number" class='form-control' name="number"  style="border-radius: 5px; margin: 10px; width: 50%;padding: 5px;" placeholder="Số câu hỏi" onblur="checknumber(this);socauhoi(this.value);" value="1" min="1" max="30">
-         <div style="border-radius: 5px; margin: 10px; width: 40%;padding: 5px;">
-
-           <select class="form-control" id="sel1" onblur ="changer()">
-            <option value="1" selected>Một đáp án</option>
-            <option value="2" >Nhiều đáp án</option>
-          </select>
-          <script type="text/javascript">
-                function changer(){
-                var e = document.getElementById("sel1");
-                var choice = e.options[e.selectedIndex].value;
-                console.log(choice);
-                $("#form1").attr("action","/createquestion/?id=<%=survey.survey_id%>&qtype="+choice); 
-               }
-          </script>
-        </div>
+      <div id="tn1" class="tab-pane active">
+         <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=1" id="form1" method="POST">
+              <div class="row post" style="margin-top: 20px;">
+                   <input  type="number" class='form-control' name="number"  style="border-radius: 5px; margin: 10px; width: 50%;padding: 5px;" placeholder="Số câu hỏi" onblur="checknumber(this);socauhoi(this.value);" value="1" min="1" max="30">
+                   <div style="border-radius: 5px; margin: 10px; width: 40%;padding: 5px;">
+                       <select class="form-control" id="sel1" onblur ="changer()">
+                          <option value="1" selected>Một đáp án</option>
+                          <option value="2" >Nhiều đáp án</option>
+                       </select>
+                       <script type="text/javascript">
+                              function changer(){
+                                  var e = document.getElementById("sel1");
+                                  var choice = e.options[e.selectedIndex].value;
+                                  console.log(choice);
+                                  $("#form1").attr("action","/createquestion/?id=<%=survey.survey_id%>&qtype="+choice);
+                             }
+                        </script>
+                    </div>
+               </div>
+                <div class="card card-body">
+                      <div class="accordion" id="accordionExampleTN1">
+                          <div class="card" >
+                            <div class="card-header" id="headingOneTN1">
+                               <p style="margin-left: 10px;">Câu hỏi 1:</p>
+                            </div>
+                            <div aria-labelledby="headingOneTN1" >
+                                <div class="card-body">
+                                    <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
+                                    <input  type="number" max="10" min="1" value="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onblur="checknumber(this);sodapan(this);">
+                                    <div id="dapan1" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                          </div>
+                       </div><br>
+                       <div id="cauhoi" style="width: 100%;"></div>
+                       <button type="submit" class="btn btn-primary" name="submit_form" id="submit_form"  style="border-radius: 5px; width: 20%;text-align: center;margin-right: 40%;margin-left: 40%;" >Cập nhật</button>
+                  </div>
+             </form>
       </div>
-      <div class="card card-body">
-        <div class="accordion" id="accordionExampleTN1">
-          <div class="card" >
-            <div class="card-header" id="headingOneTN1">
-             <p style="margin-left: 10px;">
-              Câu hỏi 1:
-            </p>
-          </div>
 
-          <div aria-labelledby="headingOneTN1" >
-            <div class="card-body">
-             
-              <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
-              <input  type="number" max="10" min="1" value="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onblur="checknumber(this);sodapan(this);">
-              <div id="dapan1" style="width: 90%;"></div>
-              </div>
-          </div>
-        </div>
-      </div><br>
-      <div id="cauhoi" style="width: 100%;"></div>
-      <button type="submit" class="btn btn-primary" name="submit_form" id="submit_form"  style="border-radius: 5px; width: 20%;text-align: center;margin-right: 40%;margin-left: 40%;" >Cập nhật</button>
-
-    </div>
- </form>
-</div>
-
-
-
-<div id="tn3" class="tab-pane tab-panel fade">
-  <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=3" method="POST">
-    <div class="row post" style="margin-top: 20px;">
-      <input  type="number" class='form-control' name="number" style="border-radius: 5px; margin: 10px; width: 70%;padding: 5px;" max="30" min="1" value="1" placeholder="Số câu hỏi" onblur="checknumber(this);socauhoi2(this.value);">
-    </div>
-      <div class="card card-body" style="width: 100%">
-        <div class="accordion" id="accordionExampleTN3">
-          <div class="card" >
-            <div class="card-header" id="headingOneTN3">
-
-              <p style="margin-left: 10px;">
-                Câu hỏi 1:
-              </p>
-            </div>
-
-            <div aria-labelledby="headingOneTN3" >
-              <div class="card-body">
-               <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
-               <input type="radio"  name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="true">Đúng
-               <input type="radio" name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="flase">Sai
-             </div>
-           </div>
-         </div>
-
-       </div><br>
-       <div id="cauhoi2" style="width: 100%;"></div>
-       <button type="submit" name="submit_form" class="btn btn-primary" style="border-radius: 5px; width: 20%;text-align: center;margin-right: 40%;margin-left: 40%;" >Cập nhật
-       </button>
-     </div>
- </form>
-</div>
-
-
-
-<div id="tl4" class="tab-pane tab-panel fade">
-  <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=4" method="POST">
-    <div class="row post" style="margin-top: 20px;">
-      <input  type="number" class='form-control' name="number" min="1" max="30" value="1" style="border-radius: 5px; margin: 10px; width: 70%;padding: 5px;" placeholder="Số câu hỏi" onblur="checknumber(this);socauhoi3(this.value);">
-    </div>
-      <div class="card card-body" style="width: 100%">
-        <div class="accordion" id="accordionExampleTN4">
-          <div class="card" >
-            <div class="card-header" id="headingOne4">
-
-              <p style="margin-left: 10px;" >
-                Câu hỏi 1:
-              </p>
-
-            </div>
-            <div data-parent="#accordionExampleTN4">
-              <div class="card-body">
-                <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
-              </div>
-            </div>
-          </div>
-        </div><br>
-        <div id="cauhoi3" style="width: 100%;"></div>
-        <button type="submit" class="btn btn-primary" style="border-radius: 5px; width: 20%;text-align: center;margin-right: 40%;margin-left: 40%;" >Cập nhật
-        </button>
+      <div id="tn3" class="tab-pane tab-panel fade">
+            <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=3" method="POST">
+                  <div class="row post" style="margin-top: 20px;">
+                    <input  type="number" class='form-control' name="number" style="border-radius: 5px; margin: 10px; width: 70%;padding: 5px;" max="30" min="1" value="1" placeholder="Số câu hỏi" onblur="checknumber(this);socauhoi2(this.value);">
+                  </div>
+                  <div class="card card-body" style="width: 100%">
+                        <div class="accordion" id="accordionExampleTN3">
+                              <div class="card" >
+                                  <div class="card-header" id="headingOneTN3">
+                                    <p style="margin-left: 10px;">Câu hỏi 1:</p>
+                                  </div>
+                                  <div aria-labelledby="headingOneTN3" >
+                                      <div class="card-body">
+                                         <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
+                                         <input type="radio"  name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="true">Đúng
+                                         <input type="radio" name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="flase">Sai
+                                      </div>
+                                 </div>
+                             </div>
+                         </div><br>
+                         <div id="cauhoi2" style="width: 100%;"></div>
+                         <button type="submit" name="submit_form" class="btn btn-primary" style="border-radius: 5px; width: 20%;text-align: center;margin-right: 40%;margin-left: 40%;" >Cập nhật
+                     </button>
+                 </div>
+           </form>
       </div>
-    </form>
-  </div>   
+
+      <div id="tl4" class="tab-pane tab-panel fade">
+          <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=4" method="POST">
+              <div class="row post" style="margin-top: 20px;">
+                    <input  type="number" class='form-control' name="number" min="1" max="30" value="1" style="border-radius: 5px; margin: 10px; width: 70%;padding: 5px;" placeholder="Số câu hỏi" onblur="checknumber(this);socauhoi3(this.value);">
+              </div>
+              <div class="card card-body" style="width: 100%">
+                  <div class="accordion" id="accordionExampleTN4">
+                      <div class="card" >
+                          <div class="card-header" id="headingOne4">
+                              <p style="margin-left: 10px;" >Câu hỏi 1:</p>
+                          </div>
+                          <div data-parent="#accordionExampleTN4">
+                              <div class="card-body">
+                                <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
+                              </div>
+                          </div>
+                       </div>
+                    </div><br>
+                    <div id="cauhoi3" style="width: 100%;"></div>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 5px; width: 20%;text-align: center;margin-right: 40%;margin-left: 40%;" >Cập nhật
+                    </button>
+                </div>
+            </form>
+      </div>
 </div>
 <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
 </div>
-</main>        
+</main>
 <footer id="footer">
   <ul style="padding: 15px; margin-bottom: 0px;">
     <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-
     <p style="font-size: 12px"> @2019 design by Team 5</p>
   </ul>
-</footer> 
+</footer>
 </body>
 <script type="text/javascript">
   function checknumber(inp){
@@ -282,11 +254,8 @@
     for(i=0;i<num;i++){
       code+=(dapan+key+"_"+(i+1)+dap);
     }
-    
-    
     var res="dapan" + key;
     document.getElementById(res).innerHTML=code;
-
   }
   function socauhoi(num){
     var i=0;
@@ -302,8 +271,6 @@
       code+=cauhoi+t+cauhoi2+t+cau+t+ok+t+cauhoi3+t+cauhoi4;
     }
     document.getElementById('cauhoi').innerHTML=code;
-
-
   }
   function socauhoi2(num){
     var i=0;
@@ -316,8 +283,6 @@
       code+=cauhoi+(t)+cauhoi2+t+cau3;
     }
     document.getElementById('cauhoi2').innerHTML=code;
-
-
   }
   function socauhoi3(num){
     var i=0;
@@ -330,16 +295,15 @@
       code+=cauhoi+(t)+cauhoi2+t+cau3;
     }
     document.getElementById('cauhoi3').innerHTML=code;
-
   }
-  <% var n =  JSON.stringify(survey.startdate)%>; 
+  <% var n =  JSON.stringify(survey.startdate)%>;
   <% var m =  JSON.stringify(survey.enddate)%> ;
   var text1 = <%- n%> ;
   var text2 = <%- m%> ;
   var date1 = new Date(text1);
   var date2 = new Date(text2);
-  document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1); 
-  document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2); 
+  document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
+  document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
     function formatdate(d){
       var dd = d.getDate();
     var mm = d.getMonth() + 1; //January is 0!
@@ -347,13 +311,12 @@
     var yyyy = d.getFullYear();
     if (dd < 10) {
       dd = '0' + dd;
-    } 
+    }
     if (mm < 10) {
       mm = '0' + mm;
-    } 
+    }
     var today = dd + '/' + mm + '/' + yyyy;
     return today;
   }
-
 </script>
 </html>
