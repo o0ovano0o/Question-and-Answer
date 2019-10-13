@@ -183,14 +183,19 @@
                         <script type="text/javascript">
                               var ans=[];
                         </script>
-                        <%for(var i=0;i< 5;i++){
-                            if(true){ %>
-                                <script type="text/javascript">
-                                   ans.push({
-                                       "ans1":"hello"
-                                   });
-                                </script>
-                            <%}
+
+                        <%for(var i=0;i< squest.length;i++){
+                            if(squest[i].quest_type_id==2){
+                                for(var j=0;j< s_ans.length;j++){
+                                    if(s_ans[j].question_id==squest[i].squest_id){ %>
+                                        <script type="text/javascript">
+                                           ans.push({
+                                               "ans1":"<%=s_ans[j].ans_text%>"
+                                           });
+                                        </script>
+                                    <%}
+                                  }
+                            }
                         }%>
                         <%for(var i=0;i< squest.length;i++){
                             if(squest[i].quest_type_id==2){ %>
@@ -232,14 +237,20 @@
                         <script type="text/javascript">
                               var ans3=[];
                         </script>
-                        <%for(var i=0;i< 5;i++){
-                            if(true){ %>
-                                <script type="text/javascript">
-                                   ans3.push({
-                                       "ans3":"Hi"
-                                   });
-                                </script>
-                            <%}
+                        <%for(var i=0;i< s_ans.length;i++){
+
+                                for(var j=0;j< squest.length;j++){
+                                  if(squest[j].quest_type_id==1){
+                                    if(s_ans[i].question_id==squest[j].squest_id){ %>
+                                        <script type="text/javascript">
+                                           ans3.push({
+                                               "ans3":"<%=s_ans[i].ans_text%>"
+                                           });
+                                        </script>
+                                    <%}
+                                  }
+                                  
+                            }
                         }%>
                         <%for(var i=0;i< squest.length ;i++){
                             if(squest[i].quest_type_id==1){ %>
