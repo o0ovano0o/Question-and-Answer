@@ -155,7 +155,7 @@
                                      loai1.push({
                                        "cau":1,
                                        "ques":"<%=squest[i].squest_text%>",
-                                       "name1":"answer1"+<%=i%>+'"'
+                                       "name1":"<%=squest[i].squest_id%>"
                                      });
                                 </script>
                             <%}
@@ -172,7 +172,7 @@
                                 <b>Câu {{value.cau2}} : {{value.ques2}}</b> <br>
                                 <div class="form-check" ng-controller="dataans" >
                                   <div ng-repeat="value_2 in ans">
-                                    <input class="form-check-input position-static" type="checkbox" id="Radios2.1" value="option1">
+                                    <input class="form-check-input position-static" name ="{{value.name2}}" type="checkbox" id="Radios2.1" value="option1">
                                     <label class="form-check-label" for="Radios2.1">{{value_2.ans1}}</label></div>
                                 </div>
                             </div>
@@ -198,6 +198,7 @@
                                      loai2.push({
                                        "cau2":1,
                                        "ques2":"<%=squest[i].squest_text%>",
+                                       "name2":"<%=squest[i].squest_id%>"
                                      });
                                 </script>
                             <%}
@@ -220,7 +221,7 @@
                                 <b> Câu {{value3.cau3}}: {{value3.ques3}}</b> <br>
                                 <div class="form-check" ng-controller="dataans3">
                                   <div ng-repeat="value_3 in ans3">
-                                    <input class="form-check-input" type="radio" name="{{value3.name}}" id="Radios3.1" value="option1" checked>
+                                    <input class="form-check-input" type="radio" name="{{value3.name3}}" id="Radios3.1" value="option1" checked>
                                     <label class="form-check-label" for="Radios3.1">{{value_3.ans3}}</label></div>
                                 </div>
                             </div>
@@ -246,7 +247,7 @@
                                      loai3.push({
                                        "cau3":5,
                                        "ques3":"<%=squest[i].squest_text%>",
-                                       "name":"answer"+<%=i%>+'"'
+                                       "name3":"<%=squest[i].squest_id%>"
                                      });
                                 </script>
                             <%}

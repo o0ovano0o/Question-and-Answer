@@ -2,21 +2,43 @@ var express = require('express')
 var router = express.Router();
 var db = require('../model/database');
 var conn = db.getConnection();
-
+var q = require('q');
 
 router.get('/', function (req, res) {
 
 	 if(req.session.user){
 				var id = req.query.id;
+
+				var defer = q.defer();
 				var query = conn.query("SELECT * FROM survey join squest on survey.survey_id=squest.surveysq_id WHERE ? ",{survey_id:id}, (err, surveys) => {
-		    		if(err) throw err;
+		    		if(err) {
+							defer.reject(err);
+						}
 		    		else{
-		    				survey=surveys[0];
-								squest=surveys;
-								s_ans=surveys;
-		    				res.render('new_survey', {session: req.session.user,survey:survey, squest:squest}); }
+								defer.resolve(surveys);
+					  }
 				});
-		}else res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
+
+				if(req.query.qtype==3 ||req.query.qtype==4){
+					var dt = false;
+				}
+				else{
+					var dt = defer.promise;
+						dt.then(function(num){
+							var querysq=conn.query("SELECT * FROM s_ans WHERE ? ", (err, squests)=>{
+								if(err) throw err;
+								else{
+									s_ans=squests;
+									res.render({session:req.session.user, s_ans:s_ans});
+								}
+							});
+						});
+					}
+		}
+		else {
+
+			res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
+		}
 });
 
 module.exports = router;
