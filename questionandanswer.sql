@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 10, 2019 lúc 05:15 PM
+-- Thời gian đã tạo: Th10 13, 2019 lúc 03:54 AM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -598,6 +598,30 @@ ALTER TABLE `yesnoreponse`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `ans_quest`
+--
+ALTER TABLE `ans_quest`
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `aquest`
+--
+ALTER TABLE `aquest`
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `cmt_ans`
+--
+ALTER TABLE `cmt_ans`
+  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `section`
+--
+ALTER TABLE `section`
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `squest`
 --
 ALTER TABLE `squest`
@@ -629,14 +653,14 @@ ALTER TABLE `user`
 -- Các ràng buộc cho bảng `ans_quest`
 --
 ALTER TABLE `ans_quest`
-  ADD CONSTRAINT `ans_quest_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `aquest` (`section_id`);
+  ADD CONSTRAINT `ans_quest_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `aquest` (`section_id`),
+  ADD CONSTRAINT `ans_quest_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `aquest` (`question_id`);
 
 --
 -- Các ràng buộc cho bảng `aquest`
 --
 ALTER TABLE `aquest`
-  ADD CONSTRAINT `aquest_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`),
-  ADD CONSTRAINT `aquest_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `ans_quest` (`question_id`);
+  ADD CONSTRAINT `aquest_ibfk_3` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
 
 --
 -- Các ràng buộc cho bảng `choice_multichoices`
@@ -650,8 +674,8 @@ ALTER TABLE `choice_multichoices`
 -- Các ràng buộc cho bảng `cmt_ans`
 --
 ALTER TABLE `cmt_ans`
-  ADD CONSTRAINT `cmt_ans_ibfk_1` FOREIGN KEY (`ans_id`) REFERENCES `ans_quest` (`ans_id`),
-  ADD CONSTRAINT `cmt_ans_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `ans_quest` (`question_id`);
+  ADD CONSTRAINT `cmt_ans_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `ans_quest` (`question_id`),
+  ADD CONSTRAINT `cmt_ans_ibfk_3` FOREIGN KEY (`ans_id`) REFERENCES `ans_quest` (`ans_id`);
 
 --
 -- Các ràng buộc cho bảng `multichoices`
@@ -678,8 +702,8 @@ ALTER TABLE `squest`
 -- Các ràng buộc cho bảng `survey_section`
 --
 ALTER TABLE `survey_section`
-  ADD CONSTRAINT `survey_section_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`),
-  ADD CONSTRAINT `survey_section_ibfk_3` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`);
+  ADD CONSTRAINT `survey_section_ibfk_3` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`),
+  ADD CONSTRAINT `survey_section_ibfk_4` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
 
 --
 -- Các ràng buộc cho bảng `s_ans`
