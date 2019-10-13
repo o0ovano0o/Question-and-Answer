@@ -238,19 +238,13 @@
                               var ans3=[];
                         </script>
                         <%for(var i=0;i< s_ans.length;i++){
-
-                                for(var j=0;j< squest.length;j++){
-                                  if(squest[j].quest_type_id==1){
-                                    if(s_ans[i].question_id==squest[j].squest_id){ %>
-                                        <script type="text/javascript">
-                                           ans3.push({
-                                               "ans3":"<%=s_ans[i].ans_text%>"
-                                           });
-                                        </script>
-                                    <%}
-                                  }
-                                  
-                            }
+                              if(s_ans[i].question_id==22){ %>
+                                    <script type="text/javascript">
+                                          ans3.push({
+                                              "ans3":"<%=s_ans[i].ans_text%>"
+                                          });
+                                    </script>
+                              <%}
                         }%>
                         <%for(var i=0;i< squest.length ;i++){
                             if(squest[i].quest_type_id==1){ %>
