@@ -149,12 +149,12 @@
                         <script type="text/javascript">
                              var loai1=[];
                         </script>
-                        <%for(var i=0;i< 2;i++){
-                            if(true){ %>
+                        <%for(var i=0;i< squest.length;i++){
+                            if(squest[i].quest_type_id==3){ %>
                                 <script type="text/javascript">
                                      loai1.push({
                                        "cau":1,
-                                       "ques":"Lý do bạn chọn ngành học này là gì?",
+                                       "ques":"<%=squest[i].squest_text%>",
                                        "name1":"answer1"+<%=i%>+'"'
                                      });
                                 </script>
@@ -192,12 +192,12 @@
                                 </script>
                             <%}
                         }%>
-                        <%for(var i=0;i< 2;i++){
-                            if(true){ %>
+                        <%for(var i=0;i< squest.length;i++){
+                            if(squest[i].quest_type_id==2){ %>
                                 <script type="text/javascript">
                                      loai2.push({
                                        "cau2":1,
-                                       "ques2":"hi",
+                                       "ques2":"<%=squest[i].squest_text%>",
                                      });
                                 </script>
                             <%}
@@ -240,12 +240,12 @@
                                 </script>
                             <%}
                         }%>
-                        <%for(var i=0;i< 2;i++){
-                            if(true){ %>
+                        <%for(var i=0;i< squest.length ;i++){
+                            if(squest[i].quest_type_id==1){ %>
                                 <script type="text/javascript">
                                      loai3.push({
                                        "cau3":5,
-                                       "ques3":"Chào bạn thời tiết hôm nay thế nào?",
+                                       "ques3":"<%=squest[i].squest_text%>",
                                        "name":"answer"+<%=i%>+'"'
                                      });
                                 </script>
@@ -272,12 +272,12 @@
                        <script type="text/javascript">
                             var loai4=[];
                        </script>
-                       <%for(var i=0;i< 2;i++){
-                           if(true){ %>
+                       <%for(var i=0;i< squest.length;i++){
+                           if(squest[i].quest_type_id==4){ %>
                                <script type="text/javascript">
                                     loai4.push({
                                       "cau4":6,
-                                      "ques3":"Lý do bạn chọn ngành học này là gì?",
+                                      "ques4":"<%=squest[i].squest_text%>"
                                     });
                                </script>
                            <%}
