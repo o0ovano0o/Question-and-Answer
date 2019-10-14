@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 	 if(req.session.user){
 				var id = req.query.id;
 				var defer = q.defer();
-				var query = conn.query("SELECT * FROM survey join squest on survey.survey_id=squest.surveysq_id WHERE ? ",{survey_id:id}, (err, num) => {
+				var query = conn.query("SELECT * FROM survey left join squest on survey.survey_id=squest.surveysq_id WHERE ? ",{survey_id:id}, (err, num) => {
 		    		if(err) {
 							defer.reject(err);
 						}
@@ -19,22 +19,18 @@ router.get('/', function (req, res) {
 								defer.resolve(num);
 					  }
 				});
-
-				if(req.query.qtype==3 ||req.query.qtype==4){
-					var dt = false;
-				}
-				else{
+				
 					var dt = defer.promise;
 						dt.then(function(num){
-							var querysq=conn.query("SELECT * FROM s_ans ", (err, squests)=>{
+							var querysq=conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?",{surveysq_id:id}, (err, squests)=>{
 								if(err) throw err;
 								else{
 									s_ans=squests;
-									res.render('new_survey', {session:req.session.user, s_ans:s_ans});
+									res.render('test', {session:req.session.user, s_ans:s_ans});
 								}
 							});
 						});
-					}
+					
 		}
 		else {
 
