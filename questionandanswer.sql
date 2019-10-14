@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 13, 2019 lúc 03:54 AM
+-- Thời gian đã tạo: Th10 14, 2019 lúc 05:23 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -150,7 +150,7 @@ CREATE TABLE `singlechoicereponse` (
 --
 
 CREATE TABLE `squest` (
-  `survey_id` int(11) NOT NULL,
+  `surveysq_id` int(11) NOT NULL,
   `squest_id` int(11) NOT NULL,
   `squest_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `quest_type_id` int(11) NOT NULL
@@ -160,7 +160,7 @@ CREATE TABLE `squest` (
 -- Đang đổ dữ liệu cho bảng `squest`
 --
 
-INSERT INTO `squest` (`survey_id`, `squest_id`, `squest_text`, `quest_type_id`) VALUES
+INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`) VALUES
 (3, 1, '1', 1),
 (3, 2, '1', 1),
 (2, 3, 'cauau hỏi ', 1),
@@ -263,7 +263,16 @@ INSERT INTO `squest` (`survey_id`, `squest_id`, `squest_text`, `quest_type_id`) 
 (2, 100, 'câu 2', 3),
 (1, 101, 'câu nhiều đáp án 1', 2),
 (1, 102, 'câu nhiều đáp án 2', 2),
-(5, 103, 'etrtrdg', 1);
+(5, 103, 'etrtrdg', 1),
+(6, 104, 'abc', 1),
+(6, 105, 'cgd', 1),
+(6, 106, 'hjsgd', 1),
+(6, 107, 'Bạn học ngành gì', 2),
+(6, 108, 'Bạn muốn làm ', 2),
+(6, 109, 'Bạn đã học môn gì', 1),
+(6, 110, 'Bạn học khóa nào ?', 1),
+(6, 111, 'thứ hai ', 1),
+(6, 112, '23131', 2);
 
 -- --------------------------------------------------------
 
@@ -295,7 +304,8 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (5, 'Khảo sát 1', 'Mô tả này', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1'),
 (6, '123', 'Khảo sát aaaaaa', '0000-00-00', '2020-12-11', 1, '', 0, 'giaovien1'),
 (7, 'phiếu khảo sát 3', 'dugfwdgfkljwef', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1'),
-(8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 1, '', 0, 'giaovien1');
+(8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 1, '', 0, 'giaovien1'),
+(9, '123', 'OK 123', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1');
 
 -- --------------------------------------------------------
 
@@ -406,7 +416,32 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`) VALUES
 (102, 81, '3123'),
 (102, 82, '23123'),
 (103, 83, '1312'),
-(103, 84, '3123');
+(103, 84, '3123'),
+(104, 85, '123'),
+(104, 86, '3213'),
+(104, 87, '34'),
+(105, 88, 'tao thích mày'),
+(105, 89, '23123123'),
+(106, 90, 'ưe'),
+(106, 91, 'fd'),
+(106, 92, 'ffg'),
+(107, 93, 'CNPM'),
+(107, 94, 'CNTT'),
+(107, 95, 'MẠng máy tinh '),
+(107, 96, 'TRuyền thông'),
+(107, 97, 'Kinh tế'),
+(108, 98, 'Dev'),
+(108, 99, 'Man'),
+(108, 100, 'Tes'),
+(109, 101, 'Hệ quản trị cơ sở dữ liệu'),
+(109, 102, 'Tín hiệu hệ thống'),
+(109, 103, 'Trí tuệ nhân tạo'),
+(111, 104, '3123'),
+(111, 105, '124134'),
+(111, 106, '21321'),
+(112, 107, '21312'),
+(112, 108, '312312'),
+(112, 109, '3123123');
 
 -- --------------------------------------------------------
 
@@ -542,7 +577,7 @@ ALTER TABLE `singlechoicereponse`
 ALTER TABLE `squest`
   ADD PRIMARY KEY (`squest_id`),
   ADD KEY `quest_type_id` (`quest_type_id`),
-  ADD KEY `survey_id` (`survey_id`);
+  ADD KEY `survey_id` (`surveysq_id`);
 
 --
 -- Chỉ mục cho bảng `survey`
@@ -625,19 +660,19 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT cho bảng `squest`
 --
 ALTER TABLE `squest`
-  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT cho bảng `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
@@ -696,7 +731,7 @@ ALTER TABLE `singlechoicereponse`
 --
 ALTER TABLE `squest`
   ADD CONSTRAINT `squest_ibfk_2` FOREIGN KEY (`quest_type_id`) REFERENCES `questiontype` (`quest_type_id`),
-  ADD CONSTRAINT `squest_ibfk_3` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`);
+  ADD CONSTRAINT `squest_ibfk_3` FOREIGN KEY (`surveysq_id`) REFERENCES `survey` (`survey_id`);
 
 --
 -- Các ràng buộc cho bảng `survey_section`
