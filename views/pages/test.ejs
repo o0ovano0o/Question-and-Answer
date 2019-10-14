@@ -48,158 +48,142 @@
     <!--Navbars -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a id="logo" class="navbar-brand" href="/home">Q&A</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" style="margin: 0px 30px" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/support">Trợ giúp</a>
-          </li>
-        </ul>
-
-          <form id="search" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        <% if (session.username) {%>
-        <ul class="navbar-nav" style="display: contents;">
-          <li class="nav-item">
-            <a class="nav-link" href="#"><img src="/images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
-          </li>
-          <li>
-            <div class="thumb" style="background-image:url(/images/avatar2.jpg);width: 40px;height: 40px"></div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
-              <a class="dropdown-item" href="/logout">Đăng xuất</a>
-            </div>
-        </ul>
-        <%} else {%>
-  <ul class="navbar-nav" style="display: contents;">
-          <li class="nav-item">
-            <a class="nav-link" href="/login"><Đăng nhập</a>
-          </li>
-        </ul>
-        <%}%>
-      </div>
-    </nav>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">  <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="/support">Trợ giúp</a></li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <% if (session.username) {%>
+                <ul class="navbar-nav" style="display: contents;">
+                    <li class="nav-item"><a class="nav-link" href="#"><img src="/images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a></li>
+                    <li><div class="thumb" style="background-image:url(/images/avatar2.jpg);width: 40px;height: 40px"></div></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
+                            <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                        </div></li>
+                </ul>
+            <%} else {%>
+                <ul class="navbar-nav" style="display: contents;">
+                    <li class="nav-item"><a class="nav-link" href="/login"><Đăng nhập</a></li>
+                </ul>
+            <%}%>
+          </div>
+      </nav>
   </header>
   <main role="main">
-    <div class="container marketing">
-      <br>
-      <div class="card">
-        <div class="card-header" style="background-color: #00cccc">
-          <h5><b>Phiếu khảo sát</b></h5>
-        </div>
-        <div class="card-body">
-          <div class="row padding">
-            <div class="col-3 col-sm-2 col-md-2">
-              <div class="card">
-                <img class="card-img-top" src="/images/logo.png">
+      <div class="container marketing">
+          <br>
+          <div class="card">
+              <div class="card-header" style="background-color: #00cccc">
+                  <h5><b>Phiếu khảo sát</b></h5>
               </div>
-            </div>
-            <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h4 class="card-title"><%=survey.title%></h4>
-                <p class="card-text"><%=survey.description%><br><br>
-                  Đăng bởi: <%=survey.author%><br>
-                 </p>
-                 <p id="date1"></p>
-                 <p id="date2"></p>
-                 <%if(session.username==survey.author){%>
-                 <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
-                 <%}%>
+                  <div class="row padding">
+                      <div class="col-3 col-sm-2 col-md-2">
+                          <div class="card"><img class="card-img-top" src="/images/logo.png"></div>
+                      </div>
+                      <div class="col-9 col-sm-9 col-md-9">
+                          <div class="card-body">
+                              <h4 class="card-title"><%=survey.title%></h4>
+                              <p class="card-text"><%=survey.description%><br><br>
+                                    Đăng bởi: <%=survey.author%><br>
+                              </p>
+                              <p id="date1"></p>
+                              <p id="date2"></p>
+                                 <%if(session.username==survey.author){%>
+                                   <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
+                                 <%}%>
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div><br>
-      <div class="card">
-          <div class="card-header" style="background-color: #00cccc">
-              <h5><b>Đăng bởi: <%=survey.author%></b></h5>
-          </div>
-          <div class="card-body">
-                <a href="/home" style="margin-left: 0%;" type="button" class="btn btn-info">Trở về danh sách phiếu</a><br><br>
-                <div class="card">
-                   <div class="card-header" style="background-color: #99ccff">
-                       <h6><b>Danh sách câu hỏi khảo sát</b></h6>
-                   </div><br>
-                   <div class="container" >
-                        <div id="c1" class="tab-pane active" ng-module="TNloai1" ng-controller="data1">
-                            <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="val in loai1"  ><!--viết lặp lại ở đây-->
-                                <b> Câu {{val.cau}}: {{val.ques}}</b> <br>
-                                  <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.1" value="option1.1" checked="checked">
-                                      <label class="form-check-label" for="Radios1.1">Đúng.</label>
+          </div><br>
+          <div class="card">
+              <div class="card-header" style="background-color: #00cccc">
+                  <h5><b>Đăng bởi: <%=survey.author%></b></h5>
+              </div>
+              <div class="card-body">
+                    <a href="/home" style="margin-left: 0%;" type="button" class="btn btn-info">Trở về danh sách phiếu</a><br><br>
+                    <div class="card">
+                         <div class="card-header" style="background-color: #99ccff">
+                             <h6><b>Danh sách câu hỏi khảo sát</b></h6>
+                         </div><br>
+                         <div class="container" >
+                              <div id="c1" class="tab-pane active" ng-module="TNloai1" ng-controller="data1">
+                                  <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="val in loai1"  ><!--viết lặp lại ở đây-->
+                                      <b>{{val.ques}}</b> <br>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.1" value="option1.1" checked="checked">
+                                            <label class="form-check-label" for="Radios1.1">Đúng.</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.2" value="option1.2"  >
+                                            <label class="form-check-label" for="Radios1.2">Sai.</label>
+                                        </div>
                                   </div>
-                                  <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.2" value="option1.2"  >
-                                      <label class="form-check-label" for="Radios1.2">Sai.</label>
-                                  </div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                             var loai1=[];
-                        </script>
-                        <%for(var i=0;i< squest.length;i++){
-                            if(squest[i].quest_type_id==3){ %>
-                                <script type="text/javascript">
-                                     loai1.push({
-                                       "cau":1,
-                                       "ques":"<%=squest[i].squest_text%>",
-                                       "name1":"<%=squest[i].squest_id%>"
+                              </div>
+                              <script type="text/javascript">
+                                   var loai1=[];
+                              </script>
+                              <%for(var i=0;i< squest.length;i++){
+                                  if(squest[i].quest_type_id==3){ %>
+                                      <script type="text/javascript">
+                                           loai1.push({
+                                             "ques":"<%=squest[i].squest_text%>",
+                                             "name1":"<%=squest[i].squest_id%>"
+                                           });
+                                      </script>
+                                  <%}
+                              }%>
+                              <script type="text/javascript">
+                                 var app = angular.module('TNloai1', []);
+                                  app.controller('data1', function($scope){
+                                   $scope.loai1=loai1;
+                                   });
+                              </script>
+                              <!-- Hết loại 1 -->
+                              <%for(var i=0;i< squest.length;i++){
+                                  if(squest[i].quest_type_id==1){ %>
+                                    <div id="c2" class="tab-pane active" >
+                                        <div class="card card body" style="margin-top: 20px;padding:15px;" >
+                                            <p> <b><%= squest[i].squest_text%></b></p>
+                                  <%
+                                     for(var j=0;j< s_ans.length;j++){
+                                       if(s_ans[j].question_id==squest[i].squest_id){%>
+                                           <div class="form-check"  ><input class="form-check-input position-static" style="margin-right:8px; margin-top: 3px;" type="radio" name="<%=squest[i].squest_id%>"><label class="form-check-label" ><%=s_ans[j].ans_text%></label></div>
+                                         <%
+                                 }}
+                                 %></div></div><%
+                               }}%>
+                              <%for(var i=0;i< squest.length;i++){
+                                  if(squest[i].quest_type_id==2){ %>
+                                    <div id="c3" class="tab-pane active" >
+                                        <div class="card card body" style="margin-top: 20px;padding:15px;"   >
+                                            <p> <b><%= squest[i].squest_text%></b></p>
+                                  <%
+                                     for(var j=0;j< s_ans.length;j++){
+                                         if(s_ans[j].question_id==squest[i].squest_id){%>
+                                             <div class="form-check"  ><input class="form-check-input position-static" style="margin-right:8px; margin-top: 3px;" type="checkbox" name="<%=squest[i].squest_id%>"><%=s_ans[j].ans_text%></input></div>
+                                 <%}}
+                                 %></div></div><%
+                              }}%>
 
-                                     });
-                                </script>
-                            <%}
-                        }%>
-                         <script type="text/javascript">
-                           var app = angular.module('TNloai1', []);
-                            app.controller('data1', function($scope){
-                             $scope.loai1=loai1;
-                             });
-                         </script>
-
-                   <%for(var i=0;i< squest.length;i++){
-
-                            if(squest[i].quest_type_id==2){ %>
-                            <p> <%= squest[i].squest_text%></p>
-                            <%
-                             for(var j=0;j< s_ans.length;j++){
-                             if(s_ans[j].question_id==squest[i].squest_id){%>
-                             <input type="radio" name="<%=squest[i].squest_id%>"><%=s_ans[j].ans_text%></input><br/>
-                             <%
-                               }}
-                            }
-                             }
-                  %>
-                     <%for(var i=0;i< squest.length;i++){
-
-                            if(squest[i].quest_type_id==1){ %>
-                            <p> <%= squest[i].squest_text%></p>
-                            <%
-                             for(var j=0;j< s_ans.length;j++){
-                             if(s_ans[j].question_id==squest[i].squest_id){%>
-                             <input type="checkbox" name="<%=squest[i].squest_id%>"><%=s_ans[j].ans_text%></input><br/>
-                             <%
-                               }}
-                            }
-                             }
-                  %>
+                              <!-- Loại câu hỏi tự luận -->
                         <div id="c4" class="tab-pane" ng-module="Tuluan" ng-controller="data4">
-                           <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="value4 in loai4">
-                               <b>Câu {{value4.cau4}}: {{value4.ques4}}</b>
-                               <textarea name="topic" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
-                           </div>
-                       </div>
+                             <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="value4 in loai4">
+                                 <b> {{value4.ques4}}</b>
+                                 <textarea name="topic" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
+                             </div>
+                        </div>
                        <script type="text/javascript">
                             var loai4=[];
                        </script>
@@ -207,7 +191,6 @@
                            if(squest[i].quest_type_id==4){ %>
                                <script type="text/javascript">
                                     loai4.push({
-                                      "cau4":6,
                                       "ques4":"<%=squest[i].squest_text%>"
                                     });
                                </script>
@@ -223,7 +206,6 @@
                    </div>
              </div><br>
              <a href="#" style="margin-right: 3%;float: right;" type="button" class="btn btn-secondary">Xem kết quả khảo sát</a><br><br><br>
-             
         </div><br>
    </div>
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
