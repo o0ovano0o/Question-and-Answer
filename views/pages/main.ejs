@@ -191,21 +191,30 @@
                                 <p style="padding-left: 20px; font-size: 12px">{{val.time}} giờ trước</p>
                               </div>
                               <dir-pagination-controls
-                                max-size="3"
+                                max-size="1"
                                 direction-links="true"
                                 boundary-links="true"  >
                               </dir-pagination-controls>
 
                     </div>
+                    <script type="text/javascript">
+                            var data=[];
+                        </script>
+                        <%for(var i=0;i< surveys[1].length;i++){
+                          if(surveys[1][i].sec_isopen == 1){ %>
+                            <script type="text/javascript">
+                              data.push({
+                                "chude":"<%=surveys[1][i].sec_title%>",
+                                "mota":"<%=surveys[1][i].sec_desc%>",
+                              "link":"/new_session/?id="+<%=surveys[1][i].section_id%>
+                              });
+                              </script>
+                              <%}
+                            }%>
                      <script type="text/javascript">
                       var app = angular.module('paginationApp', ['angularUtils.directives.dirPagination']);
 
                       app.controller('listdata', function($scope) {
-                        var data=[
-                          {"chude":"hello", "mota":"hi", "lxem": 200, "phanhoi": 3, "dagia": 2, "time": "15"},
-                          {"chude":"hello", "mota":"hi", "lxem": 100, "phanhoi": 4, "dagia": 2,"time": "16"},
-                          {"chude":"hello", "mota":"hi", "lxem": 20, "phanhoi": 5, "dagia": 2,"time": "17"},
-                        ]
                         $scope.data=data;
                       });
 
@@ -258,15 +267,22 @@
                         </dir-pagination-controls>
                       </div>
                       <script type="text/javascript">
+                            var name=[];
+                        </script>
+                        <%for(var i=0;i< surveys[1].length;i++){
+                          if(!surveys[1][i].sec_isopen == 0){ %>
+                            <script type="text/javascript">
+                              name.push({
+                                "chuded":"<%=surveys[1][i].sec_title%>",
+                                "motad":"<%=surveys[1][i].sec_desc%>",
+                              "linkd":"/new_session/?id="+<%=surveys[1][i].section_id%>
+                              });
+                              </script>
+                              <%}
+                            }%>
+                      <script type="text/javascript">
                         var app = angular.module('paginationAppd', ['angularUtils.directives.dirPagination']);
                         app.controller('listapp', function($scope){
-                          var name=[
-                            {"chuded":"hello1", "motad":"hi", "lxemd": 200, "phanhoid": 3, "dagiad": 2, "timed": "15"},
-                            {"chuded":"hello1", "motad":"hi", "lxemd": 200, "phanhoid": 3, "dagiad": 2, "timed": "15"},
-                            {"chuded":"hello1", "motad":"hi", "lxemd": 200, "phanhoid": 3, "dagiad": 2, "timed": "15"}
-
-                          ]
-
                            $scope.name=name;
                         });
                       </script>
@@ -358,13 +374,13 @@
                        <script type="text/javascript">
                             var phieum=[];
                         </script>
-                        <%for(var i=0;i< surveys.length;i++){
-                          if(surveys[i].isopen){ %>
+                        <%for(var i=0;i< surveys[0].length;i++){
+                          if(surveys[0][i].isopen){ %>
                             <script type="text/javascript">
                               phieum.push({
-                                "tieudepm":"<%=surveys[i].title%>",
-                                "motapm":"<%=surveys[i].description%>",
-                              "linkpm":"/survey/?id="+<%=surveys[i].survey_id%>
+                                "tieudepm":"<%=surveys[0][i].title%>",
+                                "motapm":"<%=surveys[0][i].description%>",
+                              "linkpm":"/survey/?id="+<%=surveys[0][i].survey_id%>
                               });
                               </script>
                               <%}
@@ -430,13 +446,13 @@
                     <script type="text/javascript">
                       var phieud=[];
                     </script>
-                      <%for(var i=0;i< surveys.length;i++){
-                          if(!surveys[i].isopen){ %>
+                      <%for(var i=0;i< surveys[0].length;i++){
+                          if(!surveys[0][i].isopen){ %>
                             <script type="text/javascript">
                               phieud.push({
-                                "tieudepd":"<%=surveys[i].title%>",
-                                "motapd":"<%=surveys[i].description%>",
-                                "linkpd":"/survey/?id="+<%=surveys[i].survey_id%>+'"'
+                                "tieudepd":"<%=surveys[0][i].title%>",
+                                "motapd":"<%=surveys[0][i].description%>",
+                                "linkpd":"/survey/?id="+<%=surveys[0][i].survey_id%>+'"'
                               });
                               </script>
                               <%}
@@ -459,164 +475,165 @@
           </div>
         </div>
 
-       <!-- Cập nhật tài khoản -->
-        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
+<!-- Cập nhật tài khoản -->
+<div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
 
-                <form>
+        <form>
 
-                  <div class="form-group">
-                    <label for="InputUserName">Họ tên:</label>
-                    <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
+          <div class="form-group">
+            <label for="InputUserName">Họ tên:</label>
+            <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
 
-                  </div>
-                  <div class="form-group">
-                    <label for="InputEmail">Email:</label>
-                    <input type="email" class="form-control" id="InputEmail" placeholder="">
-                  </div>
-
-                </form>
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
-
-              </div>
-            </div>
           </div>
-        </div>
-
-        <!-- Tạo phiên hỏi đáp -->
-        <div class="modal fade" id="SessionModal" tabindex="-1" role="dialog" aria-labelledby="SessionModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="SessionModalLabel">Tạo phiên hỏi đáp mới</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <form>
-                  <div class="form-group">
-                    <label for="InputTitle">Tiêu đề:</label>
-                    <input type="text" class="form-control" id="InputTitle" aria-describedby="title" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label for="InputDes">Mô tả:</label>
-                    <input type="text" class="form-control pb-4" id="InputDes" placeholder="">
-                  </div>
-
-                  <div class="form-group w-50">
-                    <label for="DateBegin">Ngày bắt đầu:</label>
-                    <input type="date" name="date_begin" class="form-control" id="DateBegin" onblur="check();" disabled>
-                      <script>
-                        var now = new Date();
-
-                        var day = ("0" + now.getDate()).slice(-2);
-                        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-                        var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-
-                        $('#DateBegin').val(today);
-                      </script>
-
-                      <label for="DateEnd">Ngày kết thúc:</label>
-                      <input type="date" name="date_begin" class="form-control" id="DateEnd">
-                  </div>
-
-                  <div class="form">
-                      <div class="checkbox">
-                        <label data-toggle="collapse" data-target="#collapsePas" aria-expanded="false" aria-controls="collapsePas">
-                          <input type="checkbox"/> Đặt mật khẩu
-                        </label>
-                        </div>
-
-                      <div id="collapsePas" aria-expanded="false" class="collapse">
-                        <div>
-                          <input type="text" class="form-control" id="InputPas" placeholder="Nhập mật khẩu...">
-                        </div>
-                      </div>
-
-                      <div class="checkbox">
-                        <input type="checkbox"/> Không đặt mật khẩu
-                      </div>
-                  </div>
-                </form>
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
-
-              </div>
-            </div>
+          <div class="form-group">
+            <label for="InputEmail">Email:</label>
+            <input type="email" class="form-control" id="InputEmail" placeholder="">
           </div>
-        </div>
-      </main>
 
-    <!-- Quay về đầu trang -->
-    <br>
-    <br>
-    <br>
-    <div class="text-center">
-    <a href="#"><h5>Back to top</h5></a>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
+
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- Tạo phiên hỏi đáp -->
+<div class="modal fade" id="SessionModal" tabindex="-1" role="dialog" aria-labelledby="SessionModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="SessionModalLabel">Tạo phiên hỏi đáp mới</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="/new_session" method="POST">
+          <div class="form-group">
+            <label for="InputTitle">Tiêu đề:</label>
+            <input type="text" name="sec_title" class="form-control" id="InputTitle" aria-describedby="title" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="InputDes">Mô tả:</label>
+            <input type="text" name="sec_desc" class="form-control pb-4" id="InputDes" placeholder="">
+          </div>
+
+          <div class="form-group w-50">
+            <label for="DateBegin">Ngày bắt đầu:</label>
+            <input type="date" name="date_begin" class="form-control" id="DateBegin" onblur="check();">
+            <script>
+              var now = new Date();
+
+              var day = ("0" + now.getDate()).slice(-2);
+              var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+              var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+              $('#DateBegin').val(today);
+            </script>
+
+            <label for="DateEnd">Ngày kết thúc:</label>
+            <input type="date" name="date_end" class="form-control" id="DateEnd">
+          </div>
+
+          <div class="form">
+            <div class="checkbox">
+              <label data-toggle="collapse" data-target="#collapsePas" aria-expanded="false" aria-controls="collapsePas">
+                <input type="checkbox"/> Đặt mật khẩu
+              </label>
+            </div>
+
+            <div id="collapsePas" aria-expanded="false" class="collapse">
+              <div>
+                <input type="password" name="sec_pass" class="form-control" id="InputPas" placeholder="Nhập mật khẩu...">
+              </div>
+            </div>
+
+            <div class="checkbox">
+              <input type="checkbox"/> Không đặt mật khẩu
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-success" value="Xác nhận">
+
+          </div>
+        </form>
+      </div>
 
 
-    <!-- FOOTER -->
-      <footer id="footer">
-        <ul style="padding: 15px; margin-bottom: 0px;">
-          <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-          <p style="font-size: 12px"> @2019 design by Team 5</p>
-        </ul>
-      </footer>
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- Quay về đầu trang -->
+<br>
+<br>
+<br>
+<div class="text-center">
+  <a href="#"><h5>Back to top</h5></a>
+</div>
 
 
-  <!-- Nút ẩn và hiện nội dung -->
-    <script type="text/javascript">
-      $(document).ready(function(){
-      $('#show1').click(function() {
-        $('#one').show("fast");
-        $('#two').hide("fast");
-      });
+<!-- FOOTER -->
+<footer id="footer">
+  <ul style="padding: 15px; margin-bottom: 0px;">
+    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+    <p style="font-size: 12px"> @2019 design by Team 5</p>
+  </ul>
+</footer>
 
-      $('#showall1').click(function() {
-        $('#one').show("fast");
-        $('#two').show("fast");
-      });
 
-       $('#show2').click(function() {
-
-        $('#two').show("fast");
-        $('#one').hide("fast");
-      });
-
-       $('#show3').click(function() {
-        $('#three').show("fast");
-        $('#four').hide("fast");
-      });
-
-      $('#showall2').click(function() {
-        $('#three').show("fast");
-        $('#four').show("fast");
-      });
-
-       $('#show4').click(function() {
-
-        $('#four').show("fast");
-        $('#three').hide("fast");
-      });
+<!-- Nút ẩn và hiện nội dung -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#show1').click(function() {
+      $('#one').show("fast");
+      $('#two').hide("fast");
     });
-    </script>
 
-  </body>
+    $('#showall1').click(function() {
+      $('#one').show("fast");
+      $('#two').show("fast");
+    });
+
+    $('#show2').click(function() {
+
+      $('#two').show("fast");
+      $('#one').hide("fast");
+    });
+
+    $('#show3').click(function() {
+      $('#three').show("fast");
+      $('#four').hide("fast");
+    });
+
+    $('#showall2').click(function() {
+      $('#three').show("fast");
+      $('#four').show("fast");
+    });
+
+    $('#show4').click(function() {
+
+      $('#four').show("fast");
+      $('#three').hide("fast");
+    });
+  });
+</script>
+
+</body>
 </html>
