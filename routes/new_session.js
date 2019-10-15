@@ -40,7 +40,7 @@ router.post('/', function (req, res) {
 	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 	var dateTime = date+' '+time;
 	sectionQuest = {
-			section_id: id,
+			sections_id: id,
 			context: new_quest.context,
 			author: req.session.user.username,
 			date_posted: dateTime,
@@ -67,7 +67,7 @@ router.post('/', function (req, res) {
 			alert("Không thể tạo phiên");
 		}
 		else {
-			res.redirect('/session_interface?id=' + id);
+			res.render('rules', {session:req.session.user} );
 		}
 		
 	}
