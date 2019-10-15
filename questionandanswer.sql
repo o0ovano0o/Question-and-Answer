@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2019 lúc 05:36 PM
+-- Thời gian đã tạo: Th10 15, 2019 lúc 05:01 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.2
 
@@ -25,45 +25,56 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `section`
+-- Cấu trúc bảng cho bảng `aquest`
 --
 
-CREATE TABLE `section` (
-  `section_id` int(11) NOT NULL,
-  `sec_title` varchar(64) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
-  `sec_desc` text CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
-  `author` varchar(20) NOT NULL,
-  `sec_time` date NOT NULL,
-  `sec_pass` varchar(12) NOT NULL,
-  `sec_isopen` tinyint(1) NOT NULL
+CREATE TABLE `aquest` (
+  `sections_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `author` varchar(20) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `context` text CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `date_posted` varchar(30) NOT NULL,
+  `view` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Đang đổ dữ liệu cho bảng `section`
+-- Đang đổ dữ liệu cho bảng `aquest`
 --
 
-INSERT INTO `section` (`section_id`, `sec_title`, `sec_desc`, `author`, `sec_time`, `sec_pass`, `sec_isopen`) VALUES
-(1, 'kh?o s?t', 'linh tinh', 'hay', '2019-10-14', '', 1);
+INSERT INTO `aquest` (`sections_id`, `question_id`, `author`, `context`, `date_posted`, `view`) VALUES
+(2, 1, 'hay', 'linh tinh la gi', '15/10/2019 21:2:18', 0),
+(3, 2, 'hay', 'hay la gi', '15/10/2019 21:2:45', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Chỉ mục cho bảng `section`
+-- Chỉ mục cho bảng `aquest`
 --
-ALTER TABLE `section`
-  ADD PRIMARY KEY (`section_id`);
+ALTER TABLE `aquest`
+  ADD PRIMARY KEY (`sections_id`,`question_id`) USING BTREE,
+  ADD KEY `question_id` (`question_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT cho bảng `section`
+-- AUTO_INCREMENT cho bảng `aquest`
 --
-ALTER TABLE `section`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `aquest`
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `aquest`
+--
+ALTER TABLE `aquest`
+  ADD CONSTRAINT `aquest_ibfk_3` FOREIGN KEY (`sections_id`) REFERENCES `section` (`section_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

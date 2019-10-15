@@ -206,7 +206,7 @@
                               data.push({
                                 "chude":"<%=surveys[1][i].sec_title%>",
                                 "mota":"<%=surveys[1][i].sec_desc%>",
-                              "link":"/new_session/?id="+<%=surveys[1][i].section_id%>
+                              "link":"/new_session?id="+<%=surveys[1][i].section_id%>
                               });
                               </script>
                               <%}
@@ -275,7 +275,7 @@
                               name.push({
                                 "chuded":"<%=surveys[1][i].sec_title%>",
                                 "motad":"<%=surveys[1][i].sec_desc%>",
-                              "linkd":"/new_session/?id="+<%=surveys[1][i].section_id%>
+                              "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>
                               });
                               </script>
                               <%}
@@ -380,7 +380,7 @@
                               phieum.push({
                                 "tieudepm":"<%=surveys[0][i].title%>",
                                 "motapm":"<%=surveys[0][i].description%>",
-                              "linkpm":"/survey/?id="+<%=surveys[0][i].survey_id%>
+                              "linkpm":"/survey?id="+<%=surveys[0][i].survey_id%>
                               });
                               </script>
                               <%}
@@ -452,7 +452,7 @@
                               phieud.push({
                                 "tieudepd":"<%=surveys[0][i].title%>",
                                 "motapd":"<%=surveys[0][i].description%>",
-                                "linkpd":"/survey/?id="+<%=surveys[0][i].survey_id%>+'"'
+                                "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"'
                               });
                               </script>
                               <%}
@@ -522,7 +522,7 @@
       </div>
       <div class="modal-body">
 
-        <form action="/new_session" method="POST">
+        <form action="/main" method="POST">
           <div class="form-group">
             <label for="InputTitle">Tiêu đề:</label>
             <input type="text" name="sec_title" class="form-control" id="InputTitle" aria-describedby="title" placeholder="">

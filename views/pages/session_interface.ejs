@@ -94,10 +94,10 @@
             </div>
             <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h4 class="card-title">Khảo sát sinh viên khóa mới QH2019 (K64)</h4>
-                <p class="card-text">Mô tả: Khảo sát sinh viên khóa mới QH2019 (K64)<br>
-                  Đăng bởi: <a href="/teacher_manage">Nguyễn Việt Anh</a><br>
-                  Thời gian tạo: 1 tháng trước
+                <h4 class="card-title"><%=sections[0].sec_title%></h4>
+                <p class="card-text"><%=sections[0].sec_desc%><br>
+                  Đăng bởi: <a href="/teacher_manage"><%=sections[0].author%></a><br>
+                  Thời gian tạo: <%=sections[0].sec_time%>
                 </p>
               </div>
             </div>
@@ -130,79 +130,42 @@
                   </div>
               </div>
             </div>
+            <form method="POST" action="/new_session">
             <div class="col-12 col-sm-6 col-md-6">
               <div class="row">
                   <div class="col-8 col-sm-9 col-md-9">
-                    <input type="nhap" class="form-control" id="search2" placeholder="Đặt câu hỏi ...">
+                    <input type="text" name="context" class="form-control" id="search2" placeholder="Đặt câu hỏi ...">
                   </div>
                   <div class="col-1 col-sm-1 col-md-1">
-                    <button class="btn btn-outline-secondary" type="submit">Gửi</button>
+                    <input class="btn btn-outline-secondary" type="submit" value="Gửi">
                   </div>
               </div>
             </div>
+            </form>
           </div>
+          <% for (var i = 0; i < sections.length; i++) { %>
           <div class="card">
             <div class="row padding">
               <div class="col-3 col-sm-3 col-md-2">
                 <div class="card">
-                  <a href="/question">
+                  <a href="/question"> 
                    <img class="card-img-top" src="./images/logo2.jpg" >
                  </a>
                </div>
              </div>
              <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
-                <p class="card-text">Có: 01 câu trả lời<br>
-                  Đăng bởi: <a href="/yourprofile">Đinh Việt Cường </a>
-                  - 03 lượt thích
+                <h5 class="card-title"><a href="/question"><%= sections[i].context%></a></h5>
+                <p class="card-text"><br>
+                  Đăng bởi: <a href="/yourprofile"> <%= sections[i].author%></a>
+                  <%= sections[i].date_posted%>
                 </p>
               </div>
             </div>
           </div>
         </div><br>
+        <% } %>
 
-        <div class="card">
-          <div class="row padding">
-            <div class="col-3 col-sm-3 col-md-2">
-              <div class="card">
-                <a href="/question">
-                 <img class="card-img-top" src="./images/logo2.jpg" >
-               </a>
-             </div>
-           </div>
-           <div class="col-9 col-sm-9 col-md-9">
-            <div class="card-body">
-              <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
-              <p class="card-text">Có: 01 câu trả lời<br>
-                Đăng bởi: <a href="/yourprofile">Đinh Việt Cường </a>
-                - 03 lượt thích
-              </p>
-            </div>
-          </div>
-        </div>
-      </div><br>
-
-      <div class="card">
-        <div class="row padding">
-          <div class="col-3 col-sm-3 col-md-2">
-            <div class="card">
-              <a href="/question">
-               <img class="card-img-top" src="./images/logo2.jpg" >
-             </a>
-           </div>
-         </div>
-         <div class="col-9 col-sm-9 col-md-9">
-          <div class="card-body">
-            <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
-            <p class="card-text">Có: 01 câu trả lời<br>
-              Đăng bởi: <a href="/yourprofile">Đinh Việt Cường </a>
-              - 03 lượt thích
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
