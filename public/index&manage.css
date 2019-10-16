@@ -15,6 +15,10 @@ body {
   border-radius: 15px;
   width: 300px;
 }
+#search2{
+  border-radius: 6px;
+  width: 100%;
+}
 .nav-item{
   margin: 0px 10px;
 }
@@ -75,8 +79,7 @@ table{
   text-align: center;
   color: #ffffff;
   background-color: #736f6f;
-  margin-top: 100px;
-  margin-bottom: 0px;
+  margin-top: 125px;
 }
 /* MARKETING CONTENT
 -------------------------------------------------- */
@@ -101,6 +104,16 @@ table{
 .featurette-divider {
   margin: 4rem 0;
  /* Space out the Bootstrap <hr> more */
+}
+#phienhoidap{
+  margin: 1rem 0;
+}
+#sp{
+  max-width: 250px;
+  border-top: solid 5px;
+  text-align: center;
+  font-size: 300px;
+  margin: 25px auto 30px;
 }
 
 /* Thin out the marketing headings */
@@ -133,19 +146,4 @@ table{
   }
 }
 
-/*content*/
-#column{
-  padding-top: 3%;
-}
-#column2{
-  margin-top: -3%;
-}
-#user{
-  float: left;
-  padding-top: 1%;
-}
-#search2{
-    border-radius: 15px;
-    width: 700px;
-}
 

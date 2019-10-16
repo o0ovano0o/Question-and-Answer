@@ -1,0 +1,426 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<!-- HEAD -->
+<head>
+  <!-- Cần thiết cho 1 web -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="index&manage.css">
+  <link rel="stylesheet" href="./bootstrap/bootstrap-4.0.0.min.js">
+  <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+
+  <title>Tài khoản sinh viên</title>
+
+  <!-- Thư viện online cho Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<!-- BODY -->
+<body>
+
+  <!-- HEADER -->
+    <header>
+        <!--Navbars -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <a id="logo" class="navbar-brand" href="/home">Q&A</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          <div class="collapse navbar-collapse" style="margin: 0px 30px" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
+              </li>
+             
+              <li class="nav-item">
+                <a class="nav-link" href="/support">Trợ giúp</a>
+              </li>
+            </ul>
+            
+            <form id="search" class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            
+            <% if (session.username) {%>
+            <ul class="navbar-nav" style="display: contents;">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
+              </li>
+              <!-- <li>
+                <div class="thumb d-none d-sm-none d-md-block" style="background-image:url(images/avatar1.jpg);width: 40px;height: 40px"></div>
+              </li>   -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%>
+                  
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="/yourprofile">Quản lý</a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
+                  <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                </div>
+              </li>
+            </ul>
+            <%} else {%>
+            <ul class="navbar-nav" style="display: contents;">
+              <li class="nav-item">
+                <a class="nav-link" href="/login"><Đăng nhập</a>
+              </li>
+            </ul>
+            <%}%>
+          </div>
+        </nav>
+    </header>
+    <br>
+
+  <!-- MAIN -->
+    <main role="main">
+
+      <!-- Tài khoản -->
+        <div class="container">
+          <div class="card">
+            <div class="card-body">
+              <div class="row padding">
+                  <div class="col-3 col-sm-2 col-md-2">
+                    <div class="card">
+                      <img class="card-img-top" src="./images/avatar1.jpg">
+                    </div>
+                  </div>
+                <div class="col-9 col-sm-9 col-md-9">
+                  <div class="card-body">
+                    <h4 class="card-title"><%=session.name%></h4>
+                      <p class="card-text">Chức vụ: Thành viên<br>
+                        Tổng số câu hỏi: 5
+                      </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>  
+
+      <!-- Nội dung -->
+        <div class="container">  
+          <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#comment" data-toggle="tab">Bình luận của tôi</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#question" data-toggle="tab">Câu hỏi của tôi</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div id="comment" class="tab-pane active" role="tabpanel">
+                  <div class="card-body">
+                    <div class="card" id="1">
+                      <div class="card-body d-inline">
+                        <div class="row">
+                          <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-6">
+                            Bạn đã bình luận vào câu hỏi của Lò Văn Tèn.
+                            <br>
+                            <a href="#" class="card-link">Chi tiết-></a>
+                          </div>
+                          <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
+                            <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteModal1">
+                              Xóa
+                            </button>
+                         </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <br>
+
+                    <div class="card" id="2">
+                      <div class="card-body d-inline">
+                        <div class="row">
+                          <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-6">
+                            Bạn đã bình luận vào câu hỏi của Lò Văn Tèn.
+                            <br>
+                            <a href="#" class="card-link">Chi tiết-></a>
+                          </div>
+                          <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
+                            <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteModal2">
+                              Xóa
+                            </button>
+                         </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+
+                <div id="question" class="tab-pane" role="tabpanel">
+                  <div class="card-body">
+                    
+                    <div class="card" id="3">
+                      <div class="card-body"> 
+                        <div class="card">
+                          <div class="row padding">
+                            <div class="col-3 col-sm-3 col-md-2">
+                              <div class="card">
+                               <img class="card-img-top" src="./images/logo2.jpg" >
+                              </div>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-6">
+                              <div class="card-body">
+                                <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
+                                <p class="card-text">Có: 01 câu trả lời<br>
+                                  Đăng bởi: <a href="">Đinh Việt Cường </a>
+                                  - 03 lượt thích
+                                </p>
+                              </div>
+                            </div>
+                            <div class="card-body">
+                              <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteModal3">
+                              Xóa
+                              </button>
+                              <button type="button" class="btn btn-success px-5" data-toggle="modal" data-target="#EditQuestionModal">
+                              Chỉnh sửa
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <br>
+                    <div class="card" id="4">
+                      <div class="card-body"> 
+                        <div class="card">
+                          <div class="row padding">
+                            <div class="col-3 col-sm-3 col-md-2">
+                              <div class="card">
+                               <img class="card-img-top" src="./images/logo2.jpg" >
+                              </div>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-6">
+                              <div class="card-body">
+                                <h5 class="card-title"><a href="/question">Có bạn nào gần trường muốn ở ghép không???</a></h5>
+                                <p class="card-text">Có: 01 câu trả lời<br>
+                                  Đăng bởi: <a href="">Đinh Việt Cường </a>
+                                  - 03 lượt thích
+                                </p>
+                              </div>
+                            </div>
+                            <div class="card-body">
+                              <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteModal4">
+                              Xóa
+                              </button>
+                              <button type="button" class="btn btn-success px-5" data-toggle="modal" data-target="#EditQuestionModal">
+                              Chỉnh sửa
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Xóa cmt -->
+
+        <div class="modal fade" id="DeleteModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Xóa comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Bạn chắc chắn muốn xóa comment này ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="button1" data-dismiss="modal">Có</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="DeleteModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Xóa comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Bạn chắc chắn muốn xóa comment này ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="button2" data-dismiss="modal">Có</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Xóa câu hỏi -->
+
+        <div class="modal fade" id="DeleteModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Xóa comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Bạn chắc chắn muốn xóa câu hỏi này ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="button3" data-dismiss="modal">Có</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="DeleteModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Xóa comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Bạn chắc chắn muốn xóa câu hỏi này ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="button4" data-dismiss="modal">Có</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Cập nhật tài khoản -->
+        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="UserModalLabel">Tài khoản: Việt Cường</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  
+                  <form>
+                    
+                    <div class="form-group">
+                      <label for="InputUserName">Họ tên:</label>
+                      <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
+                      
+                    </div>
+                    <div class="form-group">
+                      <label for="InputEmail">Email:</label>
+                      <input type="email" class="form-control" id="InputEmail" placeholder="">
+                    </div>
+                    
+                  </form>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cập nhật câu hỏi -->
+          <div class="modal fade" id="EditQuestionModal" tabindex="-1" role="dialog" aria-labelledby="QuesModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="QuesModalLabel">Chỉnh sửa câu hỏi</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  
+                  <form>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="" aria-describedby="title" placeholder="Nhập lại câu hỏi....">
+                    </div>
+                  </form>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </main>
+
+  <!-- FOOTER -->
+    <footer id="footer">
+      <ul style="padding: 15px; margin-bottom: 0px;">
+        <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+        <p style="font-size: 12px"> @2019 design by Team 5</p>
+      </ul>
+    </footer> 
+
+  <!-- Quay về đầu trang -->
+    <br>
+    <div class="text-center">     
+    <a href="#"><h5>Back to top</h5></a>
+    </div>  
+
+  <!-- Nút xóa -->  
+    <script type="text/javascript">
+      $("#button1").click(function(){
+      $("#1").remove();
+      });
+      $("#button2").click(function(){
+      $("#2").remove();
+      });
+      $("#button3").click(function(){
+      $("#3").remove();
+      });
+      $("#button4").click(function(){
+      $("#4").remove();
+      });
+    </script>
+  <!-- Hiển thị tuổi -->
+    <script type="text/javascript">
+      <% var n =  JSON.stringify(session.date)%> 
+      var text = <%- n%> ;
+      var date = new Date(text);
+      var d = new Date();
+      var tuoi=d.getYear()-date.getYear();
+      document.getElementById("age").innerHTML="Tuổi: "+ tuoi;
+    </script>  
+  
+</body>
+</html>
