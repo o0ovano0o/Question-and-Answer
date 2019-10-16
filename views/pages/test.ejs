@@ -64,7 +64,7 @@
 
           <form id="search" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
           </form>
         <% if (session.username) {%>
         <ul class="navbar-nav" style="display: contents;">
@@ -127,7 +127,7 @@
               <h5><b>Đăng bởi: <%=survey.author%></b></h5>
           </div>
           <div class="card-body">
-                <a href="/home" style="margin-left: 0%;" type="button" class="btn btn-info">Trở về danh sách phiếu</a><br><br>
+                <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-primary">Trở về danh sách phiếu</a><br><br>
                 <div class="card">
                    <div class="card-header" style="background-color: #99ccff">
                        <h6><b>Danh sách câu hỏi khảo sát</b></h6>
@@ -169,31 +169,31 @@
                          </script>
 
                    <%for(var i=0;i< squest.length;i++){
-
-                            if(squest[i].quest_type_id==2){ %>
-                            <p> <%= squest[i].squest_text%></p>
+                            if(squest[i].quest_type_id==1){ %>
+                              <div id="c2" class="tab-pane active" >
+                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                      <p> <b><%= squest[i].squest_text%></b></p>
                             <%
-                             for(var j=0;j< s_ans.length;j++){
-                             if(s_ans[j].question_id==squest[i].squest_id){%>
-                             <input type="radio" name="<%=squest[i].squest_id%>"><%=s_ans[j].ans_text%></input><br/>
-                             <%
-                               }}
+                               for(var j=0;j< s_ans.length;j++){
+                                 if(s_ans[j].question_id==squest[i].squest_id){%>
+                                     <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
+                             <%}}
+                             %></div></div><%
                             }
-                             }
+                      }
                   %>
                      <%for(var i=0;i< squest.length;i++){
-
-                            if(squest[i].quest_type_id==1){ %>
-                            <p> <%= squest[i].squest_text%></p>
+                            if(squest[i].quest_type_id==2){ %>
+                              <div id="c2" class="tab-pane active" >
+                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                    <p><b> <%= squest[i].squest_text%></b></p>
                             <%
                              for(var j=0;j< s_ans.length;j++){
-                             if(s_ans[j].question_id==squest[i].squest_id){%>
-                             <input type="checkbox" name="<%=squest[i].squest_id%>"><%=s_ans[j].ans_text%></input><br/>
-                             <%
-                               }}
-                            }
-                             }
-                  %>
+                               if(s_ans[j].question_id==squest[i].squest_id){%>
+                                <div class="form-check"> <input type="checkbox" style="margin: 4.8px 0px 0px -20px;" name="<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
+                               <%}}
+                            %></div></div><%
+                    }}%>
                         <div id="c4" class="tab-pane" ng-module="Tuluan" ng-controller="data4">
                            <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="value4 in loai4">
                                <b>Câu {{value4.cau4}}: {{value4.ques4}}</b>
@@ -219,11 +219,11 @@
                             $scope.loai4=loai4;
                             });
                         </script>
-                       <button class="btn btn-secondary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
+                       <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
                    </div>
              </div><br>
-             <a href="#" style="margin-right: 3%;float: right;" type="button" class="btn btn-secondary">Xem kết quả khảo sát</a><br><br><br>
-             
+             <a href="#" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a><br><br><br>
+
         </div><br>
    </div>
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
