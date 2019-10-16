@@ -11,7 +11,6 @@ router.get('/', function (req, res) {
 		var defer = q.defer();
 		var query = conn.query("SELECT * FROM section left join aquest on section.section_id = aquest.sections_id WHERE  ? ",{section_id: id}, (err, results) => {
 			if(err) {
-				console.log("loi");
 				defer.reject(err);
 			}
 			else{
@@ -22,7 +21,6 @@ router.get('/', function (req, res) {
 		var dt = defer.promise;
 		dt.then(function(result){
 			var sections = result;
-			console.log(sections);
 			res.render('session_interface', {session:req.session.user, sections: sections});
 		});
 
@@ -67,7 +65,7 @@ router.post('/', function (req, res) {
 			alert("Không thể tạo phiên");
 		}
 		else {
-			res.render('rules', {session:req.session.user} );
+			res.render('rules', {session:req.session.user});
 		}
 		
 	}

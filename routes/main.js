@@ -48,7 +48,11 @@ router.post('/', function (req, res) {
 			alert("Không thể tạo phiên");
 		}
 		else {
-			res.render('session_interface', {session: req.session.user, sections: sections});
+			var query = conn.query("SELECT * FROM survey;SELECT * FROM section",  (err, surveys) => {
+			if(err) throw err;
+			else{
+				res.render('main',{session: req.session.user, surveys}); } 
+			});
 		}
 	}
 	else
