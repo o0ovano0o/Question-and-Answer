@@ -133,93 +133,53 @@
                        <h6><b>Danh sách câu hỏi khảo sát</b></h6>
                    </div><br>
                    <div class="container" >
-                        <div id="c1" class="tab-pane active" ng-module="TNloai1" ng-controller="data1">
-                            <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="val in loai1"  ><!--viết lặp lại ở đây-->
-                                <b> Câu {{val.cau}}: {{val.ques}}</b> <br>
-                                  <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.1" value="option1.1" checked="checked">
-                                      <label class="form-check-label" for="Radios1.1">Đúng.</label>
-                                  </div>
-                                  <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.2" value="option1.2"  >
-                                      <label class="form-check-label" for="Radios1.2">Sai.</label>
-                                  </div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                             var loai1=[];
-                        </script>
-                        <%for(var i=0;i< squest.length;i++){
-                            if(squest[i].quest_type_id==3){ %>
-                                <script type="text/javascript">
-                                     loai1.push({
-                                       "cau":1,
-                                       "ques":"<%=squest[i].squest_text%>",
-                                       "name1":"<%=squest[i].squest_id%>"
-
-                                     });
-                                </script>
-                            <%}
-                        }%>
-                         <script type="text/javascript">
-                           var app = angular.module('TNloai1', []);
-                            app.controller('data1', function($scope){
-                             $scope.loai1=loai1;
-                             });
-                         </script>
-
-                   <%for(var i=0;i< squest.length;i++){
-                            if(squest[i].quest_type_id==1){ %>
+                       <% var dem=0;
+                       for(var i=0;i< squest.length;i++){
+                         dem++;
+                          if(squest[i].quest_type_id==1){ %>
+                                  <div id="c1" class="tab-pane active" >
+                                      <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                          <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                <%
+                                   for(var j=0;j< s_ans.length;j++){
+                                     if(s_ans[j].question_id==squest[i].squest_id){%>
+                                         <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
+                                 <%}}
+                                 %></div></div><%}
+                          if(squest[i].quest_type_id==3){ %>
+                                <div id="c3" class="tab-pane active" >
+                                    <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                        <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.1" value="option1.1" checked="checked">
+                                            <label class="form-check-label" for="Radios1.1">Đúng.</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.2" value="option1.2"  >
+                                            <label class="form-check-label" for="Radios1.2">Sai.</label>
+                                        </div>
+                                    </div>
+                                </div><%}
+                          if(squest[i].quest_type_id==2){ %>
                               <div id="c2" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                      <p> <b><%= squest[i].squest_text%></b></p>
-                            <%
-                               for(var j=0;j< s_ans.length;j++){
-                                 if(s_ans[j].question_id==squest[i].squest_id){%>
-                                     <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
-                             <%}}
-                             %></div></div><%
-                            }
-                      }
-                  %>
-                     <%for(var i=0;i< squest.length;i++){
-                            if(squest[i].quest_type_id==2){ %>
-                              <div id="c2" class="tab-pane active" >
+                                      <p><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                <%
+                                 for(var j=0;j< s_ans.length;j++){
+                                   if(s_ans[j].question_id==squest[i].squest_id){%>
+                                    <div class="form-check"> <input type="checkbox" style="margin: 4.8px 0px 0px -20px;" name="<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
+                              <%}}
+                          %></div></div><%}
+                          if(squest[i].quest_type_id==4){ %>
+                              <div id="c4" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                    <p><b> <%= squest[i].squest_text%></b></p>
-                            <%
-                             for(var j=0;j< s_ans.length;j++){
-                               if(s_ans[j].question_id==squest[i].squest_id){%>
-                                <div class="form-check"> <input type="checkbox" style="margin: 4.8px 0px 0px -20px;" name="<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
-                               <%}}
-                            %></div></div><%
-                    }}%>
-                        <div id="c4" class="tab-pane" ng-module="Tuluan" ng-controller="data4">
-                           <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="value4 in loai4">
-                               <b>Câu {{value4.cau4}}: {{value4.ques4}}</b>
-                               <textarea name="topic" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
-                           </div>
-                       </div>
-                       <script type="text/javascript">
-                            var loai4=[];
-                       </script>
-                       <%for(var i=0;i< squest.length;i++){
-                           if(squest[i].quest_type_id==4){ %>
-                               <script type="text/javascript">
-                                    loai4.push({
-                                      "cau4":6,
-                                      "ques4":"<%=squest[i].squest_text%>"
-                                    });
-                               </script>
-                           <%}
-                       }%>
-                        <script type="text/javascript">
-                          var app = angular.module('Tuluan', []);
-                           app.controller('data4', function($scope){
-                            $scope.loai4=loai4;
-                            });
-                        </script>
-                       <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
+                                      <p><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <textarea name="topic" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
+                                  </div>
+                              </div>
+                          <%}
+                      }%>
+                      <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
                    </div>
              </div><br>
              <a href="#" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a><br><br><br>

@@ -35,7 +35,7 @@ router.post('/', function(req, res) {
     if (user == null) {
       res.render('login', {
         data: {
-          error: "Tài khoản không tồn tại"
+          error: "Tài khoản hoặc mật khẩu không đúng"
         }
       });
     } else if (user.password == signin.userpassword) {
