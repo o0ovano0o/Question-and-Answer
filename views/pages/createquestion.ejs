@@ -114,6 +114,8 @@
          <p id="date2"></p>
        </div>
      </div>
+     <a href="/survey/?id=<%=survey.survey_id%>" style="margin: 15px;"  class="btn btn-success" role="button">Xem phiếu khảo sát</a>
+
    </div><br/>
 
 
@@ -129,7 +131,6 @@
   <%=success%>
   </div>
   <%}%>
-
   <!-- Nội dung các tabs-->
   <div class="tab-content">
       <div id="tn1" class="tab-pane active">
@@ -159,8 +160,8 @@
                             </div>
                             <div aria-labelledby="headingOneTN1" >
                                 <div class="card-body">
-                                    <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
-                                    <input  type="number" max="10" min="1" value="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);">
+                                    <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." required></textarea>
+                                    <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" required>
                                     <div id="dapan1" style="width: 90%;"></div>
                                 </div>
                             </div>
@@ -175,7 +176,7 @@
       <div id="tn3" class="tab-pane tab-panel fade">
             <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=3" method="POST">
                   <div class="row post" style="margin-top: 20px;">
-                    <input  type="number" class='form-control' name="number" style="border-radius: 5px; margin: 10px; width: 70%;padding: 5px;" max="30" min="1" value="1" placeholder="Số câu hỏi" onchange="checknumber(this);socauhoi2(this.value);">
+                    <input  type="number" class='form-control' name="number" style="border-radius: 5px; margin: 10px; width: 70%;padding: 5px;" max="30" min="1" value="1" placeholder="Số câu hỏi" onchange="checknumber(this);socauhoi2(this.value);" >
                   </div>
                   <div class="card card-body" style="width: 100%">
                         <div class="accordion" id="accordionExampleTN3">
@@ -185,7 +186,7 @@
                                   </div>
                                   <div aria-labelledby="headingOneTN3" >
                                       <div class="card-body">
-                                         <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
+                                         <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." required></textarea>
                                          <input type="radio"  name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="true">Đúng
                                          <input type="radio" name="answer" style="border-radius: 5px; margin: 0px 10px 10px 10px;" value="flase">Sai
                                       </div>
@@ -212,7 +213,7 @@
                           </div>
                           <div data-parent="#accordionExampleTN4">
                               <div class="card-body">
-                                <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." ></textarea>
+                                <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." required></textarea>
                               </div>
                           </div>
                        </div>
@@ -248,7 +249,7 @@
     var i=0;
     var num=sodapan.value;
     var dapan="<input type='text' name='answer";
-    var dap= "' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' />";
+    var dap= "' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' required/>";
     var code="";
     var key = sodapan.id;
     for(i=0;i<num;i++){
