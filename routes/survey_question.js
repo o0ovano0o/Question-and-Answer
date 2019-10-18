@@ -23,7 +23,7 @@ router.post('/', function(req, res) {
     survey = {
       title: create.title,
       description: create.description,
-      startdate: now,
+      startdate: create.date_begin,
       enddate: create.date_end,
       isopen: 1,
       views: 0,

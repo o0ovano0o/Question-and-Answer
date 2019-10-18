@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="index&manage.css">
-  <link rel="stylesheet" href="./bootstrap/bootstrap-4.0.0.min.js">
-  <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/index&manage.css">
+  <link rel="stylesheet" href="/bootstrap/bootstrap-4.0.0.min.js">
+  <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
 
 
   <title>Trang chủ</title>
@@ -110,7 +110,7 @@
                       <a class="nav-link" data-toggle="modal" href="#SessionModal"><img src="./images/icons/qa-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiên hỏi đáp</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/createsurvey"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
+                      <a class="nav-link" data-toggle="modal" href="#SurveyModal"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
                     </li>
                   </ul>
 
@@ -522,7 +522,7 @@
       </div>
       <div class="modal-body">
 
-        <form action="/home" method="POST">
+        <form action="/home/?type=1" method="POST">
           <div class="form-group">
             <label for="InputTitle">Tiêu đề:</label>
             <input type="text" name="sec_title" class="form-control" id="InputTitle" aria-describedby="title" placeholder="Tiêu đề">
@@ -533,7 +533,7 @@
           </div>
           <div class="form-group w-50">
             <label for="DateBegin">Ngày bắt đầu:</label>
-            <input type="date" name="date_begin" class="form-control" id="DateBegin" onblur="check();">
+            <input type="date" name="date_begin" class="form-control" id="DateBegin" >
             <script>
               var now = new Date();
 
@@ -545,8 +545,8 @@
               $('#DateBegin').val(today);
             </script>
 
-            <label for="DateEnd">Ngày kết thúc:</label>
-            <input type="date" name="date_end" class="form-control" id="DateEnd">
+            <label for="Date2">Ngày kết thúc:</label>
+            <input type="date" name="date_end" class="form-control" id="Date2" onblur="check(this);">
           </div>
     
           <div class="form">
@@ -579,6 +579,73 @@
     </div>
   </div>
 </div>
+
+<!-- Tạo phiếu khảo sát -->
+<div class="modal fade" id="SurveyModal" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="SessionModalLabel">Tạo phiếu khảo sát mới</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="/home/?type=2" method="POST">
+          <div>
+                 
+                  <label for="title" class="col-form-label">
+                    Tên phiếu khảo sát </label>
+                
+                
+                  <input type="text" name="title" class="form-control"    placeholder="Tiêu đề phiếu khảo sát" required >
+                            
+          </div>
+          
+                 <div >
+                  <label for="description" class="col-form-label">Mô tả khảo sát </label>
+                
+                
+                  <textarea name="description" rows="3"  class="form-control pb-4" placeholder="Mô tả, Giới thiệu phiếu khảo sát của bạn" required ></textarea>
+                </div>             
+          
+          <div class="form-group w-50">
+            
+                  <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
+                
+               
+                  <input type="date" name="datebegin" class="form-control" id="date1"  disabled>
+                  <script>var now = new Date();
+
+                      var day = ("0" + now.getDate()).slice(-2);
+                      var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+                      var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+                      $('#date1').val(today);</script>
+                
+            
+            
+           
+                  <label for="date_end" class="col-form-label">Ngày kết thúc: </label>
+                
+                
+                  <input type="date" name="date_end" class="form-control" onblur="check(this);" id="date2" required>
+                </div>
+              
+            <div class="modal-footer">
+           <input type="submit" class="btn btn-success" value="Xác nhận">
+          </div>
+          </form>
+          </div><br>
+      </div>
+
+
+</div>
+    </div>
+  </div>
+
 </main>
 
 <!-- Quay về đầu trang -->
@@ -634,6 +701,24 @@
       $('#three').hide("fast");
     });
   });
+   function check(itt){
+    var date1 = new Date();
+    var date2 = new Date(itt.value);
+   
+    if(date2-date1>0){
+
+    }
+    else if(itt.value==""){
+
+    }
+
+    else{
+      alert("Thời gian không đúng rồi kìa!!!");
+     
+      itt.value="";
+      return false;
+    }
+  }
 </script>
 
 </body>
