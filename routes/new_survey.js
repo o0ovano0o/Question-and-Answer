@@ -81,12 +81,12 @@ router.post('/', function (req, res) {
 											throw err;
 										}
 										else{
-											console.log("insert sucesss");				
+											console.log("4-insert sucesss");				
 									}
 									});
 								}
 								if(type==3){
-									console.log(i);
+									
 									truefalse=answers[name];
 									yesnoreponse={
 										reponse_id:res.insertId,
@@ -98,9 +98,58 @@ router.post('/', function (req, res) {
 											throw err;
 										}
 										else{
-											console.log("insert sucesss");				
+											console.log("3-insert sucesss");				
 									}
 									});
+								}
+								if(type==1){
+							
+									ans_id=answers[name];
+									reponse={
+										reponse_id:res.insertId,
+										quest_id:squest[i].squest_id,
+										choice_id:ans_id
+									}
+									var query = conn.query("INSERT INTO  singlechoicereponse SET ?",reponse, (err, quests) => {
+										if(err) {
+											throw err;
+										}
+										else{
+											console.log("1-insert sucesss");				
+									}
+									});
+								}
+								if(type==2){
+							
+									ans_idd=answers[name];
+									reponse={
+										reponse_id:res.insertId,
+										quest_id:squest[i].squest_id
+									}
+									var query = conn.query("INSERT INTO  multichoices SET ?",reponse, (err, quests) => {
+										if(err) {
+											throw err;
+										}
+										else{
+											console.log("21-insert sucesss");				
+										}
+									});
+									for(j=0;j<ans_idd.length;j++){
+										ans={
+											response_id:res.insertId,
+											quest_id:squest[i].squest_id,
+											ans_id:ans_idd[j]
+										}
+										var query = conn.query("INSERT INTO  choice_multichoices SET ?",ans, (err, quests) => {
+											if(err) {
+												throw err;
+											}
+											else{
+												console.log("22-insert sucesss");				
+											}
+										});
+									}
+									
 								}
 
 							}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 16, 2019 lúc 12:07 PM
+-- Thời gian đã tạo: Th10 20, 2019 lúc 04:01 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -64,6 +64,14 @@ CREATE TABLE `choice_multichoices` (
   `quest_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `choice_multichoices`
+--
+
+INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
+(122, 14, 123),
+(123, 14, 123);
+
 -- --------------------------------------------------------
 
 --
@@ -89,6 +97,13 @@ CREATE TABLE `multichoices` (
   `reponse_id` int(11) NOT NULL,
   `quest_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `multichoices`
+--
+
+INSERT INTO `multichoices` (`reponse_id`, `quest_id`) VALUES
+(14, 123);
 
 -- --------------------------------------------------------
 
@@ -135,7 +150,8 @@ CREATE TABLE `section` (
 INSERT INTO `section` (`section_id`, `sec_title`, `sec_desc`, `author`, `sec_time`, `sec_pass`, `sec_isopen`) VALUES
 (2, 'phiên hỏi đáp lần 2', 'phiên hỏi đáp', 'giaovien1', '2019-10-16', 'giaovien1', 1),
 (3, '', '', 'giaovien1', '2019-10-16', 'giaovien1', 1),
-(4, 'ffjghvh', 'ytfghc', 'giaovien1', '2019-10-16', 'giaovien1', 1);
+(4, 'ffjghvh', 'ytfghc', 'giaovien1', '2019-10-16', 'giaovien1', 1),
+(5, 'thử', 'ok', 'giaovien1', '2019-10-18', 'giaovien1', 1);
 
 -- --------------------------------------------------------
 
@@ -148,6 +164,13 @@ CREATE TABLE `singlechoicereponse` (
   `quest_id` int(11) NOT NULL,
   `choice_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `singlechoicereponse`
+--
+
+INSERT INTO `singlechoicereponse` (`reponse_id`, `quest_id`, `choice_id`) VALUES
+(14, 121, 119);
 
 -- --------------------------------------------------------
 
@@ -278,7 +301,17 @@ INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`
 (6, 109, 'Bạn đã học môn gì', 1),
 (6, 110, 'Bạn học khóa nào ?', 1),
 (6, 111, 'thứ hai ', 1),
-(6, 112, '23131', 2);
+(6, 112, '23131', 2),
+(11, 113, 'câu loại 1', 1),
+(11, 114, 'câu hỏi 2', 2),
+(11, 115, 'Cậu có xinh không', 3),
+(11, 116, 'Hãy nêu cảm nghĩ của bạn về tớ', 4),
+(13, 117, 'Bạn tên gì', 4),
+(13, 118, 'Bạn sinh năm bao nhiêu', 4),
+(13, 119, 'Cậu có thích tớ không???', 3),
+(13, 120, 'Cậu còn nhớ tớ không???', 3),
+(13, 121, 'Bạn học khóa nào', 1),
+(13, 123, 'Sở thích của bạn là gì ?', 2);
 
 -- --------------------------------------------------------
 
@@ -311,7 +344,12 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (6, '123', 'Khảo sát aaaaaa', '0000-00-00', '2020-12-11', 1, '', 0, 'giaovien1'),
 (7, 'phiếu khảo sát 3', 'dugfwdgfkljwef', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1'),
 (8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 1, '', 0, 'giaovien1'),
-(9, '123', 'OK 123', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1');
+(9, '123', 'OK 123', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1'),
+(10, 'phiếu khảo sát 5', 'Mô tả', '0000-00-00', '2091-11-11', 1, '', 0, 'giaovien1'),
+(11, 'mụn ơi', 'ơi', '2019-10-18', '2019-11-11', 1, '', 0, 'giaovien1'),
+(12, 'Khảo sát 1', 'okkkk', '2019-10-18', '2019-11-11', 1, '', 0, 'giaovien1'),
+(13, 'okkk', 'okkk', '2019-10-18', '2019-11-11', 1, '', 0, 'giaovien1'),
+(14, 'Khảo sát 1', 'thhh', '2019-10-18', '2019-10-27', 1, '', 0, 'giaovien1');
 
 -- --------------------------------------------------------
 
@@ -447,7 +485,21 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`) VALUES
 (111, 106, '21321'),
 (112, 107, '21312'),
 (112, 108, '312312'),
-(112, 109, '3123123');
+(112, 109, '3123123'),
+(113, 110, 'đáp án 1'),
+(113, 111, 'đáp án 2'),
+(113, 112, 'đáp án 3'),
+(114, 113, 'đáp án 1'),
+(114, 114, 'aaa hihi'),
+(114, 115, 'thử nữa '),
+(114, 116, 'ok'),
+(121, 117, 'Khóa 64'),
+(121, 118, 'Khóa 62'),
+(121, 119, 'Khóa 63'),
+(123, 120, 'đọc sách '),
+(123, 121, 'học'),
+(123, 122, 'hát'),
+(123, 123, 'đàn');
 
 -- --------------------------------------------------------
 
@@ -460,6 +512,14 @@ CREATE TABLE `textreponse` (
   `quest_id` int(11) NOT NULL,
   `textreponse` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `textreponse`
+--
+
+INSERT INTO `textreponse` (`reponse_id`, `quest_id`, `textreponse`) VALUES
+(14, 117, 'vân anh'),
+(14, 118, '1999');
 
 -- --------------------------------------------------------
 
@@ -497,11 +557,17 @@ INSERT INTO `user` (`user_id`, `username`, `name`, `password`, `email`, `date`, 
 
 CREATE TABLE `user_reponse` (
   `surveyid` int(11) NOT NULL,
-  `squest_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `reponse_id` int(11) NOT NULL,
   `reponse_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `user_reponse`
+--
+
+INSERT INTO `user_reponse` (`surveyid`, `user_id`, `reponse_id`, `reponse_date`) VALUES
+(13, 12, 14, '2019-10-20');
 
 -- --------------------------------------------------------
 
@@ -514,6 +580,14 @@ CREATE TABLE `yesnoreponse` (
   `quest_id` int(11) NOT NULL,
   `yesnovalue` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `yesnoreponse`
+--
+
+INSERT INTO `yesnoreponse` (`reponse_id`, `quest_id`, `yesnovalue`) VALUES
+(14, 119, 1),
+(14, 120, 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -624,7 +698,6 @@ ALTER TABLE `user`
 ALTER TABLE `user_reponse`
   ADD PRIMARY KEY (`reponse_id`) USING BTREE,
   ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD KEY `squest_id` (`squest_id`),
   ADD KEY `surveyid` (`surveyid`);
 
 --
@@ -660,31 +733,37 @@ ALTER TABLE `cmt_ans`
 -- AUTO_INCREMENT cho bảng `section`
 --
 ALTER TABLE `section`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `squest`
 --
 ALTER TABLE `squest`
-  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT cho bảng `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `user_reponse`
+--
+ALTER TABLE `user_reponse`
+  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -722,15 +801,15 @@ ALTER TABLE `cmt_ans`
 -- Các ràng buộc cho bảng `multichoices`
 --
 ALTER TABLE `multichoices`
-  ADD CONSTRAINT `multichoices_ibfk_2` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`),
-  ADD CONSTRAINT `multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`);
+  ADD CONSTRAINT `multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`),
+  ADD CONSTRAINT `multichoices_ibfk_4` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
 
 --
 -- Các ràng buộc cho bảng `singlechoicereponse`
 --
 ALTER TABLE `singlechoicereponse`
-  ADD CONSTRAINT `singlechoicereponse_ibfk_3` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`),
-  ADD CONSTRAINT `singlechoicereponse_ibfk_4` FOREIGN KEY (`choice_id`) REFERENCES `s_ans` (`ans_id`);
+  ADD CONSTRAINT `singlechoicereponse_ibfk_4` FOREIGN KEY (`choice_id`) REFERENCES `s_ans` (`ans_id`),
+  ADD CONSTRAINT `singlechoicereponse_ibfk_5` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
 
 --
 -- Các ràng buộc cho bảng `squest`
@@ -757,6 +836,18 @@ ALTER TABLE `s_ans`
 --
 ALTER TABLE `textreponse`
   ADD CONSTRAINT `textreponse_ibfk_1` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+
+--
+-- Các ràng buộc cho bảng `user_reponse`
+--
+ALTER TABLE `user_reponse`
+  ADD CONSTRAINT `user_reponse_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Các ràng buộc cho bảng `yesnoreponse`
+--
+ALTER TABLE `yesnoreponse`
+  ADD CONSTRAINT `yesnoreponse_ibfk_1` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -136,7 +136,7 @@
       <div id="tn1" class="tab-pane active">
          <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=1" id="form1" method="POST">
               <div class="row post" style="margin-top: 20px;">
-                   <input  type="number" class='form-control' name="number"  style="border-radius: 5px; margin: 10px; width: 50%;padding: 5px;" placeholder="Số câu hỏi" onchange="checknumber(this);socauhoi(this.value);" value="1" min="1" max="30">
+                   <input  type="number" class='form-control' name="number"  style="border-radius: 5px; margin: 10px; width: 50%;padding: 5px;" placeholder="Số câu hỏi" onchange="checknumber(this);socauhoi(this.value);" value="1" min="1" max="30" >
                    <div style="border-radius: 5px; margin: 10px; width: 40%;padding: 5px;">
                        <select class="form-control" id="sel1" onchange ="changer()">
                           <option value="1" selected>Một đáp án</option>
@@ -264,7 +264,7 @@
     var cauhoi2=":</p></div><div aria-labelledby='headingOneTN3' ><div class='card-body'><textarea name='question";
     var cau="' rows='2' class='col-sm-12' style='border-radius: 5px; margin: 10px; padding: 5px;' placeholder='Nội dung câu hỏi...' ></textarea><input class='form-control'  type='number' name='ans";
     var ok="' id='";
-    var cauhoi3="' style='border-radius: 5px; margin:  10px; width: 31%;padding: 5px;' placeholder='Số đáp án' min='1' value='1' max='10' on='checknumber(this);sodapan(this);'><div id='dapan";
+    var cauhoi3="' style='border-radius: 5px; margin:  10px; width: 31%;padding: 5px;' placeholder='Số đáp án' min='1' value='1' max='10' on='checknumber(this);sodapan(this);' required><div id='dapan";
     var cauhoi4="'></div></div></div></div><br></div></div>";
     var code="";
     for(i=1;i<num;i++){
