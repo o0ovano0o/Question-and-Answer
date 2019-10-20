@@ -22,6 +22,11 @@ router.get('/', function (req, res) {
 				
 					var dt = defer.promise;
 						dt.then(function(num){
+							var query=conn.query("UPDATE survey SET views=views+1 WHERE ?",{survey_id:id}, (err, squests)=>{
+								if(err) throw err;
+								else{
+								}
+							});
 							var querysq=conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?",{surveysq_id:id}, (err, squests)=>{
 								if(err) throw err;
 								else{

@@ -206,7 +206,8 @@
                               data.push({
                                 "chude":"<%=surveys[1][i].sec_title%>",
                                 "mota":"<%=surveys[1][i].sec_desc%>",
-                              "link":"/new_session?id="+<%=surveys[1][i].section_id%>
+                              "link":"/new_session?id="+<%=surveys[1][i].section_id%>,
+
                               });
                               </script>
                               <%}
@@ -353,16 +354,16 @@
                                     <tr>
                                           <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                           <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                     </tr>
                                     <tr>
-                                            <td><p>{{vlue.lxempm}} lượt xem</p></td>
+                                            <td><p>{{vlue.viewpm}} lượt xem</p></td>
                                             <td><p>{{vlue.phanhoipm}} phản hồi</p></td>
-                                            <td><p>Đánh giá: {{vlue.dgiapm}}</p></td>
+                                            <td><p>Tác giả: {{vlue.authorpm}}</p></td>
                                     </tr>
                               </table>
                           </div>
-                          <p style="padding-left: 20px; font-size: 12px">{{vlue.timepm}} giờ trước</p>
+                         
                         </div>
 
                         <dir-pagination-controls
@@ -380,7 +381,9 @@
                               phieum.push({
                                 "tieudepm":"<%=surveys[0][i].title%>",
                                 "motapm":"<%=surveys[0][i].description%>",
-                              "linkpm":"/survey?id="+<%=surveys[0][i].survey_id%>
+                              "linkpm":"/survey?id="+<%=surveys[0][i].survey_id%>,
+                               "authorpm":"<%=surveys[0][i].author%>",
+                               "viewpm":"<%=surveys[0][i].views%>"
                               });
                               </script>
                               <%}
@@ -426,16 +429,16 @@
                                         <tr>
                                           <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                           <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                         </tr>
                                         <tr>
-                                              <td><p>{{vlues.lxempd}} lượt xem</p></td>
+                                              <td><p>{{vlues.viewpd}} lượt xem</p></td>
                                               <td><p>{{vlues.phoipd}} phản hồi</p></td>
-                                              <td><p>Đánh giá: {{vlues.dgiapd}}</p></td>
+                                              <td><p>Tác giả: {{vlues.authorpd}}</p></td>
                                         </tr>
                                   </table>
                           </div>
-                          <p style="padding-left: 20px; font-size: 12px">{{vlues.timepd}} giờ trước</p>
+                         
                         </div>
                         <dir-pagination-controls
                           max-size="1"
@@ -452,7 +455,9 @@
                               phieud.push({
                                 "tieudepd":"<%=surveys[0][i].title%>",
                                 "motapd":"<%=surveys[0][i].description%>",
-                                "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"'
+                                "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"',
+                                 "authorpd":"<%=surveys[0][i].author%>",
+                               "viewpd":"<%=surveys[0][i].views%>"
                               });
                               </script>
                               <%}

@@ -6,7 +6,7 @@ var q = require('q');
 
 router.get('/', function (req, res) {
 	if(req.session.user) {
-		var query = conn.query("SELECT * FROM survey;SELECT * FROM section",  (err, surveys) => {
+		var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
 			if(err) throw err;
 			else{
 				res.render('main',{session: req.session.user, surveys}); } 
