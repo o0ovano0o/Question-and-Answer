@@ -37,5 +37,91 @@ router.get('/', function (req, res) {
 			res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 		}
 });
+router.post('/', function (req, res) {
+
+	 if(req.session.user){
+	 			var defer = q.defer();
+	 			var id = req.query.id;
+				var answers=req.body;
+				var query = conn.query("SELECT * FROM squest WHERE ? ",{surveysq_id: id,}, (err, quests) => {
+		    		if(err) {
+							defer.reject(err);
+						}
+		    		else{
+								defer.resolve(quests);
+					  }
+				});
+				
+				var dt = defer.promise;
+				dt.then(function(squest){
+					var now = new Date();
+					user_reponse= {
+						surveyid : id,
+						user_id: req.session.user.user_id,
+						reponse_date : now 
+					}
+					var query = conn.query("INSERT INTO  user_reponse SET ? ",user_reponse, (err, res) => {
+						if(err) {
+							throw err;
+						}
+						else {
+							for (var i = 0; i < squest.length; i++) {
+								var name=squest[i].quest_type_id+"_"+squest[i].squest_id;
+								var type=squest[i].quest_type_id;
+								if(type==4){
+									console.log(i);
+									text=answers[name];
+									textreponse={
+										reponse_id:res.insertId,
+										quest_id:squest[i].squest_id,
+										textreponse:text
+									}
+									var query = conn.query("INSERT INTO  textreponse SET ?",textreponse, (err, quests) => {
+										if(err) {
+											throw err;
+										}
+										else{
+											console.log("insert sucesss");				
+									}
+									});
+								}
+								if(type==3){
+									console.log(i);
+									truefalse=answers[name];
+									yesnoreponse={
+										reponse_id:res.insertId,
+										quest_id:squest[i].squest_id,
+										yesnovalue:truefalse
+									}
+									var query = conn.query("INSERT INTO  yesnoreponse SET ?",yesnoreponse, (err, quests) => {
+										if(err) {
+											throw err;
+										}
+										else{
+											console.log("insert sucesss");				
+									}
+									});
+								}
+
+							}
+						}
+
+
+						});
+				});
+				var query = conn.query("SELECT * FROM survey;SELECT * FROM section",  (err, surveys) => {
+				if(err) throw err;
+				else{
+					res.render('main',{session: req.session.user, surveys}); } 
+				});
+											
+		
+			}
+		else {
+
+			res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
+		}
+				
+});
 
 module.exports = router;
