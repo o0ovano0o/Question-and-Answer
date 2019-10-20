@@ -8,6 +8,7 @@
   <!-- Bootstrap CSS -->
 
   <link rel="stylesheet" href="/index&manage.css">
+  <link rel="stylesheet" href="/tab.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
   <title>Hiển thị câu hỏi khảo sát</title>
@@ -19,6 +20,31 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="/dirPagination.js"> </script>
   <script src="/angular.ng-modules.js"></script>
+
+  <script src="/Chart.js"></script>
+   <script type="text/javascript">
+     function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the link that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+   </script>
 </head>
 
 <!-- CSS tự định nghĩa -->
@@ -122,75 +148,151 @@
           </div>
         </div>
       </div><br>
-      <div class="card">
-          <div class="card-header" style="background-color: #00cccc">
-              <h5><b>Đăng bởi: <%=survey.author%></b></h5>
-          </div>
-          <div class="card-body">
-                <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-success">Trở về danh sách phiếu</a><br><br>
-                <form action="/survey/?id=<%=survey.survey_id%>" method="POST">
-                <div class="card">
+       <div class="tab">
+    <%  
+      var dem=0;
+      for(var i=0;i< squest.length;i++){
+      dem++; 
+      if(i==0){%>
+    <button  id="defaultOpen" class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button> 
+    <% }else {%>
+     <button class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button> 
+    <%}}%>
+      </div>
+        <%  
+      var dem=0;
+      for(var j=0;j< squest.length;j++){
+      dem++; %>     
+      <div id="<%=squest[j].squest_id%>" class="tabcontent">
+      <h3>Câu <%=dem%></h3>
+      <p><%= squest[j].squest_text%></p>
+        <canvas id="myC<%=dem%>" style="height:30%;"></canvas>
+      </div>
+<%}%>
+      <!-- <div id="London" class="tabcontent">
+      <h3>London</h3>
+      <p>London is the capital city of England.</p>
+      </div>
 
-                   <div class="card-header" style="background-color: #99ccff">
-                       <h6><b>Danh sách câu hỏi khảo sát</b></h6>
-                   </div><br>
-                   <div class="container" >
+      <div id="Paris" class="tabcontent">
+      <h3>Paris</h3>
+      <p>Paris is the capital of France.</p>
+      </div>
 
-                       <% var dem=0;
+      <div id="Tokyo" class="tabcontent">
+      <h3>Tokyo</h3>
+      <p>Tokyo is the capital of Japan.</p>
+      </div>
+                <% var dem=0;
                        for(var i=0;i< squest.length;i++){
                          dem++;
                           if(squest[i].quest_type_id==1){ %>
                                   <div id="c1" class="tab-pane active" >
                                       <div class="card card body" style="margin-top: 20px;padding:15px;">
                                           <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                <%
-                                   for(var j=0;j< s_ans.length;j++){
-                                     if(s_ans[j].question_id==squest[i].squest_id){%>
-                                         <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="1_<%=squest[i].squest_id%>" value="<%=s_ans[j].ans_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
-                                 <%}}
-                                 %></div></div><%}
+                                      <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
+                                   
+                                </div></div><%}
                           if(squest[i].quest_type_id==3){ %>
                                 <div id="c3" class="tab-pane active" >
                                     <div class="card card body" style="margin-top: 20px;padding:15px;">
                                         <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.1" value="1" >
-                                            <label class="form-check-label" for="Radios1.1">Đúng.</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.2" value="0"  >
-                                            <label class="form-check-label" for="Radios1.2">Sai.</label>
-                                        </div>
-                                    </div>
+                                      <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
+                                     </div>   
                                 </div><%}
                           if(squest[i].quest_type_id==2){ %>
                               <div id="c2" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
                                       <p><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                <%
-                                 for(var j=0;j< s_ans.length;j++){
-                                   if(s_ans[j].question_id==squest[i].squest_id){%>
-                                    <div class="form-check"> <input type="checkbox" style="margin: 4.8px 0px 0px -20px;" value="<%=s_ans[j].ans_id%>" name="2_<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
-                              <%}}
-                          %></div></div><%}
+                                   
+                              </div></div><%}
                           if(squest[i].quest_type_id==4){ %>
                               <div id="c4" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
                                       <p><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                      <textarea name="4_<%=squest[i].squest_id%>" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." required></textarea>
+                                      
+
                                   </div>
                               </div>
                           <%}
-                      }%>
-                      <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
-                   </div>
-                 </div>
-               </form>
-             <br>
-             <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a><br><br><br>
+                      }%> -->
 
-        </div><br>
-   </div>
+               <canvas id="myC1" style="height:30%;"></canvas>
+                <canvas id="myC2"  style="height: 30%;">></canvas>
+<script>
+var ctx1 = document.getElementById('myC1');
+var ctx2 = document.getElementById('myC2');
+
+var myPieChart = new Chart(ctx1, {
+  type: 'pie',
+  data: {
+    datasets: [{
+      data: [10, 20, 30] ,
+      backgroundColor: [
+    'rgba(255, 99, 132, 0.5)',
+    'rgba(54, 162, 235, 0.5)',
+    'rgba(255, 206, 86, 0.5)'
+    ],
+
+    borderColor: [
+    'rgba(255, 99, 132, 0.5)',
+    'rgba(54, 162, 235, 0.5)',
+    'rgba(255, 206, 86, 0.5)'
+    ]
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: [
+    'Red',
+    'Yellow',
+    'Blue'
+    ],
+  },
+
+  options: {
+    animation:{
+      animateRotate:true
+    }
+  }
+})
+var myChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+        
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
  </div>
 </main>
@@ -226,5 +328,7 @@ function formatdate(d){
   var today = dd + '/' + mm + '/' + yyyy;
   return today;
 }
+document.getElementById("defaultOpen").click();
   </script>
+
 </html>

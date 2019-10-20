@@ -10,6 +10,7 @@ router.use('/new_session', require(__dirname + '/new_session.js'));
 router.use('/question', require(__dirname + '/question.js'));
 
 router.use('/survey', require(__dirname + '/new_survey.js'));
+router.use('/resultsurvey', require(__dirname + '/resultsurvey.js'));
 router.use('/yourprofile', require(__dirname + '/yourprofile.js'));
 
 router.use('/student_manage', require(__dirname + '/student_manage.js'));
