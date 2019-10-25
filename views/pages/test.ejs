@@ -153,17 +153,39 @@
                           if(squest[i].quest_type_id==1){ %>
                                   <div id="c1" class="tab-pane active" >
                                       <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                          <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                        <div class="row">
+                                          <p class="col-11"> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                          <div class=" col-1 dropdown" >
+                                             <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             </button>
+                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                              <a class="dropdown-item" href="#">Thêm</a>
+                                              <a class="dropdown-item" href="#">Sửa</a>
+                                              <a class="dropdown-item" href="#">Xóa</a>
+                                             </div>
+                                           </div></div>
                                 <%
                                    for(var j=0;j< s_ans.length;j++){
                                      if(s_ans[j].question_id==squest[i].squest_id){%>
                                          <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="1_<%=squest[i].squest_id%>" value="<%=s_ans[j].ans_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
                                  <%}}
-                                 %></div></div><%}
+                                       %>
+                                       </div>
+                                     </div><%}
                           if(squest[i].quest_type_id==3){ %>
                                 <div id="c3" class="tab-pane active" >
                                     <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                        <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <div class="row">
+                                        <p class="col-11"> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                        <div class=" col-1 dropdown" >
+                                           <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                           </button>
+                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Thêm</a>
+                                            <a class="dropdown-item" href="#">Sửa</a>
+                                            <a class="dropdown-item" href="#">Xóa</a>
+                                           </div>
+                                         </div></div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.1" value="1" >
                                             <label class="form-check-label" for="Radios1.1">Đúng.</label>
@@ -177,7 +199,17 @@
                           if(squest[i].quest_type_id==2){ %>
                               <div id="c2" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                      <p><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <div class="row">
+                                        <p class="col-11"><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                        <div class=" col-1 dropdown" >
+                                           <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                           </button>
+                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Thêm</a>
+                                            <a class="dropdown-item" href="#">Sửa</a>
+                                            <a class="dropdown-item" href="#">Xóa</a>
+                                           </div>
+                                       </div></div>
                                 <%
                                  for(var j=0;j< s_ans.length;j++){
                                    if(s_ans[j].question_id==squest[i].squest_id){%>
@@ -187,7 +219,17 @@
                           if(squest[i].quest_type_id==4){ %>
                               <div id="c4" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                      <p><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                    <div class="row">
+                                      <p class="col-11"><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <div class=" col-1 dropdown" >
+                                         <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                         </button>
+                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">Thêm</a>
+                                          <a class="dropdown-item" href="#">Sửa</a>
+                                          <a class="dropdown-item" href="#">Xóa</a>
+                                         </div>
+                                     </div></div>
                                       <textarea name="4_<%=squest[i].squest_id%>" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." required></textarea>
                                   </div>
                               </div>
