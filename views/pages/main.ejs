@@ -363,7 +363,7 @@
                                     </tr>
                               </table>
                           </div>
-                         
+
                         </div>
 
                         <dir-pagination-controls
@@ -438,7 +438,7 @@
                                         </tr>
                                   </table>
                           </div>
-                         
+
                         </div>
                         <dir-pagination-controls
                           max-size="1"
@@ -553,11 +553,11 @@
             <label for="Date2">Ngày kết thúc:</label>
             <input type="date" name="date_end" class="form-control" id="Date2" onblur="check(this);">
           </div>
-    
+
           <div class="form">
             <div class="checkbox">
               <label data-toggle="collapse" data-target="#collapsePas" aria-expanded="false" aria-controls="collapsePas">
-               
+
                 <input type="checkbox"/> Đặt mật khẩu
               </label>
             </div>
@@ -596,60 +596,50 @@
         </button>
       </div>
       <div class="modal-body">
-
         <form action="/home/?type=2" method="POST">
           <div>
-                 
-                  <label for="title" class="col-form-label">
-                    Tên phiếu khảo sát </label>
-                
-                
-                  <input type="text" name="title" class="form-control"    placeholder="Tiêu đề phiếu khảo sát" required >
-                            
+            <label for="title" class="col-form-label">
+              Tên phiếu khảo sát </label>
+
+
+            <input type="text" name="title" class="form-control" placeholder="Tiêu đề phiếu khảo sát" required>
+
           </div>
-          
-                 <div >
-                  <label for="description" class="col-form-label">Mô tả khảo sát </label>
-                
-                
-                  <textarea name="description" rows="3"  class="form-control pb-4" placeholder="Mô tả, Giới thiệu phiếu khảo sát của bạn" required ></textarea>
-                </div>             
-          
+
+          <div>
+            <label for="description" class="col-form-label">Mô tả khảo sát </label>
+
+
+            <textarea name="description" rows="3" class="form-control pb-4" placeholder="Mô tả, Giới thiệu phiếu khảo sát của bạn" required></textarea>
+          </div>
+
           <div class="form-group w-50">
-            
-                  <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
-                
-               
-                  <input type="date" name="datebegin" class="form-control" id="date1"  disabled>
-                  <script>var now = new Date();
 
-                      var day = ("0" + now.getDate()).slice(-2);
-                      var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
 
-                      var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
 
-                      $('#date1').val(today);</script>
-                
-            
-            
-           
-                  <label for="date_end" class="col-form-label">Ngày kết thúc: </label>
-                
-                
-                  <input type="date" name="date_end" class="form-control" onblur="check(this);" id="date2" required>
-                </div>
-              
-            <div class="modal-footer">
-           <input type="submit" class="btn btn-success" value="Xác nhận">
+            <input type="date" name="datebegin" class="form-control" id="date1" disabled>
+            <script>
+              var now = new Date();
+
+              var day = ("0" + now.getDate()).slice(-2);
+              var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+              var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+              $('#date1').val(today);
+            </script>
+            <label for="date_end" class="col-form-label">Ngày kết thúc: </label>
+            <input type="date" name="date_end" class="form-control" onblur="check(this);" id="date2" required>
           </div>
-          </form>
-          </div><br>
-      </div>
-
-
-</div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-success" value="Xác nhận">
+          </div>
+        </form>
+      </div><br>
     </div>
   </div>
+</div>
 
 </main>
 
@@ -709,7 +699,7 @@
    function check(itt){
     var date1 = new Date();
     var date2 = new Date(itt.value);
-   
+
     if(date2-date1>0){
 
     }
@@ -719,7 +709,7 @@
 
     else{
       alert("Thời gian không đúng rồi kìa!!!");
-     
+
       itt.value="";
       return false;
     }

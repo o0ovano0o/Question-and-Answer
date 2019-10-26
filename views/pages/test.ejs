@@ -159,9 +159,8 @@
                                              <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                              </button>
                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                              <a class="dropdown-item" href="#">Thêm</a>
-                                              <a class="dropdown-item" href="#">Sửa</a>
-                                              <a class="dropdown-item" href="#">Xóa</a>
+                                              <a class="dropdown-item" href="#update_2" data-toggle="modal" data-target="#update_2">Sửa</a>
+                                              <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>">Xóa</a>
                                              </div>
                                            </div></div>
                                 <%
@@ -181,9 +180,8 @@
                                            <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                            </button>
                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Thêm</a>
-                                            <a class="dropdown-item" href="#">Sửa</a>
-                                            <a class="dropdown-item" href="#">Xóa</a>
+                                            <a class="dropdown-item" href="#update_3" data-toggle="modal" data-target="#update_3">Sửa</a>
+                                            <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>">Xóa</a>
                                            </div>
                                          </div></div>
                                         <div class="form-check">
@@ -205,9 +203,8 @@
                                            <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                            </button>
                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Thêm</a>
-                                            <a class="dropdown-item" href="#">Sửa</a>
-                                            <a class="dropdown-item" href="#">Xóa</a>
+                                            <a class="dropdown-item" href="#update_2" data-toggle="modal" data-target="#update_2">Sửa</a>
+                                            <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>">Xóa</a>
                                            </div>
                                        </div></div>
                                 <%
@@ -225,9 +222,8 @@
                                          <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                          </button>
                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Thêm</a>
-                                          <a class="dropdown-item" href="#">Sửa</a>
-                                          <a class="dropdown-item" href="#">Xóa</a>
+                                          <a class="dropdown-item" href="#update_4" data-toggle="modal" data-target="#update_4">Sửa</a>
+                                          <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>">Xóa</a>
                                          </div>
                                      </div></div>
                                       <textarea name="4_<%=squest[i].squest_id%>" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." required></textarea>
@@ -247,6 +243,108 @@
    </div>
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
  </div>
+           <div class="modal fade" id="update_3" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi khảo sát</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                             <form action="" method="POST">
+                                   <div>
+                                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                                       <input type="text" name="title" class="form-control" placeholder="Câu hỏi đúng/sai" required>
+                                   </div>
+                                 <div class="modal-footer">
+                                   <input type="submit" class="btn btn-success" value="Xác nhận">
+                                 </div>
+                             </form>
+                       </div><br>
+                   </div>
+               </div>
+           </div>
+           <div class="modal fade" id="update_1" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi khảo sát</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                             <form action="" method="POST">
+                                   <div>
+                                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                                       <input type="text" name="title" class="form-control" placeholder="Câu hỏi một đáp án" required>
+                                   </div>
+                                   <div>
+                                       <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
+                                       <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" required>
+                                       <div id="dapan1" style="width: 90%;"></div>
+                                   </div>
+                                   <div class="modal-footer">
+                                     <input type="submit" class="btn btn-success" value="Xác nhận">
+                                   </div>
+                             </form>
+                       </div><br>
+                   </div>
+               </div>
+           </div>
+           <div class="modal fade" id="update_2" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi khảo sát</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                             <form action="" method="POST">
+                                   <div>
+                                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                                       <input type="text" name="title" class="form-control" placeholder="Câu hỏi nhiều đáp án" required>
+                                   </div>
+                                   <div>
+                                       <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
+                                       <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" required>
+                                       <div id="dapan1" style="width: 90%;"></div>
+                                   </div>
+                                   <div class="modal-footer">
+                                     <input type="submit" class="btn btn-success" value="Xác nhận">
+                                   </div>
+                             </form>
+                       </div><br>
+                   </div>
+               </div>
+           </div>
+           <div class="modal fade" id="update_4" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi khảo sát</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                             <form action="" method="POST">
+                                   <div>
+                                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                                       <input type="text" name="title" class="form-control" placeholder="Câu hỏi tự luận" required>
+                                   </div>
+                                 <div class="modal-footer">
+                                   <input type="submit" class="btn btn-success" value="Xác nhận">
+                                 </div>
+                             </form>
+                       </div><br>
+                   </div>
+               </div>
+           </div>
 </main>
 <footer id="footer">
   <ul style="padding: 15px; margin-bottom: 0px;">
@@ -266,6 +364,28 @@
     var date2 = new Date(text2);
     document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
     document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
+    function checknumber(inp){
+      if(inp.value=="")
+        inp.value=1;
+      if(inp.value>30)
+      {
+        alert("Tối đa 30 thôi bạn!!");
+        inp.value=30;
+      }
+    }
+    function sodapan(sodapan){
+      var i=0;
+      var num=sodapan.value;
+      var dapan="<input type='text' name='answer";
+      var dap= "' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' required/>";
+      var code="";
+      var key = sodapan.id;
+      for(i=0;i<num;i++){
+        code+=(dapan+key+"_"+(i+1)+dap);
+      }
+      var res="dapan" + key;
+      document.getElementById(res).innerHTML=code;
+    }
 function formatdate(d){
   var dd = d.getDate();
   var mm = d.getMonth() + 1; //January is 0!
