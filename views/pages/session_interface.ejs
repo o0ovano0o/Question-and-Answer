@@ -94,10 +94,10 @@
             </div>
             <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h4 class="card-title"><%=sections[0].sec_title%></h4>
-                <p class="card-text"><%=sections[0].sec_desc%><br>
-                  Đăng bởi: <a href="/teacher_manage"><%=sections[0].author%></a><br>
-                  Thời gian tạo: <%=sections[0].sec_time%>
+                <h4 class="card-title"><%=sections[0][0].sec_title%></h4>
+                <p class="card-text"><%=sections[0][0].sec_desc%><br>
+                  Đăng bởi: <a href="/yourprofile?id=<%=sections[0].user_id%>"><%=sections[0][0].name%></a><br>
+                  Thời gian tạo: <%=sections[0][0].sec_time%>
                 </p>
               </div>
             </div>
@@ -143,7 +143,7 @@
             </div>
             </form>
           </div>
-          <% for (var i = 0; i < sections.length; i++) { %>
+          <% for (var i = 0; i < sections[1].length; i++) { %>
           <div class="card">
             <div class="row padding">
               <div class="col-3 col-sm-3 col-md-2">
@@ -155,10 +155,10 @@
              </div>
              <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h5 class="card-title"><a href="/question"><%= sections[i].context%></a></h5>
+                <h5 class="card-title"><a href="/question?question_id=<%=sections[1][i].question_id%>"><%= sections[1][i].context%></a></h5>
                 <p class="card-text"><br>
-                  Đăng bởi: <a href="/yourprofile"> <%= sections[i].author%></a>
-                  <%= sections[i].date_posted%>
+                  Đăng bởi: <a href="/yourprofile?id=<%=sections[1][i].user_id%>"> <%= sections[1][i].name%></a>
+                  <%= sections[1][i].date_posted%>
                 </p>
               </div>
             </div>

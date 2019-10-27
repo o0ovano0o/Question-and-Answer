@@ -8,22 +8,14 @@ var id;
 router.get('/', function (req, res) {
 	if(req.session.user){
 		id = req.query.id;
-		var defer = q.defer();
-		var query = conn.query("SELECT * FROM section left join aquest on section.section_id = aquest.sections_id WHERE  ? ",{section_id: id}, (err, results) => {
-			if(err) {
-				defer.reject(err);
-			}
+		var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ?"
+		conn.query(sql,[id,id], function(err, results) {	
+			if(err) throw err;
 			else{
-				defer.resolve(results);
+				var sections = results;
+				res.render('session_interface', {session:req.session.user, sections: sections});
 			}
 		});
-
-		var dt = defer.promise;
-		dt.then(function(result){
-			var sections = result;
-			res.render('session_interface', {session:req.session.user, sections: sections});
-		});
-
 	}
 	else {
 
@@ -34,17 +26,17 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
 	var new_quest = req.body;
 	var today = new Date();
-	var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-	var dateTime = date+' '+time;
-	sectionQuest = {
-			sections_id: id,
-			context: new_quest.context,
-			author: req.session.user.username,
-			date_posted: dateTime,
-			view: 0
-		};
+	var dateTime = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+	
+	
 	if(req.session.user){
+		sectionQuest = {
+		sections_id: id,
+		context: new_quest.context,
+		author: req.session.user.username,
+		date_posted: dateTime,
+		view: 0
+	};
 		if (sectionQuest) {
 			var defer1 = q.defer();
 			var query1 = conn.query("INSERT INTO aquest SET ?", sectionQuest, function(err,results) {
@@ -62,10 +54,17 @@ router.post('/', function (req, res) {
 		}
 
 		if (!checkInsert) {
-			alert("Không thể tạo phiên");
+			alert("Không thể tạo câu hỏi");
 		}
 		else {
-			res.render('rules', {session:req.session.user});
+			var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ?"
+			conn.query(sql,[id,id], function(err, results) {	
+				if(err) throw err;
+				else{
+					var sections = results;
+					res.render('session_interface', {session:req.session.user, sections: sections});
+				}
+			});
 		}
 		
 	}
