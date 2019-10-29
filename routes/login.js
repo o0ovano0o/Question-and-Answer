@@ -40,14 +40,10 @@ router.post('/', function(req, res) {
       });
     } else if (user.password == signin.userpassword) {
       req.session.user = user;
-      var query = conn.query("SELECT * FROM survey", (err, surveys) => {
-        if (err) throw err;
-        else {
-          res.render('main', {
-            session: req.session.user,
-            surveys: surveys
-          });
-        }
+      var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+      if(err) throw err;
+      else{
+        res.render('main',{session: req.session.user, surveys}); } 
       });
 
     } else {
