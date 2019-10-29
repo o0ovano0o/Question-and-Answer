@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 20, 2019 lúc 04:01 PM
--- Phiên bản máy phục vụ: 10.1.37-MariaDB
--- Phiên bản PHP: 5.6.40
+-- Thời gian đã tạo: Th10 28, 2019 lúc 12:43 PM
+-- Phiên bản máy phục vụ: 10.1.38-MariaDB
+-- Phiên bản PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -27,15 +27,8 @@ SET time_zone = "+00:00";
 --
 -- Cấu trúc bảng cho bảng `ans_quest`
 --
-
-CREATE TABLE `ans_quest` (
-  `section_id` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL,
-  `ans_id` int(11) NOT NULL,
-  `author` varchar(20) NOT NULL,
-  `content` varchar(500) NOT NULL,
-  `ans_time` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- Error reading structure for table questionandanswer.ans_quest: #1932 - Table 'questionandanswer.ans_quest' doesn't exist in engine
+-- Error reading data for table questionandanswer.ans_quest: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `questionandanswer`.`ans_quest`' at line 1
 
 -- --------------------------------------------------------
 
@@ -47,10 +40,18 @@ CREATE TABLE `aquest` (
   `sections_id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
   `author` varchar(20) NOT NULL,
-  `context` text NOT NULL,
-  `date_posted` date NOT NULL,
+  `context` text CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `date_posted` varchar(50) NOT NULL,
   `view` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `aquest`
+--
+
+INSERT INTO `aquest` (`sections_id`, `question_id`, `author`, `context`, `date_posted`, `view`) VALUES
+(2, 1, 'hay', 'dc ko', '27/10/2019', 0),
+(2, 2, 'pho', 'doan xem', '27/10/2019', 0);
 
 -- --------------------------------------------------------
 
@@ -77,15 +78,8 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 --
 -- Cấu trúc bảng cho bảng `cmt_ans`
 --
-
-CREATE TABLE `cmt_ans` (
-  `question_id` int(11) NOT NULL,
-  `ans_id` int(11) NOT NULL,
-  `cmt_id` int(11) NOT NULL,
-  `author` varchar(20) NOT NULL,
-  `cmt` varchar(500) NOT NULL,
-  `cmt_time` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- Error reading structure for table questionandanswer.cmt_ans: #1932 - Table 'questionandanswer.cmt_ans' doesn't exist in engine
+-- Error reading data for table questionandanswer.cmt_ans: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `questionandanswer`.`cmt_ans`' at line 1
 
 -- --------------------------------------------------------
 
@@ -138,7 +132,7 @@ CREATE TABLE `section` (
   `sec_title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `sec_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `author` varchar(20) NOT NULL,
-  `sec_time` date NOT NULL,
+  `sec_time` varchar(50) NOT NULL,
   `sec_pass` varchar(12) NOT NULL,
   `sec_isopen` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -533,7 +527,7 @@ CREATE TABLE `user` (
   `name` varchar(25) NOT NULL,
   `password` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `date` date NOT NULL,
+  `date` varchar(50) NOT NULL,
   `isadmin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -547,7 +541,10 @@ INSERT INTO `user` (`user_id`, `username`, `name`, `password`, `email`, `date`, 
 (9, 'vanvan1199', 'Vân Vân ', '12345', 'van@gmail.com', '1999-11-11', 0),
 (10, '12345van', 'O0ovano0o ', '12345', 'van@gmail.com', '1999-11-11', 0),
 (11, 'van1199', 'Vân Xinh Gái ', '12345', 'van@gmail.com', '1999-11-11', 0),
-(12, 'giaovien1', 'Giáo Viên 1', 'giaovien1', 'GiaoVien@gmail.com', '1967-01-01', 1);
+(12, 'giaovien1', 'Giáo Viên 1', 'giaovien1', 'GiaoVien@gmail.com', '1967-01-01', 1),
+(13, 'hay', 'Hay', '123456', 'truong@gmail.com', '1999-01-01', 1),
+(14, 'pho', 'May Con Pho ', '123456', 'tr@gmail.com', '1999-01-01', 0),
+(15, 'ngu', 'Doan Xem ', '123456', 'tee@gmail.com', '1999-01-01', 0);
 
 -- --------------------------------------------------------
 
@@ -594,14 +591,6 @@ INSERT INTO `yesnoreponse` (`reponse_id`, `quest_id`, `yesnovalue`) VALUES
 --
 
 --
--- Chỉ mục cho bảng `ans_quest`
---
-ALTER TABLE `ans_quest`
-  ADD PRIMARY KEY (`ans_id`) USING BTREE,
-  ADD UNIQUE KEY `question_id` (`question_id`,`section_id`) USING BTREE,
-  ADD KEY `section_id` (`section_id`);
-
---
 -- Chỉ mục cho bảng `aquest`
 --
 ALTER TABLE `aquest`
@@ -615,14 +604,6 @@ ALTER TABLE `choice_multichoices`
   ADD PRIMARY KEY (`ans_id`,`response_id`,`quest_id`),
   ADD KEY `response_id` (`response_id`),
   ADD KEY `quest_id` (`quest_id`);
-
---
--- Chỉ mục cho bảng `cmt_ans`
---
-ALTER TABLE `cmt_ans`
-  ADD PRIMARY KEY (`cmt_id`) USING BTREE,
-  ADD UNIQUE KEY `question_id` (`question_id`,`ans_id`) USING BTREE,
-  ADD KEY `ans_id` (`ans_id`);
 
 --
 -- Chỉ mục cho bảng `multichoices`
@@ -712,22 +693,10 @@ ALTER TABLE `yesnoreponse`
 --
 
 --
--- AUTO_INCREMENT cho bảng `ans_quest`
---
-ALTER TABLE `ans_quest`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `aquest`
 --
 ALTER TABLE `aquest`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `cmt_ans`
---
-ALTER TABLE `cmt_ans`
-  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `section`
@@ -757,7 +726,7 @@ ALTER TABLE `s_ans`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `user_reponse`
@@ -768,13 +737,6 @@ ALTER TABLE `user_reponse`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
-
---
--- Các ràng buộc cho bảng `ans_quest`
---
-ALTER TABLE `ans_quest`
-  ADD CONSTRAINT `ans_quest_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `aquest` (`sections_id`),
-  ADD CONSTRAINT `ans_quest_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `aquest` (`question_id`);
 
 --
 -- Các ràng buộc cho bảng `aquest`
@@ -789,13 +751,6 @@ ALTER TABLE `choice_multichoices`
   ADD CONSTRAINT `choice_multichoices_ibfk_2` FOREIGN KEY (`response_id`) REFERENCES `multichoices` (`reponse_id`),
   ADD CONSTRAINT `choice_multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `multichoices` (`quest_id`),
   ADD CONSTRAINT `choice_multichoices_ibfk_4` FOREIGN KEY (`ans_id`) REFERENCES `s_ans` (`ans_id`);
-
---
--- Các ràng buộc cho bảng `cmt_ans`
---
-ALTER TABLE `cmt_ans`
-  ADD CONSTRAINT `cmt_ans_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `ans_quest` (`question_id`),
-  ADD CONSTRAINT `cmt_ans_ibfk_3` FOREIGN KEY (`ans_id`) REFERENCES `ans_quest` (`ans_id`);
 
 --
 -- Các ràng buộc cho bảng `multichoices`

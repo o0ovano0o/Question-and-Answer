@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
 		name: signup.username,
 		email: signup.useremail,
 		password: signup.userpassword,
-		dateofbirth: signup.date,
+		date: signup.date,
 		isadmin: 0
 	};
 	if (signup.usernickname) {
@@ -47,26 +47,15 @@ router.post('/', function(req, res) {
 		else  {
 
 			if (users) {
-				var defer1 = q.defer();
+				console.log(users);
 				var query1 = conn.query("INSERT INTO user SET ?", users, function(err,results) {
 					if (err) {
-						defer1.reject(err);
+						throw(err);
 					}
 					else {
-						defer1.resolve(results);
+						res.render('login', {data: {message: "Tạo tài khoản thành công"}});
 					}
 				});
-				var checkInsert = defer1.promise;
-			}
-			else {
-				var checkInsert = false;
-			}
-			
-			if (!checkInsert) {
-				res.render('signin', {data: {error:  "Không thể tạo tài khoản"}});
-			}
-			else {
-				res.render('login', {data: {message: "Tạo tài khoản thành công"}});
 			}
 		}
 	});

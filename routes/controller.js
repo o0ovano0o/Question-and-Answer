@@ -4,7 +4,6 @@ var router = express.Router();
 router.use('/login', require(__dirname + '/login.js'));
 router.use('/home', require(__dirname + '/main.js'));
 router.use('/signin', require(__dirname + '/signin.js'));
-// router.use('/createsession', require(__dirname + '/new_session.js'));
 router.use('/session', require(__dirname + '/session.js'));
 router.use('/new_session', require(__dirname + '/new_session.js'));
 router.use('/question', require(__dirname + '/question.js'));

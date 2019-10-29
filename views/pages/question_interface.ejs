@@ -95,10 +95,10 @@
             </div>
             <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h4 class="card-title">Khảo sát sinh viên khóa mới QH2019 (K64)</h4>
-                <p class="card-text">Mô tả: Khảo sát sinh viên khóa mới QH2019 (K64)<br>
-                  Đăng bởi: <a href="/teacher_manage">Nguyễn Việt Anh</a><br>
-                  Thời gian tạo: 1 tháng trước
+                <h4 class="card-title"><%=question[1][0].sec_title%></h4>
+                <p class="card-text"><%=question[1][0].sec_desc%><br>
+                  Đăng bởi: <a href="/yourprofile?id=<%=question[1][0].user_id%>"><%=question[1][0].name%></a><br>
+                  Thời gian tạo: <%=question[1][0].sec_time%>
                 </p>
               </div>
             </div>
@@ -111,7 +111,7 @@
       <div class="card">
         
         <div class="card-header" style="background-color: #bbbbbb">
-          <h5><b>Câu hỏi đăng bởi: <a href="/yourprofile">Đinh Việt Cường </a></b></h5>
+          <h5><b>Câu hỏi đăng bởi: <a href="/yourprofile?id=<%=question[0][0].user_id%>"> <%=question[0][0].name%></a></b></h5>
         </div>
 
         <div class="card-body">
@@ -123,20 +123,20 @@
               </h5>
             </div>
             <div class="card-body">
-              <h5>Có bạn nào gần trường muốn ở ghép không???</h5>
+              <h5><%=question[0][0].context%></h5>
               <hr id = "phienhoidap" class="featurette-divider">
-              03 lượt thích
             </div>
           </div>
 
           <br>
           <a href="" style="padding-left: 2%;">Thích</a>
           <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#bl" aria-expanded="false" aria-controls="bl">Bình luận</a><br><br>
+            <form method="POST" action="/question?cmt=0">
               <div class="collapse" id="bl">
                   <div class="row">
                     
                     <div class="col-9 col-sm-10 col-md-11">
-                      <input type="nhap" class="form-control" id="search2" placeholder="Viết bình luận ...">
+                      <input type="nhap" name="cmt" class="form-control" id="search2" placeholder="Viết bình luận ...">
                     </div>
                     <div class="col-3 col-sm-2 col-md-1">
                       <button class="btn btn-outline-secondary" type="submit">Gửi</button>
@@ -144,6 +144,7 @@
 
                   </div>
               </div>
+            </form>
               <br>
           <!-- Câu trả lời đúng nhất -->
               
@@ -155,26 +156,26 @@
             
             <div class="card-body">
           
-              <!-- 1 comment trả lời cho câu hỏi-->  
+             <%for (var i = 0; i < question[2].length; i++) {%>
               <div class="card">
                 
                 <div class="card-header" style="background-color: #99ccff">
-                 <h6><b>Nguyễn Việt Anh</b></h6>
+                 <h6><b><%=question[2][i].name%></b></h6>
                 </div>
                
                 <div class="card-body">
-                  <h6>Câu hỏi rất hay</h6>
+                  <h6><%=question[2][i].content%></h6>
                     <hr id = "phienhoidap" class="featurette-divider">
-                    <p>01 lượt thích</p>
                     <a href="">Thích</a>
                     <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl">Trả lời
                     </a><br>
                   <p>
+                    <form method="POST" action="/question?cmt=<%=question[2][i].ans_id%>">
                     <div class="collapse" id="tl">
                       <div class="row">
                   
                         <div class="col-9 col-sm-10 col-md-11">
-                          <input type="nhap" class="form-control" id="search2" placeholder="Viết bình luận ...">
+                          <input type="nhap" name="cmt_ans" class="form-control" id="search2" placeholder="Viết bình luận ...">
                         </div>
                         <div class="col-3 col-sm-2 col-md-1">
                           <button class="btn btn-outline-secondary" type="submit">Gửi</button>
@@ -182,16 +183,19 @@
 
                       </div>
                     </div>
+                  </form>
                   </p>  
                 
                   <!-- comment trả lời cho 1 comment khác-->
+                  <% for (var j = 0; j < question[3].length; j++) { 
+                    if (question[3][j].ans_id == question[2][i].ans_id) { %>
                   <div class="card">
                     <div class="card-header" style="background-color: #dddddd">
-                     <h6><b>Đức Dũng</b></h6>
+                     <h6><b><%=question[3][j].name%></b></h6>
                     </div>
                     
                     <div class="card-body">
-                      <p>Tôi không thích bạn cười như vậy</p>
+                      <p><%=question[3][j].cmt%></p>
                       <a href="" style="">Thích</a>
                       <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#tl2" aria-expanded="false" aria-controls="tl2">Trả lời</a><br>
                       <p>
@@ -211,10 +215,12 @@
                     </div>
 
                   </div>
+                  <%}
+                } %>
                 </div>
               
               </div>
-
+              <% } %>
             </div>
 
           </div>
