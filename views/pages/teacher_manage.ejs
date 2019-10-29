@@ -36,17 +36,17 @@
               <li class="nav-item active">
                 <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
               </li>
-             
+
               <li class="nav-item">
                 <a class="nav-link" href="/support">Trợ giúp</a>
               </li>
             </ul>
-            
+
             <form id="search" class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-            
+
             <% if (session.username) {%>
             <ul class="navbar-nav" style="display: contents;">
               <li class="nav-item">
@@ -102,10 +102,10 @@
             </div>
           </div>
         </div>
-        <br>  
+        <br>
 
       <!-- Nội dung -->
-        <div class="container">  
+        <div class="container">
           <div class="card">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
@@ -150,9 +150,9 @@
 
                 <div id="survey" class="tab-pane" role="tabpanel">
                   <div class="card-body">
-                    
+
                     <div class="card" id="sur">
-                      <div class="card-body"> 
+                      <div class="card-body">
                         <div class="card">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2">
@@ -180,17 +180,17 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <br>
-                  
+
                   </div>
                 </div>
 
                  <div id="session" class="tab-pane" role="tabpanel">
                   <div class="card-body">
-                    
+
                     <div class="card" id="ses">
-                      <div class="card-body"> 
+                      <div class="card-body">
                         <div class="card">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2">
@@ -219,9 +219,9 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <br>
-                  
+
                   </div>
                 </div>
               </div>
@@ -304,25 +304,25 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  
+
                   <form>
-                    
+
                     <div class="form-group">
                       <label for="InputUserName">Họ tên:</label>
                       <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
-                      
+
                     </div>
                     <div class="form-group">
                       <label for="InputEmail">Email:</label>
                       <input type="email" class="form-control" id="InputEmail" placeholder="">
                     </div>
-                    
+
                   </form>
                 </div>
-                
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
-                
+
               </div>
             </div>
           </div>
@@ -339,7 +339,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  
+
                   <form>
                     <div class="form-group">
                       <label for="InputTitle">Tiêu đề:</label>
@@ -351,10 +351,10 @@
                     </div>
                   </form>
                 </div>
-                
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
-                
+
                 </div>
               </div>
             </div>
@@ -368,15 +368,15 @@
         <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
         <p style="font-size: 12px"> @2019 design by Team 5</p>
       </ul>
-    </footer> 
+    </footer>
 
   <!-- Quay về đầu trang -->
     <br>
-    <div class="text-center">     
+    <div class="text-center">
     <a href="#"><h5>Back to top</h5></a>
-    </div>  
+    </div>
 
-  <!-- Nút xóa -->  
+  <!-- Nút xóa -->
     <script type="text/javascript">
       $("#button1").click(function(){
       $("#cmt").remove();
@@ -388,6 +388,6 @@
       $("#sur").remove();
       });
     </script>
-  
+
 </body>
 </html>
