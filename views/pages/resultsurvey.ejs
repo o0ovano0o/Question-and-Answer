@@ -104,7 +104,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
+              <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
               <a class="dropdown-item" href="/logout">Đăng xuất</a>
             </div>
         </ul>
@@ -149,20 +149,20 @@
         </div>
       </div><br>
        <div class="tab">
-    <%  
+    <%
       var dem=0;
       for(var i=0;i< squest.length;i++){
-      dem++; 
+      dem++;
       if(i==0){%>
-    <button  id="defaultOpen" class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button> 
+    <button  id="defaultOpen" class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
     <% }else {%>
-     <button class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button> 
+     <button class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
     <%}}%>
       </div>
-        <%  
+        <%
       var dem=0;
       for(var j=0;j< squest.length;j++){
-      dem++; %>     
+      dem++; %>
       <div id="<%=squest[j].squest_id%>" class="tabcontent">
       <h3>Câu <%=dem%></h3>
       <p><%= squest[j].squest_text%></p>
@@ -191,26 +191,26 @@
                                       <div class="card card body" style="margin-top: 20px;padding:15px;">
                                           <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
                                       <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
-                                   
+
                                 </div></div><%}
                           if(squest[i].quest_type_id==3){ %>
                                 <div id="c3" class="tab-pane active" >
                                     <div class="card card body" style="margin-top: 20px;padding:15px;">
                                         <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
                                       <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
-                                     </div>   
+                                     </div>
                                 </div><%}
                           if(squest[i].quest_type_id==2){ %>
                               <div id="c2" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
                                       <p><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                   
+
                               </div></div><%}
                           if(squest[i].quest_type_id==4){ %>
                               <div id="c4" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
                                       <p><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                      
+
 
                                   </div>
                               </div>
@@ -292,7 +292,7 @@ var myChart = new Chart(ctx2, {
     }
 });
 </script>
-        
+
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
  </div>
 </main>

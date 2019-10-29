@@ -78,7 +78,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
+              <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
               <a class="dropdown-item" href="/logout">Đăng xuất</a>
             </div>
         </ul>
@@ -192,10 +192,10 @@
                                     });
                                 </script>
                             <%}
-                                  
+
                         }%> -->
                         <%for(var i=0;i< squest.length;i++){
-                            if(squest[i].quest_type_id==2){ 
+                            if(squest[i].quest_type_id==2){
                               for(var j=0;j< s_ans.length;j++){
                                   if(s_ans[j].question_id==squest[i].squest_id){ %>
                                         <script type="text/javascript">
@@ -203,7 +203,7 @@
                                               "ans1":"<%=s_ans[j].ans_text%>"
                                             });
                                         </script>
-                                  <%}   
+                                  <%}
                               }
                               %>
                                 <script type="text/javascript">
@@ -307,7 +307,7 @@
                    </div>
              </div><br>
              <a href="#" style="margin-right: 3%;float: right;" type="button" class="btn btn-secondary">Xem kết quả khảo sát</a><br><br><br>
-             
+
         </div><br>
    </div>
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>

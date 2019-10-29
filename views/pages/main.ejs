@@ -65,7 +65,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
                   <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="/yourprofile">Quản lý</a>
+                    <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
                     <a class="dropdown-item" href="/logout">Đăng xuất</a>
                   </div>
