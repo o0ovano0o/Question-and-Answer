@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 28, 2019 lúc 12:43 PM
+-- Thời gian đã tạo: Th10 29, 2019 lúc 11:26 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.2
 
@@ -27,8 +27,21 @@ SET time_zone = "+00:00";
 --
 -- Cấu trúc bảng cho bảng `ans_quest`
 --
--- Error reading structure for table questionandanswer.ans_quest: #1932 - Table 'questionandanswer.ans_quest' doesn't exist in engine
--- Error reading data for table questionandanswer.ans_quest: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `questionandanswer`.`ans_quest`' at line 1
+
+CREATE TABLE `ans_quest` (
+  `ans_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `author` varchar(50) NOT NULL,
+  `ans_time` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `ans_quest`
+--
+
+INSERT INTO `ans_quest` (`ans_id`, `question_id`, `content`, `author`, `ans_time`) VALUES
+(1, 1, 'd hay', 'pho', '29/10/2019');
 
 -- --------------------------------------------------------
 
@@ -78,8 +91,22 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 --
 -- Cấu trúc bảng cho bảng `cmt_ans`
 --
--- Error reading structure for table questionandanswer.cmt_ans: #1932 - Table 'questionandanswer.cmt_ans' doesn't exist in engine
--- Error reading data for table questionandanswer.cmt_ans: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `questionandanswer`.`cmt_ans`' at line 1
+
+CREATE TABLE `cmt_ans` (
+  `cmt_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `ans_id` int(11) NOT NULL,
+  `author` varchar(50) NOT NULL,
+  `cmt` varchar(255) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `cmt_time` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `cmt_ans`
+--
+
+INSERT INTO `cmt_ans` (`cmt_id`, `question_id`, `ans_id`, `author`, `cmt`, `cmt_time`) VALUES
+(1, 1, 1, 'pho', 'cung dc', '29/10/2019');
 
 -- --------------------------------------------------------
 
@@ -591,6 +618,13 @@ INSERT INTO `yesnoreponse` (`reponse_id`, `quest_id`, `yesnovalue`) VALUES
 --
 
 --
+-- Chỉ mục cho bảng `ans_quest`
+--
+ALTER TABLE `ans_quest`
+  ADD PRIMARY KEY (`ans_id`,`question_id`) USING BTREE,
+  ADD KEY `ans_id` (`ans_id`);
+
+--
 -- Chỉ mục cho bảng `aquest`
 --
 ALTER TABLE `aquest`
@@ -604,6 +638,15 @@ ALTER TABLE `choice_multichoices`
   ADD PRIMARY KEY (`ans_id`,`response_id`,`quest_id`),
   ADD KEY `response_id` (`response_id`),
   ADD KEY `quest_id` (`quest_id`);
+
+--
+-- Chỉ mục cho bảng `cmt_ans`
+--
+ALTER TABLE `cmt_ans`
+  ADD PRIMARY KEY (`cmt_id`,`question_id`,`ans_id`) USING BTREE,
+  ADD KEY `cmt_id` (`cmt_id`),
+  ADD KEY `ans_id` (`ans_id`),
+  ADD KEY `question_id` (`question_id`);
 
 --
 -- Chỉ mục cho bảng `multichoices`
@@ -693,10 +736,22 @@ ALTER TABLE `yesnoreponse`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `ans_quest`
+--
+ALTER TABLE `ans_quest`
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT cho bảng `aquest`
 --
 ALTER TABLE `aquest`
   MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `cmt_ans`
+--
+ALTER TABLE `cmt_ans`
+  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `section`
@@ -751,6 +806,13 @@ ALTER TABLE `choice_multichoices`
   ADD CONSTRAINT `choice_multichoices_ibfk_2` FOREIGN KEY (`response_id`) REFERENCES `multichoices` (`reponse_id`),
   ADD CONSTRAINT `choice_multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `multichoices` (`quest_id`),
   ADD CONSTRAINT `choice_multichoices_ibfk_4` FOREIGN KEY (`ans_id`) REFERENCES `s_ans` (`ans_id`);
+
+--
+-- Các ràng buộc cho bảng `cmt_ans`
+--
+ALTER TABLE `cmt_ans`
+  ADD CONSTRAINT `cmt_ans_ibfk_1` FOREIGN KEY (`ans_id`) REFERENCES `ans_quest` (`ans_id`),
+  ADD CONSTRAINT `cmt_ans_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `aquest` (`question_id`);
 
 --
 -- Các ràng buộc cho bảng `multichoices`

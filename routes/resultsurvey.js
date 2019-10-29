@@ -15,24 +15,19 @@ router.get('/', function (req, res) {
 						}
 		    		else{
 								survey=num[0];
+								squest=num;
 								defer.resolve(num);
 					  }
 				});
 				
 					var dt = defer.promise;
 						dt.then(function(num){
-							data1,data2,data3,data4;
-							for(var i=0;i<num.length;i++){
-
-							}
 							var querysq=conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?",{surveysq_id:id}, (err, squests)=>{
 								if(err) throw err;
 								else{
-
-									
-								}
 									s_ans=squests;
-									res.render('resultsurvey', {session:req.session.user,squest:num});
+									res.render('resultsurvey', {session:req.session.user, s_ans:s_ans,squest:num});
+								}
 							});
 						});
 					

@@ -237,7 +237,7 @@
                     <div class="card-body">
 
                       <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|itemsPerPage:2" >
+                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name|orderBy:sortKey:reverse|itemsPerPage:2" >
                             <div class="col-md-1" style="padding-left: 25px;">
                                   <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                             </div>
@@ -268,12 +268,12 @@
                         </dir-pagination-controls>
                       </div>
                       <script type="text/javascript">
-                            var name_=[];
+                            var name=[];
                         </script>
                         <%for(var i=0;i< surveys[1].length;i++){
                           if(!surveys[1][i].sec_isopen == 0){ %>
                             <script type="text/javascript">
-                              name_.push({
+                              name.push({
                                 "chuded":"<%=surveys[1][i].sec_title%>",
                                 "motad":"<%=surveys[1][i].sec_desc%>",
                               "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>
@@ -284,7 +284,7 @@
                       <script type="text/javascript">
                         var app = angular.module('paginationAppd', ['angularUtils.directives.dirPagination']);
                         app.controller('listapp', function($scope){
-                           $scope.name_=name_;
+                           $scope.name=name;
                         });
                       </script>
 
