@@ -17,6 +17,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
+  <script src="/angular.ng-modules.js"></script>
 
 </head>
 
@@ -149,49 +152,59 @@
                 <br>
 
                 <div id="survey" class="tab-pane" role="tabpanel">
-                  <div class="card-body">
-
-                    <div class="card" id="sur">
-                      <div class="card-body">
-                        <div class="card">
+                  <div class="card-body" ng-module="paginationApppm"  ng-controller="listapppm">
+                    <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:5">
                           <div class="row padding">
-                            <div class="col-3 col-sm-3 col-md-2">
-                              <div class="card">
-                               <img class="card-img-top" src="./images/logo2.jpg" >
-                              </div>
+                            <div class="col-3 col-sm-3 col-md-2"  >
+                               <img class="card-img-top" style="max-width: 80px; max-height: 80px; margin:auto;" src="./images/logo3.jpg" >
                             </div>
-                            <div class="col-5 col-sm-5 col-md-6">
+                            <div class="col-8 col-sm-5 col-md-7">
                               <div class="card-body">
-                                <h5 class="card-title"><a href="/question">Khảo sát vấn đề ô nhiễm ở UET???</a></h5>
-                                <p class="card-text">Mô tả: Khảo sát sinh viên ô nhiễm tại UET-VNU<br>
-                                <p class="card-text">Có: 20 lượt khảo sát
+                                <h5 class="card-title"><a href="/question">{{vlue.tieude}}</a></h5>
+                                <p class="card-text">{{vlue.mota}}<br>
+                                <p class="card-text">Có: {{vlue.num}} lượt khảo sát
                                 </p>
                               </div>
                             </div>
-                            <div class="card-body">
-                              <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteSurvey">
-                              Xóa
-                              </button>
-                              <!-- <button type="button" class="btn btn-success px-5" data-toggle="modal" data-target="#EditSurveyModal">
-                              Chỉnh sửa
-                              </button> -->
+                            <div class="col-1 col-sm-3 col-md-2"  >
+                              <div class="card-body">
+                                <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteSurvey">Xóa</button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
                     </div>
-
                     <br>
-
+                    <dir-pagination-controls
+                      max-size="1"
+                      direction-links="true"
+                      boundary-links="true"  >
+                    </dir-pagination-controls>
                   </div>
+                  <script type="text/javascript">
+                       var phieum=[];
+                   </script>
+                   <%for(var i=0;i< 6;i++){
+                     if(true){ %>
+                       <script type="text/javascript">
+                         phieum.push({
+                           "tieude": "Khảo sát tình trạng ô nhiễm môi trường hiện nay",
+                           "mota":"Đánh giá ô nhiễm",
+                           "num": 20
+                         });
+                         </script>
+                         <%}
+                       }%>
+                   <script type="text/javascript">
+                     var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
+                      app.controller('listapppm', function($scope){
+                       $scope.phieum=phieum;
+                       });
+                   </script>
                 </div>
 
                  <div id="session" class="tab-pane" role="tabpanel">
-                  <div class="card-body">
-
-                    <div class="card" id="ses">
-                      <div class="card-body">
-                        <div class="card">
+                  <div class="card-body" ng-module="paginationses"  ng-controller="listses">
+                    <div class="card" id="ses" style="margin-bottom:10px;" dir-paginate="value in ses|orderBy:sortKey:reverse|itemsPerPage:5">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2">
                               <div class="card">
@@ -200,10 +213,10 @@
                             </div>
                             <div class="col-5 col-sm-5 col-md-6">
                               <div class="card-body">
-                                <h5 class="card-title"><a href="/question">Thảo luận liên quan tới framework khi thiết kế website
+                                <h5 class="card-title"><a href="/question">{{value.tieudes}}
                                 </a></h5>
-                                <p class="card-text">Mô tả: Khảo sát sinh viên khóa mới QH2019 (K64)<br>
-                                <p class="card-text">Có: 15 câu hỏi<br>
+                                <p class="card-text">Mô tả: {{value.motas}}<br>
+                                <p class="card-text">Có: {{value.nums}} câu hỏi<br>
                                 </p>
                               </div>
                             </div>
@@ -216,14 +229,38 @@
                               </button>
                             </div>
                           </div>
-                        </div>
-                      </div>
                     </div>
-
                     <br>
-
+                    <dir-pagination-controls
+                      max-size="1"
+                      direction-links="true"
+                      boundary-links="true"  >
+                    </dir-pagination-controls>
                   </div>
+                  <script type="text/javascript">
+                       var ses=[];
+                   </script>
+                   <%for(var i=0;i< 6;i++){
+                     if(true){ %>
+                       <script type="text/javascript">
+                         ses.push({
+                           "tieudes": "Thảo luận liên quan đến framework khi thiết kế website",
+                           "motas":"Đánh giá ô nhiễm",
+                           "nums": 20
+                         });
+                         </script>
+                         <%}
+                       }%>
+                   <script type="text/javascript">
+                     var app = angular.module('paginationses', ['angularUtils.directives.dirPagination']);
+                      app.controller('listses', function($scope){
+                       $scope.ses=ses;
+                       });
+                   </script>
                 </div>
+
+
+
               </div>
             </div>
           </div>
