@@ -23,15 +23,31 @@ router.get('/', function(req, res) {
 		        if (err) throw err;
 		        else {}
 	      });
-	      var querysq = conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?", {surveysq_id: id}, (err, squests) => {
-		        if (err) throw err;
-		        else {
-		          s_ans = squests;
-		          res.render('test', {
-		            session: req.session.user,
-		            s_ans: s_ans
-		          });}
-	      });
+       
+        var query = conn.query("SELECT * from user_reponse where surveyid=? and user_id=?", [id,req.session.user.user_id], (err, ress) => {
+            if (err) throw err;
+            else {
+              if(ress.length<=0){
+                var querysq = conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?", {surveysq_id: id}, (err, squests) => {
+                    if (err) throw err;
+                    else {
+                      s_ans = squests;
+                      res.render('test', {
+                        session: req.session.user,
+                        s_ans: s_ans,
+                        check:0
+                      });}
+                });
+              }
+              else {
+                res.render('test', {
+                        session: req.session.user,
+                        check:1,
+                      });
+              }
+            }
+        });
+	      
     });
   }
 	else {
@@ -128,7 +144,7 @@ router.post('/', function(req, res) {
                   if (err) {
                     throw err;
                   } else {
-                    console.log("22-insert sucesss");
+                    console.log("22-insert sucess");
                   }
                 });
               }
@@ -137,7 +153,7 @@ router.post('/', function(req, res) {
         }
       });
     });
-    var query = conn.query("SELECT * FROM survey;SELECT * FROM section", (err, surveys) => {
+    var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section Order by sec_time DESC", (err, surveys) => {
 	      if (err) throw err;
 	      else {
 	        res.render('main', {

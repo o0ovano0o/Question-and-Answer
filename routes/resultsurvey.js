@@ -22,11 +22,11 @@ router.get('/', function (req, res) {
 				
 					var dt = defer.promise;
 						dt.then(function(num){
-							var querysq=conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?",{surveysq_id:id}, (err, squests)=>{
+							var querysq=conn.query("SELECT * FROM textreponse inner join user_reponse on textreponse.reponse_id=user_reponse.reponse_id where ?",{surveyid:id}, (err, texts)=>{
 								if(err) throw err;
 								else{
-									s_ans=squests;
-									res.render('resultsurvey', {session:req.session.user, s_ans:s_ans,squest:num});
+									
+									res.render('resultsurvey', {session:req.session.user, texts,squest:num});
 								}
 							});
 						});
