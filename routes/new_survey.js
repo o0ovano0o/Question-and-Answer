@@ -118,6 +118,10 @@ router.post('/', function(req, res) {
                   throw err;
                 } else {
                   console.log("1-insert sucesss");
+                  var query = conn.query("UPDATE s_ans SET number=number+1 WHERE ?", {ans_id: ans_id}, (err, ok) => {
+                      if (err) throw err;
+                      else {}
+                  });
                 }
               });
             }
@@ -145,6 +149,10 @@ router.post('/', function(req, res) {
                     throw err;
                   } else {
                     console.log("22-insert sucess");
+                    var query = conn.query("UPDATE s_ans SET number=number+1 WHERE ?", {ans_id: ans_idd[j]}, (err, ok) => {
+                      if (err) throw err;
+                      else {}
+                  });
                   }
                 });
               }

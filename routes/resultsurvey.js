@@ -14,27 +14,26 @@ router.get('/', function (req, res) {
 							defer.reject(err);
 						}
 		    		else{
-								survey=num[0];
 								squest=num;
 								defer.resolve(num);
 					  }
 				});
 				
 					var dt = defer.promise;
-						dt.then(function(num){
-							var querysq=conn.query("SELECT * FROM textreponse inner join user_reponse on textreponse.reponse_id=user_reponse.reponse_id where ?",{surveyid:id}, (err, texts)=>{
+						dt
+						.then(function(num){
+							var querysq=conn.query("SELECT * FROM textreponse inner join user_reponse on textreponse.reponse_id=user_reponse.reponse_id where ?;SELECT * FROM yesno;SELECT * from single;SELECT * from multi",{surveyid:id}, (err, ans)=>{
 								if(err) throw err;
 								else{
-									
-									res.render('resultsurvey', {session:req.session.user, texts,squest:num});
+								res.render("resultsurvey",{session:req.session.user,survey:num[0],texts:ans[0],yesno:ans[1],single:ans[2],multi:ans[3]});
 								}
 							});
 						});
 					
 		}
 		else {
-
-			res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
+					res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 		}
 });
+
 module.exports = router;

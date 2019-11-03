@@ -1,0 +1,11 @@
+[
+{"type":"header","version":"4.8.4","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"questionandanswer"},
+{"type":"table","name":"yesno","database":"questionandanswer","data":
+[
+{"quest_id":"115","noo":"3","total":"4"},
+{"quest_id":"119","noo":"0","total":"1"},
+{"quest_id":"120","noo":"1","total":"1"}
+]
+}
+]

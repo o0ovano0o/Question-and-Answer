@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 02, 2019 lúc 06:29 PM
+-- Thời gian đã tạo: Th10 03, 2019 lúc 02:22 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -90,11 +90,17 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 (114, 15, 114),
 (114, 19, 114),
 (114, 20, 114),
+(114, 22, 114),
 (115, 15, 114),
 (115, 20, 114),
 (116, 20, 114),
+(116, 22, 114),
+(120, 24, 123),
+(121, 25, 123),
 (122, 14, 123),
-(123, 14, 123);
+(122, 25, 123),
+(123, 14, 123),
+(123, 24, 123);
 
 -- --------------------------------------------------------
 
@@ -121,6 +127,20 @@ INSERT INTO `cmt_ans` (`cmt_id`, `question_id`, `ans_id`, `author`, `cmt`, `cmt_
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc đóng vai cho view `multi`
+-- (See below for the actual view)
+--
+CREATE TABLE `multi` (
+`question_id` int(11)
+,`ans_id` int(11)
+,`ans_text` text
+,`number` int(11)
+,`response_id` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `multichoices`
 --
 
@@ -138,7 +158,11 @@ INSERT INTO `multichoices` (`reponse_id`, `quest_id`) VALUES
 (15, 114),
 (18, 114),
 (19, 114),
-(20, 114);
+(20, 114),
+(22, 114),
+(23, 123),
+(24, 123),
+(25, 123);
 
 -- --------------------------------------------------------
 
@@ -191,6 +215,22 @@ INSERT INTO `section` (`section_id`, `sec_title`, `sec_desc`, `author`, `sec_tim
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc đóng vai cho view `single`
+-- (See below for the actual view)
+--
+CREATE TABLE `single` (
+`reponse_id` int(11)
+,`quest_id` int(11)
+,`choice_id` int(11)
+,`question_id` int(11)
+,`ans_id` int(11)
+,`ans_text` text
+,`number` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `singlechoicereponse`
 --
 
@@ -209,7 +249,11 @@ INSERT INTO `singlechoicereponse` (`reponse_id`, `quest_id`, `choice_id`) VALUES
 (15, 113, 111),
 (18, 113, 112),
 (19, 113, 110),
-(20, 113, 111);
+(20, 113, 111),
+(22, 113, 112),
+(23, 121, 118),
+(24, 121, 119),
+(25, 121, 119);
 
 -- --------------------------------------------------------
 
@@ -385,9 +429,9 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 1, '', 0, 'giaovien1'),
 (9, '123', 'OK 123', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1'),
 (10, 'phiếu khảo sát 5', 'Mô tả', '0000-00-00', '2091-11-11', 1, '', 1, 'giaovien1'),
-(11, 'mụn ơi', 'ơi', '2019-10-18', '2019-11-11', 1, '', 36, 'giaovien1'),
-(12, 'Khảo sát 1', 'okkkk', '2019-10-18', '2019-11-11', 1, '', 3, 'giaovien1'),
-(13, 'okkk', 'okkk', '2019-10-18', '2019-11-11', 1, '', 5, 'giaovien1'),
+(11, 'mụn ơi', 'ơi', '2019-10-18', '2019-11-11', 1, '', 44, 'giaovien1'),
+(12, 'Khảo sát 1', 'okkkk', '2019-10-18', '2019-11-11', 1, '', 4, 'giaovien1'),
+(13, 'okkk', 'okkk', '2019-10-18', '2019-11-11', 1, '', 13, 'giaovien1'),
 (14, 'Khảo sát 1', 'thhh', '2019-10-18', '2019-10-27', 1, '', 0, 'giaovien1');
 
 -- --------------------------------------------------------
@@ -419,10 +463,10 @@ CREATE TABLE `s_ans` (
 --
 
 INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
-(22, 1, 'đáp án 1', 0),
+(22, 1, 'đáp án 1', 1),
 (22, 2, 'đáp án 2', 0),
 (23, 3, 'dù sao', 0),
-(23, 4, 'dù ngày sao ta vẫn muốn bên người', 0),
+(23, 4, 'dù ngày sao ta vẫn muốn bên người', 1),
 (25, 5, '123123', 0),
 (25, 6, '23123123', 0),
 (25, 7, '123123', 0),
@@ -526,20 +570,20 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (112, 107, '21312', 0),
 (112, 108, '312312', 0),
 (112, 109, '3123123', 0),
-(113, 110, 'đáp án 1', 0),
-(113, 111, 'đáp án 2', 0),
-(113, 112, 'đáp án 3', 0),
-(114, 113, 'đáp án 1', 0),
-(114, 114, 'aaa hihi', 0),
-(114, 115, 'thử nữa ', 0),
-(114, 116, 'ok', 0),
+(113, 110, 'đáp án 1', 1),
+(113, 111, 'đáp án 2', 2),
+(113, 112, 'đáp án 3', 2),
+(114, 113, 'đáp án 1', 2),
+(114, 114, 'aaa hihi', 4),
+(114, 115, 'thử nữa ', 2),
+(114, 116, 'ok', 2),
 (121, 117, 'Khóa 64', 0),
-(121, 118, 'Khóa 62', 0),
-(121, 119, 'Khóa 63', 0),
-(123, 120, 'đọc sách ', 0),
-(123, 121, 'học', 0),
-(123, 122, 'hát', 0),
-(123, 123, 'đàn', 0);
+(121, 118, 'Khóa 62', 1),
+(121, 119, 'Khóa 63', 3),
+(123, 120, 'đọc sách ', 1),
+(123, 121, 'học', 1),
+(123, 122, 'hát', 2),
+(123, 123, 'đàn', 2);
 
 -- --------------------------------------------------------
 
@@ -562,7 +606,14 @@ INSERT INTO `textreponse` (`reponse_id`, `quest_id`, `textreponse`) VALUES
 (14, 118, '1999'),
 (15, 116, 'okkk'),
 (19, 116, 'mày cũng thích tớ'),
-(20, 116, 'okkkeyyy được chưa');
+(20, 116, 'okkkeyyy được chưa'),
+(22, 116, 'oki nóng quá'),
+(23, 117, 'Vân '),
+(23, 118, '1989'),
+(24, 117, 'mai'),
+(24, 118, '2000'),
+(25, 117, 'leeeee'),
+(25, 118, '2001');
 
 -- --------------------------------------------------------
 
@@ -617,7 +668,23 @@ INSERT INTO `user_reponse` (`surveyid`, `user_id`, `reponse_id`, `reponse_date`)
 (11, 11, 15, '2019-11-02'),
 (11, 10, 18, '2019-11-03'),
 (11, 8, 19, '2019-11-03'),
-(11, 2, 20, '2019-11-03');
+(11, 2, 20, '2019-11-03'),
+(11, 12, 22, '2019-11-03'),
+(13, 10, 23, '2019-11-03'),
+(13, 2, 24, '2019-11-03'),
+(13, 11, 25, '2019-11-03');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc đóng vai cho view `yesno`
+-- (See below for the actual view)
+--
+CREATE TABLE `yesno` (
+`quest_id` int(11)
+,`noo` decimal(23,0)
+,`total` bigint(21)
+);
 
 -- --------------------------------------------------------
 
@@ -640,7 +707,41 @@ INSERT INTO `yesnoreponse` (`reponse_id`, `quest_id`, `yesnovalue`) VALUES
 (14, 120, 0),
 (15, 115, 0),
 (19, 115, 0),
-(20, 115, 0);
+(20, 115, 0),
+(22, 115, 1),
+(23, 119, 1),
+(23, 120, 1),
+(24, 119, 0),
+(24, 120, 1),
+(25, 119, 0),
+(25, 120, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc cho view `multi`
+--
+DROP TABLE IF EXISTS `multi`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `multi`  AS  select `s`.`question_id` AS `question_id`,`s`.`ans_id` AS `ans_id`,`s`.`ans_text` AS `ans_text`,`s`.`number` AS `number`,`choice_multichoices`.`response_id` AS `response_id` from (`choice_multichoices` left join `s_ans` `s` on((`s`.`question_id` = `choice_multichoices`.`quest_id`))) group by `s`.`ans_id` ;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc cho view `single`
+--
+DROP TABLE IF EXISTS `single`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `single`  AS  select `singlechoicereponse`.`reponse_id` AS `reponse_id`,`singlechoicereponse`.`quest_id` AS `quest_id`,`singlechoicereponse`.`choice_id` AS `choice_id`,`s_ans`.`question_id` AS `question_id`,`s_ans`.`ans_id` AS `ans_id`,`s_ans`.`ans_text` AS `ans_text`,`s_ans`.`number` AS `number` from (`singlechoicereponse` left join `s_ans` on((`s_ans`.`question_id` = `singlechoicereponse`.`quest_id`))) group by `s_ans`.`ans_id` ;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc cho view `yesno`
+--
+DROP TABLE IF EXISTS `yesno`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yesno`  AS  select `yesnoreponse`.`quest_id` AS `quest_id`,sum((case when (`yesnoreponse`.`yesnovalue` = 0) then 1 else 0 end)) AS `noo`,count(`yesnoreponse`.`yesnovalue`) AS `total` from `yesnoreponse` group by `yesnoreponse`.`quest_id` ;
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -750,7 +851,6 @@ ALTER TABLE `user`
 --
 ALTER TABLE `user_reponse`
   ADD PRIMARY KEY (`reponse_id`) USING BTREE,
-  ADD UNIQUE KEY `user_id` (`user_id`),
   ADD KEY `surveyid` (`surveyid`);
 
 --
@@ -816,7 +916,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `user_reponse`
 --
 ALTER TABLE `user_reponse`
-  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
