@@ -117,15 +117,27 @@
                   Đăng bởi: <%=survey.author%><br>
                  </p>
                  <p id="date1"></p>
-                 <p id="date2"></p>
-                 <%if(session.username==survey.author){%>
+                <%if(survey.isopen==0){
+                 %>
+                 <p style="font-weight: bold;">Đã đóng</p>
+                
+                 <%}if(session.username==survey.author){
+
+                if(survey.isopen==0){
+                 %>
+                  <a href="/deletesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Xóa phiếu khảo sát</a>
+                  <%}else{%>
+                 <a href="/deletesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Xóa phiếu khảo sát</a>
+                 <a href="/closesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Đóng phiếu khảo sát</a>
                  <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
-                 <%}%>
+                 <%}}%>
               </div>
             </div>
           </div>
         </div>
       </div><br>
+      <% if(survey.isopen==1){
+                 %>
       <div class="card">
           <div class="card-header" style="background-color: #00cccc">
               <h5><b>Đăng bởi: <%=survey.author%></b></h5>
@@ -257,7 +269,7 @@
              </div>
              <br>
              <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a><br><br><br>
-
+<%}%>
         </div><br>
    </div>
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
@@ -422,13 +434,13 @@
 
 <script type="text/javascript">
     <% var n =  JSON.stringify(survey.startdate)%>;
-    <% var m =  JSON.stringify(survey.enddate)%> ;
+  
     var text1 = <%- n%> ;
-    var text2 = <%- m%> ;
+  
     var date1 = new Date(text1);
-    var date2 = new Date(text2);
+   
     document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
-    document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
+   
     function checknumber(inp){
       if(inp.value=="")
         inp.value=1;

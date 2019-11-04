@@ -620,7 +620,7 @@
                   <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
 
 
-                  <input type="date" name="datebegin" class="form-control" id="date1">
+                  <input type="date" name="datebegin" class="form-control" id="date1" disabled="on">
                   <script>var now = new Date();
 
                       var day = ("0" + now.getDate()).slice(-2);
@@ -629,14 +629,6 @@
                       var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
 
                       $('#date1').val(today);</script>
-
-
-
-
-                  <label for="date_end" class="col-form-label">Ngày kết thúc: </label>
-
-
-                  <input type="date" name="date_end" class="form-control" onblur="check(this);" id="date2" required>
                 </div>
 
             <div class="modal-footer">

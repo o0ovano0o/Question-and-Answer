@@ -49,7 +49,7 @@ router.post('/', function (req, res) {
 				alert("Không thể tạo phiên");
 			}
 			else {
-				var query = conn.query("SELECT * FROM survey;SELECT * FROM section",  (err, surveys) => {
+				var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
 					if(err) throw err;
 					else{
 						res.render('main',{session: req.session.user, surveys}); } 
@@ -63,7 +63,6 @@ router.post('/', function (req, res) {
 			title: create.title,
 			description: create.description,
 			startdate: now,
-			enddate: create.date_end,
 			isopen: 1,
 			views: 0,
 			author: req.session.user.username
@@ -72,7 +71,7 @@ router.post('/', function (req, res) {
 				if (err) throw err;
 				else {
 
-					var query = conn.query("SELECT * FROM survey;SELECT * FROM section", (err, surveys) => {
+					var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section", (err, surveys) => {
 						if (err) throw err;
 						else {
 							res.render('main', {

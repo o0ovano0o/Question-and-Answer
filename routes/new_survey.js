@@ -70,12 +70,12 @@ router.post('/', function(req, res) {
     var dt = defer.promise;
     dt.then(function(squest) {
       var now = new Date();
-      user_reponse = {
+      ureponse = {
 	        surveyid: id,
 	        user_id: req.session.user.user_id,
 	        reponse_date: now
       }
-      var query = conn.query("INSERT INTO  user_reponse SET ? ", user_reponse, (err, res) => {
+      var query = conn.query("INSERT INTO  user_reponse SET ? ", ureponse, (err, res) => {
         if (err) {
           throw err;
         } else {
