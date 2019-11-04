@@ -167,11 +167,11 @@
                   <h6><%=question[2][i].content%></h6>
                     <hr id = "phienhoidap" class="featurette-divider">
                     <a href="">Thích</a>
-                    <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl">Trả lời
+                    <a href="" style="padding-left: 2%;"  data-target="#tl" aria-expanded="false" aria-controls="tl">
                     </a><br>
                   <p>
                     <form method="POST" action="/question?cmt=<%=question[2][i].ans_id%>">
-                    <div class="collapse" id="tl">
+                    <div  id="tl">
                       <div class="row">
 
                         <div class="col-9 col-sm-10 col-md-11">
@@ -197,21 +197,6 @@
                     <div class="card-body">
                       <p><%=question[3][j].cmt%></p>
                       <a href="" style="">Thích</a>
-                      <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#tl2" aria-expanded="false" aria-controls="tl2">Trả lời</a><br>
-                      <p>
-                        <div class="collapse" id="tl2">
-                          <div class="row">
-
-                            <div class="col-9 col-sm-10 col-md-11">
-                              <input type="nhap" class="form-control" id="search2" placeholder="Viết bình luận ...">
-                            </div>
-                            <div class="col-3 col-sm-2 col-md-1">
-                              <button class="btn btn-outline-secondary" type="submit">Gửi</button>
-                            </div>
-
-                          </div>
-                        </div>
-                      </p>
                     </div>
 
                   </div>
@@ -234,32 +219,38 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="UserModalLabel">Tài khoản: Việt Cường</h5>
+                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
 
-                <form>
+                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
 
                   <div class="form-group">
                     <label for="InputUserName">Họ tên:</label>
-                    <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
+                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
 
                   </div>
                   <div class="form-group">
-                    <label for="InputEmail">Email:</label>
-                    <input type="email" class="form-control" id="InputEmail" placeholder="">
+                    <label for="InputPassword">Mật khẩu mới:</label>
+                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
                   </div>
+
+                  <div class="form-group">
+                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
+                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
+                  </div>
+                  <div class="modal-footer">
+                <button type="submit" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
+
+              </div>
 
                 </form>
               </div>
 
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
-
-              </div>
+              
             </div>
           </div>
         </div>
