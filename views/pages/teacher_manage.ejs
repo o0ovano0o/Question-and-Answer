@@ -170,7 +170,6 @@
                                 </p>
                               </div>
                             </div>
-                          
                           </div>
                     </div>
                     <br>
@@ -183,16 +182,16 @@
                   <script type="text/javascript">
                        var phieum=[];
                    </script>
-                   <%for(var i=0;i< 6;i++){
-                     if(true){ %>
+                   <%for(var i=0;i< info.length;i++){
+                      %>
                        <script type="text/javascript">
                          phieum.push({
-                           "tieude": "Khảo sát tình trạng ô nhiễm môi trường hiện nay",
+                           "tieude": "<%=info[i].title%>",
                            "mota":"Đánh giá ô nhiễm",
                            "num": 20
                          });
                          </script>
-                         <%}
+                         <%
                        }%>
                    <script type="text/javascript">
                      var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
