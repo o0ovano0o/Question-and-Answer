@@ -26,7 +26,59 @@
 <!-- BODY -->
 <body>
 
-  <%- include header %>
+  <!-- HEADER -->
+    <header>
+        <!--Navbars -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <a id="logo" class="navbar-brand" href="/home">Q&A</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          <div class="collapse navbar-collapse" style="margin: 0px 30px" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/support">Trợ giúp</a>
+              </li>
+            </ul>
+
+            <form id="search" class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+            <% if (session.username) {%>
+            <ul class="navbar-nav" style="display: contents;">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
+              </li>
+              <!-- <li>
+                <div class="thumb d-none d-sm-none d-md-block" style="background-image:url(images/avatar2.jpg);width: 40px;height: 40px"></div>
+              </li>   -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
+                  <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                </div>
+              </li>
+            </ul>
+            <%} else {%>
+            <ul class="navbar-nav" style="display: contents;">
+              <li class="nav-item">
+                <a class="nav-link" href="/login"><Đăng nhập</a>
+              </li>
+            </ul>
+            <%}%>
+          </div>
+        </nav>
+    </header>
+    <br>
+
   <!-- MAIN -->
     <main role="main">
 
@@ -101,7 +153,11 @@
 
                 <div id="survey" class="tab-pane" role="tabpanel">
                   <div class="card-body" ng-module="paginationApppm"  ng-controller="listapppm">
-                    <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:5">
+                    <form id="search" class="form-inline my-2 my-lg-0" style ="margin-bottom: 10px">
+                      <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px" placeholder="Search" aria-label="Search" required>
+                    </form>
+                    <div  ng-click="sort('tieude')" class=" glyphicon sort-icon" ng-show="sortKey=='tieude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                    <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2"  >
                                <img class="card-img-top" style="max-width: 80px; max-height: 80px; margin:auto;" src="./images/logo3.jpg" >
@@ -114,11 +170,7 @@
                                 </p>
                               </div>
                             </div>
-                            <div class="col-1 col-sm-3 col-md-2"  >
-                              <div class="card-body">
-                                <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteSurvey">Xóa</button>
-                              </div>
-                            </div>
+                          
                           </div>
                     </div>
                     <br>
@@ -152,7 +204,11 @@
 
                  <div id="session" class="tab-pane" role="tabpanel">
                   <div class="card-body" ng-module="paginationses"  ng-controller="listses">
-                    <div class="card" id="ses" style="margin-bottom:10px;" dir-paginate="value in ses|orderBy:sortKey:reverse|itemsPerPage:5">
+                    <form id="search" class="form-inline my-2 my-lg-0" style ="margin-bottom: 10px">
+                      <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px" placeholder="Search" aria-label="Search" required>
+                    </form>
+                    <div  ng-click="sort('tieudes')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudes'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                    <div class="card" id="ses" style="margin-bottom:10px;" dir-paginate="value in ses|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2">
                               <div class="card">
@@ -277,7 +333,47 @@
             </div>
           </div>
         </div>
-<%- include update_inf_user %>
+
+      <!-- Cập nhật tài khoản -->
+        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
+
+                  <div class="form-group">
+                    <label for="InputUserName">Họ tên:</label>
+                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="InputPassword">Mật khẩu mới:</label>
+                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
+                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
+                  </div>
+                  <div class="modal-footer">
+                <button type="submit" class="btn btn-success" >Cập nhật</button>
+
+              </div>
+
+                </form>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
 
         <!-- Cập nhật phiên hỏi đáp -->
           <div class="modal fade" id="EditSessionModal" tabindex="-1" role="dialog" aria-labelledby="QuesModalLabel" aria-hidden="true">
