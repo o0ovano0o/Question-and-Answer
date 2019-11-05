@@ -21,23 +21,29 @@ router.get('/', function(req, res) {
           }
         });
 
-        var dt = defer.promise;
-        dt.then(function(num) {
-    	      var query = conn.query("UPDATE survey SET views=views+1 WHERE ?", {survey_id: id}, (err, squests) => {
-    		        if (err) throw err;
-    		        else {}
-    	      });
-    	      var querysq = conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?", {surveysq_id: id}, (err, squests) => {
-    		        if (err) throw err;
-    		        else {
-    		          s_ans = squests;
-    		          res.render('test', {
-    		            session: req.session.user,
-    		            s_ans: s_ans,
-                    survey: num[0],
-                    squest : num,
-    		          });}
-    	      });
+        var query = conn.query("SELECT * from user_reponse where surveyid=? and user_id=?", [id,req.session.user.user_id], (err, ress) => {
+            if (err) throw err;
+            else {
+              if(ress.length<=0){
+                var querysq = conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?", {surveysq_id: id}, (err, squests) => {
+                    if (err) throw err;
+                    else {
+                      s_ans = squests;
+                      res.render('test', {
+                        session: req.session.user,
+                        s_ans: s_ans,
+                        check:0
+                      });}
+                });
+              }
+              else {
+                res.render('test', {
+                        session: req.session.user,
+                        check:1,
+
+                      });
+              }
+            }
         });
       }
     });
