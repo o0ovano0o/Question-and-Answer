@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
       survey = surveys[0];
       if (err) throw err;
       else {
-          res.render('createquestion', {
+          res.render('createquestions', {
             session: req.session.user,
             survey: survey,
           });
