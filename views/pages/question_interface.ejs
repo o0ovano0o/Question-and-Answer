@@ -31,10 +31,10 @@
 
       <!-- Phiên hỏi đáp -->
       <div class="card">
-        <div class="card-header" style="background-color: #bbbbbb">
+        <div class="card-header" style="background-color: #999">
           <h5><b>Phiên hỏi đáp</b></h5>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="background-color: #dddddd">
           <div class="row padding">
             <div class="col-3 col-sm-2 col-md-2">
               <div class="card">
@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="col-9 col-sm-9 col-md-9">
-              <div class="card-body">
+              <div class="card-body" style="margin-top: -20px;">
                 <h4 class="card-title"><%=question[1][0].sec_title%></h4>
                 <p class="card-text"><%=question[1][0].sec_desc%><br>
                   Đăng bởi: <a href="/yourprofile?id=<%=question[1][0].user_id%>"><%=question[1][0].name%></a><br>
@@ -58,11 +58,11 @@
       <!-- Nội dung câu hỏi -->
       <div class="card">
 
-        <div class="card-header" style="background-color: #bbbbbb">
-          <h5><b>Câu hỏi đăng bởi: <a href="/yourprofile?id=<%=question[0][0].user_id%>"> <%=question[0][0].name%></a></b></h5>
+        <div class="card-header" style="background-color: #999">
+          <h5><b>Câu hỏi đăng bởi: <a href="/yourprofile?id=<%=question[0][0].user_id%>" style="color: #000099;"> <%=question[0][0].name%></a></b></h5>
         </div>
 
-        <div class="card-body">
+        <div class="card-body" style="background-color: #dddddd"dddddd>
 
           <div class="card">
             <div class="card-header" style="background-color: #33ccff">
