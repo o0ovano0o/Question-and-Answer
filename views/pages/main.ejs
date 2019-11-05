@@ -50,10 +50,9 @@
                 </li>
               </ul>
 
-                <form id="search" class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
-                  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <!-- <form id="search" class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Search" aria-label="Search" required>
+                </form> -->
               <% if (session.username) {%>
               <ul class="navbar-nav" style="display: contents;">
                 <li class="nav-item">
@@ -165,8 +164,12 @@
                     <!-- Nội dung -->
                     <div class="card-body">
 
-                        <div id="1" ng-module="paginationApp" ng-controller="listdata">
-                              <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|itemsPerPage:5">
+                        <div id="1" ng-module="paginationApp" ng-controller="listdata" >
+                          <form id="search1" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Search" aria-label="Search" required>
+                          </form>
+                          <div  ng-click="sort('chude')" class=" glyphicon sort-icon" ng-show="sortKey=='chude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                              <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
                                       <div class="col-md-1" style="padding-left: 25px;">
                                             <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                                       </div>
@@ -238,7 +241,11 @@
                     <div class="card-body">
 
                       <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|itemsPerPage:5" >
+                        <form id="search2" class="form-inline my-2 my-lg-0">
+                          <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Search" aria-label="Search" required>
+                        </form>
+                        <div  ng-click="sort('chuded')" class=" glyphicon sort-icon" ng-show="sortKey=='chuded'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
                             <div class="col-md-1" style="padding-left: 25px;">
                                   <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                             </div>
@@ -303,7 +310,6 @@
               <div class="card-header" id="headingThree">
                 <div class="row">
                   <div class="col-lg-6 col-md-6 col-5 col-sm-5 col-xl-6">
-
                     <h3 class="mb-0">
                       <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" id="collapse2">
                         Các phiếu khảo sát
@@ -343,11 +349,15 @@
                     <div class="card-body">
 
                       <div id="3" ng-module="paginationApppm"  ng-controller="listapppm">
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:5">
+                        <form id="search3" class="form-inline my-2 my-lg-0">
+                          <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Search" aria-label="Search" required>
+                        </form>
+                        <div  ng-click="sort('tieudepm')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudepm'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                        <div class="row post"  style="margin-top: 20px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
                           <div class="col-md-1" style="padding-left: 25px;">
                               <div class="thumb" style="background-image:url(./images/logo3.jpg);width: 40px;height: 40px"></div>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-6" >
                               <a href="{{vlue.linkpm}}"><h4>{{vlue.tieudepm}}</h4></a>
                               <p>{{vlue.motapm}}</p>
                           </div>
@@ -416,8 +426,11 @@
                     <div class="card-body">
 
                       <div id="4" ng-module="paginationApppd"  ng-controller="listapppd">
-
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="vlues in phieud|orderBy:sortKey:reverse|itemsPerPage:5">
+                        <form id="search4" class="form-inline my-2 my-lg-0">
+                          <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Search" aria-label="Search" required>
+                        </form>
+                        <div  ng-click="sort('tieudepd')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudepd'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                        <div class="row post" style="margin-top: 20px;" dir-paginate="vlues in phieud|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
                           <div class="col-md-1" style="padding-left: 25px;">
                             <div class="thumb" style="background-image:url(./images/logo3.jpg);width: 40px;height: 40px">
                             </div>
@@ -518,7 +531,7 @@
                 </form>
               </div>
 
-              
+
             </div>
           </div>
         </div>
