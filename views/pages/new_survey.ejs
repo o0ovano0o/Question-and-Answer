@@ -93,6 +93,7 @@
     </nav>
   </header>
   <main role="main">
+    <% var cauhoi=0%>
     <div class="container marketing">
       <br>
       <div class="card">
@@ -150,7 +151,7 @@
                              var loai1=[];
                         </script>
                         <%for(var i=0;i< squest.length;i++){
-                            if(squest[i].quest_type_id==3){ %>
+                            if(squest[i].quest_type_id==3){ cauhoi+=1;%>
                                 <script type="text/javascript">
                                      loai1.push({
                                        "cau":1,
@@ -183,19 +184,8 @@
                         <script type="text/javascript">
                               var ans=[];
                         </script>
-
-                        <!-- <%for(var j=0;j< s_ans.length;j++){
-                            if(s_ans[j].question_id==%>){ %>
-                                <script type="text/javascript">
-                                    ans.push({
-                                        "ans1":"<%=s_ans[j].ans_text%>"
-                                    });
-                                </script>
-                            <%}
-                                  
-                        }%> -->
                         <%for(var i=0;i< squest.length;i++){
-                            if(squest[i].quest_type_id==2){ 
+                            if(squest[i].quest_type_id==2){ cauhoi+=1;
                               for(var j=0;j< s_ans.length;j++){
                                   if(s_ans[j].question_id==squest[i].squest_id){ %>
                                         <script type="text/javascript">
@@ -256,7 +246,7 @@
                               <%}
                         }%>
                         <%for(var i=0;i< squest.length ;i++){
-                            if(squest[i].quest_type_id==1){ %>
+                            if(squest[i].quest_type_id==1){ cauhoi+=1;%>
                                 <script type="text/javascript">
                                      loai3.push({
                                        "cau3":5,
@@ -288,7 +278,7 @@
                             var loai4=[];
                        </script>
                        <%for(var i=0;i< squest.length;i++){
-                           if(squest[i].quest_type_id==4){ %>
+                           if(squest[i].quest_type_id==4){ cauhoi+=1;%>
                                <script type="text/javascript">
                                     loai4.push({
                                       "cau4":6,
@@ -303,9 +293,12 @@
                             $scope.loai4=loai4;
                             });
                         </script>
-                       <button class="btn btn-secondary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
+                      
                    </div>
-             </div><br>
+             </div><br> 
+             <%if(cauhoi>1){ %>
+                       <p><%=cauhoi%></p>
+                       <button class="btn btn-secondary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><%}%><br><br>
              <a href="#" style="margin-right: 3%;float: right;" type="button" class="btn btn-secondary">Xem kết quả khảo sát</a><br><br><br>
              
         </div><br>

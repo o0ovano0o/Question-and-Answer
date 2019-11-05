@@ -145,7 +145,7 @@
 
             <div class="row">
                 <div class="col-6 col-sm-6 col-md-6">
-                    <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-primary">< Trở về danh sách phiếu</a>
+                    <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-primary">Trở về danh sách phiếu</a>
                 </div>
                  <%if(check==0&&survey.isopen==1){%>
                 <div class="col-6 col-sm-6 col-md-6">
@@ -261,7 +261,8 @@
                               </div>
                           <%}
                       }%>
-                      <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
+                       <%if(dem>1){ %>
+                       <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><%}%><br><br>
                    </div>
                  </div>
                </form>
