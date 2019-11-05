@@ -166,7 +166,7 @@
                     <div class="card-body">
 
                         <div id="1" ng-module="paginationApp" ng-controller="listdata">
-                              <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|itemsPerPage:2">
+                              <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|itemsPerPage:5">
                                       <div class="col-md-1" style="padding-left: 25px;">
                                             <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                                       </div>
@@ -179,12 +179,12 @@
                                                   <tr>
                                                         <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                                         <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                                        <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                                        <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                                   </tr>
                                                   <tr>
                                                         <td><p>{{val.lxem}} lượt xem</p></td>
                                                         <td><p>{{val.phanhoi}} phản hồi</p></td>
-                                                        <td><p>Đánh giá: {{val.dagia}}</p></td>
+                                                        <td><p>tác giả: {{val.author}}</p></td>
                                                   </tr>
                                             </table>
                                       </div>
@@ -207,6 +207,7 @@
                                 "chude":"<%=surveys[1][i].sec_title%>",
                                 "mota":"<%=surveys[1][i].sec_desc%>",
                               "link":"/new_session?id="+<%=surveys[1][i].section_id%>,
+                              "author":"<%=surveys[1][i].author%>"
 
                               });
                               </script>
@@ -237,7 +238,7 @@
                     <div class="card-body">
 
                       <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|itemsPerPage:2" >
+                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|itemsPerPage:5" >
                             <div class="col-md-1" style="padding-left: 25px;">
                                   <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                             </div>
@@ -250,12 +251,12 @@
                                         <tr>
                                           <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                           <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                         </tr>
                                     <tr>
                                           <td><p>{{value.lxemd}} lượt xem</p></td>
                                           <td><p>{{value.phanhoid}} phản hồi</p></td>
-                                          <td><p>Đánh giá: {{value.dagiad}}</p></td>
+                                          <td><p>tác giả: {{value.authord}}</p></td>
                                     </tr>
                                   </table>
                             </div>
@@ -276,7 +277,8 @@
                               name_.push({
                                 "chuded":"<%=surveys[1][i].sec_title%>",
                                 "motad":"<%=surveys[1][i].sec_desc%>",
-                              "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>
+                              "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>,
+                              "authord":"<%=surveys[1][i].author%>"
                               });
                               </script>
                               <%}

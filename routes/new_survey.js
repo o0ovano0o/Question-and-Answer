@@ -43,6 +43,7 @@ router.get('/', function(req, res) {
                 res.render('test', {
                         session: req.session.user,
                         check:1,
+                        
                       });
               }
             }

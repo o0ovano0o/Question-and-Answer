@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 04, 2019 lúc 12:44 PM
+-- Thời gian đã tạo: Th10 05, 2019 lúc 07:30 AM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -208,7 +208,6 @@ CREATE TABLE `section` (
 
 INSERT INTO `section` (`section_id`, `sec_title`, `sec_desc`, `author`, `sec_time`, `sec_pass`, `sec_isopen`) VALUES
 (2, 'phiên hỏi đáp lần 2', 'phiên hỏi đáp', 'giaovien1', '2019-10-16', 'giaovien1', 1),
-(3, '', '', 'giaovien1', '2019-10-16', 'giaovien1', 1),
 (4, 'ffjghvh', 'ytfghc', 'giaovien1', '2019-10-16', 'giaovien1', 1),
 (5, 'thử', 'ok', 'giaovien1', '2019-10-18', 'giaovien1', 1);
 
@@ -420,7 +419,7 @@ CREATE TABLE `survey` (
 --
 
 INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate`, `isopen`, `pass`, `views`, `author`) VALUES
-(1, 'Khảo sát khóa 64', 'Khảo sát thông tin về nguyện vọng, ước mơ...', '2019-09-30', '2019-10-03', 0, '', 0, 'taikhoan1'),
+(1, 'Khảo sát khóa 64', 'Khảo sát thông tin về nguyện vọng, ước mơ...', '2019-09-30', '2019-10-03', 0, '', 1, 'taikhoan1'),
 (2, 'Khảo sát sinh viên', 'Khảo sát việc làm thêm của sinh viên', '2019-10-02', '2019-10-19', 1, '', 3, '1234'),
 (3, 'Khảo sát ngành CNTT', 'Khảo sát dành cho các sinh viên khoa CNTT', '2019-10-02', '2019-10-23', 1, '', 0, '12345'),
 (4, 'Khảo sát ngành CNTT', 'Khảo sát dành cho các sinh viên khoa CNTT K62', '2019-10-02', '2019-10-03', 0, '', 3, '12345'),
@@ -429,11 +428,11 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (7, 'phiếu khảo sát 3', 'dugfwdgfkljwef', '0000-00-00', '2019-11-11', 0, '', 2, 'giaovien1'),
 (8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 0, '', 1, 'giaovien1'),
 (9, '123', 'OK 123', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1'),
-(10, 'phiếu khảo sát 5', 'Mô tả', '0000-00-00', '2091-11-11', 0, '', 9, 'giaovien1'),
-(11, 'mụn ơi', 'ơi', '2019-10-18', '2019-11-11', 1, '', 46, 'giaovien1'),
+(10, 'phiếu khảo sát 5', 'Mô tả', '0000-00-00', '2091-11-11', 0, '', 10, 'giaovien1'),
+(11, 'Phiếu khảo sát ', 'Mô tả về phiếu khảo sát', '2019-10-18', '2019-11-11', 1, '', 59, 'giaovien1'),
 (12, 'Khảo sát 1', 'okkkk', '2019-10-18', '2019-11-11', 1, '', 6, 'giaovien1'),
 (13, 'okkk', 'okkk', '2019-10-18', '2019-11-11', 1, '', 13, 'giaovien1'),
-(15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 1, '', 5, 'giaovien1');
+(15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 1, '', 6, 'giaovien1');
 
 -- --------------------------------------------------------
 
