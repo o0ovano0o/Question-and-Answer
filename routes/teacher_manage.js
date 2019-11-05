@@ -7,20 +7,20 @@ var q = require('q');
 router.get('/', function (req, res) {
 	if(req.session.user){
 		var id = req.query.id;
-		var query = conn.query("SELECT * FROM survey join user on user.username= survey.author WHERE ?", { user_id: id}, function(err, results) {
+		var defer = q.defer();
+		var query = conn.query("SELECT * FROM user WHERE ?", { user_id: id}, function(err, results) {
 			if(err) {
-				throw err;
+				defer.reject(err);
 			}
 			else{
-				console.log(results);
-				res.render('teacher_manage', {session: req.session.user, info: results});
+				defer.resolve(results);
 			}
 		});
-		// var dt = defer.promise;
-		// dt.then(function(results){
-		// 	var sections = results;
-		// 	res.render('teacher_manage', {session: req.session.user, info: sections});
-		// });
+		var dt = defer.promise;
+		dt.then(function(result){
+			var sections = result;
+			res.render('teacher_manage', {session: req.session.user, info: sections});
+		});
 	}
 	else
 		res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
