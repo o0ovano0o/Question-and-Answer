@@ -27,7 +27,7 @@ router.get('/', function(req, res) {
         var query = conn.query("SELECT * from user_reponse where surveyid=? and user_id=?", [id,req.session.user.user_id], (err, ress) => {
             if (err) throw err;
             else {
-              if(ress.length<=0){
+              if(ress.length<=0||req.session.user.isadmin){
                 var querysq = conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?", {surveysq_id: id}, (err, squests) => {
                     if (err) throw err;
                     else {
@@ -43,7 +43,6 @@ router.get('/', function(req, res) {
                 res.render('test', {
                         session: req.session.user,
                         check:1,
-                        
                       });
               }
             }
@@ -162,15 +161,7 @@ router.post('/', function(req, res) {
         }
       });
     });
-    var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section Order by sec_time DESC", (err, surveys) => {
-	      if (err) throw err;
-	      else {
-	        res.render('main', {
-	          session: req.session.user,
-	          surveys
-	        });
-	      }
-    });
+    res.redirect('/survey?id=' + req.query.id );
   }
 	else {
     res.render('login', {data: {error: "Mời bạn đăng nhập!"}});
