@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 			
 			var id = req.query.id;
 			var defer = q.defer();
-			var query = conn.query("SELECT * FROM user WHERE ?", { user_id: id}, function(err, results) {
+			var query = conn.query("SELECT * FROM survey join user on user.username= survey.author WHERE ? Order by startdate DESC", { user_id: id}, function(err, results) {
 				if(err) {
 					defer.reject(err);
 				}

@@ -154,7 +154,7 @@
                 <div id="survey" class="tab-pane" role="tabpanel">
                   <div class="card-body" ng-module="paginationApppm"  ng-controller="listapppm">
                     <form id="search" class="form-inline my-2 my-lg-0" style ="margin-bottom: 10px">
-                      <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px" placeholder="Search" aria-label="Search" required>
+                      <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width:700px;" placeholder="Tìm kiếm phiếu khảo sát" aria-label="Search" required>
                     </form>
                     <div  ng-click="sort('tieude')" class=" glyphicon sort-icon" ng-show="sortKey=='tieude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
                     <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
@@ -164,7 +164,7 @@
                             </div>
                             <div class="col-8 col-sm-5 col-md-7">
                               <div class="card-body">
-                                <h5 class="card-title"><a href="/question">{{vlue.tieude}}</a></h5>
+                                <h5 class="card-title"><a href="{{vlue.link}}">{{vlue.tieude}}</a></h5>
                                 <p class="card-text">{{vlue.mota}}<br>
                                 <p class="card-text">Có: {{vlue.num}} lượt khảo sát
                                 </p>
@@ -187,8 +187,9 @@
                        <script type="text/javascript">
                          phieum.push({
                            "tieude": "<%=info[i].title%>",
-                           "mota":"Đánh giá ô nhiễm",
-                           "num": 20
+                           "mota":"<%=info[i].description%>",
+                           "num": "<%=info[i].num_re%>",
+                           "link":"./survey?id=<%=info[i].survey_id%>"
                          });
                          </script>
                          <%
