@@ -31,57 +31,7 @@
 <!-- BODY -->
   <body>
 
-    <!-- HEADER -->
-      <header>
-          <!--Navbars -->
-          <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a id="logo" class="navbar-brand" href="/home">Q&A</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-            <div class="collapse navbar-collapse" style="margin: 0px 30px" id="navbarCollapse">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="/support">Trợ giúp</a>
-                </li>
-              </ul>
-
-                <form id="search" class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
-                  <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-              <% if (session.username) {%>
-              <ul class="navbar-nav" style="display: contents;">
-                <li class="nav-item">
-                  <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
-                </li>
-                <li>
-                  <div class="thumb d-none d-sm-none d-md-block" style="background-image:url(./images/avatar2.jpg);width: 40px;height: 40px"></div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
-                    <a class="dropdown-item" href="/logout">Đăng xuất</a>
-                  </div>
-                </li>
-              </ul>
-              <%} else {%>
-              <ul class="navbar-nav" style="display: contents;">
-                <li class="nav-item">
-                  <a class="nav-link" href="/login"><Đăng nhập</a>
-                </li>
-              </ul>
-              <%}%>
-
-            </div>
-          </nav>
-      </header>
+    <%- include header %>
 
 
     <!-- MAIN -->
@@ -171,7 +121,7 @@
                                             <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                                       </div>
                                       <div class="col-md-6">
-                                        <a href="{{val.link}}"><h4>{{val.chude}}</h4></a>
+                                        <a href="{{val.link}}" onclick="checkpassword()"><h4>{{val.chude}}</h4></a>
                                         <p>{{val.mota}}</p>
                                       </div>
                                       <div class="col-md-5" style="display: flex;">
@@ -199,6 +149,9 @@
                     </div>
                     <script type="text/javascript">
                             var data=[];
+                            function checkpassword(){
+                              prompt("Vui lòng nhập mật khẩu");
+                            }
                         </script>
                         <%for(var i=0;i< surveys[1].length;i++){
                           if(surveys[1][i].sec_isopen == 1){ %>
@@ -482,47 +435,6 @@
           </div>
         </div>
 
-<!-- Cập nhật tài khoản -->
-        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
-
-                  <div class="form-group">
-                    <label for="InputUserName">Họ tên:</label>
-                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
-
-                  </div>
-                  <div class="form-group">
-                    <label for="InputPassword">Mật khẩu mới:</label>
-                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
-                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
-                  </div>
-                  <div class="modal-footer">
-                <button type="submit" class="btn btn-success" >Cập nhật</button>
-
-              </div>
-
-                </form>
-              </div>
-
-              
-            </div>
-          </div>
-        </div>
-
 <!-- Tạo phiên hỏi đáp -->
 <div class="modal fade" id="SessionModal" tabindex="-1" role="dialog" aria-labelledby="SessionModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -650,6 +562,7 @@
 </div>
     </div>
   </div>
+  <%- include update_inf_user %>
 
 </main>
 
