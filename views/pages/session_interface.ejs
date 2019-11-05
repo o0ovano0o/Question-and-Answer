@@ -23,58 +23,7 @@
 
 <body style="background-color: #EEEEEE">
 
-<!-- HEADER -->
-  <header>
-
-    <!--Navbars -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a id="logo" class="navbar-brand" href="/home">Q&A</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" style="margin: 0px 30px" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/support">Trợ giúp</a>
-          </li>
-        </ul>
-
-        <form id="search" class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
-        <% if (session.username) {%>
-        <ul class="navbar-nav" style="display: contents;">
-          <li class="nav-item">
-            <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
-          </li>
-          <!-- <li>
-            <div class="thumb" style="background-image:url(images/avatar1.jpg);width: 40px;height: 40px"></div>
-          </li>  -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
-              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
-              <a class="dropdown-item" href="/logout">Đăng xuất</a>
-            </div>
-          </li>
-        </ul>
-        <%} else {%>
-          <ul class="navbar-nav" style="display: contents;">
-            <li class="nav-item">
-              <a class="nav-link" href="/login"><Đăng nhập</a>
-            </li>
-          </ul>
-        <%}%>
-      </div>
-    </nav>
-  </header>
+<%- include header %>
 
 <!-- MAIN -->
   <main role="main">
@@ -99,6 +48,9 @@
                   Đăng bởi: <a href="/yourprofile?id=<%=sections[0].user_id%>"><%=sections[0][0].name%></a><br>
                   Thời gian tạo: <%=sections[0][0].sec_time%>
                 </p>
+                <button class="btn btn-outline-secondary">Chỉnh sửa</button>
+                <button class="btn btn-outline-secondary">Xóa</button>
+                <button class="btn btn-outline-secondary">Đóng</button>
               </div>
             </div>
           </div>
@@ -130,8 +82,9 @@
                   </div>
               </div>
             </div>
-            <form method="POST" action="/new_session">
             <div class="col-12 col-sm-6 col-md-6">
+            <form method="POST" action="/new_session">
+            
               <div class="row">
                   <div class="col-8 col-sm-9 col-md-9">
                     <input type="text" name="context" class="form-control" id="search2" placeholder="Đặt câu hỏi ...">
@@ -140,8 +93,9 @@
                     <input class="btn btn-outline-secondary" type="submit" value="Gửi">
                   </div>
               </div>
-            </div>
+            
             </form>
+            </div>
           </div>
           <% for (var i = 0; i < sections[1].length; i++) { %>
           <div class="card">
@@ -154,6 +108,7 @@
                </div>
              </div>
              <div class="col-9 col-sm-9 col-md-9">
+              
               <div class="card-body">
                 <h5 class="card-title"><a href="/question?question_id=<%=sections[1][i].question_id%>"><%= sections[1][i].context%></a></h5>
                 <p class="card-text"><br>
@@ -162,6 +117,13 @@
                 </p>
               </div>
             </div>
+            <div style="float: right;" class="dropdown">
+                  <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                  <a class="dropdown-item" href="#">Xóa</a>
+                </div>
+              </div>
           </div>
         </div><br>
         <% } %>
@@ -171,46 +133,7 @@
 <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
 </div>
 
-<!-- Cập nhật tài khoản -->
-        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
-
-                  <div class="form-group">
-                    <label for="InputUserName">Họ tên:</label>
-                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
-
-                  </div>
-                  <div class="form-group">
-                    <label for="InputPassword">Mật khẩu mới:</label>
-                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
-                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
-                  </div>
-                  <div class="modal-footer">
-                <button type="submit" class="btn btn-success" >Cập nhật</button>
-
-              </div>
-
-                </form>
-              </div>
-
-              
-            </div>
-          </div>
-        </div>
+<%- include update_inf_user %>
 
 </main>
 <footer id="footer">
