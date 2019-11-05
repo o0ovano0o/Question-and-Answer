@@ -77,7 +77,7 @@
               <div class="tab-content">
                 <div id="comment" class="tab-pane active" role="tabpanel">
                 <%for (var i = 0; i < info[3].length; i++) { %>
-                
+
                   <div class="card-body">
                     <div class="card" id="cmt">
                       <div class="card-body d-inline">
@@ -118,7 +118,11 @@
                 <br>
                 <div id="survey" class="tab-pane" role="tabpanel">
                   <div class="card-body" ng-module="paginationApppm"  ng-controller="listapppm">
-                    <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:5">
+                    <form id="search1" class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px;"placeholder="Tìm kiếm phiếu khảo sát" aria-label="Search" required>
+                    </form>
+                    <div  ng-click="sort('tieude')" class=" glyphicon sort-icon" ng-show="sortKey=='tieude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                    <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2"  >
                                <img class="card-img-top" style="max-width: 80px; max-height: 80px; margin:auto;" src="./images/logo3.jpg" >
@@ -161,7 +165,11 @@
 
                  <div id="session" class="tab-pane" role="tabpanel">
                   <div class="card-body" ng-module="paginationses"  ng-controller="listses">
-                    <div class="card" id="ses" style="margin-bottom:10px;" dir-paginate="value in ses|orderBy:sortKey:reverse|itemsPerPage:5">
+                    <form id="search1" class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px;"placeholder="Tìm kiếm phiếu hỏi đáp" aria-label="Search" required>
+                    </form>
+                    <div  ng-click="sort('tieudes')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudes'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                    <div class="card" id="ses" style="margin-bottom:10px;" dir-paginate="value in ses|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2">
                               <div class="card">
