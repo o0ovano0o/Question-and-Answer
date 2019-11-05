@@ -6,7 +6,7 @@ var q = require('q');
 
 router.get('/', function (req, res) {
 	if(req.session.user) {
-		var query = conn.query("SELECT * FROM survey;SELECT * FROM section",  (err, surveys) => {
+		var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
 			if(err) throw err;
 			else{
 				res.render('main',{session: req.session.user, surveys}); } 
@@ -18,38 +18,73 @@ router.get('/', function (req, res) {
 	}
 });
 router.post('/', function (req, res) {
-	var new_section = req.body;
-	sections = {
-			sec_title: new_section.sec_title,
-			sec_desc: new_section.sec_desc,
-			author: req.session.user.username,
-			sec_time: new_section.date_begin,
-			sec_pass: new_section.sec_pass,
-			sec_isopen: 1
-		};
+	var create = req.body;
 	if(req.session.user){
-		if (sections) {
-			var defer1 = q.defer();
-			var query1 = conn.query("INSERT INTO section SET ?", sections, function(err,results) {
-				if (err) {
-					defer1.reject(err);
-				}
+		if(req.query.type==1){
+			sections = {
+			sec_title: create.sec_title,
+			sec_desc: create.sec_desc,
+			author: req.session.user.username,
+			sec_time: create.date_begin,
+			sec_pass: create.sec_pass,
+			sec_isopen: 1
+			};
+			if (sections) {
+				var defer1 = q.defer();
+				var query1 = conn.query("INSERT INTO section SET ?", sections, function(err,results) {
+					if (err) {
+						defer1.reject(err);
+					}
+					else {
+						defer1.resolve(results);
+					}
+				});
+				var checkInsert = defer1.promise;
+			}
+			else {
+				var checkInsert = false;
+			}
+
+			if (!checkInsert) {
+				alert("Không thể tạo phiên");
+			}
+			else {
+				var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+					if(err) throw err;
+					else{
+						res.render('main',{session: req.session.user, surveys}); } 
+					});
+			}
+		}
+		else
+		{
+			var now = new Date();
+			survey = {
+			title: create.title,
+			description: create.description,
+			startdate: now,
+			isopen: 1,
+			views: 0,
+			author: req.session.user.username
+			};
+			var query = conn.query("INSERT INTO survey SET ?", survey, (err, surveys) => {
+				if (err) throw err;
 				else {
-					defer1.resolve(results);
+
+					var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section", (err, surveys) => {
+						if (err) throw err;
+						else {
+							res.render('main', {
+								session: req.session.user,
+								surveys: surveys
+							});
+						}
+					});
 				}
 			});
-			var checkInsert = defer1.promise;
-		}
-		else {
-			var checkInsert = false;
+
 		}
 
-		if (!checkInsert) {
-			alert("Không thể tạo phiên");
-		}
-		else {
-			res.render('session_interface', {session: req.session.user, sections: sections});
-		}
 	}
 	else
 		res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});

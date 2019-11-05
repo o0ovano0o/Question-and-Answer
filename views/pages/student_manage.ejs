@@ -36,17 +36,17 @@
               <li class="nav-item active">
                 <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
               </li>
-             
+
               <li class="nav-item">
                 <a class="nav-link" href="/support">Trợ giúp</a>
               </li>
             </ul>
-            
+
             <form id="search" class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-            
+
             <% if (session.username) {%>
             <ul class="navbar-nav" style="display: contents;">
               <li class="nav-item">
@@ -57,10 +57,10 @@
               </li>   -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%>
-                  
+
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                  <a class="dropdown-item" href="/yourprofile">Quản lý</a>
+                  <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
                   <a class="dropdown-item" href="/logout">Đăng xuất</a>
                 </div>
@@ -103,10 +103,10 @@
             </div>
           </div>
         </div>
-        <br>  
+        <br>
 
       <!-- Nội dung -->
-        <div class="container">  
+        <div class="container">
           <div class="card">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
@@ -164,9 +164,9 @@
 
                 <div id="question" class="tab-pane" role="tabpanel">
                   <div class="card-body">
-                    
+
                     <div class="card" id="3">
-                      <div class="card-body"> 
+                      <div class="card-body">
                         <div class="card">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2">
@@ -195,10 +195,10 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <br>
                     <div class="card" id="4">
-                      <div class="card-body"> 
+                      <div class="card-body">
                         <div class="card">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2">
@@ -227,7 +227,7 @@
                         </div>
                       </div>
                     </div>
-                  
+
                   </div>
                 </div>
               </div>
@@ -324,32 +324,38 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="UserModalLabel">Tài khoản: Việt Cường</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  
-                  <form>
-                    
-                    <div class="form-group">
-                      <label for="InputUserName">Họ tên:</label>
-                      <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
-                      
-                    </div>
-                    <div class="form-group">
-                      <label for="InputEmail">Email:</label>
-                      <input type="email" class="form-control" id="InputEmail" placeholder="">
-                    </div>
-                    
-                  </form>
-                </div>
-                
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
-                
+                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
+              <div class="modal-body">
+
+                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
+
+                  <div class="form-group">
+                    <label for="InputUserName">Họ tên:</label>
+                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="InputPassword">Mật khẩu mới:</label>
+                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
+                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
+                  </div>
+                  <div class="modal-footer">
+                <button type="submit" class="btn btn-success" >Cập nhật</button>
+
+              </div>
+
+                </form>
+              </div>
+
+              
             </div>
           </div>
         </div>
@@ -365,17 +371,17 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  
+
                   <form>
                     <div class="form-group">
                       <input type="text" class="form-control" id="" aria-describedby="title" placeholder="Nhập lại câu hỏi....">
                     </div>
                   </form>
                 </div>
-                
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
-                
+
                 </div>
               </div>
             </div>
@@ -389,15 +395,15 @@
         <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
         <p style="font-size: 12px"> @2019 design by Team 5</p>
       </ul>
-    </footer> 
+    </footer>
 
   <!-- Quay về đầu trang -->
     <br>
-    <div class="text-center">     
+    <div class="text-center">
     <a href="#"><h5>Back to top</h5></a>
-    </div>  
+    </div>
 
-  <!-- Nút xóa -->  
+  <!-- Nút xóa -->
     <script type="text/javascript">
       $("#button1").click(function(){
       $("#1").remove();
@@ -414,13 +420,13 @@
     </script>
   <!-- Hiển thị tuổi -->
     <script type="text/javascript">
-      <% var n =  JSON.stringify(session.date)%> 
+      <% var n =  JSON.stringify(session.date)%>
       var text = <%- n%> ;
       var date = new Date(text);
       var d = new Date();
       var tuoi=d.getYear()-date.getYear();
       document.getElementById("age").innerHTML="Tuổi: "+ tuoi;
-    </script>  
-  
+    </script>
+
 </body>
 </html>

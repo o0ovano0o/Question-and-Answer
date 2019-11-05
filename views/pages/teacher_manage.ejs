@@ -17,6 +17,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
+  <script src="/angular.ng-modules.js"></script>
 
 </head>
 
@@ -36,17 +39,17 @@
               <li class="nav-item active">
                 <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
               </li>
-             
+
               <li class="nav-item">
                 <a class="nav-link" href="/support">Trợ giúp</a>
               </li>
             </ul>
-            
+
             <form id="search" class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-            
+
             <% if (session.username) {%>
             <ul class="navbar-nav" style="display: contents;">
               <li class="nav-item">
@@ -58,7 +61,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                  <a class="dropdown-item" href="/yourprofile">Quản lý</a>
+                  <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
                   <a class="dropdown-item" href="/logout">Đăng xuất</a>
                 </div>
@@ -91,7 +94,7 @@
                   </div>
                 <div class="col-9 col-sm-9 col-md-9">
                   <div class="card-body">
-                    <h4 class="card-title"><%=session.name%></h4>
+                    <h4 class="card-title"><%=info[0].name%></h4>
                       <p class="card-text">Chức vụ: Giảng viên<br>
                         Tổng số phiên khảo sát: 5<br>
                         Tổng số phiên hỏi đáp: 5
@@ -102,10 +105,10 @@
             </div>
           </div>
         </div>
-        <br>  
+        <br>
 
       <!-- Nội dung -->
-        <div class="container">  
+        <div class="container">
           <div class="card">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
@@ -149,49 +152,59 @@
                 <br>
 
                 <div id="survey" class="tab-pane" role="tabpanel">
-                  <div class="card-body">
-                    
-                    <div class="card" id="sur">
-                      <div class="card-body"> 
-                        <div class="card">
+                  <div class="card-body" ng-module="paginationApppm"  ng-controller="listapppm">
+                    <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|itemsPerPage:5">
                           <div class="row padding">
-                            <div class="col-3 col-sm-3 col-md-2">
-                              <div class="card">
-                               <img class="card-img-top" src="./images/logo2.jpg" >
-                              </div>
+                            <div class="col-3 col-sm-3 col-md-2"  >
+                               <img class="card-img-top" style="max-width: 80px; max-height: 80px; margin:auto;" src="./images/logo3.jpg" >
                             </div>
-                            <div class="col-5 col-sm-5 col-md-6">
+                            <div class="col-8 col-sm-5 col-md-7">
                               <div class="card-body">
-                                <h5 class="card-title"><a href="/question">Khảo sát vấn đề ô nhiễm ở UET???</a></h5>
-                                <p class="card-text">Mô tả: Khảo sát sinh viên ô nhiễm tại UET-VNU<br>
-                                <p class="card-text">Có: 20 lượt khảo sát
+                                <h5 class="card-title"><a href="/question">{{vlue.tieude}}</a></h5>
+                                <p class="card-text">{{vlue.mota}}<br>
+                                <p class="card-text">Có: {{vlue.num}} lượt khảo sát
                                 </p>
                               </div>
                             </div>
-                            <div class="card-body">
-                              <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteSurvey">
-                              Xóa
-                              </button>
-                              <!-- <button type="button" class="btn btn-success px-5" data-toggle="modal" data-target="#EditSurveyModal">
-                              Chỉnh sửa
-                              </button> -->
+                            <div class="col-1 col-sm-3 col-md-2"  >
+                              <div class="card-body">
+                                <button type="button" class="btn btn-warning px-5" data-toggle="modal" data-target="#DeleteSurvey">Xóa</button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
                     </div>
-                    
                     <br>
-                  
+                    <dir-pagination-controls
+                      max-size="1"
+                      direction-links="true"
+                      boundary-links="true"  >
+                    </dir-pagination-controls>
                   </div>
+                  <script type="text/javascript">
+                       var phieum=[];
+                   </script>
+                   <%for(var i=0;i< 6;i++){
+                     if(true){ %>
+                       <script type="text/javascript">
+                         phieum.push({
+                           "tieude": "Khảo sát tình trạng ô nhiễm môi trường hiện nay",
+                           "mota":"Đánh giá ô nhiễm",
+                           "num": 20
+                         });
+                         </script>
+                         <%}
+                       }%>
+                   <script type="text/javascript">
+                     var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
+                      app.controller('listapppm', function($scope){
+                       $scope.phieum=phieum;
+                       });
+                   </script>
                 </div>
 
                  <div id="session" class="tab-pane" role="tabpanel">
-                  <div class="card-body">
-                    
-                    <div class="card" id="ses">
-                      <div class="card-body"> 
-                        <div class="card">
+                  <div class="card-body" ng-module="paginationses"  ng-controller="listses">
+                    <div class="card" id="ses" style="margin-bottom:10px;" dir-paginate="value in ses|orderBy:sortKey:reverse|itemsPerPage:5">
                           <div class="row padding">
                             <div class="col-3 col-sm-3 col-md-2">
                               <div class="card">
@@ -200,10 +213,10 @@
                             </div>
                             <div class="col-5 col-sm-5 col-md-6">
                               <div class="card-body">
-                                <h5 class="card-title"><a href="/question">Thảo luận liên quan tới framework khi thiết kế website
+                                <h5 class="card-title"><a href="/question">{{value.tieudes}}
                                 </a></h5>
-                                <p class="card-text">Mô tả: Khảo sát sinh viên khóa mới QH2019 (K64)<br>
-                                <p class="card-text">Có: 15 câu hỏi<br>
+                                <p class="card-text">Mô tả: {{value.motas}}<br>
+                                <p class="card-text">Có: {{value.nums}} câu hỏi<br>
                                 </p>
                               </div>
                             </div>
@@ -216,14 +229,38 @@
                               </button>
                             </div>
                           </div>
-                        </div>
-                      </div>
                     </div>
-                    
                     <br>
-                  
+                    <dir-pagination-controls
+                      max-size="1"
+                      direction-links="true"
+                      boundary-links="true"  >
+                    </dir-pagination-controls>
                   </div>
+                  <script type="text/javascript">
+                       var ses=[];
+                   </script>
+                   <%for(var i=0;i< 6;i++){
+                     if(true){ %>
+                       <script type="text/javascript">
+                         ses.push({
+                           "tieudes": "Thảo luận liên quan đến framework khi thiết kế website",
+                           "motas":"Đánh giá ô nhiễm",
+                           "nums": 20
+                         });
+                         </script>
+                         <%}
+                       }%>
+                   <script type="text/javascript">
+                     var app = angular.module('paginationses', ['angularUtils.directives.dirPagination']);
+                      app.controller('listses', function($scope){
+                       $scope.ses=ses;
+                       });
+                   </script>
                 </div>
+
+
+
               </div>
             </div>
           </div>
@@ -298,32 +335,38 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  
-                  <form>
-                    
-                    <div class="form-group">
-                      <label for="InputUserName">Họ tên:</label>
-                      <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
-                      
-                    </div>
-                    <div class="form-group">
-                      <label for="InputEmail">Email:</label>
-                      <input type="email" class="form-control" id="InputEmail" placeholder="">
-                    </div>
-                    
-                  </form>
-                </div>
-                
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
-                
+                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
+              <div class="modal-body">
+
+                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
+
+                  <div class="form-group">
+                    <label for="InputUserName">Họ tên:</label>
+                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="InputPassword">Mật khẩu mới:</label>
+                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
+                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
+                  </div>
+                  <div class="modal-footer">
+                <button type="submit" class="btn btn-success" >Cập nhật</button>
+
+              </div>
+
+                </form>
+              </div>
+
+              
             </div>
           </div>
         </div>
@@ -339,7 +382,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  
+
                   <form>
                     <div class="form-group">
                       <label for="InputTitle">Tiêu đề:</label>
@@ -351,10 +394,10 @@
                     </div>
                   </form>
                 </div>
-                
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
-                
+
                 </div>
               </div>
             </div>
@@ -368,15 +411,15 @@
         <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
         <p style="font-size: 12px"> @2019 design by Team 5</p>
       </ul>
-    </footer> 
+    </footer>
 
   <!-- Quay về đầu trang -->
     <br>
-    <div class="text-center">     
+    <div class="text-center">
     <a href="#"><h5>Back to top</h5></a>
-    </div>  
+    </div>
 
-  <!-- Nút xóa -->  
+  <!-- Nút xóa -->
     <script type="text/javascript">
       $("#button1").click(function(){
       $("#cmt").remove();
@@ -388,6 +431,6 @@
       $("#sur").remove();
       });
     </script>
-  
+
 </body>
 </html>

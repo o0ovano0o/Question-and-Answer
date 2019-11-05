@@ -35,19 +35,15 @@ router.post('/', function(req, res) {
     if (user == null) {
       res.render('login', {
         data: {
-          error: "Tài khoản không tồn tại"
+          error: "Tài khoản hoặc mật khẩu không đúng"
         }
       });
     } else if (user.password == signin.userpassword) {
       req.session.user = user;
-      var query = conn.query("SELECT * FROM survey", (err, surveys) => {
-        if (err) throw err;
-        else {
-          res.render('main', {
-            session: req.session.user,
-            surveys: surveys
-          });
-        }
+      var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+      if(err) throw err;
+      else{
+        res.render('main',{session: req.session.user, surveys}); } 
       });
 
     } else {

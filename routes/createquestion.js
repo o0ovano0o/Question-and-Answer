@@ -71,7 +71,7 @@ router.post('/', function(req, res) {
             for (var j = 1; j <= an; j++) {
               var ans = "answer" + k + "_" + j;
               s_ans = {
-                question_id: number,
+                question_id: number ,
                 ans_text: req.body[ans]
               }
               var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {

@@ -20,11 +20,11 @@ body {
   width: 100%;
 }
 .nav-item{
-  margin: 0px 10px;
+  margin: 0px 0px;
 }
 .user{
   padding: 0px 15px;
-  border-radius: 100%; 
+  border-radius: 100%;
   color: whitesmoke;
 }
 
@@ -71,7 +71,7 @@ table{
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-} 
+}
 
 /*Footer css*/
 
@@ -145,5 +145,3 @@ table{
     margin-top: 7rem;
   }
 }
-
-

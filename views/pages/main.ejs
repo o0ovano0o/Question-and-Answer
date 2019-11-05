@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="index&manage.css">
-  <link rel="stylesheet" href="./bootstrap/bootstrap-4.0.0.min.js">
-  <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/index&manage.css">
+  <link rel="stylesheet" href="/bootstrap/bootstrap-4.0.0.min.js">
+  <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
 
 
   <title>Trang chủ</title>
@@ -60,12 +60,12 @@
                   <a class="nav-link" href="#"><img src="./images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
                 </li>
                 <li>
-                  <div class="thumb d-none d-sm-none d-md-block" style="background-image:url(images/avatar2.jpg);width: 40px;height: 40px"></div>
+                  <div class="thumb d-none d-sm-none d-md-block" style="background-image:url(./images/avatar2.jpg);width: 40px;height: 40px"></div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
                   <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="/yourprofile">Quản lý</a>
+                    <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
                     <a class="dropdown-item" href="/logout">Đăng xuất</a>
                   </div>
@@ -110,7 +110,7 @@
                       <a class="nav-link" data-toggle="modal" href="#SessionModal"><img src="./images/icons/qa-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiên hỏi đáp</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/createsurvey"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
+                      <a class="nav-link" data-toggle="modal" href="#SurveyModal"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
                     </li>
                   </ul>
 
@@ -206,7 +206,8 @@
                               data.push({
                                 "chude":"<%=surveys[1][i].sec_title%>",
                                 "mota":"<%=surveys[1][i].sec_desc%>",
-                              "link":"/new_session?id="+<%=surveys[1][i].section_id%>
+                              "link":"/new_session?id="+<%=surveys[1][i].section_id%>,
+
                               });
                               </script>
                               <%}
@@ -236,7 +237,7 @@
                     <div class="card-body">
 
                       <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name|orderBy:sortKey:reverse|itemsPerPage:2" >
+                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|itemsPerPage:2" >
                             <div class="col-md-1" style="padding-left: 25px;">
                                   <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                             </div>
@@ -267,12 +268,12 @@
                         </dir-pagination-controls>
                       </div>
                       <script type="text/javascript">
-                            var name=[];
+                            var name_=[];
                         </script>
                         <%for(var i=0;i< surveys[1].length;i++){
                           if(!surveys[1][i].sec_isopen == 0){ %>
                             <script type="text/javascript">
-                              name.push({
+                              name_.push({
                                 "chuded":"<%=surveys[1][i].sec_title%>",
                                 "motad":"<%=surveys[1][i].sec_desc%>",
                               "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>
@@ -283,7 +284,7 @@
                       <script type="text/javascript">
                         var app = angular.module('paginationAppd', ['angularUtils.directives.dirPagination']);
                         app.controller('listapp', function($scope){
-                           $scope.name=name;
+                           $scope.name_=name_;
                         });
                       </script>
 
@@ -353,16 +354,16 @@
                                     <tr>
                                           <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                           <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                     </tr>
                                     <tr>
-                                            <td><p>{{vlue.lxempm}} lượt xem</p></td>
+                                            <td><p>{{vlue.viewpm}} lượt xem</p></td>
                                             <td><p>{{vlue.phanhoipm}} phản hồi</p></td>
-                                            <td><p>Đánh giá: {{vlue.dgiapm}}</p></td>
+                                            <td><p>Tác giả: {{vlue.authorpm}}</p></td>
                                     </tr>
                               </table>
                           </div>
-                          <p style="padding-left: 20px; font-size: 12px">{{vlue.timepm}} giờ trước</p>
+
                         </div>
 
                         <dir-pagination-controls
@@ -380,7 +381,9 @@
                               phieum.push({
                                 "tieudepm":"<%=surveys[0][i].title%>",
                                 "motapm":"<%=surveys[0][i].description%>",
-                              "linkpm":"/survey?id="+<%=surveys[0][i].survey_id%>
+                              "linkpm":"/survey?id="+<%=surveys[0][i].survey_id%>,
+                               "authorpm":"<%=surveys[0][i].author%>",
+                               "viewpm":"<%=surveys[0][i].views%>"
                               });
                               </script>
                               <%}
@@ -426,16 +429,16 @@
                                         <tr>
                                           <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                           <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/star.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
                                         </tr>
                                         <tr>
-                                              <td><p>{{vlues.lxempd}} lượt xem</p></td>
+                                              <td><p>{{vlues.viewpd}} lượt xem</p></td>
                                               <td><p>{{vlues.phoipd}} phản hồi</p></td>
-                                              <td><p>Đánh giá: {{vlues.dgiapd}}</p></td>
+                                              <td><p>Tác giả: {{vlues.authorpd}}</p></td>
                                         </tr>
                                   </table>
                           </div>
-                          <p style="padding-left: 20px; font-size: 12px">{{vlues.timepd}} giờ trước</p>
+
                         </div>
                         <dir-pagination-controls
                           max-size="1"
@@ -452,7 +455,9 @@
                               phieud.push({
                                 "tieudepd":"<%=surveys[0][i].title%>",
                                 "motapd":"<%=surveys[0][i].description%>",
-                                "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"'
+                                "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"',
+                                 "authorpd":"<%=surveys[0][i].author%>",
+                               "viewpd":"<%=surveys[0][i].views%>"
                               });
                               </script>
                               <%}
@@ -476,39 +481,45 @@
         </div>
 
 <!-- Cập nhật tài khoản -->
-<div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
 
-        <form>
+                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
 
-          <div class="form-group">
-            <label for="InputUserName">Họ tên:</label>
-            <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
+                  <div class="form-group">
+                    <label for="InputUserName">Họ tên:</label>
+                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
 
+                  </div>
+                  <div class="form-group">
+                    <label for="InputPassword">Mật khẩu mới:</label>
+                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
+                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
+                  </div>
+                  <div class="modal-footer">
+                <button type="submit" class="btn btn-success" >Cập nhật</button>
+
+              </div>
+
+                </form>
+              </div>
+
+              
+            </div>
           </div>
-          <div class="form-group">
-            <label for="InputEmail">Email:</label>
-            <input type="email" class="form-control" id="InputEmail" placeholder="">
-          </div>
-
-        </form>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
-
-      </div>
-    </div>
-  </div>
-</div>
+        </div>
 
 <!-- Tạo phiên hỏi đáp -->
 <div class="modal fade" id="SessionModal" tabindex="-1" role="dialog" aria-labelledby="SessionModalLabel" aria-hidden="true">
@@ -522,19 +533,18 @@
       </div>
       <div class="modal-body">
 
-        <form action="/main" method="POST">
+        <form action="/home?type=1" method="POST">
           <div class="form-group">
             <label for="InputTitle">Tiêu đề:</label>
-            <input type="text" name="sec_title" class="form-control" id="InputTitle" aria-describedby="title" placeholder="">
+            <input type="text" name="sec_title" class="form-control" id="InputTitle" aria-describedby="title" placeholder="Tiêu đề">
           </div>
           <div class="form-group">
             <label for="InputDes">Mô tả:</label>
-            <input type="text" name="sec_desc" class="form-control pb-4" id="InputDes" placeholder="">
+            <input type="text" name="sec_desc" class="form-control pb-4" id="InputDes" placeholder="Mô tả" aria-describedby="desc" autocomplete="off">
           </div>
-
           <div class="form-group w-50">
             <label for="DateBegin">Ngày bắt đầu:</label>
-            <input type="date" name="date_begin" class="form-control" id="DateBegin" onblur="check();">
+            <input type="date" name="date_begin" class="form-control" id="DateBegin" >
             <script>
               var now = new Date();
 
@@ -546,19 +556,21 @@
               $('#DateBegin').val(today);
             </script>
 
-            <label for="DateEnd">Ngày kết thúc:</label>
-            <input type="date" name="date_end" class="form-control" id="DateEnd">
+            <label for="Date2">Ngày kết thúc:</label>
+            <input type="date" name="date_end" class="form-control" id="Date2" onblur="check(this);">
           </div>
 
           <div class="form">
             <div class="checkbox">
               <label data-toggle="collapse" data-target="#collapsePas" aria-expanded="false" aria-controls="collapsePas">
+
                 <input type="checkbox"/> Đặt mật khẩu
               </label>
             </div>
 
             <div id="collapsePas" aria-expanded="false" class="collapse">
               <div>
+                 <input style="display:none">
                 <input type="password" name="sec_pass" class="form-control" id="InputPas" placeholder="Nhập mật khẩu...">
               </div>
             </div>
@@ -578,6 +590,65 @@
     </div>
   </div>
 </div>
+
+<!-- Tạo phiếu khảo sát -->
+<div class="modal fade" id="SurveyModal" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="SessionModalLabel">Tạo phiếu khảo sát mới</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="/home?type=2" method="POST">
+          <div>
+
+                  <label for="title" class="col-form-label">
+                    Tên phiếu khảo sát </label>
+
+
+                  <input type="text" name="title" class="form-control"    placeholder="Tiêu đề phiếu khảo sát" required >
+
+          </div>
+
+                 <div >
+                  <label for="description" class="col-form-label">Mô tả khảo sát </label>
+
+
+                  <textarea name="description" rows="3"  class="form-control pb-4" placeholder="Mô tả, Giới thiệu phiếu khảo sát của bạn" required ></textarea>
+                </div>
+
+          <div class="form-group w-50">
+
+                  <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
+
+
+                  <input type="date" name="datebegin" class="form-control" id="date1" disabled="on">
+                  <script>var now = new Date();
+
+                      var day = ("0" + now.getDate()).slice(-2);
+                      var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+                      var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+                      $('#date1').val(today);</script>
+                </div>
+
+            <div class="modal-footer">
+           <input type="submit" class="btn btn-success" value="Xác nhận">
+          </div>
+          </form>
+          </div><br>
+      </div>
+
+
+</div>
+    </div>
+  </div>
+
 </main>
 
 <!-- Quay về đầu trang -->
@@ -633,6 +704,24 @@
       $('#three').hide("fast");
     });
   });
+   function check(itt){
+    var date1 = new Date();
+    var date2 = new Date(itt.value);
+
+    if(date2-date1>0){
+
+    }
+    else if(itt.value==""){
+
+    }
+
+    else{
+      alert("Thời gian không đúng rồi kìa!!!");
+
+      itt.value="";
+      return false;
+    }
+  }
 </script>
 
 </body>

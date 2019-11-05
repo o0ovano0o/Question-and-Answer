@@ -19,6 +19,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="/dirPagination.js"> </script>
   <script src="/angular.ng-modules.js"></script>
+  <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script>
+    window.history.pushState("", "", '/survey?id=<%=survey.survey_id%>');
+  </script>
 </head>
 
 <!-- CSS tự định nghĩa -->
@@ -64,7 +68,7 @@
 
           <form id="search" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
           </form>
         <% if (session.username) {%>
         <ul class="navbar-nav" style="display: contents;">
@@ -78,7 +82,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="/yourprofile">Quản lý tài khoản</a>
+              <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
               <a class="dropdown-item" href="/logout">Đăng xuất</a>
             </div>
         </ul>
@@ -113,121 +117,311 @@
                   Đăng bởi: <%=survey.author%><br>
                  </p>
                  <p id="date1"></p>
-                 <p id="date2"></p>
-                 <%if(session.username==survey.author){%>
+                <%if(survey.isopen==0){
+                 %>
+                 <p style="font-weight: bold;">Đã đóng</p>
+                
+                 <%}if(session.username==survey.author){
+
+                if(survey.isopen==0){
+                 %>
+                  <a href="/deletesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Xóa phiếu khảo sát</a>
+                  <%}else{%>
+                 <a href="/deletesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Xóa phiếu khảo sát</a>
+                 <a href="/closesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Đóng phiếu khảo sát</a>
                  <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
-                 <%}%>
+                 <%}}%>
               </div>
             </div>
           </div>
         </div>
       </div><br>
+      <% if(survey.isopen==1){
+                 %>
       <div class="card">
           <div class="card-header" style="background-color: #00cccc">
               <h5><b>Đăng bởi: <%=survey.author%></b></h5>
           </div>
           <div class="card-body">
-                <a href="/home" style="margin-left: 0%;" type="button" class="btn btn-info">Trở về danh sách phiếu</a><br><br>
+
+            <div class="row">
+                <div class="col-6 col-sm-6 col-md-6">
+                    <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-primary">< Trở về danh sách phiếu</a>
+                </div>
+                 <%if(check==0){%>
+                <div class="col-6 col-sm-6 col-md-6">
+                
+                  <a data-toggle="collapse" href="#start" id="st" style="margin-left: 0%;"role="button" class="btn btn-primary">Bắt đầu</a>
+
+                </div>
+            </div><br>
+              <div class="collapse" id="start" aria-labelledby="st">
+
+                <form action="/survey/?id=<%=survey.survey_id%>" method="POST">
                 <div class="card">
+
                    <div class="card-header" style="background-color: #99ccff">
                        <h6><b>Danh sách câu hỏi khảo sát</b></h6>
                    </div><br>
                    <div class="container" >
-                        <div id="c1" class="tab-pane active" ng-module="TNloai1" ng-controller="data1">
-                            <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="val in loai1"  ><!--viết lặp lại ở đây-->
-                                <b> Câu {{val.cau}}: {{val.ques}}</b> <br>
-                                  <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.1" value="option1.1" checked="checked">
-                                      <label class="form-check-label" for="Radios1.1">Đúng.</label>
+
+                       <% var dem=0;
+                       for(var i=0;i< squest.length;i++){
+                         dem++;
+                          if(squest[i].quest_type_id==1){ %>
+                                  <div id="c1" class="tab-pane active" >
+                                      <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                        <div class="row">
+                                          <p class="col-11"> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+
+                                          <%if(session.username==survey.author){%>
+                                            <div class=" col-1 dropdown" >
+                                               <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               </button>
+                                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#update_1" data-toggle="modal" data-target="#update_1">Sửa</a>
+                                                <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
+                                               </div>
+                                             </div>
+                                           <%}%>
+                                         </div>
+                                <%
+                                   for(var j=0;j< s_ans.length;j++){
+                                     if(s_ans[j].question_id==squest[i].squest_id){%>
+                                         <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="1_<%=squest[i].squest_id%>" value="<%=s_ans[j].ans_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
+                                 <%}}
+                                       %>
+                                       </div>
+                                     </div><%}
+                          if(squest[i].quest_type_id==3){ %>
+                                <div id="c3" class="tab-pane active" >
+                                    <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                      <div class="row">
+                                        <p class="col-11"> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                        <%if(session.username==survey.author){%>
+                                          <div class=" col-1 dropdown" >
+                                             <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             </button>
+                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                              <a class="dropdown-item" href="#update_3" data-toggle="modal" data-target="#update_3">Sửa</a>
+                                              <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
+                                             </div>
+                                           </div>
+                                        <%}%>
+                                       </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.1" value="1" >
+                                            <label class="form-check-label" for="Radios1.1">Đúng.</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.2" value="0"  >
+                                            <label class="form-check-label" for="Radios1.2">Sai.</label>
+                                        </div>
+                                    </div>
+                                </div><%}
+                          if(squest[i].quest_type_id==2){ %>
+                              <div id="c2" class="tab-pane active" >
+                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                      <div class="row">
+                                        <p class="col-11"><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                        <%if(session.username==survey.author){%>
+                                          <div class=" col-1 dropdown" >
+                                             <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             </button>
+                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                              <a class="dropdown-item" href="#update_2" data-toggle="modal" data-target="#update_2">Sửa</a>
+                                              <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
+                                             </div>
+                                          </div>
+                                       <%}%>
+                                     </div>
+                                <%
+                                 for(var j=0;j< s_ans.length;j++){
+                                   if(s_ans[j].question_id==squest[i].squest_id){%>
+                                    <div class="form-check"> <input type="checkbox" style="margin: 4.8px 0px 0px -20px;" value="<%=s_ans[j].ans_id%>" name="2_<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
+                              <%}}%>
+                          </div></div><%}
+                          if(squest[i].quest_type_id==4){ %>
+                              <div id="c4" class="tab-pane active" >
+                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                    <div class="row">
+                                      <p class="col-11"><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <%if(session.username==survey.author){%>
+                                        <div class=" col-1 dropdown" >
+                                           <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                           </button>
+                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#update_4" data-toggle="modal" data-target="#update_4">Sửa</a>
+                                            <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
+                                           </div>
+                                        </div>
+                                     <%}%>
+                                   </div>
+                                      <textarea name="4_<%=squest[i].squest_id%>" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." required></textarea>
                                   </div>
-                                  <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="{{val.name1}}" id="Radios1.2" value="option1.2"  >
-                                      <label class="form-check-label" for="Radios1.2">Sai.</label>
-                                  </div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                             var loai1=[];
-                        </script>
-                        <%for(var i=0;i< squest.length;i++){
-                            if(squest[i].quest_type_id==3){ %>
-                                <script type="text/javascript">
-                                     loai1.push({
-                                       "cau":1,
-                                       "ques":"<%=squest[i].squest_text%>",
-                                       "name1":"<%=squest[i].squest_id%>"
-
-                                     });
-                                </script>
-                            <%}
-                        }%>
-                         <script type="text/javascript">
-                           var app = angular.module('TNloai1', []);
-                            app.controller('data1', function($scope){
-                             $scope.loai1=loai1;
-                             });
-                         </script>
-
-                   <%for(var i=0;i< squest.length;i++){
-
-                            if(squest[i].quest_type_id==2){ %>
-                            <p> <%= squest[i].squest_text%></p>
-                            <%
-                             for(var j=0;j< s_ans.length;j++){
-                             if(s_ans[j].question_id==squest[i].squest_id){%>
-                             <input type="radio" name="<%=squest[i].squest_id%>"><%=s_ans[j].ans_text%></input><br/>
-                             <%
-                               }}
-                            }
-                             }
-                  %>
-                     <%for(var i=0;i< squest.length;i++){
-
-                            if(squest[i].quest_type_id==1){ %>
-                            <p> <%= squest[i].squest_text%></p>
-                            <%
-                             for(var j=0;j< s_ans.length;j++){
-                             if(s_ans[j].question_id==squest[i].squest_id){%>
-                             <input type="checkbox" name="<%=squest[i].squest_id%>"><%=s_ans[j].ans_text%></input><br/>
-                             <%
-                               }}
-                            }
-                             }
-                  %>
-                        <div id="c4" class="tab-pane" ng-module="Tuluan" ng-controller="data4">
-                           <div class="card card body" style="margin-top: 20px;padding:15px;" ng-repeat="value4 in loai4">
-                               <b>Câu {{value4.cau4}}: {{value4.ques4}}</b>
-                               <textarea name="topic" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
-                           </div>
-                       </div>
-                       <script type="text/javascript">
-                            var loai4=[];
-                       </script>
-                       <%for(var i=0;i< squest.length;i++){
-                           if(squest[i].quest_type_id==4){ %>
-                               <script type="text/javascript">
-                                    loai4.push({
-                                      "cau4":6,
-                                      "ques4":"<%=squest[i].squest_text%>"
-                                    });
-                               </script>
-                           <%}
-                       }%>
-                        <script type="text/javascript">
-                          var app = angular.module('Tuluan', []);
-                           app.controller('data4', function($scope){
-                            $scope.loai4=loai4;
-                            });
-                        </script>
-                       <button class="btn btn-secondary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
+                              </div>
+                          <%}
+                      }%>
+                      <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><br><br>
                    </div>
-             </div><br>
-             <a href="#" style="margin-right: 3%;float: right;" type="button" class="btn btn-secondary">Xem kết quả khảo sát</a><br><br><br>
-             
+                 </div>
+               </form>
+             </div>
+             <br>
+             <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a><br><br><br>
+<%}%>
         </div><br>
    </div>
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
  </div>
+           <div class="modal fade" id="update_3" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi thuộc loại Đúng/Sai</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                             <form action="" method="POST">
+                               <% var dem=0;
+                               for(var i=0;i< squest.length;i++){
+                                 dem++;
+                                  if(squest[i].quest_type_id==3){ %>
+                                   <div>
+                                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                                       <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" required>
+                                    </div>
+                                    <%}}%>
+                                 <div class="modal-footer">
+                                   <input type="submit" class="btn btn-success" value="Xác nhận">
+                                 </div>
+                             </form>
+                       </div><br>
+                   </div>
+               </div>
+           </div>
+           <div class="modal fade" id="update_1" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi loại một đáp án</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                             <form action="" method="POST">
+                               <% var dem=0;
+                               for(var i=0;i< squest.length;i++){
+                                 dem++;
+                                  if(squest[i].quest_type_id==1){ %>
+                                   <div>
+                                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                                       <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" required>
+                                   </div>
+                                   <div>
+                                       <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
+                                       <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" required>
+                                       <%for(var j=0;j< s_ans.length;j++){
+                                          if(s_ans[j].question_id==squest[i].squest_id){%>
+                                            <div style="width: 90%;">
+                                                <input type='text' name='answer' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" required/>
+                                            </div>
+                                       <%}}%>
+                                       <div id="dapan1" style="width: 90%;"></div>
+                                   </div>
+                                   <div class="modal-footer">
+                                     <input type="submit" class="btn btn-success" value="Xác nhận">
+                                   </div>
+                                <%}}%>
+                             </form>
+                       </div><br>
+                   </div>
+               </div>
+           </div>
+           <div class="modal fade" id="update_2" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi nhiều đáp án</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                             <form action="" method="POST">
+                               <% var dem=0;
+                               for(var i=0;i< squest.length;i++){
+                                 dem++;
+                                  if(squest[i].quest_type_id==2){ %>
+                                   <div>
+                                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                                       <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" required>
+                                   </div>
+                                   <div>
+                                       <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
+                                       <input  type="number" max="10" min="1" id="2" class="form-control" name="ans2" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" required>
+                                       <%for(var j=0;j< s_ans.length;j++){
+                                          if(s_ans[j].question_id==squest[i].squest_id){%>
+                                            <div style="width: 90%;">
+                                                <input type='text' name='answer' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" required/>
+                                            </div>
+                                       <%}}%>
+                                       <div id="dapan2" style="width: 90%;"></div>
+                                   </div>
+                                  <%}}%>
+                                   <div class="modal-footer">
+                                     <input type="submit" class="btn btn-success" value="Xác nhận">
+                                   </div>
+                             </form>
+                       </div><br>
+                   </div>
+               </div>
+           </div>
+           <div class="modal fade" id="update_4" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                     <% var dem=0;
+                     for(var i=0;i< squest.length;i++){
+                       dem++;
+                        if(squest[i].quest_type_id==4){ %>
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi thuộc loại câu hỏi tự luận</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                             <form action="" method="POST">
+                                   <div>
+                                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                                       <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" required>
+                                   </div>
+                                 <div class="modal-footer">
+                                   <input type="submit" class="btn btn-success" value="Xác nhận">
+                                 </div>
+                             </form>
+                       </div><br>
+                       <%}}%>
+                   </div>
+               </div>
+           </div>
+           <% } else {%>
+           <br/><br/>
+                   <div class="alert alert-primary" role="alert" style="width: 100%;">
+                    Bạn đã làm bài khảo sát này rồi.
+                  </div>
+                  <div class="row" style="width: 100%">
+                  <div class="col-6 col-sm-6 col-md-6">
+                  </div>
+                 <div class="col-6 col-sm-6 col-md-6">
+                    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a>
+                  </div>
+                </div>
+
+                   <%}%>
 </main>
 <footer id="footer">
   <ul style="padding: 15px; margin-bottom: 0px;">
@@ -240,13 +434,35 @@
 
 <script type="text/javascript">
     <% var n =  JSON.stringify(survey.startdate)%>;
-    <% var m =  JSON.stringify(survey.enddate)%> ;
+  
     var text1 = <%- n%> ;
-    var text2 = <%- m%> ;
+  
     var date1 = new Date(text1);
-    var date2 = new Date(text2);
+   
     document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
-    document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
+   
+    function checknumber(inp){
+      if(inp.value=="")
+        inp.value=1;
+      if(inp.value>30)
+      {
+        alert("Tối đa 30 thôi bạn!!");
+        inp.value=30;
+      }
+    }
+    function sodapan(sodapan){
+      var i=0;
+      var num=sodapan.value;
+      var dapan="<input type='text' name='answer";
+      var dap= "' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' required/>";
+      var code="";
+      var key = sodapan.id;
+      for(i=0;i<num;i++){
+        code+=(dapan+dap);
+      }
+      var res="dapan" + key;
+      document.getElementById(res).innerHTML=code;
+    }
 function formatdate(d){
   var dd = d.getDate();
   var mm = d.getMonth() + 1; //January is 0!

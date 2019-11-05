@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Cần thiết cho 1 web -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="/index&manage.css">
+  <link rel="stylesheet" href="/tab.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <title>Hiển thị câu hỏi khảo sát</title>
+
+  <!-- Thư viện online cho Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="/dirPagination.js"> </script>
+  <script src="/angular.ng-modules.js"></script>
+
+  <script src="/Chart.js"></script>
+   <script type="text/javascript">
+     function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the link that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+   </script>
+</head>
+
+<!-- CSS tự định nghĩa -->
+<style type="text/css">
+  .nav-pills>a.active, .nav-pills>a:focus, .nav-pills>a:hover {
+    cursor: default;
+    font-weight: bold;
+    background-color: #009999 !important;
+    border-bottom: 3px solid #ff0066;
+    color: black;
+    border-radius: 0px;
+  }
+  .nav-pills>a {
+
+    font-weight: normal;
+    border-bottom: 3px solid #ff0066;
+    color: black;
+    border-radius: 0px;
+  }
+  .tabcontent {
+    height:auto;
+  }
+  <%for(var k=0;k< yesno.length; k++){%>
+  #myProgress<%=k%> {
+  width: 100%;
+  background-color: #F15A32;
+}
+
+#myBar<%=k%> {
+  width: <%=(yesno[k].total-yesno[k].noo)*100/yesno[k].total%>%;
+  height: 60px;
+  background-color: #4CCF52;
+}
+          <%}%>
+      </div>
+</style>
+
+<body style="background-color: #EEEEEE">
+
+  <!-- HEADER -->
+  <header>
+
+    <!--Navbars -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a id="logo" class="navbar-brand" href="/home">Q&A</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" style="margin: 0px 30px" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/support">Trợ giúp</a>
+          </li>
+        </ul>
+
+          <form id="search" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        <% if (session.username) {%>
+        <ul class="navbar-nav" style="display: contents;">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><img src="/images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
+          </li>
+          <li>
+            <div class="thumb" style="background-image:url(/images/avatar2.jpg);width: 40px;height: 40px"></div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%> </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
+              <a class="dropdown-item" href="/logout">Đăng xuất</a>
+            </div>
+        </ul>
+        <%} else {%>
+  <ul class="navbar-nav" style="display: contents;">
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><Đăng nhập</a>
+          </li>
+        </ul>
+        <%}%>
+      </div>
+    </nav>
+  </header>
+  <main role="main" style="min-height: 1000px;">
+    <div class="container marketing">
+      <br>
+       <div id="accordion">
+      <div class="card">
+        <div class="card-header" style="background-color: #00cccc" data-toggle="collapse" href="#collapseOne">
+          <h5><b>Phiếu khảo sát <%=survey.title%></b></h5>
+        </div>
+        <div id="collapseOne" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <div class="row padding">
+            <div class="col-3 col-sm-2 col-md-2">
+              <div class="card">
+                <img class="card-img-top" src="/images/logo.png">
+              </div>
+            </div>
+            <div class="col-9 col-sm-9 col-md-9">
+              <div class="card-body">
+                <h4 class="card-title"><%=survey.title%></h4>
+                <p class="card-text"><%=survey.description%><br><br>
+                  Đăng bởi: <%=survey.author%><br>
+                 </p>
+                 <p id="date1"></p>
+                 <p id="date2"></p>
+                 <%if(session.username==survey.author){%>
+                 <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
+                 <%}%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+        </div>
+      <br>
+       <div class="tab">
+    <%
+      var dem=0;
+      for(var i=0;i< squest.length;i++){
+      dem++;
+      if(i==0){%>
+    <button  id="defaultOpen" class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
+    <% }else {%>
+     <button class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
+    <%}}%>
+      </div>
+        <%
+      var dem=0;
+      for(var j=0;j< squest.length;j++){
+      dem++; 
+      if(squest[j].quest_type_id==4){ var de=0;%>
+      <div id="<%=squest[j].squest_id%>" class="tabcontent">
+        
+      <h3>Câu <%=dem%></h3>
+      <p><%= squest[j].squest_text%></p>
+       <div id="accordion">
+              <%
+          var de=0;
+          for(var k=0;k< texts.length;k++){
+          
+          if(squest[j].squest_id==texts[k].quest_id){ de++; %>
+                <div class="card">
+              <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseOne<%=k%>">
+                 Câu trả lời <%=de%>:
+                </a>
+              </div>
+              <div id="collapseOne<%=k%>" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                 <%=texts[k].textreponse%>
+                </div>
+              </div>
+            </div>
+          
+          <%}}%>
+      </div></div>
+       <%}if(squest[j].quest_type_id==3){ var de3=0;%>
+      <div id="<%=squest[j].squest_id%>" class="tabcontent">
+        
+      <h3>Câu <%=dem%></h3>
+      <p><%= squest[j].squest_text%></p>
+              <%
+          var de3=0;
+          for(var k=0;k< yesno.length;k++){
+          
+          if(squest[j].squest_id==yesno[k].quest_id){ de3++; %>
+          <p>Tổng: <%=yesno[k].total%></p>
+          <p>Số người chọn <span style="color:red;font-weight: bold;">Sai</span>: <%=yesno[k].noo%></p>
+          <p>Số người chọn <span style="color:green;font-weight: bold;">Đúng</span>: <%=yesno[k].total-yesno[k].noo%></p>
+                <div id="myProgress<%=k%>">
+                  <div id="myBar<%=k%>"></div>
+                </div>
+          <%}}%>
+      </div>
+       <%}if(squest[j].quest_type_id==1){ var de1=0;%>
+      <div id="<%=squest[j].squest_id%>" class="tabcontent">
+        
+      <h3>Câu <%=dem%></h3>
+      <p><%= squest[j].squest_text%></p> 
+      <canvas id="myC<%=dem%>"></canvas>
+    
+              <%
+          var de1=0;
+          for(var k=0;k< single.length;k++){
+          
+          if(squest[j].squest_id==single[k].quest_id){ de1++; %>
+          <p>Số người chọn <span style="font-style: italic;color: blue"><%=single[k].ans_text%></span>: <%=single[k].number%></p>
+                
+          <%}}%>
+      </div>
+      <%}if(squest[j].quest_type_id==2){%>
+       <div id="<%=squest[j].squest_id%>" class="tabcontent">
+      <h3>Câu <%=dem%></h3>
+      <p><%= squest[j].squest_text%></p> 
+      <canvas id="myC<%=dem%>"></canvas>
+             <%
+          var de2=0;
+          for(var k=0;k< multi.length;k++){
+          if(squest[j].squest_id==multi[k].question_id){ de2++; %>
+          <p>Số người chọn <span style="font-style: italic;color: blue;"><%=multi[k].ans_text%></span>: <%=multi[k].number%></p>
+                
+          <%}}%>
+      </div>
+<%}}%>
+      <!-- <div id="London" class="tabcontent">
+      <h3>London</h3>
+      <p>London is the capital city of England.</p>
+      </div>
+
+      <div id="Paris" class="tabcontent">
+      <h3>Paris</h3>
+      <p>Paris is the capital of France.</p>
+      </div>
+
+      <div id="Tokyo" class="tabcontent">
+      <h3>Tokyo</h3>
+      <p>Tokyo is the capital of Japan.</p>
+      </div>
+                <% var dem=0;
+                       for(var i=0;i< squest.length;i++){
+                         dem++;
+                          if(squest[i].quest_type_id==1){ %>
+                                  <div id="c1" class="tab-pane active" >
+                                      <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                          <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
+
+                                </div></div><%}
+                          if(squest[i].quest_type_id==3){ %>
+                                <div id="c3" class="tab-pane active" >
+                                    <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                        <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
+                                     </div>
+                                </div><%}
+                          if(squest[i].quest_type_id==2){ %>
+                              <div id="c2" class="tab-pane active" >
+                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                      <p><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+
+                              </div></div><%}
+                          if(squest[i].quest_type_id==4){ %>
+                              <div id="c4" class="tab-pane active" >
+                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                      <p><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+
+
+                                  </div>
+                              </div>
+                          <%}
+                      }%> -->
+
+<script>
+   var color=['#F15A32',
+    '#FCF640',
+    '#608FEC',
+    '#C1BDB8',
+    '#2A2927',
+    '#E570BB',
+    '#FA9F34',
+    '#4CCF52',
+    '#B59265',
+    '#A360EC'
+    ];
+    
+  <%
+      var dem=0;
+      for(var j=0;j< squest.length;j++){
+      dem++; %>
+      data<%=dem%>=[];
+    labels<%=dem%>=[];
+    backgroundColor<%=dem%>=[];
+    borderColor<%=dem%>=[]; 
+
+      <%  
+          if(squest[j].quest_type_id==1){ 
+                var k=0;
+              
+                for(var i=0;i< single.length;i++){
+              
+                if(single[i].quest_id==squest[j].squest_id)
+                  {
+                    k++;
+                 %>
+                    data<%=dem%>.push(<%=single[i].number%>);
+                    labels<%=dem%>.push("<%=single[i].ans_text%>");
+                    backgroundColor<%=dem%>.push(color[<%=k%>-1]);
+                    borderColor<%=dem%>.push(color[<%=k%>-1]);
+                    <%}}%>
+                
+          var ctx<%=dem%> = document.getElementById('myC<%=dem%>');
+         var myPieChart<%=dem%> = new Chart(ctx<%=dem%>, {
+            type: 'pie',
+            data: {
+              datasets: [{
+                data:data<%=dem%>,
+                backgroundColor:backgroundColor<%=dem%>,
+                borderColor:borderColor<%=dem%>
+                 }],
+                labels:labels<%=dem%>,
+              },
+            options: {
+    animation:{
+      animateRotate:true
+    }
+  }
+});   
+          
+ 
+          <%}
+          if(squest[j].quest_type_id==2){ 
+                var k=0;
+                
+                for(var i=0;i< multi.length;i++){
+              
+                if(multi[i].question_id==squest[j].squest_id){k++;
+                 %>
+                    data<%=dem%>.push(<%=multi[i].number%>);
+                    labels<%=dem%>.push("<%=multi[i].ans_text%>");
+                    backgroundColor<%=dem%>.push(color[<%=k%>-1]);
+                    borderColor<%=dem%>.push(color[<%=k%>-1]);
+                    <%}}%>
+                
+          var ctx<%=dem%> = document.getElementById('myC<%=dem%>');
+         var myChart<%=dem%> = new Chart(ctx<%=dem%>, {
+            type: 'bar',
+            data: {
+               labels:labels<%=dem%>,
+              datasets: [{
+                data:data<%=dem%>,
+                backgroundColor:backgroundColor<%=dem%>,
+                borderColor:borderColor<%=dem%>,
+                 borderWidth: 1,
+                 label:"Biểu đồ",
+                 }],
+               
+               
+              },
+           options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+    <%}}%>
+// var myPieChart = new Chart(ctx1, {
+//   type: 'pie',
+//   data: {
+//     datasets: [{
+//       data: [10, 20, 30] ,
+//       backgroundColor: [
+//     'rgba(255, 99, 132, 0.5)',
+//     'rgba(54, 162, 235, 0.5)',
+//     'rgba(255, 206, 86, 0.5)'
+//     ],
+
+//     borderColor: [
+//     'rgba(255, 99, 132, 0.5)',
+//     'rgba(54, 162, 235, 0.5)',
+//     'rgba(255, 206, 86, 0.5)'
+//     ]
+//     }],
+
+//     // These labels appear in the legend and in the tooltips when hovering different arcs
+//     labels: [
+//     'Red',
+//     'Yellow',
+//     'Blue'
+//     ],
+//   },
+
+//   options: {
+//     animation:{
+//       animateRotate:true
+//     }
+//   }
+// })
+// var myChart = new Chart(ctx2, {
+//     type: 'bar',
+//     data: {
+//         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//         datasets: [{
+//             label: '# of Votes',
+//             data: [12, 19, 3, 5, 2, 3],
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 0.2)',
+//                 'rgba(54, 162, 235, 0.2)',
+//                 'rgba(255, 206, 86, 0.2)',
+//                 'rgba(75, 192, 192, 0.2)',
+//                 'rgba(153, 102, 255, 0.2)',
+//                 'rgba(255, 159, 64, 0.2)'
+//             ],
+//             borderColor: [
+//                 'rgba(255, 99, 132, 1)',
+//                 'rgba(54, 162, 235, 1)',
+//                 'rgba(255, 206, 86, 1)',
+//                 'rgba(75, 192, 192, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }]
+//         }
+//     }
+// });
+</script>
+
+   <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+ </div>
+</main>
+<footer id="footer">
+  <ul style="padding: 15px; margin-bottom: 0px;">
+    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+    <p style="font-size: 12px"> @2019 design by Team 5</p>
+  </ul>
+</footer>
+</body>
+
+
+<script type="text/javascript">
+    <% var n =  JSON.stringify(survey.startdate)%>;
+    <% var m =  JSON.stringify(survey.enddate)%> ;
+    var text1 = <%- n%> ;
+    var text2 = <%- m%> ;
+    var date1 = new Date(text1);
+    var date2 = new Date(text2);
+    document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
+    document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
+function formatdate(d){
+  var dd = d.getDate();
+  var mm = d.getMonth() + 1; //January is 0!
+
+  var yyyy = d.getFullYear();
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+  var today = dd + '/' + mm + '/' + yyyy;
+  return today;
+}
+document.getElementById("defaultOpen").click();
+  </script>
+
+</html>

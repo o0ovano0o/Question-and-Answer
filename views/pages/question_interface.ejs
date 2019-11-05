@@ -21,7 +21,7 @@
 </head>
 
 <body style="background-color: #EEEEEE">
-  
+
   <!-- HEADER -->
   <header>
 
@@ -36,12 +36,12 @@
           <li class="nav-item active">
             <a class="nav-link" href="/home">Trang chủ <span class="sr-only">(current)</span></a>
           </li>
-          
+
           <li class="nav-item">
             <a class="nav-link" href="/support">Trợ giúp</a>
           </li>
         </ul>
-        
+
         <form id="search" class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -54,11 +54,11 @@
           </li>
          <!--  <li>
             <div class="thumb" style="background-image:url(images/avatar1.jpg);width: 40px;height: 40px"></div>
-          </li> -->  
+          </li> -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color: whitesmoke" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.name%></a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="/yourprofile">Quản lý</a>
+              <a class="dropdown-item" href="/yourprofile?id=<%=session.user_id%>">Quản lý</a>
               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UserModal">Cập nhật thông tin</a>
               <a class="dropdown-item" href="/logout">Đăng xuất</a>
             </div>
@@ -74,13 +74,13 @@
       </div>
     </nav>
   </header>
-  
+
 <!-- MAIN -->
   <main role="main">
 
     <div class="container marketing">
       <br>
-      
+
       <!-- Phiên hỏi đáp -->
       <div class="card">
         <div class="card-header" style="background-color: #bbbbbb">
@@ -95,10 +95,10 @@
             </div>
             <div class="col-9 col-sm-9 col-md-9">
               <div class="card-body">
-                <h4 class="card-title">Khảo sát sinh viên khóa mới QH2019 (K64)</h4>
-                <p class="card-text">Mô tả: Khảo sát sinh viên khóa mới QH2019 (K64)<br>
-                  Đăng bởi: <a href="/teacher_manage">Nguyễn Việt Anh</a><br>
-                  Thời gian tạo: 1 tháng trước
+                <h4 class="card-title"><%=question[1][0].sec_title%></h4>
+                <p class="card-text"><%=question[1][0].sec_desc%><br>
+                  Đăng bởi: <a href="/yourprofile?id=<%=question[1][0].user_id%>"><%=question[1][0].name%></a><br>
+                  Thời gian tạo: <%=question[1][0].sec_time%>
                 </p>
               </div>
             </div>
@@ -106,12 +106,12 @@
         </div>
       </div>
       <br>
-      
+
       <!-- Nội dung câu hỏi -->
       <div class="card">
-        
+
         <div class="card-header" style="background-color: #bbbbbb">
-          <h5><b>Câu hỏi đăng bởi: <a href="/yourprofile">Đinh Việt Cường </a></b></h5>
+          <h5><b>Câu hỏi đăng bởi: <a href="/yourprofile?id=<%=question[0][0].user_id%>"> <%=question[0][0].name%></a></b></h5>
         </div>
 
         <div class="card-body">
@@ -123,20 +123,20 @@
               </h5>
             </div>
             <div class="card-body">
-              <h5>Có bạn nào gần trường muốn ở ghép không???</h5>
+              <h5><%=question[0][0].context%></h5>
               <hr id = "phienhoidap" class="featurette-divider">
-              03 lượt thích
             </div>
           </div>
 
           <br>
           <a href="" style="padding-left: 2%;">Thích</a>
           <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#bl" aria-expanded="false" aria-controls="bl">Bình luận</a><br><br>
+            <form method="POST" action="/question?cmt=0">
               <div class="collapse" id="bl">
                   <div class="row">
-                    
+
                     <div class="col-9 col-sm-10 col-md-11">
-                      <input type="nhap" class="form-control" id="search2" placeholder="Viết bình luận ...">
+                      <input type="nhap" name="cmt" class="form-control" id="search2" placeholder="Viết bình luận ...">
                     </div>
                     <div class="col-3 col-sm-2 col-md-1">
                       <button class="btn btn-outline-secondary" type="submit">Gửi</button>
@@ -144,37 +144,38 @@
 
                   </div>
               </div>
+            </form>
               <br>
           <!-- Câu trả lời đúng nhất -->
-              
 
-          <!-- Bình luận--> 
+
+          <!-- Bình luận-->
           <div class="card">
-            
+
             <div class="card-header"><h5><b>Nội dung bình luận</b></h5></div>
-            
+
             <div class="card-body">
-          
-              <!-- 1 comment trả lời cho câu hỏi-->  
+
+             <%for (var i = 0; i < question[2].length; i++) {%>
               <div class="card">
-                
+
                 <div class="card-header" style="background-color: #99ccff">
-                 <h6><b>Nguyễn Việt Anh</b></h6>
+                 <h6><b><%=question[2][i].name%></b></h6>
                 </div>
-               
+
                 <div class="card-body">
-                  <h6>Câu hỏi rất hay</h6>
+                  <h6><%=question[2][i].content%></h6>
                     <hr id = "phienhoidap" class="featurette-divider">
-                    <p>01 lượt thích</p>
                     <a href="">Thích</a>
-                    <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl">Trả lời
+                    <a href="" style="padding-left: 2%;"  data-target="#tl" aria-expanded="false" aria-controls="tl">
                     </a><br>
                   <p>
-                    <div class="collapse" id="tl">
+                    <form method="POST" action="/question?cmt=<%=question[2][i].ans_id%>">
+                    <div  id="tl">
                       <div class="row">
-                  
+
                         <div class="col-9 col-sm-10 col-md-11">
-                          <input type="nhap" class="form-control" id="search2" placeholder="Viết bình luận ...">
+                          <input type="nhap" name="cmt_ans" class="form-control" id="search2" placeholder="Viết bình luận ...">
                         </div>
                         <div class="col-3 col-sm-2 col-md-1">
                           <button class="btn btn-outline-secondary" type="submit">Gửi</button>
@@ -182,39 +183,29 @@
 
                       </div>
                     </div>
-                  </p>  
-                
+                  </form>
+                  </p>
+
                   <!-- comment trả lời cho 1 comment khác-->
+                  <% for (var j = 0; j < question[3].length; j++) {
+                    if (question[3][j].ans_id == question[2][i].ans_id) { %>
                   <div class="card">
                     <div class="card-header" style="background-color: #dddddd">
-                     <h6><b>Đức Dũng</b></h6>
+                     <h6><b><%=question[3][j].name%></b></h6>
                     </div>
-                    
-                    <div class="card-body">
-                      <p>Tôi không thích bạn cười như vậy</p>
-                      <a href="" style="">Thích</a>
-                      <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#tl2" aria-expanded="false" aria-controls="tl2">Trả lời</a><br>
-                      <p>
-                        <div class="collapse" id="tl2">
-                          <div class="row">
-                      
-                            <div class="col-9 col-sm-10 col-md-11">
-                              <input type="nhap" class="form-control" id="search2" placeholder="Viết bình luận ...">
-                            </div>
-                            <div class="col-3 col-sm-2 col-md-1">
-                              <button class="btn btn-outline-secondary" type="submit">Gửi</button>
-                            </div>
 
-                          </div>
-                        </div>
-                      </p>  
+                    <div class="card-body">
+                      <p><%=question[3][j].cmt%></p>
+                      <a href="" style="">Thích</a>
                     </div>
 
                   </div>
+                  <%}
+                } %>
                 </div>
-              
-              </div>
 
+              </div>
+              <% } %>
             </div>
 
           </div>
@@ -228,43 +219,49 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="UserModalLabel">Tài khoản: Việt Cường</h5>
+                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                
-                <form>
+
+                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
 
                   <div class="form-group">
                     <label for="InputUserName">Họ tên:</label>
-                    <input type="text" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="">
-                    
+                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
+
                   </div>
                   <div class="form-group">
-                    <label for="InputEmail">Email:</label>
-                    <input type="email" class="form-control" id="InputEmail" placeholder="">
+                    <label for="InputPassword">Mật khẩu mới:</label>
+                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
                   </div>
-                  
+
+                  <div class="form-group">
+                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
+                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
+                  </div>
+                  <div class="modal-footer">
+                <button type="submit" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
+
+              </div>
+
                 </form>
               </div>
+
               
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Cập nhật</button>
-              
-              </div>
             </div>
           </div>
         </div>
 
-  </main>   
+  </main>
   <!-- Quay về đầu trang -->
     <br>
-    <div class="text-center">     
+    <div class="text-center">
     <a href="#"><h5>Back to top</h5></a>
     </div>
-  
+
 <!-- FOOTER -->
   <footer id="footer">
     <ul style="padding: 15px; margin-bottom: 0px;">
