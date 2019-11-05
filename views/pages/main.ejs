@@ -166,7 +166,7 @@
 
                         <div id="1" ng-module="paginationApp" ng-controller="listdata" >
                           <form id="search1" class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Search" aria-label="Search" required>
+                            <input class="form-control mr-sm-2" type="search" style="width: 50%" ng-model="search" placeholder="Tìm kiếm phiên hỏi đáp" aria-label="Search" required>
                           </form>
                           <div  ng-click="sort('chude')" class=" glyphicon sort-icon" ng-show="sortKey=='chude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
                               <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
@@ -242,7 +242,7 @@
 
                       <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
                         <form id="search2" class="form-inline my-2 my-lg-0">
-                          <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Search" aria-label="Search" required>
+                          <input class="form-control mr-sm-2" type="search" style="width: 50%;" ng-model="search" placeholder="Tìm phiếu khảo sát" aria-label="Search" required>
                         </form>
                         <div  ng-click="sort('chuded')" class=" glyphicon sort-icon" ng-show="sortKey=='chuded'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
                         <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
@@ -284,6 +284,7 @@
                               name_.push({
                                 "chuded":"<%=surveys[1][i].sec_title%>",
                                 "motad":"<%=surveys[1][i].sec_desc%>",
+
                               "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>,
                               "authord":"<%=surveys[1][i].author%>"
                               });
@@ -395,7 +396,8 @@
                                 "motapm":"<%=surveys[0][i].description%>",
                               "linkpm":"/survey?id="+<%=surveys[0][i].survey_id%>,
                                "authorpm":"<%=surveys[0][i].author%>",
-                               "viewpm":"<%=surveys[0][i].views%>"
+                               "viewpm":"<%=surveys[0][i].views%>",
+                               "phanhoipm":"<%=surveys[0][i].num_re%>"
                               });
                               </script>
                               <%}
@@ -472,7 +474,8 @@
                                 "motapd":"<%=surveys[0][i].description%>",
                                 "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"',
                                  "authorpd":"<%=surveys[0][i].author%>",
-                               "viewpd":"<%=surveys[0][i].views%>"
+                               "viewpd":"<%=surveys[0][i].views%>",
+                                "phoipd":"<%=surveys[0][i].num_re%>"
                               });
                               </script>
                               <%}
