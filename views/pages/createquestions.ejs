@@ -74,7 +74,7 @@
        </ul>
      <p style="font-weight: bold;"> Để chắc chắn bạn đã nhập đúng định dạng hãy nhấn xem trước trước khi tạo. Dưới đây là đoạn mã mẫu của chúng tôi.</p>
      </div>
-     <a href="/survey/?id=<%=survey.survey_id%>" style="margin: 15px;"  class="btn btn-success" role="button">Xem phiếu khảo sát</a>
+     <a href="/survey?id=<%=survey.survey_id%>" style="margin: 15px;"  class="btn btn-success" role="button">Xem phiếu khảo sát</a>
 
    </div><br/>
 </div>
@@ -87,8 +87,8 @@
   <div class="card">
     <div class="card-header"><h3>Nhập câu hỏi bằng văn bản</h3></div>
     <div class="card-body">
-      <form>
-        <textarea rows="15" id="text" style="width: 100%;" >Bạn là gì ?{
+      <form action="/createquestions/?id=<%=survey.survey_id%>" method="POST">
+        <textarea rows="15" id="text" name="text" style="width: 100%;" >Bạn là gì ?{
 học sinh/
 giáo viên/
 người thứ 3
@@ -151,7 +151,7 @@ Bạn có suy nghĩ gì?(4);</textarea>
           textra+="</div>";
           console.log(cau1[0]);
       }
-       if(cau[i].search("(2)")!=-1){
+       else if(cau[i].search("(2)")!=-1){
          var tn=cau[i].split("{");
           var de=tn[0];
           de=de.replace(/(?:\r\n|\r|\n)/g, '')
@@ -169,7 +169,7 @@ Bạn có suy nghĩ gì?(4);</textarea>
           textra+="</div>";
           console.log(cau2[0]);
       }
-       if(cau[i].search("(3)")!=-1){
+       else if(cau[i].search("(3)")!=-1){
          
            cau[i]=cau[i].replace(/(?:\r\n|\r|\n)/g, '');
            cau[i]=cau[i].replace("(3)","");
@@ -180,7 +180,7 @@ Bạn có suy nghĩ gì?(4);</textarea>
           textra+="</div>";
            console.log(cau[i]);
       }
-       if(cau[i].search("(4)")!=-1){
+       else if(cau[i].search("(4)")!=-1){
         cau[i]=cau[i].replace(/(?:\r\n|\r|\n)/g, '');
         cau[i]=cau[i].replace("(4)","");
           cau4.push(cau[i]);

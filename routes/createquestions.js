@@ -30,54 +30,98 @@ router.get('/', function(req, res) {
     });
 });
 router.post('/', function(req, res) {
-  if (req.query.id && req.query.qtype) {
-
-    var id = req.query.id;
-    var qtype = req.query.qtype;
-    var n = req.body.number;
-
-    for (var i = 1; i <= n; i++) {
-      var quest = "question" + i;
-      squest = {
-        surveysq_id: id,
-        squest_text: req.body[quest],
-        quest_type_id: qtype
-      }
-      var defer = q.defer();
-      var que = conn.query("INSERT INTO squest SET ?", squest, function(err, result) {
-        if (err) throw err;
-        else {
-          defer.resolve(result.insertId);
-        }
-      });
-    }
-
-    if (qtype == 3 || qtype == 4)
-      var dt = false;
-    else {
-      var dt = defer.promise;
-      dt.then(function(number) {
-        if (qtype == 1 || qtype == 2) {
-          for (var k = 1; k <= n; k++) {
-            var an = req.body["ans" + k];
-            for (var j = 1; j <= an; j++) {
-              var ans = "answer" + k + "_" + j;
-              s_ans = {
-                question_id: number ,
-                ans_text: req.body[ans]
+  if (req.query.id) {
+      id=req.query.id;
+      text=req.body.text;
+      var cau=text.split(";");
+    for(var i=0;i<cau.length;i++){
+      if(cau[i].search("(1)")!=-1){
+          var tn=cau[i].split("{");
+          var de=tn[0];
+           de=de.replace(/(?:\r\n|\r|\n)/g, '');
+          var dn=tn[1].split("}");
+          var str = dn[0].replace(/(?:\r\n|\r|\n)/g, '');
+          var dapan=str.split("/");
+           squest = {
+            surveysq_id: id,
+            squest_text: de,
+            quest_type_id: 1
+          }
+          var que = conn.query("INSERT INTO squest SET ?", squest, function(err, result) {
+            if (err) throw err;
+            else {
+              for (var j = dapan.length - 1; j >= 0; j--) {
+                s_ans = {
+                question_id: result.insertId ,
+                ans_text: dapan[j]
               }
-              var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {
+                var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {
                 if (err) throw err;
                 else;
               });
             }
-            number += 1;
+            }
+          });
+      }
+       else if(cau[i].search("(2)")!=-1){
+          var tn=cau[i].split("{");
+          var de=tn[0];
+           de=de.replace(/(?:\r\n|\r|\n)/g, '');
+          var dn=tn[1].split("}");
+          var str = dn[0].replace(/(?:\r\n|\r|\n)/g, '');
+          var dapan=str.split("/");
+           squest = {
+            surveysq_id: id,
+            squest_text: de,
+            quest_type_id: 2
           }
-        } else;
-      });
+          var que = conn.query("INSERT INTO squest SET ?", squest, function(err, result) {
+            if (err) throw err;
+            else {
+              for (var j = dapan.length - 1; j >= 0; j--) {
+                s_ans = {
+                question_id: result.insertId ,
+                ans_text: dapan[j]
+              }
+                var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {
+                if (err) throw err;
+                else;
+              });
+            }
+            }
+          });
+      }
+       else if(cau[i].search("(3)")!=-1){
+         
+           cau[i]=cau[i].replace(/(?:\r\n|\r|\n)/g, '');
+           cau[i]=cau[i].replace("(3)","");
+           squest = {
+            surveysq_id: id,
+            squest_text: cau[i],
+            quest_type_id: 3
+          }
+          var que = conn.query("INSERT INTO squest SET ?", squest, function(err, result) {
+            if (err) throw err;
+            else;
+          });
+      }
+       else if(cau[i].search("(4)")!=-1){
+        cau[i]=cau[i].replace(/(?:\r\n|\r|\n)/g, '');
+        cau[i]=cau[i].replace("(4)","");
+           squest = {
+            surveysq_id: id,
+            squest_text: cau[i],
+            quest_type_id: 4
+          }
+          var que = conn.query("INSERT INTO squest SET ?", squest, function(err, result) {
+            if (err) throw err;
+            else;
+          });
+      }
     }
-    if (req.session.user) {
-      res.redirect('/createquestion/?id=' + req.query.id + "&data=success");
+  
+    if(req.session.user) {
+      res.redirect('/createquestions?id=' + req.query.id );
     }
   }
 
