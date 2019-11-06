@@ -22,33 +22,41 @@
   <script src="/angular.ng-modules.js"></script>
 
   <script src="/Chart.js"></script>
-   <script type="text/javascript">
-     function openCity(evt, cityName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
+  <script type="text/javascript">
+   function openCity(evt, cityName) {
+// Declare all variables
+var i, tabcontent, tablinks;
 
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the link that opened the tab
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+// Get all elements with class="tabcontent" and hide them
+tabcontent = document.getElementsByClassName("tabcontent");
+for (i = 0; i < tabcontent.length; i++) {
+  tabcontent[i].style.display = "none";
 }
 
-   </script>
+// Get all elements with class="tablinks" and remove the class "active"
+tablinks = document.getElementsByClassName("tablinks");
+for (i = 0; i < tablinks.length; i++) {
+  tablinks[i].className = tablinks[i].className.replace(" active", "");
+}
+
+// Show the current tab, and add an "active" class to the link that opened the tab
+document.getElementById(cityName).style.display = "block";
+evt.currentTarget.className += " active";
+}
+
+</script>
 </head>
 
 <!-- CSS tự định nghĩa -->
 <style type="text/css">
+           .scroll{
+            display:block;
+            border: 1px solid #888;
+            padding:5px;
+            width:325px;
+            height:498px;
+            overflow:scroll;
+         }
   .nav-pills>a.active, .nav-pills>a:focus, .nav-pills>a:hover {
     cursor: default;
     font-weight: bold;
@@ -64,297 +72,303 @@
     color: black;
     border-radius: 0px;
   }
-  .tabcontent {
-    height:auto;
-  }
+
   <%for(var k=0;k< yesno.length; k++){%>
-  #myProgress<%=k%> {
-  width: 100%;
-  background-color: #F15A32;
-}
+    #myProgress<%=k%> {
+      width: 100%;
+      background-color: #F15A32;
+    }
 
-#myBar<%=k%> {
-  width: <%=(yesno[k].total-yesno[k].noo)*100/yesno[k].total%>%;
-  height: 60px;
-  background-color: #4CCF52;
-}
-          <%}%>
-      </div>
-</style>
+    #myBar<%=k%> {
+      width: <%=(yesno[k].total-yesno[k].noo)*100/yesno[k].total%>%;
+      height: 60px;
+      background-color: #4CCF52;
+    }
+    <%}%>
+    </div>
+  </style>
 
-<body style="background-color: #EEEEEE">
+  <body style="background-color: #EEEEEE">
 
-  <%- include header %>
-  <main role="main" style="min-height: 1000px;">
-    <div class="container marketing">
-      <br>
-       <div id="accordion">
-      <div class="card">
-        <div class="card-header" style="background-color: #00cccc" data-toggle="collapse" href="#collapseOne">
-          <h5><b>Phiếu khảo sát <%=survey.title%></b></h5>
-        </div>
-        <div id="collapseOne" class="collapse" data-parent="#accordion">
-        <div class="card-body">
-          <div class="row padding">
-            <div class="col-3 col-sm-2 col-md-2">
-              <div class="card">
-                <img class="card-img-top" src="/images/logo.png">
-              </div>
+    <%- include header %>
+    <main role="main" style="min-height: 650px;">
+      <div class="container marketing">
+        <br>
+        <p>
+        <a href="" style="margin-left: 0%;" role="button" class="btn btn-primary">< Trở về phiếu khảo sát</a>
+        </p>
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header" style="background-color: #00cccc" data-toggle="collapse" href="#collapseOne">
+              <h5><b>Phiếu khảo sát:  <%=survey.title%></b></h5>
             </div>
-            <div class="col-9 col-sm-9 col-md-9">
+            <div id="collapseOne" class="collapse" data-parent="#accordion">
               <div class="card-body">
-                <h4 class="card-title"><%=survey.title%></h4>
-                <p class="card-text"><%=survey.description%><br><br>
-                  Đăng bởi: <%=survey.author%><br>
-                 </p>
-                 <p id="date1"></p>
-                 <p id="date2"></p>
-                 <%if(session.username==survey.author){%>
-                 <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
-                 <%}%>
+                <div class="row padding">
+                  <div class="col-3 col-sm-2 col-md-2">
+                    <div class="card">
+                      <img class="card-img-top" src="/images/logo.png">
+                    </div>
+                  </div>
+                  <div class="col-9 col-sm-9 col-md-9">
+                    <div class="card-body">
+                      <h4 class="card-title"><%=survey.title%></h4>
+                      <p class="card-text"><%=survey.description%><br><br>
+                        Đăng bởi: <%=survey.author%><br>
+                      </p>
+                      <p id="date1"></p>
+                      <p id="date2"></p>
+                      <%if(session.username==survey.author){%>
+                      <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
+                      <%}%>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      </div>
-        </div>
-      <br>
-       <div class="tab">
-    <%
-      var dem=0;
-      for(var i=0;i< squest.length;i++){
-      dem++;
-      if(i==0){%>
-    <button  id="defaultOpen" class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
-    <% }else {%>
-     <button class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
-    <%}}%>
-      </div>
-        <%
-      var dem=0;
-      for(var j=0;j< squest.length;j++){
-      dem++; 
-      if(squest[j].quest_type_id==4){ var de=0;%>
-      <div id="<%=squest[j].squest_id%>" class="tabcontent">
+        <br>
         
-      <h3>Câu <%=dem%></h3>
-      <p><%= squest[j].squest_text%></p>
-       <div id="accordion">
-              <%
-          var de=0;
-          for(var k=0;k< texts.length;k++){
-          
-          if(squest[j].squest_id==texts[k].quest_id){ de++; %>
-                <div class="card">
+        <div class="tab">
+          <div class="scroll">
+          <%
+          var dem=0;
+          for(var i=0;i< squest.length;i++){
+          dem++;
+          if(i==0){%>
+          <button  id="defaultOpen" class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
+          <% }else {%>
+          <button class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
+          <%}}%>
+          </div>
+        </div>
+        
+        <%
+        var dem=0;
+        for(var j=0;j< squest.length;j++){
+        dem++; 
+        if(squest[j].quest_type_id==4){ var de=0;%>
+        <div id="<%=squest[j].squest_id%>" class="tabcontent">
+
+          <h3>Câu <%=dem%></h3>
+          <p><%= squest[j].squest_text%></p>
+          <div id="accordion">
+            <%
+            var de=0;
+            for(var k=0;k< texts.length;k++){
+
+            if(squest[j].squest_id==texts[k].quest_id){ de++; %>
+            <div class="card">
               <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapseOne<%=k%>">
                  Câu trả lời <%=de%>:
-                </a>
-              </div>
-              <div id="collapseOne<%=k%>" class="collapse show" data-parent="#accordion">
-                <div class="card-body">
-                 <%=texts[k].textreponse%>
-                </div>
-              </div>
-            </div>
-          
-          <%}}%>
-      </div></div>
-       <%}if(squest[j].quest_type_id==3){ var de3=0;%>
-      <div id="<%=squest[j].squest_id%>" class="tabcontent">
-        
+               </a>
+             </div>
+             <div id="collapseOne<%=k%>" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+               <%=texts[k].textreponse%>
+             </div>
+           </div>
+         </div>
+
+         <%}}%>
+       </div>
+     </div>
+     <%}if(squest[j].quest_type_id==3){ var de3=0;%>
+     <div id="<%=squest[j].squest_id%>" class="tabcontent">
+
       <h3>Câu <%=dem%></h3>
       <p><%= squest[j].squest_text%></p>
-              <%
-          var de3=0;
-          for(var k=0;k< yesno.length;k++){
-          
-          if(squest[j].squest_id==yesno[k].quest_id){ de3++; %>
-          <p>Tổng: <%=yesno[k].total%></p>
-          <p>Số người chọn <span style="color:red;font-weight: bold;">Sai</span>: <%=yesno[k].noo%></p>
-          <p>Số người chọn <span style="color:green;font-weight: bold;">Đúng</span>: <%=yesno[k].total-yesno[k].noo%></p>
-                <div id="myProgress<%=k%>">
-                  <div id="myBar<%=k%>"></div>
-                </div>
-          <%}}%>
+      <%
+      var de3=0;
+      for(var k=0;k< yesno.length;k++){
+
+      if(squest[j].squest_id==yesno[k].quest_id){ de3++; %>
+      <p>Tổng: <%=yesno[k].total%></p>
+      <p>Số người chọn <span style="color:red;font-weight: bold;">Sai</span>: <%=yesno[k].noo%></p>
+      <p>Số người chọn <span style="color:green;font-weight: bold;">Đúng</span>: <%=yesno[k].total-yesno[k].noo%></p>
+      <div id="myProgress<%=k%>">
+        <div id="myBar<%=k%>"></div>
       </div>
-       <%}if(squest[j].quest_type_id==1){ var de1=0;%>
-      <div id="<%=squest[j].squest_id%>" class="tabcontent">
-        
+      <%}}%>
+    </div>
+    <%}if(squest[j].quest_type_id==1){ var de1=0;%>
+    <div id="<%=squest[j].squest_id%>" class="tabcontent">
+
       <h3>Câu <%=dem%></h3>
       <p><%= squest[j].squest_text%></p> 
       <canvas id="myC<%=dem%>"></canvas>
-    
-              <%
-          var de1=0;
-          for(var k=0;k< single.length;k++){
-          
-          if(squest[j].squest_id==single[k].quest_id){ de1++; %>
-          <p>Số người chọn <span style="font-style: italic;color: blue"><%=single[k].ans_text%></span>: <%=single[k].number%></p>
-                
-          <%}}%>
-      </div>
-      <%}if(squest[j].quest_type_id==2){%>
-       <div id="<%=squest[j].squest_id%>" class="tabcontent">
+
+      <%
+      var de1=0;
+      for(var k=0;k< single.length;k++){
+
+      if(squest[j].squest_id==single[k].quest_id){ de1++; %>
+      <p>Số người chọn <span style="font-style: italic;color: blue"><%=single[k].ans_text%></span>: <%=single[k].number%></p>
+
+      <%}}%>
+    </div>
+    <%}if(squest[j].quest_type_id==2){%>
+    <div id="<%=squest[j].squest_id%>" class="tabcontent">
       <h3>Câu <%=dem%></h3>
       <p><%= squest[j].squest_text%></p> 
       <canvas id="myC<%=dem%>"></canvas>
-             <%
-          var de2=0;
-          for(var k=0;k< multi.length;k++){
-          if(squest[j].squest_id==multi[k].question_id){ de2++; %>
-          <p>Số người chọn <span style="font-style: italic;color: blue;"><%=multi[k].ans_text%></span>: <%=multi[k].number%></p>
-                
-          <%}}%>
-      </div>
-<%}}%>
-      <!-- <div id="London" class="tabcontent">
-      <h3>London</h3>
-      <p>London is the capital city of England.</p>
-      </div>
+      <%
+      var de2=0;
+      for(var k=0;k< multi.length;k++){
+      if(squest[j].squest_id==multi[k].question_id){ de2++; %>
+      <p>Số người chọn <span style="font-style: italic;color: blue;"><%=multi[k].ans_text%></span>: <%=multi[k].number%></p>
 
-      <div id="Paris" class="tabcontent">
-      <h3>Paris</h3>
-      <p>Paris is the capital of France.</p>
-      </div>
+      <%}}%>
+    </div>
+    <%}}%>
+    <!-- <div id="London" class="tabcontent">
+    <h3>London</h3>
+    <p>London is the capital city of England.</p>
+    </div>
 
-      <div id="Tokyo" class="tabcontent">
-      <h3>Tokyo</h3>
-      <p>Tokyo is the capital of Japan.</p>
-      </div>
-                <% var dem=0;
-                       for(var i=0;i< squest.length;i++){
-                         dem++;
-                          if(squest[i].quest_type_id==1){ %>
-                                  <div id="c1" class="tab-pane active" >
-                                      <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                          <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                      <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
+    <div id="Paris" class="tabcontent">
+    <h3>Paris</h3>
+    <p>Paris is the capital of France.</p>
+    </div>
 
-                                </div></div><%}
-                          if(squest[i].quest_type_id==3){ %>
-                                <div id="c3" class="tab-pane active" >
+    <div id="Tokyo" class="tabcontent">
+    <h3>Tokyo</h3>
+    <p>Tokyo is the capital of Japan.</p>
+    </div>
+              <% var dem=0;
+                     for(var i=0;i< squest.length;i++){
+                       dem++;
+                        if(squest[i].quest_type_id==1){ %>
+                                <div id="c1" class="tab-pane active" >
                                     <div class="card card body" style="margin-top: 20px;padding:15px;">
                                         <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                      <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
-                                     </div>
-                                </div><%}
-                          if(squest[i].quest_type_id==2){ %>
-                              <div id="c2" class="tab-pane active" >
-                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                      <p><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                    <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
 
                               </div></div><%}
-                          if(squest[i].quest_type_id==4){ %>
-                              <div id="c4" class="tab-pane active" >
+                        if(squest[i].quest_type_id==3){ %>
+                              <div id="c3" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                      <p><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <p> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                    <canvas id="chart_<%= squest[i].squest_id%>" width="360" height="300"></canvas>
+                                   </div>
+                              </div><%}
+                        if(squest[i].quest_type_id==2){ %>
+                            <div id="c2" class="tab-pane active" >
+                                <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                    <p><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+
+                            </div></div><%}
+                        if(squest[i].quest_type_id==4){ %>
+                            <div id="c4" class="tab-pane active" >
+                                <div class="card card body" style="margin-top: 20px;padding:15px;">
+                                    <p><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
 
 
-                                  </div>
-                              </div>
-                          <%}
+                                </div>
+                            </div>
+                        <%}
                       }%> -->
 
-<script>
-   var color=['#F15A32',
-    '#FCF640',
-    '#608FEC',
-    '#C1BDB8',
-    '#2A2927',
-    '#E570BB',
-    '#FA9F34',
-    '#4CCF52',
-    '#B59265',
-    '#A360EC'
-    ];
-    
-  <%
-      var dem=0;
-      for(var j=0;j< squest.length;j++){
-      dem++; %>
-      data<%=dem%>=[];
-    labels<%=dem%>=[];
-    backgroundColor<%=dem%>=[];
-    borderColor<%=dem%>=[]; 
+                      <script>
+                       var color=['#F15A32',
+                       '#FCF640',
+                       '#608FEC',
+                       '#C1BDB8',
+                       '#2A2927',
+                       '#E570BB',
+                       '#FA9F34',
+                       '#4CCF52',
+                       '#B59265',
+                       '#A360EC'
+                       ];
 
-      <%  
-          if(squest[j].quest_type_id==1){ 
-                var k=0;
-              
-                for(var i=0;i< single.length;i++){
-              
-                if(single[i].quest_id==squest[j].squest_id)
-                  {
-                    k++;
-                 %>
-                    data<%=dem%>.push(<%=single[i].number%>);
-                    labels<%=dem%>.push("<%=single[i].ans_text%>");
-                    backgroundColor<%=dem%>.push(color[<%=k%>-1]);
-                    borderColor<%=dem%>.push(color[<%=k%>-1]);
-                    <%}}%>
-                
-          var ctx<%=dem%> = document.getElementById('myC<%=dem%>');
-         var myPieChart<%=dem%> = new Chart(ctx<%=dem%>, {
-            type: 'pie',
-            data: {
-              datasets: [{
-                data:data<%=dem%>,
-                backgroundColor:backgroundColor<%=dem%>,
-                borderColor:borderColor<%=dem%>
-                 }],
-                labels:labels<%=dem%>,
-              },
-            options: {
-    animation:{
-      animateRotate:true
-    }
-  }
-});   
-          
- 
-          <%}
-          if(squest[j].quest_type_id==2){ 
-                var k=0;
-                
-                for(var i=0;i< multi.length;i++){
-              
-                if(multi[i].question_id==squest[j].squest_id){k++;
-                 %>
-                    data<%=dem%>.push(<%=multi[i].number%>);
-                    labels<%=dem%>.push("<%=multi[i].ans_text%>");
-                    backgroundColor<%=dem%>.push(color[<%=k%>-1]);
-                    borderColor<%=dem%>.push(color[<%=k%>-1]);
-                    <%}}%>
-                
-          var ctx<%=dem%> = document.getElementById('myC<%=dem%>');
-         var myChart<%=dem%> = new Chart(ctx<%=dem%>, {
-            type: 'bar',
-            data: {
-               labels:labels<%=dem%>,
-              datasets: [{
-                data:data<%=dem%>,
-                backgroundColor:backgroundColor<%=dem%>,
-                borderColor:borderColor<%=dem%>,
-                 borderWidth: 1,
-                 label:"Biểu đồ",
-                 }],
-               
-               
-              },
-           options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
+                       <%
+                       var dem=0;
+                       for(var j=0;j< squest.length;j++){
+                        dem++; %>
+                        data<%=dem%>=[];
+                        labels<%=dem%>=[];
+                        backgroundColor<%=dem%>=[];
+                        borderColor<%=dem%>=[]; 
 
-    <%}}%>
+                        <%  
+                        if(squest[j].quest_type_id==1){ 
+                          var k=0;
+
+                          for(var i=0;i< single.length;i++){
+
+                            if(single[i].quest_id==squest[j].squest_id)
+                            {
+                              k++;
+                              %>
+                              data<%=dem%>.push(<%=single[i].number%>);
+                              labels<%=dem%>.push("<%=single[i].ans_text%>");
+                              backgroundColor<%=dem%>.push(color[<%=k%>-1]);
+                              borderColor<%=dem%>.push(color[<%=k%>-1]);
+                              <%}}%>
+
+                              var ctx<%=dem%> = document.getElementById('myC<%=dem%>');
+                              var myPieChart<%=dem%> = new Chart(ctx<%=dem%>, {
+                                type: 'pie',
+                                data: {
+                                  datasets: [{
+                                    data:data<%=dem%>,
+                                    backgroundColor:backgroundColor<%=dem%>,
+                                    borderColor:borderColor<%=dem%>
+                                  }],
+                                  labels:labels<%=dem%>,
+                                },
+                                options: {
+                                  animation:{
+                                    animateRotate:true
+                                  }
+                                }
+                              });   
+
+
+                              <%}
+                              if(squest[j].quest_type_id==2){ 
+                                var k=0;
+
+                                for(var i=0;i< multi.length;i++){
+
+                                  if(multi[i].question_id==squest[j].squest_id){k++;
+                                   %>
+                                   data<%=dem%>.push(<%=multi[i].number%>);
+                                   labels<%=dem%>.push("<%=multi[i].ans_text%>");
+                                   backgroundColor<%=dem%>.push(color[<%=k%>-1]);
+                                   borderColor<%=dem%>.push(color[<%=k%>-1]);
+                                   <%}}%>
+
+                                   var ctx<%=dem%> = document.getElementById('myC<%=dem%>');
+                                   var myChart<%=dem%> = new Chart(ctx<%=dem%>, {
+                                    type: 'bar',
+                                    data: {
+                                     labels:labels<%=dem%>,
+                                     datasets: [{
+                                      data:data<%=dem%>,
+                                      backgroundColor:backgroundColor<%=dem%>,
+                                      borderColor:borderColor<%=dem%>,
+                                      borderWidth: 1,
+                                      label:"Biểu đồ",
+                                    }],
+
+
+                                  },
+                                  options: {
+                                    scales: {
+                                      yAxes: [{
+                                        ticks: {
+                                          beginAtZero: true
+                                        }
+                                      }]
+                                    }
+                                  }
+                                });
+
+                                   <%}}%>
 // var myPieChart = new Chart(ctx1, {
 //   type: 'pie',
 //   data: {
@@ -425,9 +439,9 @@
 // });
 </script>
 
-   <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
- </div>
- <%- include update_inf_user %>
+<p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+</div>
+<%- include update_inf_user %>
 </main>
 <footer id="footer">
   <ul style="padding: 15px; margin-bottom: 0px;">
@@ -439,29 +453,29 @@
 
 
 <script type="text/javascript">
-    <% var n =  JSON.stringify(survey.startdate)%>;
-    <% var m =  JSON.stringify(survey.enddate)%> ;
-    var text1 = <%- n%> ;
-    var text2 = <%- m%> ;
-    var date1 = new Date(text1);
-    var date2 = new Date(text2);
-    document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
-    document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
-function formatdate(d){
-  var dd = d.getDate();
-  var mm = d.getMonth() + 1; //January is 0!
+  <% var n =  JSON.stringify(survey.startdate)%>;
+  <% var m =  JSON.stringify(survey.enddate)%> ;
+  var text1 = <%- n%> ;
+  var text2 = <%- m%> ;
+  var date1 = new Date(text1);
+  var date2 = new Date(text2);
+  document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
+  document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
+  function formatdate(d){
+    var dd = d.getDate();
+var mm = d.getMonth() + 1; //January is 0!
 
-  var yyyy = d.getFullYear();
-  if (dd < 10) {
-    dd = '0' + dd;
-  }
-  if (mm < 10) {
-    mm = '0' + mm;
-  }
-  var today = dd + '/' + mm + '/' + yyyy;
-  return today;
+var yyyy = d.getFullYear();
+if (dd < 10) {
+  dd = '0' + dd;
+}
+if (mm < 10) {
+  mm = '0' + mm;
+}
+var today = dd + '/' + mm + '/' + yyyy;
+return today;
 }
 document.getElementById("defaultOpen").click();
-  </script>
+</script>
 
 </html>
