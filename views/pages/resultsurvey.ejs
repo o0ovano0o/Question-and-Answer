@@ -49,14 +49,6 @@ evt.currentTarget.className += " active";
 
 <!-- CSS tự định nghĩa -->
 <style type="text/css">
-           .scroll{
-            display:block;
-            border: 1px solid #888;
-            padding:5px;
-            width:325px;
-            height:498px;
-            overflow:scroll;
-         }
   .nav-pills>a.active, .nav-pills>a:focus, .nav-pills>a:hover {
     cursor: default;
     font-weight: bold;
@@ -131,7 +123,7 @@ evt.currentTarget.className += " active";
         <br>
         
         <div class="tab">
-          <div class="scroll">
+          <div class="scroll" style="width:325px; display:block; border: 1px solid #999; padding:5px; height:498px; overflow:scroll;">
           <%
           var dem=0;
           for(var i=0;i< squest.length;i++){
@@ -150,9 +142,10 @@ evt.currentTarget.className += " active";
         dem++; 
         if(squest[j].quest_type_id==4){ var de=0;%>
         <div id="<%=squest[j].squest_id%>" class="tabcontent">
-
+          
           <h3>Câu <%=dem%></h3>
           <p><%= squest[j].squest_text%></p>
+          <div class="scroll" style=" display:block; height: 390px; overflow:scroll;">
           <div id="accordion">
             <%
             var de=0;
@@ -174,6 +167,7 @@ evt.currentTarget.className += " active";
 
          <%}}%>
        </div>
+      </div>
      </div>
      <%}if(squest[j].quest_type_id==3){ var de3=0;%>
      <div id="<%=squest[j].squest_id%>" class="tabcontent">
