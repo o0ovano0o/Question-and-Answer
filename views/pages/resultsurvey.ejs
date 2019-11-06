@@ -205,7 +205,7 @@ evt.currentTarget.className += " active";
       for(var k=0;k< single.length;k++){
 
       if(squest[j].squest_id==single[k].quest_id){ de1++; %>
-      <p>Số người chọn <span style="font-style: italic;color: blue"><%=single[k].ans_text%></span>: <%=single[k].number%></p>
+      
 
       <%}}%>
     </div>
@@ -218,8 +218,7 @@ evt.currentTarget.className += " active";
       var de2=0;
       for(var k=0;k< multi.length;k++){
       if(squest[j].squest_id==multi[k].question_id){ de2++; %>
-      <p>Số người chọn <span style="font-style: italic;color: blue;"><%=multi[k].ans_text%></span>: <%=multi[k].number%></p>
-
+      
       <%}}%>
     </div>
     <%}}%>

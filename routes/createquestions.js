@@ -35,33 +35,39 @@ router.post('/', function(req, res) {
       text=req.body.text;
       var cau=text.split(";");
     for(var i=0;i<cau.length;i++){
+
+
       if(cau[i].search("(1)")!=-1){
-          var tn=cau[i].split("{");
+         var tn=cau[i].split("{");
           var de=tn[0];
-           de=de.replace(/(?:\r\n|\r|\n)/g, '');
+          de=de.replace(/(?:\r\n|\r|\n)/g, '')
           var dn=tn[1].split("}");
           var str = dn[0].replace(/(?:\r\n|\r|\n)/g, '');
           var dapan=str.split("/");
-           squest = {
+           var squest = {
             surveysq_id: id,
             squest_text: de,
             quest_type_id: 1
           }
+          console.log(dapan);
           var que = conn.query("INSERT INTO squest SET ?", squest, function(err, result) {
             if (err) throw err;
             else {
-              for (var j = dapan.length - 1; j >= 0; j--) {
-                s_ans = {
+              for (var j =0; j < dapan.length ; j++) {
+                var s_ans = {
                 question_id: result.insertId ,
                 ans_text: dapan[j]
-              }
+                }
+                console.log(dapan[j]);
                 var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {
                 if (err) throw err;
                 else;
               });
             }
             }
+          
           });
+          console.log(cau[i]);
       }
        else if(cau[i].search("(2)")!=-1){
           var tn=cau[i].split("{");
@@ -70,7 +76,7 @@ router.post('/', function(req, res) {
           var dn=tn[1].split("}");
           var str = dn[0].replace(/(?:\r\n|\r|\n)/g, '');
           var dapan=str.split("/");
-           squest = {
+           var squest = {
             surveysq_id: id,
             squest_text: de,
             quest_type_id: 2
@@ -79,7 +85,7 @@ router.post('/', function(req, res) {
             if (err) throw err;
             else {
               for (var j = dapan.length - 1; j >= 0; j--) {
-                s_ans = {
+               var  s_ans = {
                 question_id: result.insertId ,
                 ans_text: dapan[j]
               }
@@ -89,7 +95,9 @@ router.post('/', function(req, res) {
               });
             }
             }
+            dapan.length=0;
           });
+           console.log(cau[i]);
       }
        else if(cau[i].search("(3)")!=-1){
          
@@ -104,6 +112,7 @@ router.post('/', function(req, res) {
             if (err) throw err;
             else;
           });
+           console.log(cau[i]);
       }
        else if(cau[i].search("(4)")!=-1){
         cau[i]=cau[i].replace(/(?:\r\n|\r|\n)/g, '');
@@ -117,6 +126,7 @@ router.post('/', function(req, res) {
             if (err) throw err;
             else;
           });
+           console.log(cau[i]);
       }
     }
   
