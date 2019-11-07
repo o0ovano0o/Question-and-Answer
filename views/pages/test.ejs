@@ -69,6 +69,7 @@
                   Đăng bởi: <%=survey.author%><br>
                  </p>
                  <p id="date1"></p>
+                 <p>Tổng số câu hỏi: <%=numb[0].total%></p>
                 <%if(survey.isopen==0){
                  %>
                  <p style="font-weight: bold;">Đã đóng</p>
@@ -78,6 +79,7 @@
                 if(survey.isopen==0){
                  %>
                   <a href="/deletesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Xóa phiếu khảo sát</a>
+                  <a href="/resurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Mở lại phiếu khảo sát</a>
                   <%}else{%>
                  <a href="/deletesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Xóa phiếu khảo sát</a>
                  <a href="/closesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Đóng phiếu khảo sát</a>
@@ -362,9 +364,11 @@
  </div>                              
            <%}else {%>
            <br/><br/>
+           <%if(survey.isopen==1){%>
                    <div class="alert alert-primary" role="alert" style="width: 100%;">
                     Bạn đã làm bài khảo sát này rồi.
                   </div>
+                  <%}else{%>
                   <div class="row" style="width: 100%">
                   <div class="col-6 col-sm-6 col-md-6">
                   </div>
@@ -373,7 +377,7 @@
                   </div>
                 </div>
 
-                   <%}%>
+                   <%}}%>
 <%- include update_inf_user %>
 </main>
 <footer id="footer">

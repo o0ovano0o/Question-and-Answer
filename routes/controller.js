@@ -13,6 +13,7 @@ router.use('/survey', require(__dirname + '/new_survey.js'));
 router.use('/resultsurvey', require(__dirname + '/resultsurvey.js'));
 router.use('/yourprofile', require(__dirname + '/yourprofile.js'));
 router.use('/closesurvey', require(__dirname + '/closesurvey.js'));
+router.use('/resurvey', require(__dirname + '/resurvey.js'));
 router.use('/deletesurvey', require(__dirname + '/deletesurvey.js'));
 router.use('/student_manage', require(__dirname + '/student_manage.js'));
 

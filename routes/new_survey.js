@@ -28,14 +28,16 @@ router.get('/', function(req, res) {
             if (err) throw err;
             else {
               if(ress.length<=0||req.session.user.isadmin){
-                var querysq = conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?", {surveysq_id: id}, (err, squests) => {
+                var querysq = conn.query("SELECT squest.*, s_ans.* FROM squest left join s_ans on squest.squest_id=s_ans.question_id where ?;SELECT count(*) as total FROM `squest` GROUP BY `surveysq_id` having ?", [{surveysq_id: id},{surveysq_id: id}], (err, squests) => {
                     if (err) throw err;
                     else {
-                      s_ans = squests;
+                      s_ans = squests[0];
+                      numb=squests[1];
                       res.render('test', {
                         session: req.session.user,
                         s_ans: s_ans,
-                        check:0
+                        check:0,
+                        numb:numb,
                       });}
                 });
               }

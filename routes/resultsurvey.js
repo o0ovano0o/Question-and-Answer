@@ -22,10 +22,10 @@ router.get('/', function (req, res) {
 					var dt = defer.promise;
 						dt
 						.then(function(num){
-							var querysq=conn.query("SELECT * FROM textreponse inner join user_reponse on textreponse.reponse_id=user_reponse.reponse_id where ?;SELECT * FROM yesno;SELECT * from single;SELECT * from multi",{surveyid:id}, (err, ans)=>{
+							var querysq=conn.query("SELECT * FROM textreponse inner join user_reponse on textreponse.reponse_id=user_reponse.reponse_id where ?;SELECT * FROM yesno;SELECT * from single;SELECT * from multi;SELECT count(*) as total FROM `user_reponse` group by `surveyid` having ?",[{surveyid:id},{surveyid:id}], (err, ans)=>{
 								if(err) throw err;
 								else{
-								res.render("resultsurvey",{session:req.session.user,survey:num[0],texts:ans[0],yesno:ans[1],single:ans[2],multi:ans[3]});
+								res.render("resultsurvey",{session:req.session.user,survey:num[0],texts:ans[0],yesno:ans[1],single:ans[2],multi:ans[3],number:ans[4]});
 								}
 							});
 						});

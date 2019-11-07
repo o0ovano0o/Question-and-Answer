@@ -87,7 +87,7 @@ evt.currentTarget.className += " active";
       <div class="container marketing">
         <br>
         <p>
-        <a href="" style="margin-left: 0%;" role="button" class="btn btn-primary">< Trở về phiếu khảo sát</a>
+        <a href="/survey?id=<%=survey.survey_id%>" style="margin-left: 0%;" role="button" class="btn btn-primary">< Trở về phiếu khảo sát</a>
         </p>
         <div id="accordion">
           <div class="card">
@@ -109,10 +109,8 @@ evt.currentTarget.className += " active";
                         Đăng bởi: <%=survey.author%><br>
                       </p>
                       <p id="date1"></p>
-                      <p id="date2"></p>
-                      <%if(session.username==survey.author){%>
-                      <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
-                      <%}%>
+                      
+                    <p>Số người tham gia: <%=number[0].total%></p>
                     </div>
                   </div>
                 </div>
@@ -447,13 +445,13 @@ evt.currentTarget.className += " active";
 
 <script type="text/javascript">
   <% var n =  JSON.stringify(survey.startdate)%>;
-  <% var m =  JSON.stringify(survey.enddate)%> ;
+ 
   var text1 = <%- n%> ;
-  var text2 = <%- m%> ;
+  
   var date1 = new Date(text1);
-  var date2 = new Date(text2);
+
   document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
-  document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
+  
   function formatdate(d){
     var dd = d.getDate();
 var mm = d.getMonth() + 1; //January is 0!

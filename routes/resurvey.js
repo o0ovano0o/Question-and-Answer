@@ -7,12 +7,12 @@ var q = require('q');
 router.get('/', function (req, res) {
   if(req.session.user) {
      var id = req.query.id;
-     var query = conn.query("update survey set isopen=0 WHERE ?", {survey_id: id}, (err, squests) => {
+     var query = conn.query("update survey set isopen=1 WHERE ?", {survey_id: id}, (err, squests) => {
             if (err) throw err;
             else {
             }
         });
-    res.redirect('/home');
+      res.redirect('/home');
   }
 
   else{
