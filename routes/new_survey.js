@@ -143,11 +143,13 @@ router.post('/', function(req, res) {
                   quest_id: squest[i].squest_id,
                   ans_id: ans_idd[j]
                 }
+                console.log(ans_idd[j]);
                 var query = conn.query("INSERT INTO  choice_multichoices SET ?", ans, (err, resss) => {
                   if (err) {
                     throw err;
                   } else {
                     console.log("22-insert sucesss");
+                    console.log(ans_idd[j]);
                   }
                 });
 
