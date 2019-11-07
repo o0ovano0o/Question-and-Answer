@@ -137,13 +137,14 @@ router.post('/', function(req, res) {
                   console.log("21-insert sucesss");
                 }
               });
+              if(ans_idd[0]>10){
               for (var j = 0; j < ans_idd.length; j++) {
                 ans = {
                   response_id: resp.insertId,
                   quest_id: squest[i].squest_id,
                   ans_id: ans_idd[j]
                 }
-                console.log(ans_idd[j]);
+                console.log(ans_idd);
                 var query = conn.query("INSERT INTO  choice_multichoices SET ?", ans, (err, resss) => {
                   if (err) {
                     throw err;
@@ -154,6 +155,23 @@ router.post('/', function(req, res) {
                 });
 
               }
+            }
+            else{
+               ans = {
+                  response_id: resp.insertId,
+                  quest_id: squest[i].squest_id,
+                  ans_id: ans_idd
+                }
+                console.log(ans_idd);
+                var query = conn.query("INSERT INTO  choice_multichoices SET ?", ans, (err, resss) => {
+                  if (err) {
+                    throw err;
+                  } else {
+                    console.log("22-insert sucesss");
+                    console.log(ans_idd);
+                  }
+                });
+            }
             }
           }
         }
