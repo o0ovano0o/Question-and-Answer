@@ -1,6 +1,88 @@
 var express = require('express');
+const passport = require('passport');
 var router = express.Router();
+var db = require('../model/database');
+var conn = db.getConnection();
+var q = require('q');
+router.get('/auth/facebook', passport.authenticate('facebook',{scope:'email'}));
 
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook',
+   { successRedirect : '/homefb', failureRedirect: '/login' }));
+
+
+router.get('/homefb',isLoggedIn,function(req,res){
+	
+	user=req.user;
+	users = {
+		user_id:user.id,
+		username: user.username,
+		name: user.username,
+		email: user.email,
+		password: 'fb',
+		date: '',
+		isadmin: 0
+	};
+	var defer = q.defer();
+		var query = conn.query("SELECT * FROM user WHERE ?", {email :user.email}, function(err,results) {
+			if (err) {
+				defer.reject(err);
+			}
+			else {
+				defer.resolve(results);
+			}
+		});
+		var dt = defer.promise;
+		dt.then(function(usercheck){
+		var userr = usercheck[0];
+
+		if (userr != null) {
+					var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+				      if(err) throw err;
+				      else{
+				      	userscheck = {
+							user_id:userr.user_id,
+							username: user.username,
+							name: user.username,
+							email: user.email,
+							password: 'fb',
+							date: '',
+							isadmin: 0
+						};
+						req.session.user=userscheck;
+				        res.render('main',{session: req.session.user, surveys}); } 
+				      });
+			}
+		else  {
+
+			if (users) {
+				console.log(users);
+				var query1 = conn.query("INSERT INTO user SET ?", users, function(err,results) {
+					if (err) {
+						throw(err);
+					}
+					else {
+						var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+				      if(err) throw err;
+				      else{
+				      	userscheck = {
+							user_id:results.insertId,
+							username: user.username,
+							name: user.username,
+							email: user.email,
+							password: 'fb',
+							date: '',
+							isadmin: 0
+						};
+						req.session.user=userscheck;
+				        res.render('main',{session: req.session.user, surveys}); } 
+				      });
+					}
+				});
+			}
+		}
+	});
+});
 router.use('/login', require(__dirname + '/login.js'));
 router.use('/home', require(__dirname + '/main.js'));
 router.use('/signin', require(__dirname + '/signin.js'));
@@ -27,5 +109,11 @@ router.use('/createsurvey', require(__dirname + '/survey_question.js'));
 router.use('/createquestion', require(__dirname + '/createquestion.js'));
 router.use('/createquestions', require(__dirname + '/createquestions.js'));
 router.use('/logout', require(__dirname + '/logout.js'));
+function isLoggedIn(req, res, next) {
+	if(req.isAuthenticated()){
+		return next();
+	}
 
+	res.redirect('/login');
+}
 module.exports = router;
