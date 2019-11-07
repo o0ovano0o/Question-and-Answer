@@ -74,8 +74,8 @@
                  <%}else{%>
                     <p>Tổng số câu hỏi: 0</p>
                  <%}%>
-                
-                
+
+
                  <%if(session.username==survey.author){
 
                 if(survey.isopen==0){
@@ -83,7 +83,7 @@
                   <p style="font-weight: bold;">Đã đóng</p>
                   <a href="/resurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Mở lại phiếu khảo sát</a>
                   <%}else{%>
-                 
+
                  <a href="/closesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Đóng phiếu khảo sát</a>
                  <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
                  <a href="/createquestions/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi bằng văn bản</a>
@@ -113,7 +113,7 @@
                                              </button>
                                          </div>
                                          <div class="modal-body">
-                                               <form action="/updatesurvey?id=<%=survey.survey_id%>" method="POST">                                           
+                                               <form action="/updatesurvey?id=<%=survey.survey_id%>" method="POST">
                                                      <div>
                                                          <label for="title" class="col-form-label">Tiêu đề:</label>
                                                          <input type="text" name="title" class="form-control" value="<%=survey.title%>" required>
@@ -142,7 +142,7 @@
                 </div>
                  <%if((check==0&&survey.isopen==1)||session.u){%>
                 <div class="col-6 col-sm-6 col-md-6">
-                
+
                   <a data-toggle="collapse" href="#start" id="st" style="margin-left: -8%;"role="button" class="btn btn-primary">Bắt đầu</a>
 
                 </div>
@@ -154,7 +154,7 @@
                     <form action="/survey/?id=<%=survey.survey_id%>" method="POST">
                       <%}%>
                 <div class="card">
-  
+
                    <div class="card-header" style="background-color: #99ccff">
                        <h6><b>Danh sách câu hỏi khảo sát</b></h6>
                    </div><br>
@@ -167,7 +167,7 @@
                                   <div id="c1" class="tab-pane active" >
                                       <div class="card card body" style="margin-top: 20px;padding:15px;">
                                         <div class="row">
-                                         
+
                                           <p class="col-11"> <%if(session.username==survey.author){%>
                                           <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
                                           <%}%> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
@@ -230,7 +230,7 @@
                                 <div id="c3" class="tab-pane active" >
                                     <div class="card card body" style="margin-top: 20px;padding:15px;">
                                       <div class="row">
-                                         
+
                                         <p class="col-11">
                                            <%if(session.username==survey.author){%>
                                           <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
@@ -267,7 +267,7 @@
                                                </button>
                                            </div>
                                            <div class="modal-body">
-                                                 <form action="" method="POST">
+                                                 <form action="/updatequestion?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>" method="POST">
                                                        <div>
                                                            <label for="title" class="col-form-label">Câu hỏi:</label>
                                                            <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>">
@@ -317,7 +317,7 @@
                                              </button>
                                          </div>
                                          <div class="modal-body">
-                                               <form action="" method="POST">                                           
+                                               <form action="" method="POST">
                                                      <div>
                                                          <label for="title" class="col-form-label">Câu hỏi:</label>
                                                          <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
@@ -376,7 +376,7 @@
                                              </button>
                                          </div>
                                          <div class="modal-body">
-                                               <form action="" method="POST">
+                                               <form action="/updatequestion?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>" method="POST">
                                                      <div>
                                                          <label for="title" class="col-form-label">Câu hỏi:</label>
                                                          <input type="text" name="title" class="form-control" value="<%=squest[i].squest_text%>" >
@@ -386,12 +386,12 @@
                                                    </div>
                                                </form>
                                              </select>
-                                         </div><br>                                       
+                                         </div><br>
                                      </div>
                                  </div>
                              </div>
                           <%}
-                          
+
                       }%>
 
                        <%if(cauhoi>=1&&(!session.isadmin)){ %>
@@ -409,7 +409,7 @@
 
    </div>
    <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
- </div>                              
+ </div>
            <%}else {%>
            <br/><br/>
            <%if(survey.isopen==1){%>
@@ -446,13 +446,13 @@
 
 <script type="text/javascript">
     <% var n =  JSON.stringify(survey.startdate)%>;
-  
+
     var text1 = <%- n%> ;
-  
+
     var date1 = new Date(text1);
-   
+
     document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
-   
+
     function checknumber(inp){
       if(inp.value=="")
         inp.value=1;
