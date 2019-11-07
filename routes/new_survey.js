@@ -78,7 +78,7 @@ router.post('/', function(req, res) {
 	        user_id: req.session.user.user_id,
 	        reponse_date: now
       }
-      var query = conn.query("INSERT INTO  user_reponse SET ? ", ureponse, (err, res) => {
+      var query = conn.query("INSERT INTO  user_reponse SET ? ", ureponse, (err, resp) => {
         if (err) {
           throw err;
         } else {
@@ -89,7 +89,7 @@ router.post('/', function(req, res) {
 	              console.log(i);
 	              text = answers[name];
 	              textreponse = {
-		                reponse_id: res.insertId,
+		                reponse_id: resp.insertId,
 		                quest_id: squest[i].squest_id,
 		                textreponse: text
 	              }
@@ -101,7 +101,7 @@ router.post('/', function(req, res) {
             if (type == 3) {
 	              truefalse = answers[name];
 	              yesnoreponse = {
-		                reponse_id: res.insertId,
+		                reponse_id: resp.insertId,
 		                quest_id: squest[i].squest_id,
 		                yesnovalue: truefalse
 	              }
@@ -112,7 +112,7 @@ router.post('/', function(req, res) {
             if (type == 1) {
               ans_id = answers[name];
               reponse = {
-                reponse_id: res.insertId,
+                reponse_id: resp.insertId,
                 quest_id: squest[i].squest_id,
                 choice_id: ans_id
               }
@@ -120,18 +120,14 @@ router.post('/', function(req, res) {
                 if (err) {
                   throw err;
                 } else {
-                  console.log("1-insert sucesss");
-                  var query = conn.query("UPDATE s_ans SET number=number+1 WHERE ?", {ans_id: ans_id}, (err, ok) => {
-                      if (err) throw err;
-                      else {}
-                  });
+                  console.log("1-insert sucess");
                 }
               });
             }
             if (type == 2) {
               ans_idd = answers[name];
               reponse = {
-                reponse_id: res.insertId,
+                reponse_id: resp.insertId,
                 quest_id: squest[i].squest_id
               }
               var query = conn.query("INSERT INTO  multichoices SET ?", reponse, (err, quests) => {
@@ -141,9 +137,9 @@ router.post('/', function(req, res) {
                   console.log("21-insert sucesss");
                 }
               });
-              for (j = 0; j < ans_idd.length; j++) {
+              for (var j = 0; j < ans_idd.length; j++) {
                 ans = {
-                  response_id: res.insertId,
+                  response_id: resp.insertId,
                   quest_id: squest[i].squest_id,
                   ans_id: ans_idd[j]
                 }
@@ -151,9 +147,10 @@ router.post('/', function(req, res) {
                   if (err) {
                     throw err;
                   } else {
-                    console.log("22-insert sucess");
+                    console.log("22-insert sucesss");
                   }
                 });
+
               }
             }
           }

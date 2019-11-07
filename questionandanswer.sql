@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 07, 2019 lúc 12:58 PM
+-- Thời gian đã tạo: Th10 07, 2019 lúc 02:16 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -94,13 +94,27 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 (1, 18, 114),
 (1, 27, 125),
 (1, 33, 125),
-(1, 35, 305),
+(1, 37, 313),
 (2, 27, 125),
 (2, 33, 125),
+(2, 37, 314),
+(2, 37, 315),
+(2, 38, 314),
+(3, 37, 314),
+(3, 41, 320),
 (4, 18, 114),
-(4, 35, 305),
+(4, 37, 313),
+(4, 37, 314),
+(4, 37, 315),
+(4, 38, 314),
+(4, 41, 320),
+(4, 41, 322),
 (7, 27, 125),
 (7, 33, 125),
+(7, 37, 315),
+(7, 41, 320),
+(7, 41, 322),
+(9, 37, 313),
 (113, 19, 114),
 (113, 20, 114),
 (114, 15, 114),
@@ -119,39 +133,11 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 (123, 24, 123),
 (127, 34, 125),
 (128, 34, 125),
-(398, 32, 303),
-(399, 31, 303),
-(399, 32, 303),
-(399, 35, 303),
-(400, 31, 303),
-(400, 35, 303),
-(401, 30, 303),
-(401, 35, 303),
-(402, 30, 303),
-(403, 31, 304),
-(403, 32, 304),
-(403, 35, 304),
-(404, 30, 304),
-(404, 31, 304),
-(404, 32, 304),
-(404, 35, 304),
-(405, 31, 304),
-(405, 35, 304),
-(406, 30, 304),
-(406, 35, 304),
-(407, 35, 304),
-(408, 30, 305),
-(408, 32, 305),
-(409, 30, 305),
-(409, 32, 305),
-(410, 30, 305),
-(411, 30, 305),
-(411, 31, 305),
-(412, 30, 305),
-(412, 31, 305),
 (417, 36, 313),
 (418, 36, 313),
+(418, 38, 313),
 (419, 36, 313),
+(419, 38, 313),
 (422, 36, 314),
 (423, 36, 314),
 (424, 36, 314),
@@ -159,7 +145,31 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 (427, 36, 315),
 (428, 36, 315),
 (429, 36, 315),
-(430, 36, 315);
+(430, 36, 315),
+(437, 40, 320),
+(438, 40, 320),
+(443, 41, 321),
+(444, 40, 321),
+(445, 40, 321),
+(446, 41, 321),
+(450, 40, 322),
+(451, 40, 322),
+(458, 42, 327),
+(458, 45, 327),
+(459, 42, 327),
+(459, 43, 327),
+(460, 43, 327),
+(460, 44, 327),
+(461, 44, 327),
+(461, 45, 327),
+(463, 45, 328),
+(464, 43, 328),
+(464, 44, 328),
+(465, 42, 328),
+(465, 45, 328),
+(466, 42, 328),
+(466, 43, 328),
+(466, 44, 328);
 
 --
 -- Bẫy `choice_multichoices`
@@ -237,23 +247,31 @@ INSERT INTO `multichoices` (`reponse_id`, `quest_id`) VALUES
 (24, 123),
 (25, 123),
 (27, 125),
-(30, 303),
-(30, 304),
-(30, 305),
-(31, 303),
-(31, 304),
-(31, 305),
-(32, 303),
-(32, 304),
-(32, 305),
 (33, 125),
 (34, 125),
-(35, 303),
-(35, 304),
-(35, 305),
 (36, 313),
 (36, 314),
-(36, 315);
+(36, 315),
+(37, 313),
+(37, 314),
+(37, 315),
+(38, 313),
+(38, 314),
+(38, 315),
+(40, 320),
+(40, 321),
+(40, 322),
+(41, 320),
+(41, 321),
+(41, 322),
+(42, 327),
+(42, 328),
+(43, 327),
+(43, 328),
+(44, 327),
+(44, 328),
+(45, 327),
+(45, 328);
 
 -- --------------------------------------------------------
 
@@ -345,11 +363,35 @@ INSERT INTO `singlechoicereponse` (`reponse_id`, `quest_id`, `choice_id`) VALUES
 (23, 121, 118),
 (24, 121, 119),
 (25, 121, 119),
-(30, 302, 395),
-(31, 302, 397),
-(32, 302, 397),
-(35, 302, 396),
-(36, 312, 414);
+(36, 312, 414),
+(37, 312, 415),
+(38, 312, 414),
+(39, 318, 431),
+(39, 319, 435),
+(40, 318, 432),
+(40, 319, 434),
+(41, 318, 433),
+(41, 319, 434),
+(42, 325, 453),
+(42, 326, 457),
+(43, 325, 454),
+(43, 326, 456),
+(44, 325, 453),
+(44, 326, 455),
+(45, 325, 454),
+(45, 326, 456);
+
+--
+-- Bẫy `singlechoicereponse`
+--
+DELIMITER $$
+CREATE TRIGGER `single1` AFTER INSERT ON `singlechoicereponse` FOR EACH ROW BEGIN
+		update s_ans
+        set s_ans.number = s_ans.number+1
+        where s_ans.ans_id = new.choice_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -528,21 +570,23 @@ INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`
 (15, 167, 'Bạn thích gì ?', 2),
 (15, 168, 'Bạn là nam?', 3),
 (15, 169, 'Bạn có suy nghĩ gì?', 4),
-(19, 302, 'Bạn là gì ?', 1),
-(19, 303, 'Bạn thích gì ?', 2),
-(19, 304, 'Bạn thích gì ?', 2),
-(19, 305, 'Bạn thích gì ?', 2),
-(19, 306, 'Bạn là nam?', 3),
-(19, 307, 'Bạn là nam?', 3),
-(19, 308, 'Bạn là nam?', 3),
-(19, 309, 'Bạn có suy nghĩ gì?', 4),
-(19, 310, 'Bạn có suy nghĩ gì?', 4),
 (20, 312, 'Bạn là gì ?', 1),
 (20, 313, 'Bạn thích gì ?', 2),
 (20, 314, 'Bạn thích gì ?', 2),
 (20, 315, 'Bạn thích gì ?', 2),
 (20, 316, 'Bạn là nam?', 3),
-(20, 317, 'Bạn có suy nghĩ gì?', 4);
+(20, 317, 'Bạn có suy nghĩ gì?', 4),
+(21, 318, 'Bạn là gì ?', 1),
+(21, 319, 'Bạn là gì ?', 1),
+(21, 320, 'Bạn thích gì ?', 2),
+(21, 321, 'Bạn thích gì ?', 2),
+(21, 322, 'Bạn thích gì ?', 2),
+(21, 323, 'Bạn là nam?', 3),
+(21, 324, 'Bạn có suy nghĩ gì?', 4),
+(22, 325, 'Bạn là gì ?', 1),
+(22, 326, 'Bạn là gì ?', 1),
+(22, 327, 'Bạn thích gì ?', 2),
+(22, 328, 'Bạn thích gì ?', 2);
 
 -- --------------------------------------------------------
 
@@ -580,9 +624,10 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (12, 'Khảo sát 1', 'okkkk', '2019-10-18', '2019-11-11', 1, '', 33, 'giaovien1', 0),
 (13, 'okkk', 'okkk', '2019-10-18', '2019-11-11', 1, '', 14, 'giaovien1', 4),
 (15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 0, '', 42, 'giaovien1', 1),
-(16, 'Khảo sát test chỉnh sửa', 'mô tả', '2019-11-05', '0000-00-00', 1, '', 47, 'giaovien1', 1),
-(19, 'Test chức năng xóa sửa khảo sát', 'Test chức năng xóa sửa khảo sát', '2019-11-07', '0000-00-00', 1, '', 42, 'giaovien1', 0),
-(20, 'test lỗi nhiều đáp án', 'test lỗi nhiều đáp án', '2019-11-07', '0000-00-00', 1, '', 4, 'giaovien1', 0);
+(16, 'Khảo sát test chỉnh sửa', 'mô tả', '2019-11-05', '0000-00-00', 1, '', 48, 'giaovien1', 1),
+(20, 'test lỗi nhiều đáp án', 'test lỗi ', '2019-11-07', '0000-00-00', 1, '', 15, 'giaovien1', 0),
+(21, 'test lỗi', 'test lỗi nhiều đáp án', '2019-11-07', '0000-00-00', 1, '', 10, 'giaovien1', 0),
+(22, 'Khảo sát 1', 'huhuhu', '2019-11-07', '0000-00-00', 1, '', 13, 'giaovien1', 0);
 
 -- --------------------------------------------------------
 
@@ -613,15 +658,15 @@ CREATE TABLE `s_ans` (
 --
 
 INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
-(22, 1, 'đáp án 1', 3),
-(22, 2, 'đáp án 2', 1),
-(23, 3, 'dù sao', 0),
-(23, 4, 'dù ngày sao ta vẫn muốn bên người', 2),
+(22, 1, 'đáp án 1', 4),
+(22, 2, 'đáp án 2', 4),
+(23, 3, 'dù sao', 2),
+(23, 4, 'dù ngày sao ta vẫn muốn bên người', 8),
 (25, 5, '123123', 0),
 (25, 6, '23123123', 0),
-(25, 7, '123123', 1),
+(25, 7, '123123', 4),
 (27, 8, '123123', 0),
-(27, 9, '23123123', 0),
+(27, 9, '23123123', 1),
 (27, 10, '123123', 0),
 (28, 11, '23', 0),
 (28, 12, '132', 0),
@@ -796,31 +841,13 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (167, 193, 'me', 0),
 (167, 194, 'kem', 0),
 (167, 195, 'kẹo', 0),
-(302, 395, 'học sinh', 1),
-(302, 396, 'giáo viên', 0),
-(302, 397, 'người thứ 3', 2),
-(303, 398, 'kẹo', 1),
-(303, 399, 'kem', 2),
-(303, 400, 'me', 1),
-(303, 401, 'xoài', 1),
-(303, 402, 'bim bim', 0),
-(304, 403, 'kẹo', 2),
-(304, 404, 'kem', 2),
-(304, 405, 'me', 1),
-(304, 406, 'xoài', 1),
-(304, 407, 'bim bim', 1),
-(305, 408, 'kẹo', 1),
-(305, 409, 'kem', 1),
-(305, 410, 'me', 0),
-(305, 411, 'xoài', 0),
-(305, 412, 'bim bim', 0),
 (312, 413, 'học sinh', 0),
 (312, 414, 'giáo viên', 1),
-(312, 415, 'người thứ 3', 0),
+(312, 415, 'người thứ 3', 1),
 (313, 416, 'kẹo', 0),
 (313, 417, 'kem', 1),
-(313, 418, 'me', 1),
-(313, 419, 'xoài', 1),
+(313, 418, 'me', 2),
+(313, 419, 'xoài', 2),
 (313, 420, 'bim bim', 0),
 (314, 421, 'kẹo', 0),
 (314, 422, 'kem', 1),
@@ -831,7 +858,44 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (315, 427, 'kem', 1),
 (315, 428, 'me', 1),
 (315, 429, 'xoài', 1),
-(315, 430, 'bim bim', 1);
+(315, 430, 'bim bim', 1),
+(318, 431, 'học sinh', 0),
+(318, 432, 'giáo viên', 0),
+(318, 433, 'người thứ 3', 0),
+(319, 434, 'học sinh', 2),
+(319, 435, 'giáo viên', 0),
+(319, 436, 'người thứ 3', 0),
+(320, 437, 'kẹo', 1),
+(320, 438, 'kem', 1),
+(320, 439, 'me', 0),
+(320, 440, 'xoài', 0),
+(320, 441, 'bim bim', 0),
+(321, 442, 'kẹo', 0),
+(321, 443, 'kem', 1),
+(321, 444, 'me', 1),
+(321, 445, 'xoài', 1),
+(321, 446, 'bim bim', 1),
+(322, 447, 'kẹo', 0),
+(322, 448, 'kem', 0),
+(322, 449, 'me', 0),
+(322, 450, 'xoài', 1),
+(322, 451, 'bim bim', 1),
+(325, 452, 'học sinh', 0),
+(325, 453, 'giáo viên', 1),
+(325, 454, 'người thứ 3', 2),
+(326, 455, 'học sinh', 1),
+(326, 456, 'giáo viên', 2),
+(326, 457, 'người thứ 3', 2),
+(327, 458, 'kẹo', 0),
+(327, 459, 'kem', 0),
+(327, 460, 'me', 0),
+(327, 461, 'xoài', 0),
+(327, 462, 'bim bim', 0),
+(328, 463, 'kẹo', 0),
+(328, 464, 'kem', 0),
+(328, 465, 'me', 0),
+(328, 466, 'xoài', 0),
+(328, 467, 'bim bim', 0);
 
 -- --------------------------------------------------------
 
@@ -872,7 +936,9 @@ INSERT INTO `textreponse` (`reponse_id`, `quest_id`, `textreponse`) VALUES
 (32, 310, 'kk'),
 (33, 127, 'Bình thường'),
 (34, 127, 'okk'),
-(36, 317, 'k');
+(36, 317, 'k'),
+(37, 317, 'ok'),
+(40, 324, 'ko');
 
 -- --------------------------------------------------------
 
@@ -943,7 +1009,16 @@ INSERT INTO `user_reponse` (`surveyid`, `user_id`, `reponse_id`, `reponse_date`)
 (16, 11, 33, '2019-11-07'),
 (16, 8, 34, '2019-11-07'),
 (19, 8, 35, '2019-11-07'),
-(20, 10, 36, '2019-11-07');
+(20, 10, 36, '2019-11-07'),
+(20, 11, 37, '2019-11-07'),
+(20, 8, 38, '2019-11-07'),
+(21, 10, 39, '2019-11-07'),
+(21, 2, 40, '2019-11-07'),
+(21, 8, 41, '2019-11-07'),
+(22, 10, 42, '2019-11-07'),
+(22, 2, 43, '2019-11-07'),
+(22, 8, 44, '2019-11-07'),
+(22, 11, 45, '2019-11-07');
 
 -- --------------------------------------------------------
 
@@ -999,7 +1074,9 @@ INSERT INTO `yesnoreponse` (`reponse_id`, `quest_id`, `yesnovalue`) VALUES
 (33, 126, 1),
 (34, 126, 1),
 (35, 306, 0),
-(36, 316, 0);
+(36, 316, 0),
+(37, 316, 0),
+(40, 323, 0);
 
 -- --------------------------------------------------------
 
@@ -1178,19 +1255,19 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT cho bảng `squest`
 --
 ALTER TABLE `squest`
-  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
+  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=329;
 
 --
 -- AUTO_INCREMENT cho bảng `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=431;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
@@ -1202,7 +1279,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `user_reponse`
 --
 ALTER TABLE `user_reponse`
-  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -1218,9 +1295,9 @@ ALTER TABLE `aquest`
 -- Các ràng buộc cho bảng `choice_multichoices`
 --
 ALTER TABLE `choice_multichoices`
-  ADD CONSTRAINT `choice_multichoices_ibfk_2` FOREIGN KEY (`response_id`) REFERENCES `multichoices` (`reponse_id`),
-  ADD CONSTRAINT `choice_multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `multichoices` (`quest_id`),
-  ADD CONSTRAINT `choice_multichoices_ibfk_4` FOREIGN KEY (`ans_id`) REFERENCES `s_ans` (`ans_id`);
+  ADD CONSTRAINT `choice_multichoices_ibfk_2` FOREIGN KEY (`response_id`) REFERENCES `multichoices` (`reponse_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `choice_multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `multichoices` (`quest_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `choice_multichoices_ibfk_4` FOREIGN KEY (`ans_id`) REFERENCES `s_ans` (`ans_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `cmt_ans`
@@ -1233,15 +1310,15 @@ ALTER TABLE `cmt_ans`
 -- Các ràng buộc cho bảng `multichoices`
 --
 ALTER TABLE `multichoices`
-  ADD CONSTRAINT `multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`),
-  ADD CONSTRAINT `multichoices_ibfk_4` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+  ADD CONSTRAINT `multichoices_ibfk_3` FOREIGN KEY (`quest_id`) REFERENCES `squest` (`squest_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `multichoices_ibfk_4` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `singlechoicereponse`
 --
 ALTER TABLE `singlechoicereponse`
-  ADD CONSTRAINT `singlechoicereponse_ibfk_4` FOREIGN KEY (`choice_id`) REFERENCES `s_ans` (`ans_id`),
-  ADD CONSTRAINT `singlechoicereponse_ibfk_5` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+  ADD CONSTRAINT `singlechoicereponse_ibfk_4` FOREIGN KEY (`choice_id`) REFERENCES `s_ans` (`ans_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `singlechoicereponse_ibfk_5` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `squest`
@@ -1267,7 +1344,7 @@ ALTER TABLE `s_ans`
 -- Các ràng buộc cho bảng `textreponse`
 --
 ALTER TABLE `textreponse`
-  ADD CONSTRAINT `textreponse_ibfk_1` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+  ADD CONSTRAINT `textreponse_ibfk_1` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `user_reponse`
@@ -1279,7 +1356,7 @@ ALTER TABLE `user_reponse`
 -- Các ràng buộc cho bảng `yesnoreponse`
 --
 ALTER TABLE `yesnoreponse`
-  ADD CONSTRAINT `yesnoreponse_ibfk_1` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`);
+  ADD CONSTRAINT `yesnoreponse_ibfk_1` FOREIGN KEY (`reponse_id`) REFERENCES `user_reponse` (`reponse_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
