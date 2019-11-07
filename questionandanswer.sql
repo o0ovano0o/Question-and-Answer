@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 07, 2019 lúc 08:52 AM
+-- Thời gian đã tạo: Th10 07, 2019 lúc 12:58 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -93,9 +93,14 @@ CREATE TABLE `choice_multichoices` (
 INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 (1, 18, 114),
 (1, 27, 125),
+(1, 33, 125),
+(1, 35, 305),
 (2, 27, 125),
+(2, 33, 125),
 (4, 18, 114),
+(4, 35, 305),
 (7, 27, 125),
+(7, 33, 125),
 (113, 19, 114),
 (113, 20, 114),
 (114, 15, 114),
@@ -111,7 +116,62 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 (122, 14, 123),
 (122, 25, 123),
 (123, 14, 123),
-(123, 24, 123);
+(123, 24, 123),
+(127, 34, 125),
+(128, 34, 125),
+(398, 32, 303),
+(399, 31, 303),
+(399, 32, 303),
+(399, 35, 303),
+(400, 31, 303),
+(400, 35, 303),
+(401, 30, 303),
+(401, 35, 303),
+(402, 30, 303),
+(403, 31, 304),
+(403, 32, 304),
+(403, 35, 304),
+(404, 30, 304),
+(404, 31, 304),
+(404, 32, 304),
+(404, 35, 304),
+(405, 31, 304),
+(405, 35, 304),
+(406, 30, 304),
+(406, 35, 304),
+(407, 35, 304),
+(408, 30, 305),
+(408, 32, 305),
+(409, 30, 305),
+(409, 32, 305),
+(410, 30, 305),
+(411, 30, 305),
+(411, 31, 305),
+(412, 30, 305),
+(412, 31, 305),
+(417, 36, 313),
+(418, 36, 313),
+(419, 36, 313),
+(422, 36, 314),
+(423, 36, 314),
+(424, 36, 314),
+(426, 36, 315),
+(427, 36, 315),
+(428, 36, 315),
+(429, 36, 315),
+(430, 36, 315);
+
+--
+-- Bẫy `choice_multichoices`
+--
+DELIMITER $$
+CREATE TRIGGER `mutli1` AFTER INSERT ON `choice_multichoices` FOR EACH ROW BEGIN
+		update s_ans
+        set s_ans.number = s_ans.number+1
+        where s_ans.ans_id = new.ans_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -176,7 +236,24 @@ INSERT INTO `multichoices` (`reponse_id`, `quest_id`) VALUES
 (23, 123),
 (24, 123),
 (25, 123),
-(27, 125);
+(27, 125),
+(30, 303),
+(30, 304),
+(30, 305),
+(31, 303),
+(31, 304),
+(31, 305),
+(32, 303),
+(32, 304),
+(32, 305),
+(33, 125),
+(34, 125),
+(35, 303),
+(35, 304),
+(35, 305),
+(36, 313),
+(36, 314),
+(36, 315);
 
 -- --------------------------------------------------------
 
@@ -267,7 +344,12 @@ INSERT INTO `singlechoicereponse` (`reponse_id`, `quest_id`, `choice_id`) VALUES
 (22, 113, 112),
 (23, 121, 118),
 (24, 121, 119),
-(25, 121, 119);
+(25, 121, 119),
+(30, 302, 395),
+(31, 302, 397),
+(32, 302, 397),
+(35, 302, 396),
+(36, 312, 414);
 
 -- --------------------------------------------------------
 
@@ -445,7 +527,22 @@ INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`
 (15, 166, 'Bạn là gì ?', 1),
 (15, 167, 'Bạn thích gì ?', 2),
 (15, 168, 'Bạn là nam?', 3),
-(15, 169, 'Bạn có suy nghĩ gì?', 4);
+(15, 169, 'Bạn có suy nghĩ gì?', 4),
+(19, 302, 'Bạn là gì ?', 1),
+(19, 303, 'Bạn thích gì ?', 2),
+(19, 304, 'Bạn thích gì ?', 2),
+(19, 305, 'Bạn thích gì ?', 2),
+(19, 306, 'Bạn là nam?', 3),
+(19, 307, 'Bạn là nam?', 3),
+(19, 308, 'Bạn là nam?', 3),
+(19, 309, 'Bạn có suy nghĩ gì?', 4),
+(19, 310, 'Bạn có suy nghĩ gì?', 4),
+(20, 312, 'Bạn là gì ?', 1),
+(20, 313, 'Bạn thích gì ?', 2),
+(20, 314, 'Bạn thích gì ?', 2),
+(20, 315, 'Bạn thích gì ?', 2),
+(20, 316, 'Bạn là nam?', 3),
+(20, 317, 'Bạn có suy nghĩ gì?', 4);
 
 -- --------------------------------------------------------
 
@@ -474,18 +571,18 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (1, 'Khảo sát khóa 64', 'Khảo sát thông tin về nguyện vọng, ước mơ...', '2019-09-30', '2019-10-03', 0, '', 1, 'taikhoan1', 0),
 (2, 'Khảo sát sinh viên', 'Khảo sát việc làm thêm của sinh viên', '2019-10-02', '2019-10-19', 1, '', 4, '1234', 0),
 (3, 'Khảo sát ngành CNTT', 'Khảo sát dành cho các sinh viên khoa CNTT', '2019-10-02', '2019-10-23', 1, '', 0, '12345', 0),
-(4, 'Khảo sát ngành CNTT', 'Khảo sát dành cho các sinh viên khoa CNTT K62', '2019-10-02', '2019-10-03', 0, '', 4, '12345', 0),
 (5, 'Khảo sát 1', 'Mô tả này', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1', 0),
 (6, '123', 'Khảo sát aaaaaa', '0000-00-00', '2020-12-11', 1, '', 0, 'giaovien1', 0),
 (7, 'phiếu khảo sát 3', 'dugfwdgfkljwef', '0000-00-00', '2019-11-11', 0, '', 2, 'giaovien1', 0),
 (8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 0, '', 2, 'giaovien1', 0),
-(9, '123', 'OK 123', '0000-00-00', '2019-11-11', 1, '', 14, 'giaovien1', 0),
 (10, 'phiếu khảo sát 5', 'Mô tả', '0000-00-00', '2091-11-11', 0, '', 10, 'giaovien1', 0),
-(11, 'Phiếu khảo sát ', 'Mô tả về phiếu khảo sát', '2019-10-18', '2019-11-11', 1, '', 72, 'giaovien1', 5),
+(11, 'Phiếu khảo sát ', 'Mô tả về phiếu khảo sát', '2019-10-18', '2019-11-11', 1, '', 85, 'giaovien1', 5),
 (12, 'Khảo sát 1', 'okkkk', '2019-10-18', '2019-11-11', 1, '', 33, 'giaovien1', 0),
 (13, 'okkk', 'okkk', '2019-10-18', '2019-11-11', 1, '', 14, 'giaovien1', 4),
-(15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 1, '', 37, 'giaovien1', 1),
-(16, 'Khảo sát test', 'mô tả', '2019-11-05', '0000-00-00', 0, '', 21, 'giaovien1', 1);
+(15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 0, '', 42, 'giaovien1', 1),
+(16, 'Khảo sát test chỉnh sửa', 'mô tả', '2019-11-05', '0000-00-00', 1, '', 47, 'giaovien1', 1),
+(19, 'Test chức năng xóa sửa khảo sát', 'Test chức năng xóa sửa khảo sát', '2019-11-07', '0000-00-00', 1, '', 42, 'giaovien1', 0),
+(20, 'test lỗi nhiều đáp án', 'test lỗi nhiều đáp án', '2019-11-07', '0000-00-00', 1, '', 4, 'giaovien1', 0);
 
 -- --------------------------------------------------------
 
@@ -516,13 +613,13 @@ CREATE TABLE `s_ans` (
 --
 
 INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
-(22, 1, 'đáp án 1', 1),
-(22, 2, 'đáp án 2', 0),
+(22, 1, 'đáp án 1', 3),
+(22, 2, 'đáp án 2', 1),
 (23, 3, 'dù sao', 0),
-(23, 4, 'dù ngày sao ta vẫn muốn bên người', 1),
+(23, 4, 'dù ngày sao ta vẫn muốn bên người', 2),
 (25, 5, '123123', 0),
 (25, 6, '23123123', 0),
-(25, 7, '123123', 0),
+(25, 7, '123123', 1),
 (27, 8, '123123', 0),
 (27, 9, '23123123', 0),
 (27, 10, '123123', 0),
@@ -640,8 +737,8 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (124, 124, 'Nên', 0),
 (124, 125, 'Không', 0),
 (124, 126, 'Tôi không quan tâm', 0),
-(125, 127, 'Hà Nội', 0),
-(125, 128, 'Hải Phòng', 0),
+(125, 127, 'Hà Nội', 1),
+(125, 128, 'Hải Phòng', 1),
 (125, 129, 'HCM', 0),
 (129, 130, 'abc', 0),
 (129, 131, 'edc', 0),
@@ -698,7 +795,43 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (167, 192, 'xoài', 0),
 (167, 193, 'me', 0),
 (167, 194, 'kem', 0),
-(167, 195, 'kẹo', 0);
+(167, 195, 'kẹo', 0),
+(302, 395, 'học sinh', 1),
+(302, 396, 'giáo viên', 0),
+(302, 397, 'người thứ 3', 2),
+(303, 398, 'kẹo', 1),
+(303, 399, 'kem', 2),
+(303, 400, 'me', 1),
+(303, 401, 'xoài', 1),
+(303, 402, 'bim bim', 0),
+(304, 403, 'kẹo', 2),
+(304, 404, 'kem', 2),
+(304, 405, 'me', 1),
+(304, 406, 'xoài', 1),
+(304, 407, 'bim bim', 1),
+(305, 408, 'kẹo', 1),
+(305, 409, 'kem', 1),
+(305, 410, 'me', 0),
+(305, 411, 'xoài', 0),
+(305, 412, 'bim bim', 0),
+(312, 413, 'học sinh', 0),
+(312, 414, 'giáo viên', 1),
+(312, 415, 'người thứ 3', 0),
+(313, 416, 'kẹo', 0),
+(313, 417, 'kem', 1),
+(313, 418, 'me', 1),
+(313, 419, 'xoài', 1),
+(313, 420, 'bim bim', 0),
+(314, 421, 'kẹo', 0),
+(314, 422, 'kem', 1),
+(314, 423, 'me', 1),
+(314, 424, 'xoài', 1),
+(314, 425, 'bim bim', 0),
+(315, 426, 'kẹo', 1),
+(315, 427, 'kem', 1),
+(315, 428, 'me', 1),
+(315, 429, 'xoài', 1),
+(315, 430, 'bim bim', 1);
 
 -- --------------------------------------------------------
 
@@ -730,7 +863,16 @@ INSERT INTO `textreponse` (`reponse_id`, `quest_id`, `textreponse`) VALUES
 (25, 117, 'leeeee'),
 (25, 118, '2001'),
 (27, 127, 'Thích'),
-(29, 128, 'okkkk');
+(29, 128, 'okkkk'),
+(30, 309, 'đíu nghĩ gì cả'),
+(30, 310, 'hỏi lắm vậy'),
+(31, 309, 'o'),
+(31, 310, 'k'),
+(32, 309, 'kk'),
+(32, 310, 'kk'),
+(33, 127, 'Bình thường'),
+(34, 127, 'okk'),
+(36, 317, 'k');
 
 -- --------------------------------------------------------
 
@@ -794,7 +936,14 @@ INSERT INTO `user_reponse` (`surveyid`, `user_id`, `reponse_id`, `reponse_date`)
 (15, 12, 26, '2019-11-04'),
 (16, 12, 27, '2019-11-05'),
 (15, 10, 28, '2019-11-05'),
-(17, 12, 29, '2019-11-05');
+(17, 12, 29, '2019-11-05'),
+(19, 2, 30, '2019-11-07'),
+(19, 10, 31, '2019-11-07'),
+(19, 11, 32, '2019-11-07'),
+(16, 11, 33, '2019-11-07'),
+(16, 8, 34, '2019-11-07'),
+(19, 8, 35, '2019-11-07'),
+(20, 10, 36, '2019-11-07');
 
 -- --------------------------------------------------------
 
@@ -837,7 +986,20 @@ INSERT INTO `yesnoreponse` (`reponse_id`, `quest_id`, `yesnovalue`) VALUES
 (24, 120, 1),
 (25, 119, 0),
 (25, 120, 1),
-(27, 126, 1);
+(27, 126, 1),
+(30, 306, 0),
+(30, 307, 1),
+(30, 308, 0),
+(31, 306, 1),
+(31, 307, 0),
+(31, 308, 1),
+(32, 306, 1),
+(32, 307, 0),
+(32, 308, 1),
+(33, 126, 1),
+(34, 126, 1),
+(35, 306, 0),
+(36, 316, 0);
 
 -- --------------------------------------------------------
 
@@ -1016,19 +1178,19 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT cho bảng `squest`
 --
 ALTER TABLE `squest`
-  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
+  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
 
 --
 -- AUTO_INCREMENT cho bảng `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=389;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=431;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
@@ -1040,7 +1202,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `user_reponse`
 --
 ALTER TABLE `user_reponse`
-  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

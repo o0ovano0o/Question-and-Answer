@@ -148,10 +148,13 @@
                 </div>
             </div><br>
               <div class="collapse" id="start" aria-labelledby="st">
-
-                <form action="/survey/?id=<%=survey.survey_id%>" method="POST">
+                  <%if(session.username==survey.author){%>
+                <form action="/deletes?id=<%=survey.survey_id%>" id="del" method="POST">
+                  <%}else{%>
+                    <form action="/survey/?id=<%=survey.survey_id%>" method="POST">
+                      <%}%>
                 <div class="card">
-
+  
                    <div class="card-header" style="background-color: #99ccff">
                        <h6><b>Danh sách câu hỏi khảo sát</b></h6>
                    </div><br>
@@ -164,7 +167,10 @@
                                   <div id="c1" class="tab-pane active" >
                                       <div class="card card body" style="margin-top: 20px;padding:15px;">
                                         <div class="row">
-                                          <p class="col-11"> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                         
+                                          <p class="col-11"> <%if(session.username==survey.author){%>
+                                          <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
+                                          <%}%> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
 
                                           <%if(session.username==survey.author){%>
                                             <div class=" col-1 dropdown" >
@@ -202,11 +208,11 @@
                                                      </div>
                                                      <div>
                                                          <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
-                                                         <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" required>
+                                                         <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);">
                                                          <%for(var j=0;j< s_ans.length;j++){
                                                             if(s_ans[j].question_id==squest[i].squest_id){%>
                                                               <div style="width: 90%;">
-                                                                  <input type='text' name='answer' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" required/>
+                                                                  <input type='text' name='answer' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
                                                               </div>
                                                          <%}}%>
                                                          <div id="dapan1" style="width: 90%;"></div>
@@ -224,7 +230,12 @@
                                 <div id="c3" class="tab-pane active" >
                                     <div class="card card body" style="margin-top: 20px;padding:15px;">
                                       <div class="row">
-                                        <p class="col-11"> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                         
+                                        <p class="col-11">
+                                           <%if(session.username==survey.author){%>
+                                          <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
+                                          <%}%>
+                                         <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
                                         <%if(session.username==survey.author){%>
                                           <div class=" col-1 dropdown" >
                                              <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -259,7 +270,7 @@
                                                  <form action="" method="POST">
                                                        <div>
                                                            <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                           <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" required>
+                                                           <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>">
                                                         </div>
                                                      <div class="modal-footer">
                                                        <input type="submit" class="btn btn-success" value="Xác nhận">
@@ -274,7 +285,10 @@
                               <div id="c2" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
                                       <div class="row">
-                                        <p class="col-11"><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                        <p class="col-11">
+                                            <%if(session.username==survey.author){%>
+                                          <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
+                                          <%}%><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
                                         <%if(session.username==survey.author){%>
                                           <div class=" col-1 dropdown" >
                                              <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -306,15 +320,15 @@
                                                <form action="" method="POST">                                           
                                                      <div>
                                                          <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                         <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" required>
+                                                         <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
                                                      </div>
                                                      <div>
                                                          <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
-                                                         <input  type="number" max="10" min="1" id="2_<%= squest[i].squest_id%>" class="form-control" name="ans2" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" required>
+                                                         <input  type="number" max="10" min="1" id="2_<%= squest[i].squest_id%>" class="form-control" name="ans2" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" >
                                                          <%for(var j=0;j< s_ans.length;j++){
                                                             if(s_ans[j].question_id==squest[i].squest_id){%>
                                                               <div style="width: 90%;">
-                                                                  <input type='text' name='answer' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" required/>
+                                                                  <input type='text' name='answer' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
                                                               </div>
                                                          <%}}%>
                                                          <div id="dapan2_<%= squest[i].squest_id%>" style="width: 90%;"></div>
@@ -333,7 +347,11 @@
                               <div id="c4" class="tab-pane active" >
                                   <div class="card card body" style="margin-top: 20px;padding:15px;">
                                     <div class="row">
-                                      <p class="col-11"><b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                                      <p class="col-11">
+                                         <%if(session.username==survey.author){%>
+                                          <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
+                                          <%}%>
+                                          <b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
                                       <%if(session.username==survey.author){%>
                                         <div class=" col-1 dropdown" >
                                            <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -345,7 +363,7 @@
                                         </div>
                                      <%}%>
                                    </div>
-                                      <textarea name="4_<%=squest[i].squest_id%>" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." required></textarea>
+                                      <textarea name="4_<%=squest[i].squest_id%>" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
                                   </div>
                               </div>
                               <div class="modal fade" id="update_<%=squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
@@ -361,12 +379,13 @@
                                                <form action="" method="POST">
                                                      <div>
                                                          <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                         <input type="text" name="title" class="form-control" value="<%=squest[i].squest_text%>" required>
+                                                         <input type="text" name="title" class="form-control" value="<%=squest[i].squest_text%>" >
                                                      </div>
                                                    <div class="modal-footer">
                                                      <input type="submit" class="btn btn-success" value="Xác nhận">
                                                    </div>
                                                </form>
+                                             </select>
                                          </div><br>                                       
                                      </div>
                                  </div>
@@ -377,7 +396,8 @@
 
                        <%if(cauhoi>=1&&(!session.isadmin)){ %>
                        <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><%}%><br><br>
-
+                     <%if(cauhoi>=1&&(session.username==survey.author)){ %>
+                       <button type="submit" class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Xóa nhiều</button><%}%><br><br>
                    </div>
                  </div>
                </form>
@@ -396,6 +416,13 @@
                    <div class="alert alert-primary" role="alert" style="width: 100%;">
                     Bạn đã làm bài khảo sát này rồi.
                   </div>
+                  <div class="row" style="width: 100%">
+                  <div class="col-6 col-sm-6 col-md-6">
+                  </div>
+                 <div class="col-6 col-sm-6 col-md-6">
+                    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a>
+                  </div>
+                </div>
                   <%}else{%>
                   <div class="row" style="width: 100%">
                   <div class="col-6 col-sm-6 col-md-6">

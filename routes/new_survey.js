@@ -23,7 +23,7 @@ router.get('/', function(req, res) {
 		        if (err) throw err;
 		        else {}
 	      });
-       
+       var numb=0
         var query = conn.query("SELECT * from user_reponse where surveyid=? and user_id=?", [id,req.session.user.user_id], (err, ress) => {
             if (err) throw err;
             else {
@@ -45,6 +45,7 @@ router.get('/', function(req, res) {
                 res.render('test', {
                         session: req.session.user,
                         check:1,
+                        numb:0,
                       });
               }
             }
@@ -146,15 +147,11 @@ router.post('/', function(req, res) {
                   quest_id: squest[i].squest_id,
                   ans_id: ans_idd[j]
                 }
-                var query = conn.query("INSERT INTO  choice_multichoices SET ?", ans, (err, quests) => {
+                var query = conn.query("INSERT INTO  choice_multichoices SET ?", ans, (err, resss) => {
                   if (err) {
                     throw err;
                   } else {
                     console.log("22-insert sucess");
-                    var query = conn.query("UPDATE s_ans SET number=number+1 WHERE ?", {ans_id: ans_idd[j]}, (err, ok) => {
-                      if (err) throw err;
-                      else {}
-                  });
                   }
                 });
               }
