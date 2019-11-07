@@ -74,15 +74,13 @@
                  <%}else{%>
                     <p>Tổng số câu hỏi: 0</p>
                  <%}%>
-                <%if(survey.isopen==0){
-                 %>
-                 <p style="font-weight: bold;">Đã đóng</p>
                 
-                 <%}if(session.username==survey.author){
+                
+                 <%if(session.username==survey.author){
 
                 if(survey.isopen==0){
                  %>
-
+                  <p style="font-weight: bold;">Đã đóng</p>
                   <a href="/resurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Mở lại phiếu khảo sát</a>
                   <%}else{%>
                  
@@ -92,7 +90,7 @@
                  <%}}%>
               </div>
             </div>
-            <%if(session.username=survey.author){%>
+            <%if(session.username==survey.author){%>
               <div class=" col-1 dropdown" >
                 <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 </button>
