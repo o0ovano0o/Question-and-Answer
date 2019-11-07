@@ -133,6 +133,7 @@ router.post('/', function(req, res) {
             else ;
           });
    }
+   if(cau1.length>=1){
  var dt = defer.promise;
       dt.then(function(number) {
     for (var k = 0; k < cau1.length ; k++) {
@@ -148,7 +149,9 @@ router.post('/', function(req, res) {
     }
     number++;
   }
-  });
+  });}
+
+  if(cau2.length>=1){
        var dt2 = defer2.promise;
       dt2.then(function(number) {
     for (var k = 0; k < cau2.length ; k++) {
@@ -165,6 +168,7 @@ router.post('/', function(req, res) {
     number++;
   }
   });
+    }
 
 
     if(req.session.user) {
