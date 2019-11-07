@@ -69,6 +69,15 @@
           <input type="email" name="useremail" class="form-control" id="InputEmail" placeholder="Nhập email..." onblur="javascript: Email_()" required>
           </div>
           </div><br>
+
+          <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-xl-4 col-lg-4 text-right">
+          <label for="inputmauser" class="col-form-label d-inline">Mã tài khoản: </label></div>
+          <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+          <input type="mauser" name="mauser" class="form-control" id="inputmauser" placeholder="Nhập mã tài khoản nếu có..." >
+          </div>
+          </div><br>
+
           </div>
 
           <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6">
@@ -94,24 +103,19 @@
           <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
           <input type="password" class="form-control" id="InputRePassW" placeholder="Nhập lại mật khẩu...." onblur="javascript: checkpass()" required>
           </div>
-          </div>
-          </div>
-        </div>
+        </div><br>
 
-        <div class="row pt-3">
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
           <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-          <div class="form-check">
-
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked required>
-            <label class="form-check-label d-inline" for="exampleRadios1">
-              Tôi đồng ý với <a class="orange" href="/rules">các điều khoản</a> của Q&A.
-            </label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked required>
+                <label class="form-check-label d-inline" for="exampleRadios1">
+                  Tôi đồng ý với <a class="orange" href="/rules">các điều khoản</a> của Q&A.
+                </label>
             </div>
           </div>
+          </div>
         </div>
-
-
+        
         </div>
       </div>
       <!-- Hàng 6 -->
@@ -136,7 +140,7 @@ $('form').on('keyup keypress', function(e) {
   if(isFocused){
    return true;
   }
-  else if (keyCode == 13) { 
+  else if (keyCode == 13) {
     e.preventDefault();
     return false;
   }

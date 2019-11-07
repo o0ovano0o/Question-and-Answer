@@ -12,8 +12,8 @@ router.get('/', function (req, res) {
 router.post('/', function(req, res) {
 	var signup = req.body;
 	var check = true;
-	
-	
+
+
 	users = {
 		username: signup.usernickname,
 		name: signup.username,
@@ -22,6 +22,8 @@ router.post('/', function(req, res) {
 		date: signup.date,
 		isadmin: 0
 	};
+
+	if (signup.mauser=='123456') users.isadmin=1;
 	if (signup.usernickname) {
 		var defer = q.defer();
 		var query = conn.query("SELECT * FROM user WHERE ?", {username: signup.usernickname}, function(err,results) {
@@ -37,10 +39,10 @@ router.post('/', function(req, res) {
 	else {
 		var dt = false;
 	}
-	
+
 	dt.then(function(usercheck){
 		var user = usercheck[0];
-	
+
 		if (user != null) {
 				res.render('signin', {data: {error:  "Tài khoản đã tồn tại"}});
 			}
