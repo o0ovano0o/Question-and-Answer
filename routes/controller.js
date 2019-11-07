@@ -68,7 +68,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 				      	userscheck = {
 							user_id:results.insertId,
 							username: user.username,
-							name: user.username,
+							name: user.name,
 							email: user.email,
 							password: 'fb',
 							date: '',
