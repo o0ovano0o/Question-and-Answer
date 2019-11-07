@@ -69,7 +69,11 @@
                   Đăng bởi: <%=survey.author%><br>
                  </p>
                  <p id="date1"></p>
+                 <%if(numb[0]){%>
                  <p>Tổng số câu hỏi: <%=numb[0].total%></p>
+                 <%}else{%>
+                    <p>Tổng số câu hỏi: 0</p>
+                 <%}%>
                 <%if(survey.isopen==0){
                  %>
                  <p style="font-weight: bold;">Đã đóng</p>
@@ -78,30 +82,56 @@
 
                 if(survey.isopen==0){
                  %>
-                  <a href="/deletesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Xóa phiếu khảo sát</a>
+
                   <a href="/resurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Mở lại phiếu khảo sát</a>
                   <%}else{%>
-                 <a href="/deletesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Xóa phiếu khảo sát</a>
+                 
                  <a href="/closesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Đóng phiếu khảo sát</a>
                  <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
                  <a href="/createquestions/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi bằng văn bản</a>
                  <%}}%>
               </div>
             </div>
-            <%if(session.isadmin){%>
+            <%if(session.username=survey.author){%>
               <div class=" col-1 dropdown" >
                 <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="" >Sửa</a>
-                  <a class="dropdown-item" >Xóa</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#updatesurvey" href="#updatesurvey">Sửa</a>
+                  <a class="dropdown-item" href="/deletesurvey?id=<%=survey.survey_id%>">Xóa</a>
                 </div>
               </div>
             <%}%>
           </div>
         </div>
       </div><br>
-      
+       <div class="modal fade" id="updatesurvey" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                           <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa phiếu khảo sát</h5>
+                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                             </button>
+                                         </div>
+                                         <div class="modal-body">
+                                               <form action="/updatesurvey?id=<%=survey.survey_id%>" method="POST">                                           
+                                                     <div>
+                                                         <label for="title" class="col-form-label">Tiêu đề:</label>
+                                                         <input type="text" name="title" class="form-control" value="<%=survey.title%>" required>
+                                                     </div>
+                                                     <div>
+                                                         <label for="des" class="col-form-label">Mô tả:</label>
+                                                         <input type="text" name="des" class="form-control" value="<%=survey.description%>" required>
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                       <input type="submit" class="btn btn-success" value="Xác nhận">
+                                                     </div>
+                                               </form>
+                                         </div><br>
+                                     </div>
+                                 </div>
+                             </div>
       <div class="card">
           <div class="card-header" style="background-color: #00cccc">
               <h5><b>Đăng bởi: <%=survey.author%></b></h5>

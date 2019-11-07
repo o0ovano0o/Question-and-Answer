@@ -15,6 +15,7 @@ router.use('/yourprofile', require(__dirname + '/yourprofile.js'));
 router.use('/closesurvey', require(__dirname + '/closesurvey.js'));
 router.use('/resurvey', require(__dirname + '/resurvey.js'));
 router.use('/deletesurvey', require(__dirname + '/deletesurvey.js'));
+router.use('/updatesurvey', require(__dirname + '/updatesurvey.js'));
 router.use('/student_manage', require(__dirname + '/student_manage.js'));
 
 router.use('/teacher_manage', require(__dirname + '/teacher_manage.js'));
