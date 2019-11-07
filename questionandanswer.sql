@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 06, 2019 lúc 06:25 PM
+-- Thời gian đã tạo: Th10 07, 2019 lúc 08:52 AM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -413,7 +413,6 @@ INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`
 (16, 125, 'Thủ đô Việt Nam là gì', 2),
 (16, 126, 'Việt Nam nằm ở khu vực Đông Nam Á?', 3),
 (16, 127, 'Nêu cảm nhận của bạn khi lần đầu đến Việt Nam', 4),
-(17, 128, 'câu tự luận', 4),
 (15, 129, 'câu hỏi 1 đáp án', 1),
 (15, 130, 'đúng sai 1', 3),
 (15, 131, 'đúng sai 2', 3),
@@ -442,7 +441,11 @@ INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`
 (15, 154, 'Bạn là gì ?', 1),
 (15, 155, 'Bạn thích gì ?', 2),
 (15, 156, 'Bạn là nam?', 3),
-(15, 157, 'Bạn có suy nghĩ gì?', 4);
+(15, 157, 'Bạn có suy nghĩ gì?', 4),
+(15, 166, 'Bạn là gì ?', 1),
+(15, 167, 'Bạn thích gì ?', 2),
+(15, 168, 'Bạn là nam?', 3),
+(15, 169, 'Bạn có suy nghĩ gì?', 4);
 
 -- --------------------------------------------------------
 
@@ -478,12 +481,11 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 0, '', 2, 'giaovien1', 0),
 (9, '123', 'OK 123', '0000-00-00', '2019-11-11', 1, '', 14, 'giaovien1', 0),
 (10, 'phiếu khảo sát 5', 'Mô tả', '0000-00-00', '2091-11-11', 0, '', 10, 'giaovien1', 0),
-(11, 'Phiếu khảo sát ', 'Mô tả về phiếu khảo sát', '2019-10-18', '2019-11-11', 1, '', 70, 'giaovien1', 5),
+(11, 'Phiếu khảo sát ', 'Mô tả về phiếu khảo sát', '2019-10-18', '2019-11-11', 1, '', 72, 'giaovien1', 5),
 (12, 'Khảo sát 1', 'okkkk', '2019-10-18', '2019-11-11', 1, '', 33, 'giaovien1', 0),
 (13, 'okkk', 'okkk', '2019-10-18', '2019-11-11', 1, '', 14, 'giaovien1', 4),
-(15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 1, '', 34, 'giaovien1', 1),
-(16, 'Khảo sát test', 'mô tả', '2019-11-05', '0000-00-00', 0, '', 21, 'giaovien1', 1),
-(17, 'thử ', 'thử ', '2019-11-05', '0000-00-00', 1, '', 10, 'giaovien1', 0);
+(15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 1, '', 37, 'giaovien1', 1),
+(16, 'Khảo sát test', 'mô tả', '2019-11-05', '0000-00-00', 0, '', 21, 'giaovien1', 1);
 
 -- --------------------------------------------------------
 
@@ -688,7 +690,15 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (155, 174, 'xoài', 0),
 (155, 175, 'me', 0),
 (155, 176, 'kem', 0),
-(155, 177, 'kẹo', 0);
+(155, 177, 'kẹo', 0),
+(166, 188, 'người thứ 3', 0),
+(166, 189, 'giáo viên', 0),
+(166, 190, 'học sinh', 0),
+(167, 191, 'bim bim', 0),
+(167, 192, 'xoài', 0),
+(167, 193, 'me', 0),
+(167, 194, 'kem', 0),
+(167, 195, 'kẹo', 0);
 
 -- --------------------------------------------------------
 
@@ -1006,19 +1016,19 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT cho bảng `squest`
 --
 ALTER TABLE `squest`
-  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
 
 --
 -- AUTO_INCREMENT cho bảng `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=389;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
@@ -1075,8 +1085,8 @@ ALTER TABLE `singlechoicereponse`
 -- Các ràng buộc cho bảng `squest`
 --
 ALTER TABLE `squest`
-  ADD CONSTRAINT `squest_ibfk_2` FOREIGN KEY (`quest_type_id`) REFERENCES `questiontype` (`quest_type_id`),
-  ADD CONSTRAINT `squest_ibfk_3` FOREIGN KEY (`surveysq_id`) REFERENCES `survey` (`survey_id`);
+  ADD CONSTRAINT `squest_ibfk_2` FOREIGN KEY (`quest_type_id`) REFERENCES `questiontype` (`quest_type_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `squest_ibfk_3` FOREIGN KEY (`surveysq_id`) REFERENCES `survey` (`survey_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `survey_section`
@@ -1089,7 +1099,7 @@ ALTER TABLE `survey_section`
 -- Các ràng buộc cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
-  ADD CONSTRAINT `s_ans_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `squest` (`squest_id`);
+  ADD CONSTRAINT `s_ans_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `squest` (`squest_id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `textreponse`
