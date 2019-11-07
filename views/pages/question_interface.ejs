@@ -120,14 +120,25 @@
                     <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                   <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Ghim</a>
-                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                    <a class="dropdown-item" id="show_update1">Chỉnh sửa</a>
                     <a class="dropdown-item" href="#">Xóa</a>
                   </div>
                 </div>
                 </div>
 
                 <div class="card-body">
-                  <h6><%=question[2][i].content%></h6>
+                  <h6 id="cont1"><%=question[2][i].content%></h6>
+                  <form method="POST" action="">
+                  <div class="row" style="display: none;" id="cont2">
+                    <div class="col-9 col-sm-10 col-md-11">
+                      <input type="nhap" class="form-control" value="<%=question[2][i].content%>" >
+                    </div>
+                    <div class="col-3 col-sm-2 col-md-1">
+                      <button class="btn btn-outline-secondary" type="submit">Sửa</button>
+                    </div>
+                  </div>
+                  </form>
+
               <form class="form-inline" style="padding-top: 8px;">
                 <small style="font-size: 14px;">03 lượt thích</small>
                 <small style="font-size: 14px;padding-left: 20px;">05 phản hồi</small>
@@ -160,14 +171,25 @@
                      <div style="float: right;" class="col-md-1 dropdown">
                         <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                        <a class="dropdown-item" id="show_update2">Chỉnh sửa</a>
                         <a class="dropdown-item" href="#">Xóa</a>
                       </div>
                     </div>
                   </div>
 
                     <div class="card-body">
-                      <p><%=question[3][j].cmt%></p>
+                      <p id="in_cont1"><%=question[3][j].cmt%></p>
+                      <form method="POST" action="">
+                      <div class="row" style="display: none;" id="in_cont2">
+                        <div class="col-9 col-sm-10 col-md-11">
+                          <input type="nhap" class="form-control" value="<%=question[3][j].cmt%>" >
+                        </div>
+                        <div class="col-3 col-sm-2 col-md-1">
+                          <button class="btn btn-outline-secondary" type="submit">Sửa</button>
+                        </div>
+                      </div>
+                      </form>
+                      
                       <small style="font-size: 14px;">03 lượt thích</small>
                       <hr id = "phienhoidap" class="featurette-divider">
                       <a href="" style="">Thích</a>
@@ -204,6 +226,18 @@
     </ul>
   </footer>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#show_update1').click(function() {
+      $('#cont2').show("fast");
+      $('#cont1').hide("fast");
+    });
+    $('#show_update2').click(function() {
+      $('#in_cont2').show("fast");
+      $('#in_cont1').hide("fast");
+    });
+  });
+</script>
 
 </body>
 </html>

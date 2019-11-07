@@ -174,7 +174,7 @@
                                             <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                                       </div>
                                       <div class="col-md-6">
-                                        <a href="{{val.link}}"><h4>{{val.chude}}</h4></a>
+                                        <a href="{{val.link}}" onclick="checkpassword()"><h4>{{val.chude}}</h4></a>
                                         <p>{{val.mota}}</p>
                                       </div>
                                       <div class="col-md-5" style="display: flex;">
@@ -202,6 +202,9 @@
                     </div>
                     <script type="text/javascript">
                             var data=[];
+                            function checkpassword(){
+                              prompt("Vui lòng nhập mật khẩu");
+                            }
                         </script>
                         <%for(var i=0;i< surveys[1].length;i++){
                           if(surveys[1][i].sec_isopen == 1){ %>
