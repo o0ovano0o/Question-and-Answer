@@ -22,6 +22,7 @@ router.use('/support', require(__dirname + '/support.js'));
 router.use('/rules', require(__dirname + '/rules.js'));
 router.use('/createsurvey', require(__dirname + '/survey_question.js'));
 router.use('/createquestion', require(__dirname + '/createquestion.js'));
+router.use('/createquestions', require(__dirname + '/createquestions.js'));
 router.use('/logout', require(__dirname + '/logout.js'));
 
 module.exports = router;

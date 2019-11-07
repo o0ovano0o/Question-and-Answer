@@ -31,10 +31,10 @@
     <div class="container marketing">
       <br>
       <div class="card">
-        <div class="card-header" style="background-color: #bbbbbb">
+        <div class="card-header" style="background-color: #888">
           <h5><b>Phiên hỏi đáp</b></h5>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="background-color: #dddddd">
           <div class="row padding">
             <div class="col-3 col-sm-2 col-md-2">
               <div class="card">
@@ -42,15 +42,17 @@
               </div>
             </div>
             <div class="col-9 col-sm-9 col-md-9">
-              <div class="card-body">
+              <div class="card-body" style="margin-top: -20px;">
                 <h4 class="card-title"><%=sections[0][0].sec_title%></h4>
                 <p class="card-text"><%=sections[0][0].sec_desc%><br>
-                  Đăng bởi: <a href="/yourprofile?id=<%=sections[0].user_id%>"><%=sections[0][0].name%></a><br>
+                  Đăng bởi: <a href="/yourprofile?id=<%=sections[0][0].user_id%>"><%=sections[0][0].name%></a><br>
                   Thời gian tạo: <%=sections[0][0].sec_time%>
                 </p>
-                <button class="btn btn-outline-secondary">Chỉnh sửa</button>
-                <button class="btn btn-outline-secondary">Xóa</button>
-                <button class="btn btn-outline-secondary">Đóng</button>
+                <p class="form-inline" >
+                  <a href="" class="btn btn-secondary" role="button" style="margin-right: 10px;">Sửa phiên hỏi đáp</a>
+                  <a href="" class="btn btn-secondary" role="button" style="margin-right: 10px;">Xóa phiên hỏi đáp</a>
+                  <a href="" class="btn btn-secondary" role="button">Đóng phiên hỏi đáp</a>
+                </p>
               </div>
             </div>
           </div>
@@ -58,7 +60,7 @@
       </div><br>
 
       <div class="card">
-        <div class="card-header d-inline" style="background-color: #bbbbbb">
+        <div class="card-header d-inline" style="background-color: #888">
           <h5>Danh sách câu hỏi<h5>
           <!-- <div class="dropdown" class="text-right">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,10 +72,10 @@
           </div> -->
 
         </div>
-        <div class="card-body">
+        <div class="card-body" style="background-color: #dddddd">
           <div class="row" style="margin-bottom: 3%;">
             <div class="col-12 col-sm-6 col-md-6" >
-              <div class="row">
+              <div class="row" style="margin-top: 22px;">
                   <div class="col-8 col-sm-7 col-md-7" style="margin-bottom: 3%;">
                     <input type="tim" class="form-control" id="search2" placeholder="Tìm kiếm ...">
                   </div>
@@ -84,16 +86,14 @@
             </div>
             <div class="col-12 col-sm-6 col-md-6">
             <form method="POST" action="/new_session">
-            
               <div class="row">
                   <div class="col-8 col-sm-9 col-md-9">
-                    <input type="text" name="context" class="form-control" id="search2" placeholder="Đặt câu hỏi ...">
+                    <textarea type="text" name="context" rows="3" class="form-control" id="search2" placeholder="Đặt câu hỏi ..."></textarea> 
                   </div>
                   <div class="col-1 col-sm-1 col-md-1">
-                    <input class="btn btn-outline-secondary" type="submit" value="Gửi">
+                    <input class="btn btn-outline-secondary" type="submit" value="Gửi" style="margin-top: 22px;">
                   </div>
               </div>
-            
             </form>
             </div>
           </div>
@@ -102,7 +102,7 @@
             <div class="row padding">
               <div class="col-3 col-sm-3 col-md-2">
                 <div class="card">
-                  <a href="/question">
+                  <a href="/question?question_id=<%=sections[1][i].question_id%>">
                    <img class="card-img-top" src="./images/logo2.jpg" >
                  </a>
                </div>

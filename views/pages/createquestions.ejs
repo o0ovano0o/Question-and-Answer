@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Cần thiết cho 1 web -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="/index&manage.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <title>Thêm câu hỏi khảo sát</title>
+
+  <!-- Thư viện online cho Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+
+<!-- CSS tự định nghĩa -->
+<style type="text/css">
+  .nav-pills>a.active, .nav-pills>a:focus, .nav-pills>a:hover {
+    cursor: default;
+    font-weight: bold;
+    background-color: #009999 !important;
+    border-bottom: 3px solid #ff0066;
+    color: black;
+    border-radius: 0px;
+  }
+  .nav-pills>a {
+
+    font-weight: normal;
+    border-bottom: 3px solid #ff0066;
+    color: black;
+    border-radius: 0px;
+  }
+  .cauhoi{
+    padding:10px;
+    border-width: 1px;
+    background-color: #d2fabe;
+    border-radius: 10px;
+    margin:10px;
+  }
+</style>
+
+<body style="background-color: #EEEEEE">
+
+<%- include header %>
+
+    <main role="main">
+      <div class="container marketing">
+       <div class="container" style="margin-top: 50px;background-color: white;border-radius: 20px;">
+        <div >
+         <div >
+          <br>
+          <label for="title" class="col-form-label">
+            <h3>Tên phiếu khảo sát: <%=survey.title%> </h3></label>
+          </div>
+        </div>
+        <div >
+         <label for="description" class="col-form-label"><h4>Mô tả khảo sát: <%=survey.description%></h4> </label>
+       
+      </div>
+      <div>
+       Để nhập hàng loạt câu hỏi bạn cần nhập theo định dạng<ul>
+        <li>Cuối mỗi câu hỏi thêm loại câu trong dấu ngoặc đơn ví dụ với câu hỏi loại 1 thêm (1) vào cuối câu</li>
+        <li>Câu trắc nghiệm 1 đáp án là có mã là 1, câu trắc nghiệm nhiều đáp án có mã là 2, câu đúng sai có mã là 3 và câu tự luận có mã là 4</li>
+        <li>Với câu loại 1 và 2 thì thêm cặp dấu {} để thêm các đáp án</li>
+        <li>Các đáp án được viết trong dấu {} và được ngăn cách bởi dấu / </li>
+        <li>Lưu ý:Đáp án cuối cùng không cần dấu '/' cuối câu</li>
+         <li>Mỗi câu hỏi ngăn cách bởi dấu ;</li>
+       </ul>
+     <p style="font-weight: bold;"> Để chắc chắn bạn đã nhập đúng định dạng hãy nhấn xem trước trước khi tạo. Dưới đây là đoạn mã mẫu của chúng tôi.</p>
+     </div>
+     <a href="/survey?id=<%=survey.survey_id%>" style="margin: 15px;"  class="btn btn-success" role="button">Xem phiếu khảo sát</a>
+
+   </div><br/>
+</div>
+
+
+  
+  <!-- Nội dung các tabs-->
+<div class="container marketing">
+   <div class="container" style="margin-top: 50px;background-color: white;border-radius: 20px;margin: 10px;padding: 15px;">
+  <div class="card">
+    <div class="card-header"><h3>Nhập câu hỏi bằng văn bản</h3></div>
+    <div class="card-body">
+      <form action="/createquestions/?id=<%=survey.survey_id%>" method="POST">
+        <textarea rows="15" id="text" name="text" style="width: 100%;" >Bạn là gì ?{
+học sinh/
+giáo viên/
+người thứ 3
+}(1);
+Bạn thích gì ?{
+kẹo/
+kem/
+me/
+xoài/
+bim bim
+}(2);
+Bạn là nam?(3);
+Bạn có suy nghĩ gì?(4);</textarea>
+       
+        <input type="submit" name="submit"  value="Tạo" class="btn btn-success">
+      </form>
+         <button class="btn btn-success" onclick="return dinhdang();" style="margin-top: 20px;">Xem trước</button>
+      <div id="xemtrc"></div>
+    </div> 
+  </div>
+</div>
+</div>
+<p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+</div>
+<%- include update_inf_user %>
+</main>
+<footer id="footer">
+  <ul style="padding: 15px; margin-bottom: 0px;">
+    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+    <p style="font-size: 12px"> @2019 design by Team 5</p>
+  </ul>
+</footer>
+</body>
+<script type="text/javascript">
+  function dinhdang(){
+    text=document.getElementById('text').value;
+    console.log(text);
+    var cau=text.split(";");
+    var cau1=[];
+    var cau2=[];
+    var cau3=[];
+    var cau4=[];
+    var textra="";
+    for(var i=0;i<cau.length;i++){
+      if(cau[i].search("(1)")!=-1){
+          var tn=cau[i].split("{");
+          var de=tn[0];
+           de=de.replace(/(?:\r\n|\r|\n)/g, '');
+          var dn=tn[1].split("}");
+          var str = dn[0].replace(/(?:\r\n|\r|\n)/g, '');
+          var dapan=str.split("/");
+          cau1.push({
+              "cauhoi":de,
+              "dapan":dapan,
+          }); 
+          textra+=("<div class='cauhoi'><p>"+de+"</p>");
+          for(var j=0;j<dapan.length;j++){
+            textra+="<input type='radio' name='"+i+"'>"+dapan[j]+"<br/>";
+          }
+          textra+="</div>";
+          console.log(cau1[0]);
+      }
+       else if(cau[i].search("(2)")!=-1){
+         var tn=cau[i].split("{");
+          var de=tn[0];
+          de=de.replace(/(?:\r\n|\r|\n)/g, '')
+          var dn=tn[1].split("}");
+          var str = dn[0].replace(/(?:\r\n|\r|\n)/g, '');
+          var dapan=str.split("/");
+          cau2.push({
+              "cauhoi":de,
+              "dapan":dapan,
+          }); 
+          textra+="<div class='cauhoi'><p>"+de+"</p>";
+          for(var j=0;j<dapan.length;j++){
+            textra+="<input type='checkbox' name='"+i+"'>"+dapan[j]+"<br/>";
+          }
+          textra+="</div>";
+          console.log(cau2[0]);
+      }
+       else if(cau[i].search("(3)")!=-1){
+         
+           cau[i]=cau[i].replace(/(?:\r\n|\r|\n)/g, '');
+           cau[i]=cau[i].replace("(3)","");
+            cau3.push(cau[i]);
+          textra+="<div class='cauhoi'><p>"+cau[i]+"</p>";
+          textra+="<input type='radio' name='"+i+"'>"+"Đúng"+"<br/>";
+          textra+="<input type='radio' name='"+i+"'>"+"Sai"+"<br/>";
+          textra+="</div>";
+           console.log(cau[i]);
+      }
+       else if(cau[i].search("(4)")!=-1){
+        cau[i]=cau[i].replace(/(?:\r\n|\r|\n)/g, '');
+        cau[i]=cau[i].replace("(4)","");
+          cau4.push(cau[i]);
+          textra+="<div class='cauhoi'><p>"+cau[i]+"</p>";
+          textra+="<textarea style='width:100%;' rows='3'></textarea>";
+          textra+="</div>";
+          console.log(cau[i]);
+      }
+    }
+    document.getElementById('xemtrc').innerHTML=textra;
+
+
+  }
+</script>
+</html>

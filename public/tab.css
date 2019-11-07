@@ -6,7 +6,6 @@
   border: 1px solid #ccc;
   background-color: #f1f1f1;
   width: 30%;
-  height: 300px;
   max-height: 500px;
   
 }
@@ -39,7 +38,7 @@
 .tabcontent {
   float: left;
   padding:  15px;
-  border: 1px solid #ccc;
+  border: 1px solid #999;
   width: 70%;
   border-left: none;
   height: 300px;

@@ -62,9 +62,7 @@
         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
           <p id="date1"></p>
         </div>
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-         <p id="date2"></p>
-       </div>
+        
      </div>
      <a href="/survey/?id=<%=survey.survey_id%>" style="margin: 15px;"  class="btn btn-success" role="button">Xem phiếu khảo sát</a>
 
@@ -113,7 +111,7 @@
                             <div aria-labelledby="headingOneTN1" >
                                 <div class="card-body">
                                     <textarea name="question1" rows="2" class="col-sm-12" style="border-radius: 5px; margin: 10px; padding: 5px;" placeholder="Nội dung câu hỏi..." required></textarea>
-                                    <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" required>
+                                    <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="sodapan(this);checknumber(this);" required>
                                     <div id="dapan1" style="width: 90%;"></div>
                                 </div>
                             </div>
@@ -217,7 +215,7 @@
     var cauhoi2=":</p></div><div aria-labelledby='headingOneTN3' ><div class='card-body'><textarea name='question";
     var cau="' rows='2' class='col-sm-12' style='border-radius: 5px; margin: 10px; padding: 5px;' placeholder='Nội dung câu hỏi...' ></textarea><input class='form-control'  type='number' name='ans";
     var ok="' id='";
-    var cauhoi3="' style='border-radius: 5px; margin:  10px; width: 31%;padding: 5px;' placeholder='Số đáp án' min='1' value='1' max='10' on='checknumber(this);sodapan(this);' required><div id='dapan";
+    var cauhoi3="' style='border-radius: 5px; margin:  10px; width: 31%;padding: 5px;' placeholder='Số đáp án' min='1' value='1' max='10' onblur='sodapan(this);checknumber(this);' required><div id='dapan";
     var cauhoi4="'></div></div></div></div><br></div></div>";
     var code="";
     for(i=1;i<num;i++){
