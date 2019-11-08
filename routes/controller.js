@@ -45,7 +45,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 							username: user.username,
 							name: user.name,
 							email: user.email,
-							password: 'fb',
+							password:'fb',
 							date: '',
 							isadmin: 0
 						};
