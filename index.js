@@ -28,7 +28,7 @@ function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
       
        user={
-							user_id : profile.id,
+						user_id : profile.id,
                         name : profile.displayName,
                         username: profile.emails[0].value,
                         email : profile.emails[0].value, 

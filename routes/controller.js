@@ -17,7 +17,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 	users = {
 		user_id:user.id,
 		username: user.username,
-		name: user.username,
+		name: user.name,
 		email: user.email,
 		password: 'fb',
 		date: '',
@@ -43,7 +43,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 				      	userscheck = {
 							user_id:userr.user_id,
 							username: user.username,
-							name: user.username,
+							name: user.name,
 							email: user.email,
 							password: 'fb',
 							date: '',
