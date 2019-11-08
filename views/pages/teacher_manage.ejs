@@ -20,11 +20,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
   <script src="/angular.ng-modules.js"></script>
+  <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
 </head>
 
 <!-- BODY -->
-<body>
+<body style="background-color: #EEEEEE">
 
   <%- include header %>
   <!-- MAIN -->
@@ -33,7 +34,7 @@
       <!-- Tài khoản -->
       <% var numbersurvey = info[2].length; %>
       <% var numbersection = info[1].length; %>
-        <div class="container">
+        <div class="container"><br>
           <div class="card">
             <div class="card-body">
               <div class="row padding">
@@ -60,7 +61,7 @@
       <!-- Nội dung -->
         <div class="container">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header" >
               <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
                   <a class="nav-link active" href="#comment" data-toggle="tab">Bình luận của tôi</a>
@@ -73,14 +74,14 @@
                 </li>
               </ul>
             </div>
-            <div class="card-body">
+            <div class="card-body" >
               <div class="tab-content">
                 <div id="comment" class="tab-pane active" role="tabpanel">
                 <%for (var i = 0; i < info[3].length; i++) { %>
 
                   <div class="card-body">
                     <div class="card" id="cmt">
-                      <div class="card-body d-inline">
+                      <div class="card-body d-inline" >
                         <div class="row">
                           <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-6">
                             Bạn đã bình luận "<%=info[3][i].content%>""
@@ -218,6 +219,11 @@
               </div>
             </div>
           </div>
+            <!-- Quay về đầu trang -->
+    <br>
+    <div class="text-center">
+    <a href="#"><h5>Back to top</h5></a>
+    </div>
         </div>
 
     </main>
@@ -230,11 +236,6 @@
       </ul>
     </footer>
 
-  <!-- Quay về đầu trang -->
-    <br>
-    <div class="text-center">
-    <a href="#"><h5>Back to top</h5></a>
-    </div>
 
   <!-- Nút xóa -->
     <script type="text/javascript">

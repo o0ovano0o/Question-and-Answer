@@ -79,7 +79,8 @@ table{
   text-align: center;
   color: #ffffff;
   background-color: #736f6f;
-  margin-top: 125px;
+  margin-top: 95px;
+  display: block;
 }
 /* MARKETING CONTENT
 -------------------------------------------------- */
