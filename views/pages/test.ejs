@@ -138,7 +138,7 @@
 
             <div class="row">
                 <div class="col-6 col-sm-6 col-md-6">
-                    <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-primary">< Trở về danh sách phiếu</a>
+                    <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-primary"><ion-icon name="arrow-round-back"></ion-icon> Trở về danh sách phiếu</a>
                 </div>
                  <%if((check==0&&survey.isopen==1)||session.u){%>
                 <div class="col-6 col-sm-6 col-md-6">
@@ -403,7 +403,7 @@
                </form>
              </div>
              <br>
-             <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a><br><br><br>
+             <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a><br><br><br>
 
         </div><br>
 
@@ -420,7 +420,7 @@
                   <div class="col-6 col-sm-6 col-md-6">
                   </div>
                  <div class="col-6 col-sm-6 col-md-6">
-                    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a>
+                    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a>
                   </div>
                 </div>
                   <%}else{%>
@@ -428,7 +428,7 @@
                   <div class="col-6 col-sm-6 col-md-6">
                   </div>
                  <div class="col-6 col-sm-6 col-md-6">
-                    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát</a>
+                    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a>
                   </div>
                 </div>
 
