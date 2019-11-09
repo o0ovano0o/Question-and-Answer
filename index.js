@@ -33,7 +33,8 @@ function(accessToken, refreshToken, profile, done) {
                         name : profile.displayName,
                         username: profile.emails[0].value,
                         email : profile.emails[0].value, 
-                        isadmin:0
+                        isadmin:0,
+                        photo: "profile.photos.value",
 }
 console.log(user);
       return done(null, user);

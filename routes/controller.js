@@ -14,6 +14,7 @@ router.get('/auth/facebook/callback',
 router.get('/homefb',isLoggedIn,function(req,res){
 
 	user=req.user;
+	id=req.query.id;
 	users = {
 		user_id:user.id,
 		username: user.username,
