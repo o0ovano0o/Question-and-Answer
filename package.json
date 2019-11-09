@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "express-generator": "^4.16.1",
     "express-session": "^1.16.2",
+    "googleapis": "^45.0.0",
     "mysql": "^2.17.1",
     "node-q": "^2.4.4",
     "nodemailer": "^6.3.1",

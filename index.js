@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var q = require('q');
 var FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var session = require('express-session');
 const config = require('./routes/config');
 passport.serializeUser(function(user, done) {
@@ -54,6 +55,27 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: config.googleClientID,
+      clientSecret: config.googleClientSecret,
+      callbackURL: '/auth/google/callback'
+    },(accessToken,refreshToken, profile,done)=>{
+    console.log(accessToken);
+    console.log(refreshToken);
+    console.log(profile);
+     user={
+						user_id : profile.id,
+                        name : profile.displayName,
+                        username: profile.emails[0].value,
+                        email : profile.emails[0].value, 
+                        isadmin:0,
+                        photo: profile.photos[0].value,
+}
+    return done(null, user);
+}
+));
 app.use(function(req, res, next) {
    res.locals.session = req.session;
   res.locals.user = req.user;
