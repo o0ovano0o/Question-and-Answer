@@ -29,18 +29,18 @@ router.post('/', function (req, res) {
 
         for (var j = 1; j <= num; j++) {
              var ans = "answer" + type + "_" +ids+"_"+ j;
-            
+
              s_ans = {
                question_id: ids ,
                ans_text: req.body[ans],
                number: type
              }
-             var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {
-               if (err) throw err;
-               else{
-
-               }
-             });
+             if(s_ans.ans_text!=""){
+               var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {
+                 if (err) throw err;
+                 else{}
+               });
+             }
         }
       }
       res.redirect('/survey?id=' + req.query.id );
