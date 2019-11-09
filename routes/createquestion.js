@@ -39,11 +39,9 @@ router.get('/', function(req, res) {
 });
 router.post('/', function(req, res) {
   if (req.query.id && req.query.qtype) {
-
     var id = req.query.id;
     var qtype = req.query.qtype;
     var n = req.body.number;
-
     for (var i = 1; i <= n; i++) {
       var quest = "question" + i;
       squest = {

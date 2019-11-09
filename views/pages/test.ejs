@@ -167,14 +167,12 @@
                                   <div id="c1" class="tab-pane active" >
                                       <div class="card card body" style="margin-top: 20px;padding:15px;">
                                         <div class="row">
-
                                           <p class="col-11"> <%if(session.username==survey.author){%>
                                           <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
                                           <%}%> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-
                                           <%if(session.username==survey.author){%>
                                             <div class=" col-1 dropdown" >
-                                               <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                </button>
                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="#update_1" data-toggle="modal" data-target="#update_<%= squest[i].squest_id%>">Sửa</a>
@@ -183,9 +181,11 @@
                                              </div>
                                            <%}%>
                                          </div>
-                                <%
+                                <% var count=0;
                                    for(var j=0;j< s_ans.length;j++){
-                                     if(s_ans[j].question_id==squest[i].squest_id){%>
+                                     if(s_ans[j].question_id==squest[i].squest_id){
+                                       count++;
+                                       %>
                                          <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="1_<%=squest[i].squest_id%>" value="<%=s_ans[j].ans_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
                                  <%}}
                                        %>
@@ -201,21 +201,24 @@
                                              </button>
                                          </div>
                                          <div class="modal-body">
-                                               <form action="" method="POST">
+                                               <form action="/updatequestion?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>" method="POST">
                                                      <div>
                                                          <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                         <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" required>
+                                                         <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
                                                      </div>
                                                      <div>
                                                          <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
-                                                         <input  type="number" max="10" min="1" id="1" class="form-control" name="ans1" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);">
-                                                         <%for(var j=0;j< s_ans.length;j++){
-                                                            if(s_ans[j].question_id==squest[i].squest_id){%>
+                                                         <input  type="number" max="10" min="1" id="1_<%= squest[i].squest_id%>" class="form-control" name="numans" value="<%=count%>" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this, <%=count%>);">
+                                                         <% var m=0;
+                                                         for(var j=0;j< s_ans.length;j++){
+                                                            if(s_ans[j].question_id==squest[i].squest_id){
+                                                              m++;
+                                                              %>
                                                               <div style="width: 90%;">
-                                                                  <input type='text' name='answer' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
+                                                                  <input type='text' name='answer1_<%= squest[i].squest_id%>_<%=m%>' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
                                                               </div>
                                                          <%}}%>
-                                                         <div id="dapan1" style="width: 90%;"></div>
+                                                         <div id="dapan1_<%= squest[i].squest_id%>" style="width: 90%;"></div>
                                                      </div>
                                                      <div class="modal-footer">
                                                        <input type="submit" class="btn btn-success" value="Xác nhận">
@@ -238,7 +241,7 @@
                                          <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
                                         <%if(session.username==survey.author){%>
                                           <div class=" col-1 dropdown" >
-                                             <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                              </button>
                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                               <a class="dropdown-item" href="" data-toggle="modal" data-target="#update_<%=squest[i].squest_id%>">Sửa</a>
@@ -291,7 +294,7 @@
                                           <%}%><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
                                         <%if(session.username==survey.author){%>
                                           <div class=" col-1 dropdown" >
-                                             <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                              </button>
                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                               <a class="dropdown-item" href="" data-toggle="modal" data-target="#update_<%= squest[i].squest_id%>">Sửa</a>
@@ -300,9 +303,11 @@
                                           </div>
                                        <%}%>
                                      </div>
-                                      <%
+                                      <% var count_2=0;
                                        for(var j=0;j< s_ans.length;j++){
-                                         if(s_ans[j].question_id==squest[i].squest_id){%>
+                                         if(s_ans[j].question_id==squest[i].squest_id){
+                                            count_2++;
+                                           %>
                                           <div class="form-check"> <input type="checkbox" style="margin: 4.8px 0px 0px -20px;" value="<%=s_ans[j].ans_id%>" name="2_<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
                                     <%}}%>
                                 </div>
@@ -317,18 +322,21 @@
                                              </button>
                                          </div>
                                          <div class="modal-body">
-                                               <form action="" method="POST">
+                                               <form action="/updatequestion?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=2" method="POST">
                                                      <div>
                                                          <label for="title" class="col-form-label">Câu hỏi:</label>
                                                          <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
                                                      </div>
                                                      <div>
                                                          <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
-                                                         <input  type="number" max="10" min="1" id="2_<%= squest[i].squest_id%>" class="form-control" name="ans2" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this);" >
-                                                         <%for(var j=0;j< s_ans.length;j++){
-                                                            if(s_ans[j].question_id==squest[i].squest_id){%>
+                                                         <input  type="number" max="10" min="1" id="2_<%= squest[i].squest_id%>" class="form-control" name="numans" value ="<%=count_2%>" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this, <%=count_2%>);" >
+                                                         <% var n=0;
+                                                         for(var j=0;j< s_ans.length;j++){
+                                                            if(s_ans[j].question_id==squest[i].squest_id){
+                                                              n++;
+                                                              %>
                                                               <div style="width: 90%;">
-                                                                  <input type='text' name='answer' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
+                                                                  <input type='text' name='answer2_<%= squest[i].squest_id%>_<%=n%>' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
                                                               </div>
                                                          <%}}%>
                                                          <div id="dapan2_<%= squest[i].squest_id%>" style="width: 90%;"></div>
@@ -354,7 +362,7 @@
                                           <b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
                                       <%if(session.username==survey.author){%>
                                         <div class=" col-1 dropdown" >
-                                           <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                           <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                            </button>
                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="#update_4<%=squest[i].squest_id%>" data-toggle="modal" data-target="#update_<%=squest[i].squest_id%>">Sửa</a>
@@ -446,13 +454,9 @@
 
 <script type="text/javascript">
     <% var n =  JSON.stringify(survey.startdate)%>;
-
     var text1 = <%- n%> ;
-
     var date1 = new Date(text1);
-
     document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
-
     function checknumber(inp){
       if(inp.value=="")
         inp.value=1;
@@ -462,15 +466,17 @@
         inp.value=30;
       }
     }
-    function sodapan(sodapan){
+    function sodapan(sodapan, num1){
       var i=0;
-      var num=sodapan.value;
+      var num=sodapan.value-num1;
       var dapan="<input type='text' name='answer";
-      var dap= "' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' required/>";
+      var dap= "' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' />";
       var code="";
       var key = sodapan.id;
+
       for(i=0;i<num;i++){
-        code+=(dapan+dap);
+        var m= i+num1+1;
+        code+=(dapan+key+"_"+m+dap);
       }
       var res="dapan" + key;
       document.getElementById(res).innerHTML=code;

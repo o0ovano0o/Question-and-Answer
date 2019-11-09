@@ -12,7 +12,7 @@ router.get('/auth/facebook/callback',
 
 
 router.get('/homefb',isLoggedIn,function(req,res){
-	
+
 	user=req.user;
 	users = {
 		user_id:user.id,
@@ -50,7 +50,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 							isadmin: 0
 						};
 						req.session.user=userscheck;
-				        res.render('main',{session: req.session.user, surveys}); } 
+				        res.render('main',{session: req.session.user, surveys}); }
 				      });
 			}
 		else  {
@@ -75,7 +75,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 							isadmin: 0
 						};
 						req.session.user=userscheck;
-				        res.render('main',{session: req.session.user, surveys}); } 
+				        res.render('main',{session: req.session.user, surveys}); }
 				      });
 					}
 				});
@@ -101,7 +101,7 @@ router.use('/deletesurvey', require(__dirname + '/deletesurvey.js'));
 router.use('/updatesurvey', require(__dirname + '/updatesurvey.js'));
 router.use('/student_manage', require(__dirname + '/student_manage.js'));
 router.use('/updatequestion', require(__dirname + '/updatequestion.js'));
-
+router.use('/updatequestype', require(__dirname + '/updatequestype.js'));
 router.use('/teacher_manage', require(__dirname + '/teacher_manage.js'));
 router.use('/survey_list', require(__dirname + '/list_survey.js'));
 router.use('/support', require(__dirname + '/support.js'));
@@ -110,6 +110,7 @@ router.use('/createsurvey', require(__dirname + '/survey_question.js'));
 router.use('/createquestion', require(__dirname + '/createquestion.js'));
 router.use('/createquestions', require(__dirname + '/createquestions.js'));
 router.use('/logout', require(__dirname + '/logout.js'));
+
 function isLoggedIn(req, res, next) {
 	if(req.isAuthenticated()){
 		return next();

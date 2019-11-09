@@ -63,7 +63,7 @@
         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
           <p id="date1"></p>
         </div>
-        
+
      </div>
      <a href="/survey/?id=<%=survey.survey_id%>" style="margin: 15px;"  class="btn btn-success" role="button"><ion-icon name="eye"></ion-icon> Xem phiếu khảo sát</a>
 
@@ -254,9 +254,9 @@
   var text1 = <%- n%> ;
   var text2 = <%- m%> ;
   var date1 = new Date(text1);
-  var date2 = new Date(text2);
+  //var date2 = new Date(text2);
   document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
-  document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
+  //document.getElementById("date2").innerHTML="Ngày kết thúc: "+formatdate(date2);
     function formatdate(d){
       var dd = d.getDate();
     var mm = d.getMonth() + 1; //January is 0!
