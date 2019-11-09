@@ -25,7 +25,7 @@ router.post('/',function(req,res){
             else {
               var user = squests[0];
               if(user == null){
-                res.render('forgetpass',{data:"Gmail này kết nối tài khoản nào cả."});
+                res.render('forgetpass',{data:"Gmail này không kết nối tài khoản nào cả."});
               }
               else{
               var text="Chào bạn, Chúng tôi là QA. Đây là thứ bạn muốn: \n";

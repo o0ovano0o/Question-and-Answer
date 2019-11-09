@@ -2,48 +2,61 @@
 <html lang="en">
 <!-- HEAD -->
 <head>
-  <!-- Cần thiết cho 1 web -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Cần thiết cho 1 web -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="/index&manage.css">
-  <link rel="stylesheet" href="/bootstrap/bootstrap-4.0.0.min.js">
-  <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/bootstrap/bootstrap-4.0.0.min.js">
+<link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
 
 
-  <title>Quên mật khẩu</title>
+<title>Quên mật khẩu</title>
 
-  <!-- Thư viện online cho Bootstrap -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <!-- Xử lý Navigation -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!-- Thư viện online cho Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Xử lý Navigation -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 </head>
 
 <!-- BODY -->
-  <body>
+<body style="background-color: #eeeeee">
 
 
 
 
-    <!-- MAIN -->
+<!-- MAIN -->
 <main class="pt-5">
-  <h3>Quên mật khẩu</h3>
-  <p>Hãy nhập gmail đăng ký của bạn chúng tôi sẽ gửi mật khẩu đến gmail của bạn.</p>
-<form action="/sendmail" method="POST"> 
-<input type="email" name="mail">
-<input type="submit" name="sub" value="Xác nhận">
-</form>
-// thêm alert hay cảnh báo gì đấy vào thẻ dưới này nhé :3 kiểu màu đỏ í
-<div><%=data%></div>
-
+  <div class="container"><br><br>
+    <div class="row">
+        <div class="col-2 col-sm-2 col-md-2"></div>
+        <div class="col-8 col-sm-8 col-md-8">
+            <div class="card">
+              <div class="card-body">
+                    <h4>Quên mật khẩu</h4>
+                <hr id = "sp" class="star-primary" style="  max-width: 100%;border-top: solid 2px #888;text-align: center;font-size: 200px;margin: 20px auto 30px;">
+                  <p style="text-align: center;">Hãy nhập gmail đăng ký, chúng tôi sẽ gửi mật khẩu đến gmail của bạn.</p>
+                    <form action="/sendmail" method="POST" class="form-inline" style="margin-left: 14%;"> 
+                      <input type="email" name="mail" class="form-control mr-sm-2" placeholder="Nhập gmail đăng ký..." style="width: 300px;height: 35px;border-radius: 5px ;">
+                      <input type="submit" class="btn btn-primary" name="sub" onclick="alert('<%=data%>')" value="Xác nhận"> 
+                    </form>
+                                           
+              </div>
+              <div class="card-footer">
+                Liên hệ email: <a class="linkNormal" href="https://gmail.com" target="_blank">nhom05@gmail.com
+                </a> để được tư vấn và giải đáp thắc mắc!
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
 </main>
 
 <!-- FOOTER -->
-<footer id="footer">
+<footer id="footer" style="  text-align: center;color: #ffffff;background-color: #736f6f;margin-top:220px;display: block;">
   <ul style="padding: 15px; margin-bottom: 0px;">
     <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
     <p style="font-size: 12px"> @2019 design by Team 5</p>
