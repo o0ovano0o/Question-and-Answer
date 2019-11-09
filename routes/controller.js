@@ -24,7 +24,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 		isadmin: 0
 	};
 	var defer = q.defer();
-		var query = conn.query("SELECT * FROM user WHERE ?", {email :user.email}, function(err,results) {
+		var query = conn.query("SELECT * FROM user WHERE ?", {name :user.name}, function(err,results) {
 			if (err) {
 				defer.reject(err);
 			}
@@ -45,7 +45,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 							username: user.username,
 							name: user.name,
 							email: user.email,
-							password:'fb',
+							password:user.photo,
 							date: '',
 							isadmin: 0
 						};
@@ -70,9 +70,9 @@ router.get('/homefb',isLoggedIn,function(req,res){
 							username: user.username,
 							name: user.name,
 							email: user.email,
-							password: 'fb',
+							password:user.photo,
 							date: '',
-							isadmin: 0
+							isadmin: 0 
 						};
 						req.session.user=userscheck;
 				        res.render('main',{session: req.session.user, surveys}); }
@@ -83,6 +83,13 @@ router.get('/homefb',isLoggedIn,function(req,res){
 		}
 	});
 });
+router.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
+  })
+);
+router.get('/auth/google/callback', passport.authenticate('google', { successRedirect : '/homefb', failureRedirect: '/login' }));
 router.use('/login', require(__dirname + '/login.js'));
 router.use('/home', require(__dirname + '/main.js'));
 router.use('/signin', require(__dirname + '/signin.js'));

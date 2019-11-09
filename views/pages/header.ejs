@@ -24,7 +24,11 @@
             <a class="nav-link" href="#"><img src="/images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
           </li>
           <li>
-            <div class="thumb" style="background-image:url(/images/avatar2.jpg);width: 40px;height: 40px"></div>
+          <%if(session.password.length>30){%>
+            <div class="thumb" style="background-image:url(<%=session.password%>);width: 40px;height: 40px"></div>
+            <%} else{%>
+            <div class="thumb" style="background-image:url(/images/avatar2.jpg );width: 40px;height: 40px"></div>
+            <%}%>
           </li>
 
           <li class="nav-item dropdown">
