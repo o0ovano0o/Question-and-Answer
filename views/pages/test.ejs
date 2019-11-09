@@ -154,7 +154,9 @@
                     <form action="/survey/?id=<%=survey.survey_id%>" method="POST">
                       <%}%>
                 <div class="card">
-
+       <div style="visibility: hidden;">
+         <form><input type="submit" name=""></form>
+       </div>
                    <div class="card-header" style="background-color: #99ccff">
                        <h6><b>Danh sách câu hỏi khảo sát</b></h6>
                    </div><br>
@@ -201,27 +203,33 @@
                                              </button>
                                          </div>
                                          <div class="modal-body">
+<<<<<<< HEAD
                                                <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=1" method="POST">
+=======
+                                         
+                                                     
+                                          <form action="/updatequestion?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>" method="POST" id="sua_<%=squest[i].squest_id%>">
+>>>>>>> b2c7c9263611b2ce77e60a20d0d04219800bdc28
                                                      <div>
                                                          <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                         <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
+                                                         <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" form="sua_<%=squest[i].squest_id%>" >
                                                      </div>
                                                      <div>
                                                          <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
-                                                         <input  type="number" max="10" min="1" id="1_<%= squest[i].squest_id%>" class="form-control" name="numans" value="<%=count%>" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this, <%=count%>);">
+                                                         <input  type="number" max="10" min="1" id="1_<%= squest[i].squest_id%>" class="form-control" name="numans" value="<%=count%>" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this, <%=count%>);" form="sua_<%=squest[i].squest_id%>">
                                                          <% var m=0;
                                                          for(var j=0;j< s_ans.length;j++){
                                                             if(s_ans[j].question_id==squest[i].squest_id){
                                                               m++;
                                                               %>
                                                               <div style="width: 90%;">
-                                                                  <input type='text' name='answer1_<%= squest[i].squest_id%>_<%=m%>' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
+                                                                  <input type='text' name='answer1_<%= squest[i].squest_id%>_<%=m%>' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" form="sua_<%=squest[i].squest_id%>"/>
                                                               </div>
                                                          <%}}%>
                                                          <div id="dapan1_<%= squest[i].squest_id%>" style="width: 90%;"></div>
                                                      </div>
                                                      <div class="modal-footer">
-                                                       <input type="submit" class="btn btn-success" value="Xác nhận">
+                                                       <input type="submit" form="sua_<%=squest[i].squest_id%>" class="btn btn-success" value="Xác nhận">
                                                      </div>
                                                </form>
                                          </div><br>
@@ -405,7 +413,7 @@
                        <%if(cauhoi>=1&&(!session.isadmin)){ %>
                        <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><%}%><br><br>
                      <%if(cauhoi>=1&&(session.username==survey.author)){ %>
-                       <button type="submit" class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Xóa nhiều</button><%}%><br><br>
+                       <button type="submit" form="del" class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Xóa nhiều</button><%}%><br><br>
                    </div>
                  </div>
                </form>

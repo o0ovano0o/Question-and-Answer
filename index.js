@@ -23,7 +23,7 @@ passport.use(new FacebookStrategy({
     clientID: config.facebook_key,
     clientSecret:config.facebook_secret ,
     callbackURL: config.callback_url,
-     profileFields: ['id','displayName','email','first_name','last_name','middle_name']
+     profileFields: ['id','displayName','email','first_name','photos','last_name','middle_name']
   },
 function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -33,7 +33,8 @@ function(accessToken, refreshToken, profile, done) {
                         name : profile.displayName,
                         username: profile.emails[0].value,
                         email : profile.emails[0].value, 
-                        isadmin:0
+                        isadmin:0,
+                        photo: profile.photos[0].value,
 }
 console.log(user);
       return done(null, user);

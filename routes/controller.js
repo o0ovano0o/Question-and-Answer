@@ -14,6 +14,7 @@ router.get('/auth/facebook/callback',
 router.get('/homefb',isLoggedIn,function(req,res){
 
 	user=req.user;
+	id=req.query.id;
 	users = {
 		user_id:user.id,
 		username: user.username,
@@ -89,6 +90,7 @@ router.get(
     scope: ['profile', 'email']
   })
 );
+router.use('/sendmail', require(__dirname + '/sendmail.js'))
 router.get('/auth/google/callback', passport.authenticate('google', { successRedirect : '/homefb', failureRedirect: '/login' }));
 router.use('/login', require(__dirname + '/login.js'));
 router.use('/home', require(__dirname + '/main.js'));
