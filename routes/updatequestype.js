@@ -6,6 +6,7 @@ var q = require('q');
 
 router.post('/', function (req, res) {
   if(req.session.user) {
+
      var id = req.query.id;
      var ids= req.query.ids;
      var type = req.query.type;
@@ -14,14 +15,41 @@ router.post('/', function (req, res) {
      var query = conn.query(sql, (err, squests) => {
         if (err) throw err;
         else {
-          //defer.resolve(num);
-            res.redirect('/survey?id='+id );
         }
      });
+
+     if(type==1 ||type ==2){
+   	   var query = conn.query("DELETE from s_ans where ?", {question_id: ids}, (err, sans) => {
+   		    if (err) throw err;
+   		    else {
+
+          }
+   	   });
+
+
+        for (var j = 1; j <= num; j++) {
+             var ans = "answer" + type + "_" +ids+"_"+ j;
+            
+             s_ans = {
+               question_id: ids ,
+               ans_text: req.body[ans],
+               number: type
+             }
+             var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {
+               if (err) throw err;
+               else{
+
+               }
+             });
+        }
+      }
+      res.redirect('/survey?id=' + req.query.id );
+
+
   }
-  else{
+  else
     res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
-  }
+
 });
 
 

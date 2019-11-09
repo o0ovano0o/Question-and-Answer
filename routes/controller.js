@@ -72,7 +72,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 							email: user.email,
 							password:user.photo,
 							date: '',
-							isadmin: 0 
+							isadmin: 0
 						};
 						req.session.user=userscheck;
 				        res.render('main',{session: req.session.user, surveys}); }
@@ -107,7 +107,6 @@ router.use('/resurvey', require(__dirname + '/resurvey.js'));
 router.use('/deletesurvey', require(__dirname + '/deletesurvey.js'));
 router.use('/updatesurvey', require(__dirname + '/updatesurvey.js'));
 router.use('/student_manage', require(__dirname + '/student_manage.js'));
-router.use('/updatequestion', require(__dirname + '/updatequestion.js'));
 router.use('/updatequestype', require(__dirname + '/updatequestype.js'));
 router.use('/teacher_manage', require(__dirname + '/teacher_manage.js'));
 router.use('/survey_list', require(__dirname + '/list_survey.js'));
