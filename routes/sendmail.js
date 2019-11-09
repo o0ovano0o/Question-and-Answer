@@ -12,15 +12,15 @@ router.get('/', function (req, res) {
 });
 
 router.post('/',function(req,res){
-  user=req.body.mail;
+  userr=req.body.mail;
   var transporter = nodemailer.createTransport({
-  service: 'gmail',
+ service: 'gmail',
   auth: {
     user: 'beminah1999@gmail.com',
     pass: 'min921999'
   }
 });
-  var query = conn.query("Select * from user WHERE ?", {email: user}, (err, squests) => {
+  var query = conn.query("Select * from user WHERE ?", {email: userr}, (err, squests) => {
             if (err) throw err;
             else {
               var user = squests[0];
@@ -32,9 +32,9 @@ router.post('/',function(req,res){
               for (var i = 0; i < squests.length; i++) {
                 text+="username: "+squests[i].username+" password:"+squests[i].password+"\n";
               }
-                var mailOptions = {
+                let mailOptions = {
                   from: 'beminah1999@gmail.com',
-                  to: user,
+                  to: userr,
                   subject: 'Mật khẩu QA của bạn',
                   text: text
                 };
@@ -52,7 +52,6 @@ router.post('/',function(req,res){
 
 
 });
-
 
 
 module.exports = router;

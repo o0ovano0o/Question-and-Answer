@@ -41,10 +41,15 @@
                   <p style="text-align: center;">Hãy nhập gmail đăng ký, chúng tôi sẽ gửi mật khẩu đến gmail của bạn.</p>
                     <form action="/sendmail" method="POST" class="form-inline" style="margin-left: 14%;"> 
                       <input type="email" name="mail" class="form-control mr-sm-2" placeholder="Nhập gmail đăng ký..." style="width: 300px;height: 35px;border-radius: 5px ;">
-                      <input type="submit" class="btn btn-primary" name="sub" onclick="alert('<%=data%>')" value="Xác nhận"> 
+                      <input type="submit" class="btn btn-primary" name="sub" value="Xác nhận"> 
                     </form>
                                            
               </div>
+              <%if(data!=""){%>
+              <div class="alert alert-danger" role="alert">
+                            <%=data%>
+                          </div>
+                          <%}%>
               <div class="card-footer">
                 Liên hệ email: <a class="linkNormal" href="https://gmail.com" target="_blank">nhom05@gmail.com
                 </a> để được tư vấn và giải đáp thắc mắc!
