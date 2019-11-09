@@ -7,7 +7,7 @@ var q = require('q');
 
 router.get('/', function (req, res) {
  
-    res.render('forgetpass');
+    res.render('forgetpass',{data:""});
   
 });
 
@@ -23,6 +23,11 @@ router.post('/',function(req,res){
   var query = conn.query("Select * from user WHERE ?", {email: user}, (err, squests) => {
             if (err) throw err;
             else {
+              var user = squests[0];
+              if(user == null){
+                res.render('forgetpass',{data:"Gmail này kết nối tài khoản nào cả."});
+              }
+              else{
               var text="Chào bạn, Chúng tôi là QA. Đây là thứ bạn muốn: \n";
               for (var i = 0; i < squests.length; i++) {
                 text+="username: "+squests[i].username+" password:"+squests[i].password+"\n";
@@ -42,6 +47,7 @@ router.post('/',function(req,res){
                   }
                 });
             }
+          }
         });
 
 
