@@ -16,8 +16,8 @@ router.post('/',function(req,res){
   var transporter = nodemailer.createTransport({
  service: 'gmail',
   auth: {
-    user: 'beminah1999@gmail.com',
-    pass: 'min921999'
+    user: 'nhom05web@gmail.com',
+    pass: 'A0379685354'
   }
 });
   var query = conn.query("Select * from user WHERE ?", {email: userr}, (err, squests) => {
@@ -30,10 +30,11 @@ router.post('/',function(req,res){
               else{
               var text="Chào bạn, Chúng tôi là QA. Đây là thứ bạn muốn: \n";
               for (var i = 0; i < squests.length; i++) {
-                text+="username: "+squests[i].username+" password:"+squests[i].password+"\n";
+                text+="Username: "+squests[i].username+"\n" + "Password:"+squests[i].password+"\n"+
+                "Cảm ơn vì đã truy cập hệ thống của chúng tôi!";
               }
                 let mailOptions = {
-                  from: 'beminah1999@gmail.com',
+                  from: 'nhom05web@gmail.com',
                   to: userr,
                   subject: 'Mật khẩu QA của bạn',
                   text: text
