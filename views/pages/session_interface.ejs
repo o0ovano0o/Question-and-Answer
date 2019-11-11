@@ -49,11 +49,12 @@
                   Đăng bởi: <a href="/yourprofile?id=<%=sections[0][0].user_id%>"><%=sections[0][0].name%></a><br>
                   Thời gian tạo: <%=sections[0][0].sec_time%>
                 </p>
+                <% if (sections[0][0].username == session.username) { %>
                 <p class="form-inline" >
-                  <a href="" class="btn btn-secondary" role="button" style="margin-right: 10px;">Sửa phiên hỏi đáp</a>
                   <a href="" class="btn btn-secondary" role="button" style="margin-right: 10px;">Xóa phiên hỏi đáp</a>
                   <a href="" class="btn btn-secondary" role="button">Đóng phiên hỏi đáp</a>
                 </p>
+                <%}%>
               </div>
             </div>
           </div>
@@ -98,12 +99,12 @@
             </form>
             </div>
           </div>
-          <% for (var i = 0; i < sections[1].length; i++) { %>
+          <% sections[1].forEach(function(sections) { %>
           <div class="card">
             <div class="row padding">
               <div class="col-3 col-sm-3 col-md-2">
                 <div class="card">
-                  <a href="/question?question_id=<%=sections[1][i].question_id%>">
+                  <a href="/question?question_id=<%=sections.question_id%>">
                    <img class="card-img-top" src="./images/logo2.jpg" >
                  </a>
                </div>
@@ -111,13 +112,14 @@
              <div class="col-9 col-sm-9 col-md-9">
               
               <div class="card-body">
-                <h5 class="card-title"><a href="/question?question_id=<%=sections[1][i].question_id%>"><%= sections[1][i].context%></a></h5>
+                <h5 class="card-title"><a href="/question?question_id=<%=sections.question_id%>"><%= sections.context%></a></h5>
                 <p class="card-text"><br>
-                  Đăng bởi: <a href="/yourprofile?id=<%=sections[1][i].user_id%>"> <%= sections[1][i].name%></a>
-                  <%= sections[1][i].date_posted%>
+                  Đăng bởi: <a href="/yourprofile?id=<%=sections.user_id%>"> <%= sections.name%></a>
+                  <%= sections.date_posted%>
                 </p>
               </div>
             </div>
+            <% if (sections.username == session.username) { %>
             <div style="float: right;" class="dropdown">
                   <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                 <div class="dropdown-menu">
@@ -125,9 +127,10 @@
                   <a class="dropdown-item" href="#">Xóa</a>
                 </div>
               </div>
+              <% } %>
           </div>
         </div><br>
-        <% } %>
+        <% }); %>
 
   </div>
 </div>

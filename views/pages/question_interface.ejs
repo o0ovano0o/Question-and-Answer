@@ -111,28 +111,31 @@
             <div class="card-header"><h5><b>Nội dung bình luận</b></h5></div>
 
             <div class="card-body">
-
-             <%for (var i = 0; i < question[2].length; i++) {%>
+             <%question[2].forEach(function(q) {%>
               <div class="card">
 
                 <div class="card-header row" style="background-color: #99ccff">
-                 <div class="col-md-11"><h6><b><%=question[2][i].name%></b></h6></div>
+                 <div class="col-md-11"><h6><b><%=q.name%></b></h6></div>
                  <div style="float: right;" class="col-md-1 dropdown">
                     <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                  <div class="dropdown-menu">
+                  <div class="dropdown-menu"> 
+                    <% if (question[1][0].author == session.username) { %>
                     <a class="dropdown-item" href="#">Ghim</a>
+                    <%}%>
+                    <% if (q.username == session.username) { %>
                     <a class="dropdown-item" id="show_update1">Chỉnh sửa</a>
                     <a class="dropdown-item" href="#">Xóa</a>
+                    <%}%>
                   </div>
                 </div>
                 </div>
 
                 <div class="card-body">
-                  <h6 id="cont1"><%=question[2][i].content%></h6>
-                  <form method="POST" action="">
+                  <h6 id="cont1"><%=q.content%></h6>
+                  <form method="POST" action="/session?ans_id=<%=q.ans_id%>">
                   <div class="row" style="display: none;" id="cont2">
                     <div class="col-9 col-sm-10 col-md-11">
-                      <input type="nhap" class="form-control" value="<%=question[2][i].content%>" >
+                      <input type="nhap" class="form-control" value="<%=q.content%>" >
                     </div>
                     <div class="col-3 col-sm-2 col-md-1">
                       <button class="btn btn-outline-secondary" type="submit">Sửa</button>
@@ -147,13 +150,12 @@
                     <hr id = "phienhoidap" class="featurette-divider">
 
                <a href="">Thích</a>
-               <a href="" style="padding-left: 2%;">Xem tất cả phản hồi</a><br>
-                     <form method="POST" action="/question?cmt=<%=question[2][i].ans_id%>">
+                     <form method="POST" action="/question?cmt=<%=q.ans_id%>">
                       <p>
                     <div>
                       <div class="row">
                         <div class="col-9 col-sm-10 col-md-11">
-                          <input type="nhap" name="cmt_ans" class="form-control" id="search2" placeholder="Phản hồi <%=question[2][i].name%>">
+                          <input type="nhap" name="cmt_ans" class="form-control" id="search2" placeholder="Phản hồi <%=q.name%>">
                         </div>
                         <div class="col-3 col-sm-2 col-md-1">
                           <button class="btn btn-outline-secondary" type="submit">Gửi</button>
@@ -164,11 +166,12 @@
                   </form>
 
                   <!-- comment trả lời cho 1 comment khác-->
-                  <% for (var j = 0; j < question[3].length; j++) {
-                    if (question[3][j].ans_id == question[2][i].ans_id) { %>
+                  <% question[3].forEach(function(questions) {
+                    if (questions.ans_id == q.ans_id) { %>
                   <div class="card">
                     <div class="card-header row" style="background-color: #dddddd">
-                     <div class="col-md-11"><h6><b><%=question[3][j].name%></b></h6></div>
+                     <div class="col-md-11"><h6><b><%=questions.name%></b></h6></div>
+                     <% if (questions.username == session.username) { %>
                      <div style="float: right;" class="col-md-1 dropdown">
                         <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                       <div class="dropdown-menu">
@@ -176,14 +179,15 @@
                         <a class="dropdown-item" href="#">Xóa</a>
                       </div>
                     </div>
+                    <%}%>
                   </div>
 
                     <div class="card-body">
-                      <p id="in_cont1"><%=question[3][j].cmt%></p>
-                      <form method="POST" action="">
+                      <p id="in_cont1"><%=questions.cmt%></p>
+                      <form method="POST" action="/session?cmt_id=<%=questions.cmt_id%>">
                       <div class="row" style="display: none;" id="in_cont2">
                         <div class="col-9 col-sm-10 col-md-11">
-                          <input type="nhap" class="form-control" value="<%=question[3][j].cmt%>" >
+                          <input type="nhap" class="form-control" value="<%=questions.cmt%>" >
                         </div>
                         <div class="col-3 col-sm-2 col-md-1">
                           <button class="btn btn-outline-secondary" type="submit">Sửa</button>
@@ -197,11 +201,11 @@
                     </div>
                   </div>
                   <%}
-                } %>
+                }); %>
                 </div>
 
               </div>
-              <% } %>
+              <% }); %>
             </div>
 
           </div>
