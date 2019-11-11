@@ -50,11 +50,17 @@
                   Thời gian tạo: <%=sections[0][0].sec_time%>
                 </p>
                 <% if (sections[0][0].username == session.username) { %>
-                <p class="form-inline" >
-                  <a href="" class="btn btn-secondary" role="button" style="margin-right: 10px;">Xóa phiên hỏi đáp</a>
-                  <a href="" class="btn btn-secondary" role="button">Đóng phiên hỏi đáp</a>
+                <%if (sections[0][0].sec_isopen==0){%>
+                 <p class="form-inline" >
+                  <a href="/deleteqa?id=<%=sections[0][0].section_id%>" class="btn btn-secondary" role="button" style="margin-right: 10px;">Xóa phiên hỏi đáp</a>
+                  <a href="/openqa?id=<%=sections[0][0].section_id%>" class="btn btn-secondary" role="button">Mở lại phiên hỏi đáp</a>
                 </p>
-                <%}%>
+                <%} else {%>
+                <p class="form-inline" >
+                  <a href="/deleteqa?id=<%=sections[0][0].section_id%>" class="btn btn-secondary" role="button" style="margin-right: 10px;">Xóa phiên hỏi đáp</a>
+                  <a href="/closeqa?id=<%=sections[0][0].section_id%>" class="btn btn-secondary" role="button">Đóng phiên hỏi đáp</a>
+                </p>
+                <%}}%>
               </div>
             </div>
           </div>
