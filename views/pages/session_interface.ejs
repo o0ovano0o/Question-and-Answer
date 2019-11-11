@@ -51,22 +51,56 @@
                 </p>
                 <% if (sections[0][0].username == session.username) { %>
                 <%if (sections[0][0].sec_isopen==0){%>
-                 <p class="form-inline" >
-                  <a href="/deleteqa?id=<%=sections[0][0].section_id%>" class="btn btn-secondary" role="button" style="margin-right: 10px;">Xóa phiên hỏi đáp</a>
+                 <p class="form-inline" >   
                   <a href="/openqa?id=<%=sections[0][0].section_id%>" class="btn btn-secondary" role="button">Mở lại phiên hỏi đáp</a>
                 </p>
                 <%} else {%>
                 <p class="form-inline" >
-                  <a href="/deleteqa?id=<%=sections[0][0].section_id%>" class="btn btn-secondary" role="button" style="margin-right: 10px;">Xóa phiên hỏi đáp</a>
                   <a href="/closeqa?id=<%=sections[0][0].section_id%>" class="btn btn-secondary" role="button">Đóng phiên hỏi đáp</a>
                 </p>
                 <%}}%>
               </div>
             </div>
+             <%if(session.username==sections[0][0].username){%>
+              <div class=" col-1 dropdown" >
+                <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" data-toggle="modal" data-target="#updatesection" href="#updatesection">Sửa</a>
+                  <a class="dropdown-item" href="/deleteqa?id=<%=sections[0][0].section_id%>">Xóa</a>
+                </div>
+              </div>
+            <%}%>
           </div>
         </div>
       </div><br>
-
+ <div class="modal fade" id="updatesection" tabindex="-1" role="dialog" aria-labelledby="SectionModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                           <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa phiếu khảo sát</h5>
+                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                             </button>
+                                         </div>
+                                         <div class="modal-body">
+                                               <form action="/upsec?id=<%=sections[0][0].section_id%>" method="POST">
+                                                     <div>
+                                                         <label for="title" class="col-form-label">Tiêu đề:</label>
+                                                         <input type="text" name="title" class="form-control" value="<%=sections[0][0].sec_title%>" required>
+                                                     </div>
+                                                     <div>
+                                                         <label for="des" class="col-form-label">Mô tả:</label>
+                                                         <input type="text" name="des" class="form-control" value="<%=sections[0][0].sec_desc%>" required>
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                       <input type="submit" class="btn btn-success" value="Xác nhận">
+                                                     </div>
+                                               </form>
+                                         </div><br>
+                                     </div>
+                                 </div>
+                             </div>
       <div class="card">
         <div class="card-header d-inline" style="background-color: #888">
           <h5>Danh sách câu hỏi<h5>

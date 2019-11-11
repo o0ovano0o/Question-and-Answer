@@ -110,6 +110,7 @@ router.use('/deletesurvey', require(__dirname + '/deletesurvey.js'));
 router.use('/deleteqa', require(__dirname + '/deleteqa.js'));
 router.use('/closeqa', require(__dirname + '/closeqa.js'));
 router.use('/openqa', require(__dirname + '/openqa.js'));
+router.use('/upsec', require(__dirname + '/upsec.js'));
 router.use('/updatesurvey', require(__dirname + '/updatesurvey.js'));
 router.use('/student_manage', require(__dirname + '/student_manage.js'));
 router.use('/updatequestype', require(__dirname + '/updatequestype.js'));
