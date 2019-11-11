@@ -22,6 +22,7 @@ router.get('/', function (req, res) {
 	
 });
 
+
 router.post('/', function (req, res) {
 	var data = req.body;
 	var today = new Date();

@@ -111,7 +111,7 @@
             <div class="card-header"><h5><b>Nội dung bình luận</b></h5></div>
 
             <div class="card-body">
-             <%question[2].forEach(function(q) {%>
+             <%var i=0; question[2].forEach(function(q) { i++;%>
               <div class="card">
 
                 <div class="card-header row" style="background-color: #99ccff">
@@ -123,7 +123,7 @@
                     <a class="dropdown-item" href="#">Ghim</a>
                     <%}%>
                     <% if (q.username == session.username) { %>
-                    <a class="dropdown-item" id="show_update1">Chỉnh sửa</a>
+                    <a class="dropdown-item" id="show_update<%=i%>">Chỉnh sửa</a>
                     <a class="dropdown-item" href="#">Xóa</a>
                     <%}%>
                   </div>
@@ -131,9 +131,9 @@
                 </div>
 
                 <div class="card-body">
-                  <h6 id="cont1"><%=q.content%></h6>
+                  <h6 id="cont1_<%=i%>"><%=q.content%></h6>
                   <form method="POST" action="/session?ans_id=<%=q.ans_id%>">
-                  <div class="row" style="display: none;" id="cont2">
+                  <div class="row" style="display: none;" id="cont2_<%=i%>">
                     <div class="col-9 col-sm-10 col-md-11">
                       <input type="nhap" class="form-control" value="<%=q.content%>" >
                     </div>
@@ -232,16 +232,15 @@
   </footer>
 
 <script type="text/javascript">
+   <% var i=1 ;question[2].forEach(function(q) {
+    if (q.username == session.username){ %>
   $(document).ready(function(){
-    $('#show_update1').click(function() {
-      $('#cont2').show("fast");
-      $('#cont1').hide("fast");
-    });
-    $('#show_update2').click(function() {
-      $('#in_cont2').show("fast");
-      $('#in_cont1').hide("fast");
-    });
-  });
+    $('#show_update<%=i%>').click(function() {
+      $('#cont2_<%=i%>').show("fast");
+      $('#cont1_<%=i%>').hide("fast");
+    }); });
+    <%}i++;});%>
+ 
 </script>
 
 </body>
