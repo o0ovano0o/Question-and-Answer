@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="index&manage.css">
   <link rel="stylesheet" href="./bootstrap/bootstrap-4.0.0.min.js">
   <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <title>Hiển thị câu hỏi</title>
 
@@ -74,12 +75,12 @@
             <div class="card-body">
               <h5><%=question[0][0].context%></h5>
               <form class="form-inline" style="padding-top: 8px;">
-                <small style="font-size: 15px;">03 lượt thích</small>
-                <small style="font-size: 15px;padding-left: 20px;">07 bình luận</small>
+                <small style="font-size: 15px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small>
+                <small style="font-size: 15px;padding-left: 5%;"><i class="fa fa-commenting-o" aria-hidden="true"></i> 07 bình luận</small>
               </form>
               <hr id = "phienhoidap" class="featurette-divider">
-               <a href="">Thích</a>
-               <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl">Trả lời</a><br>
+               <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a>
+               <a href="" style="padding-left: 6%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl"><i class="fa fa-comment-o" aria-hidden="true"></i> Bình luận</a><br>
               <form method="POST" action="/question?cmt=0">
                <p>
                 <div class="collapse" id="tl">
@@ -144,12 +145,12 @@
                   </form>
 
               <form class="form-inline" style="padding-top: 8px;">
-                <small style="font-size: 14px;">03 lượt thích</small>
-                <small style="font-size: 14px;padding-left: 20px;">05 phản hồi</small>
+                <small style="font-size: 14px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small>
+                <small style="font-size: 14px;padding-left: 20px;"><i class="fa fa-commenting-o" aria-hidden="true"></i> 05 phản hồi</small>
               </form>
                     <hr id = "phienhoidap" class="featurette-divider">
 
-               <a href="">Thích</a>
+               <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a>
                      <form method="POST" action="/question?cmt=<%=q.ans_id%>">
                       <p>
                     <div>
@@ -195,9 +196,9 @@
                       </div>
                       </form>
                       
-                      <small style="font-size: 14px;">03 lượt thích</small>
+                      <small style="font-size: 14px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small>
                       <hr id = "phienhoidap" class="featurette-divider">
-                      <a href="" style="">Thích</a>
+                      <a href="" style=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a>
                     </div>
                   </div>
                   <%}
