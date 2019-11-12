@@ -158,9 +158,10 @@
                         <% var count = 0;
                         for(var i=0;i< surveys[1].length;i++){
                           if(surveys[1][i].sec_isopen == 1){ 
+                            if (surveys[2]) {
                             for (var j = 0; j < surveys[2].length; j++) {
                               if (surveys[2][j].section_id == surveys[1][i].section_id)
-                                count = count + 1;}%>
+                                count = count + 1;}}%>
                             <script type="text/javascript">
                               data.push({
                                 "phanhoi":"<%=count%>",
@@ -235,11 +236,12 @@
                             var name_=[];
                         </script>
                         <% var countd = 0;
-                        for(var i=0;i< surveys[1].length;i++){
+                        for(var i=0;i < surveys[1].length;i++){
                           if(surveys[1][i].sec_isopen == 0){ 
+                          if (surveys[2]) {
                             for (var j = 0; j < surveys[2].length; j++) {
                               if (surveys[2][j].section_id == surveys[1][i].section_id)
-                                countd = countd + 1;}%>
+                                countd = countd + 1;}}%>
                             <script type="text/javascript">
                               name_.push({
                                 "phanhoid": "<%=countd%>",
