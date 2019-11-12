@@ -29,478 +29,475 @@
 </head>
 
 <!-- BODY -->
-  <body>
+<body>
 
-      <%- include header %>
-
-
-    <!-- MAIN -->
-      <main class="pt-5">
-
-       <!-- Container - Collapse -->
-        <div class="container"><br><br>
-          <div id="accordion">
-
-            <% if(session.isadmin){%>
-            <!-- Tạo hoạt động mới -->
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h3 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Tạo hoạt động mới
-                  </button>
-                </h3>
-              </div>
-
-              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-
-                  <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item">
-                      <a class="nav-link" data-toggle="modal" href="#SessionModal"><img src="./images/icons/qa-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiên hỏi đáp</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" data-toggle="modal" href="#SurveyModal"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
-                    </li>
-                  </ul>
+  <%- include header %>
 
 
-                </div>
-              </div>
-            </div>
-            <br>
-            <%}%>
+  <!-- MAIN -->
+  <main class="pt-5">
 
-            <!-- Phiên hỏi đáp -->
-            <div class="card">
-              <div class="card-header" id="headingTwo">
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-5 col-sm-5 col-xl-6">
+   <!-- Container - Collapse -->
+   <div class="container"><br><br>
+    <div id="accordion">
 
-                    <h3 class="mb-0">
-                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" id="collapse1">
-                        Các phiên hỏi đáp
-                      </button>
-                    </h3>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-4 col-sm-4 col-xl-5"></div>
-                  <div class="col-lg-2 col-md-2 col-1 col-sm-1 col-xl-1">
-                    <div class="dropdown">
-                        <button class="btn btn-success" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Bộ lọc
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#" id="show1">Đang mở</a>
-                          <a class="dropdown-item" href="#" id="show2">Đã đóng</a>
-                          <a class="dropdown-item" href="#" id="showall1">Hiển thị tất cả phiên</a>
+      <% if(session.isadmin){%>
+      <!-- Tạo hoạt động mới -->
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h3 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Tạo hoạt động mới
+            </button>
+          </h3>
+        </div>
 
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
 
-              <!-- Nội dung trong phiên hỏi đáp-->
-              <div id="collapseTwo" class="collapse " aria-labelledby="headingTwo" data-parent="#accordion">
+            <ul class="nav nav-pills nav-fill">
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" href="#SessionModal"><img src="./images/icons/qa-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiên hỏi đáp</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" href="#SurveyModal"><img src="./images/icons/survey-icon.png" style="width: 50px; height: auto;" class="text-center">Tạo phiếu khảo sát</a>
+              </li>
+            </ul>
 
-                <!-- Phiên hỏi đáp đang mở-->
-                <div class="card-body" id="one">
-                  <div class="card">
-
-                    <div class="card-header d-flex align-items-start">
-                      <img src="./images/icons/open.png" style="width: 50px;" class="pr-2">
-                      <h5 class="pt-2 pb-2">Các phiên hỏi đáp đang mở</h5>
-                    </div>
-
-                    <!-- Nội dung -->
-                    <div class="card-body">
-
-                        <div id="1" ng-module="paginationApp" ng-controller="listdata" >
-                          <form id="search1" class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiên hỏi đáp đang mở" style="width: 50%" aria-label="Search" required>
-                          </form>
-                          <div  ng-click="sort('chude')" class=" glyphicon sort-icon" ng-show="sortKey=='chude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
-                              <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
-                                      <div class="col-md-1" style="padding-left: 25px;">
-                                            <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
-                                      </div>
-                                      <div class="col-md-6">
-                                        <a href="{{val.link}}" onclick="checkpassword()"><h4>{{val.chude}}</h4></a>
-                                        <p>{{val.mota}}</p>
-                                      </div>
-                                      <div class="col-md-5" style="display: flex;">
-                                            <table style="text-align: center;">
-                                                  <tr>
-                                                        <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                                        <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                                  </tr>
-                                                  <tr>
-                                                        <td><p>{{val.phanhoi}} phản hồi</p></td>
-                                                        <td><p>tác giả: {{val.author}}</p></td>
-                                                  </tr>
-                                            </table>
-                                      </div>
-                                <p style="padding-left: 20px; font-size: 12px">{{val.time}}</p>
-                              </div>
-                              <dir-pagination-controls
-                                max-size="1"
-                                direction-links="true"
-                                boundary-links="true"  >
-                              </dir-pagination-controls>
-
-                    </div>
-                    <script type="text/javascript">
-                            var data=[];
-                            function checkpassword(){
-                              prompt("Vui lòng nhập mật khẩu");
-                            }
-                        </script>
-                        <% var count = 0;
-                        for(var i=0;i< surveys[1].length;i++){
-                          if(surveys[1][i].sec_isopen == 1){ 
-                            if (surveys[2]) {
-                            for (var j = 0; j < surveys[2].length; j++) {
-                              if (surveys[2][j].section_id == surveys[1][i].section_id)
-                                count = count + 1;}}%>
-                            <script type="text/javascript">
-                              data.push({
-                                "phanhoi":"<%=count%>",
-                                "time":"<%=surveys[1][i].sec_time%>",
-                                "chude":"<%=surveys[1][i].sec_title%>",
-                                "mota":"<%=surveys[1][i].sec_desc%>",
-                              "link":"/new_session?id="+<%=surveys[1][i].section_id%>,
-                              "author":"<%=surveys[1][i].name%>"
-
-                              });
-                              </script>
-                              <%} count = 0;
-                            }%>
-                     <script type="text/javascript">
-                      var app = angular.module('paginationApp', ['angularUtils.directives.dirPagination']);
-
-                      app.controller('listdata', function($scope) {
-                        $scope.data=data;
-                      });
-
-                    </script>
-
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Phiên hỏi đáp đã đóng-->
-                <div class="card-body" id="two">
-                  <div class="card">
-                    <div class="card-header d-flex align-items-start">
-                      <img src="images/icons/lock.png" style="width: 50px;" class="pr-2">
-                      <h5 class="pt-2 pb-2">Các phiên hỏi đáp đã đóng</h5>
-                    </div>
-
-                    <!-- Nội dung -->
-                    <div class="card-body">
-
-                      <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
-                        <form id="search2" class="form-inline my-2 my-lg-0">
-                          <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiên hỏi đáp đã đóng" style="width: 50%" aria-label="Search" required>
-                        </form>
-                        <div  ng-click="sort('chuded')" class=" glyphicon sort-icon" ng-show="sortKey=='chuded'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
-                            <div class="col-md-1" style="padding-left: 25px;">
-                                  <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
-                            </div>
-                            <div class="col-md-6">
-                                  <a href="{{value.linkd}}"><h4>{{value.chuded}}</h4></a>
-                                  <p>{{value.motad}}</p>
-                            </div>
-                            <div class="col-md-5" style="display: flex;">
-                                  <table style="text-align: center;">
-                                        <tr>
-                                          <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                        </tr>
-                                    <tr>
-                                          <td><p>{{value.phanhoid}} phản hồi</p></td>
-                                          <td><p>tác giả: {{value.authord}}</p></td>
-                                    </tr>
-                                  </table>
-                            </div>
-                            <p style="padding-left: 20px; font-size: 12px">{{value.timed}} giờ trước</p>
-                        </div>
-                        <dir-pagination-controls
-                          max-size="1"
-                          direction-links="true"
-                          boundary-links="true"  >
-                        </dir-pagination-controls>
-                      </div>
-                      <script type="text/javascript">
-                            var name_=[];
-                        </script>
-                        <% var countd = 0;
-                        for(var i=0;i < surveys[1].length;i++){
-                          if(surveys[1][i].sec_isopen == 0){ 
-                          if (surveys[2]) {
-                            for (var j = 0; j < surveys[2].length; j++) {
-                              if (surveys[2][j].section_id == surveys[1][i].section_id)
-                                countd = countd + 1;}}%>
-                            <script type="text/javascript">
-                              name_.push({
-                                "phanhoid": "<%=countd%>",
-                                "timed":"<%=surveys[1][i].sec_time%>",
-                                "chuded":"<%=surveys[1][i].sec_title%>",
-                                "motad":"<%=surveys[1][i].sec_desc%>",
-                              "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>,
-                              "authord":"<%=surveys[1][i].name%>"
-                              });
-                              </script>
-                              <%} countd = 0;
-                            }%>
-                      <script type="text/javascript">
-                        var app = angular.module('paginationAppd', ['angularUtils.directives.dirPagination']);
-                        app.controller('listapp', function($scope){
-                           $scope.name_=name_;
-                        });
-                      </script>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            <br>
-
-            <!-- Phiếu khảo sát -->
-            <div class="card">
-              <div class="card-header" id="headingThree">
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-5 col-sm-5 col-xl-6">
-                    <h3 class="mb-0">
-                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" id="collapse2">
-                        Các phiếu khảo sát
-                      </button>
-                    </h3>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-4 col-sm-4 col-xl-5"></div>
-                  <div class="col-lg-2 col-md-2 col-1 col-sm-1 col-xl-1">
-                    <div class="dropdown">
-                        <button class="btn btn-success" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Bộ lọc
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#" id="show3">Đang mở</a>
-                          <a class="dropdown-item" href="#" id="show4">Đã đóng</a>
-                          <a class="dropdown-item" href="#" id="showall2">Hiển thị tất cả phiếu</a>
-
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Nội dung trong phiếu khảo sát -->
-              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-
-                <!-- Phiếu đang mở -->
-                <div class="card-body" id="three">
-                  <div class="card">
-
-                    <div class="card-header d-flex align-items-start">
-                      <img src="images/icons/open.png" style="width: 50px;" class="pr-2">
-                      <h5 class="pt-2 pb-2">Các phiếu khảo sát đang mở</h5>
-                    </div>
-
-                    <!-- Nội dung -->
-                    <div class="card-body">
-
-                      <div id="3" ng-module="paginationApppm"  ng-controller="listapppm">
-                        <form id="search3" class="form-inline my-2 my-lg-0">
-                          <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiếu khảo sát đang mở" style="width: 50%" aria-label="Search" required>
-                        </form>
-                        <div  ng-click="sort('tieudepm')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudepm'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
-                        <div class="row post"  style="margin-top: 20px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
-                          <div class="col-md-1" style="padding-left: 25px;">
-                              <div class="thumb" style="background-image:url(./images/logo3.jpg);width: 40px;height: 40px"></div>
-                          </div>
-                          <div class="col-md-6" >
-                              <a href="{{vlue.linkpm}}"><h4>{{vlue.tieudepm}}</h4></a>
-                              <p>{{vlue.motapm}}</p>
-                          </div>
-                          <div class="col-md-5" style="display: flex;">
-                              <table style="text-align: center;">
-                                    <tr>
-                                          <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                    </tr>
-                                    <tr>
-                                            <td><p>{{vlue.viewpm}} lượt xem</p></td>
-                                            <td><p>{{vlue.phanhoipm}} phản hồi</p></td>
-                                            <td><p>Tác giả: {{vlue.authorpm}}</p></td>
-                                    </tr>
-                              </table>
-                          </div>
-
-                        </div>
-
-                        <dir-pagination-controls
-                          max-size="1"
-                          direction-links="true"
-                          boundary-links="true"  >
-                        </dir-pagination-controls>
-                      </div>
-                       <script type="text/javascript">
-                            var phieum=[];
-                        </script>
-                        <%for(var i=0;i< surveys[0].length;i++){
-                          if(surveys[0][i].isopen){ %>
-                            <script type="text/javascript">
-                              phieum.push({
-                                "tieudepm":"<%=surveys[0][i].title%>",
-                                "motapm":"<%=surveys[0][i].description%>",
-                              "linkpm":"/survey?id="+<%=surveys[0][i].survey_id%>,
-                               "authorpm":"<%=surveys[0][i].name%>",
-                                "phanhoipm":"<%=surveys[0][i].num_re%>",
-                               "viewpm":"<%=surveys[0][i].views%>"
-                              });
-                              </script>
-                              <%}
-                            }%>
-                        <script type="text/javascript">
-                          var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
-                           app.controller('listapppm', function($scope){
-                            $scope.phieum=phieum;
-                            });
-
-                        </script>
-
-
-
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Phiếu đã đóng -->
-                <div class="card-body" id="four">
-                  <div class="card">
-                    <div class="card-header d-flex align-items-start">
-                      <img src="images/icons/lock.png" style="width: 50px;" class="pr-2">
-                      <h5 class="pt-2 pb-2">Các phiếu khảo sát đã đóng</h5>
-                    </div>
-
-                    <!-- Nội dung -->
-                    <div class="card-body">
-
-                      <div id="4" ng-module="paginationApppd"  ng-controller="listapppd">
-                        <form id="search4" class="form-inline my-2 my-lg-0">
-                          <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiếu khảo sát đã đóng" style="width: 50%" aria-label="Search" required>
-                        </form>
-                        <div  ng-click="sort('tieudepd')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudepd'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
-                        <div class="row post" style="margin-top: 20px;" dir-paginate="vlues in phieud|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
-                          <div class="col-md-1" style="padding-left: 25px;">
-                            <div class="thumb" style="background-image:url(./images/logo3.jpg);width: 40px;height: 40px">
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                           <a href="{{vlues.linkpd}}"><h4>{{vlues.tieudepd}}</h4></a>
-                           <p>{{vlues.motapd}}</p>
-                          </div>
-                           <div class="col-md-5" style="display: flex;">
-                                  <table style="text-align: center;">
-                                        <tr>
-                                          <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                                        </tr>
-                                        <tr>
-                                              <td><p>{{vlues.viewpd}} lượt xem</p></td>
-                                              <td><p>{{vlues.phoipd}} phản hồi</p></td>
-                                              <td><p>Tác giả: {{vlues.authorpd}}</p></td>
-                                        </tr>
-                                  </table>
-                          </div>
-
-                        </div>
-                        <dir-pagination-controls
-                          max-size="1"
-                          direction-links="true"
-                          boundary-links="true"  >
-                        </dir-pagination-controls>
-                      </div>
-                    <script type="text/javascript">
-                      var phieud=[];
-                    </script>
-                      <%for(var i=0;i< surveys[0].length;i++){
-                          if(!surveys[0][i].isopen){ %>
-                            <script type="text/javascript">
-                              phieud.push({
-                                "tieudepd":"<%=surveys[0][i].title%>",
-                                "motapd":"<%=surveys[0][i].description%>",
-                                "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"',
-                                 "authorpd":"<%=surveys[0][i].name%>",
-                                 "phoipd":"<%=surveys[0][i].num_re%>",
-                               "viewpd":"<%=surveys[0][i].views%>"
-                              });
-                              </script>
-                              <%}
-                            }%>
-                    <script type="text/javascript">
-                      var app = angular.module('paginationApppd', ['angularUtils.directives.dirPagination']);
-                     app.controller('listapppd', function($scope){
-                        $scope.phieud=phieud;
-                      });
-
-                    </script>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            <br>
 
           </div>
         </div>
+      </div>
+      <br>
+      <%}%>
+
+      <!-- Phiên hỏi đáp -->
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-5 col-sm-5 col-xl-6">
+
+              <h3 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" id="collapse1">
+                  Các phiên hỏi đáp
+                </button>
+              </h3>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 col-sm-4 col-xl-5"></div>
+            <div class="col-lg-2 col-md-2 col-1 col-sm-1 col-xl-1">
+              <div class="dropdown">
+                <button class="btn btn-success" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Bộ lọc
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#" id="show1">Đang mở</a>
+                  <a class="dropdown-item" href="#" id="show2">Đã đóng</a>
+                  <a class="dropdown-item" href="#" id="showall1">Hiển thị tất cả phiên</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nội dung trong phiên hỏi đáp-->
+        <div id="collapseTwo" class="collapse " aria-labelledby="headingTwo" data-parent="#accordion">
+
+          <!-- Phiên hỏi đáp đang mở-->
+          <div class="card-body" id="one">
+            <div class="card">
+
+              <div class="card-header d-flex align-items-start">
+                <img src="./images/icons/open.png" style="width: 50px;" class="pr-2">
+                <h5 class="pt-2 pb-2">Các phiên hỏi đáp đang mở</h5>
+              </div>
+
+              <!-- Nội dung -->
+              <div class="card-body">
+
+                <div id="1" ng-module="paginationApp" ng-controller="listdata" >
+                  <form id="search1" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiên hỏi đáp đang mở" style="width: 50%" aria-label="Search" required>
+                  </form>
+                  <div  ng-click="sort('chude')" class=" glyphicon sort-icon" ng-show="sortKey=='chude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                  <div class="row post" style="margin-top: 20px;" dir-paginate="val in data|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+                    <div class="col-md-1" style="padding-left: 25px;">
+                      <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
+                    </div>
+                    <div class="col-md-6">
+                      <a href="{{val.link}}" data-toggle="modal" data-target="#checkpassword"><h4>{{val.chude}}</h4></a>
+                      <p>{{val.mota}}</p>
+                    </div>
+                    <div class="col-md-5" style="display: flex;">
+                      <table style="text-align: center;">
+                        <tr>
+                          <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                        </tr>
+                        <tr>
+                          <td><p>{{val.phanhoi}} phản hồi</p></td>
+                          <td><p>tác giả: {{val.author}}</p></td>
+                        </tr>
+                      </table>
+                    </div>
+                    <p style="padding-left: 20px; font-size: 12px">{{val.time}}</p>
+                  </div>
+                  <dir-pagination-controls
+                  max-size="1"
+                  direction-links="true"
+                  boundary-links="true"  >
+                </dir-pagination-controls>
+
+              </div>
+              <script type="text/javascript">
+                var data=[];
+              </script>
+              <% var count = 0;
+              for(var i=0;i< surveys[1].length;i++){
+              if(surveys[1][i].sec_isopen == 1){ 
+              if (surveys[2]) {
+              for (var j = 0; j < surveys[2].length; j++) {
+              if (surveys[2][j].section_id == surveys[1][i].section_id)
+              count = count + 1;}}%>
+              <script type="text/javascript">
+                data.push({
+                  "phanhoi":"<%=count%>",
+                  "time":"<%=surveys[1][i].sec_time%>",
+                  "chude":"<%=surveys[1][i].sec_title%>",
+                  "mota":"<%=surveys[1][i].sec_desc%>",
+                  "link":"/new_session?id="+<%=surveys[1][i].section_id%>,
+                  "author":"<%=surveys[1][i].name%>"
+
+                });
+              </script>
+              <%} count = 0;
+            }%>
+            <script type="text/javascript">
+              var app = angular.module('paginationApp', ['angularUtils.directives.dirPagination']);
+
+              app.controller('listdata', function($scope) {
+                $scope.data=data;
+              });
+
+            </script>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Phiên hỏi đáp đã đóng-->
+      <div class="card-body" id="two">
+        <div class="card">
+          <div class="card-header d-flex align-items-start">
+            <img src="images/icons/lock.png" style="width: 50px;" class="pr-2">
+            <h5 class="pt-2 pb-2">Các phiên hỏi đáp đã đóng</h5>
+          </div>
+
+          <!-- Nội dung -->
+          <div class="card-body">
+
+            <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
+              <form id="search2" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiên hỏi đáp đã đóng" style="width: 50%" aria-label="Search" required>
+              </form>
+              <div  ng-click="sort('chuded')" class=" glyphicon sort-icon" ng-show="sortKey=='chuded'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+              <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
+                <div class="col-md-1" style="padding-left: 25px;">
+                  <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
+                </div>
+                <div class="col-md-6">
+                  <a href="{{value.linkd}}"><h4>{{value.chuded}}</h4></a>
+                  <p>{{value.motad}}</p>
+                </div>
+                <div class="col-md-5" style="display: flex;">
+                  <table style="text-align: center;">
+                    <tr>
+                      <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                      <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{value.phanhoid}} phản hồi</p></td>
+                      <td><p>tác giả: {{value.authord}}</p></td>
+                    </tr>
+                  </table>
+                </div>
+                <p style="padding-left: 20px; font-size: 12px">{{value.timed}} giờ trước</p>
+              </div>
+              <dir-pagination-controls
+              max-size="1"
+              direction-links="true"
+              boundary-links="true"  >
+            </dir-pagination-controls>
+          </div>
+          <script type="text/javascript">
+            var name_=[];
+          </script>
+          <% var countd = 0;
+          for(var i=0;i < surveys[1].length;i++){
+          if(surveys[1][i].sec_isopen == 0){ 
+          if (surveys[2]) {
+          for (var j = 0; j < surveys[2].length; j++) {
+          if (surveys[2][j].section_id == surveys[1][i].section_id)
+          countd = countd + 1;}}%>
+          <script type="text/javascript">
+            name_.push({
+              "phanhoid": "<%=countd%>",
+              "timed":"<%=surveys[1][i].sec_time%>",
+              "chuded":"<%=surveys[1][i].sec_title%>",
+              "motad":"<%=surveys[1][i].sec_desc%>",
+              "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>,
+              "authord":"<%=surveys[1][i].name%>"
+            });
+          </script>
+          <%} countd = 0;
+        }%>
+        <script type="text/javascript">
+          var app = angular.module('paginationAppd', ['angularUtils.directives.dirPagination']);
+          app.controller('listapp', function($scope){
+           $scope.name_=name_;
+         });
+       </script>
+
+     </div>
+   </div>
+ </div>
+
+</div>
+</div>
+<br>
+
+<!-- Phiếu khảo sát -->
+<div class="card">
+  <div class="card-header" id="headingThree">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-5 col-sm-5 col-xl-6">
+        <h3 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" id="collapse2">
+            Các phiếu khảo sát
+          </button>
+        </h3>
+      </div>
+      <div class="col-lg-4 col-md-4 col-4 col-sm-4 col-xl-5"></div>
+      <div class="col-lg-2 col-md-2 col-1 col-sm-1 col-xl-1">
+        <div class="dropdown">
+          <button class="btn btn-success" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Bộ lọc
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" id="show3">Đang mở</a>
+            <a class="dropdown-item" href="#" id="show4">Đã đóng</a>
+            <a class="dropdown-item" href="#" id="showall2">Hiển thị tất cả phiếu</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nội dung trong phiếu khảo sát -->
+  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+
+    <!-- Phiếu đang mở -->
+    <div class="card-body" id="three">
+      <div class="card">
+
+        <div class="card-header d-flex align-items-start">
+          <img src="images/icons/open.png" style="width: 50px;" class="pr-2">
+          <h5 class="pt-2 pb-2">Các phiếu khảo sát đang mở</h5>
+        </div>
+
+        <!-- Nội dung -->
+        <div class="card-body">
+
+          <div id="3" ng-module="paginationApppm"  ng-controller="listapppm">
+            <form id="search3" class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiếu khảo sát đang mở" style="width: 50%" aria-label="Search" required>
+            </form>
+            <div  ng-click="sort('tieudepm')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudepm'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+            <div class="row post"  style="margin-top: 20px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+              <div class="col-md-1" style="padding-left: 25px;">
+                <div class="thumb" style="background-image:url(./images/logo3.jpg);width: 40px;height: 40px"></div>
+              </div>
+              <div class="col-md-6" >
+                <a href="{{vlue.linkpm}}"><h4>{{vlue.tieudepm}}</h4></a>
+                <p>{{vlue.motapm}}</p>
+              </div>
+              <div class="col-md-5" style="display: flex;">
+                <table style="text-align: center;">
+                  <tr>
+                    <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                    <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                    <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                  </tr>
+                  <tr>
+                    <td><p>{{vlue.viewpm}} lượt xem</p></td>
+                    <td><p>{{vlue.phanhoipm}} phản hồi</p></td>
+                    <td><p>Tác giả: {{vlue.authorpm}}</p></td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+
+            <dir-pagination-controls
+            max-size="1"
+            direction-links="true"
+            boundary-links="true"  >
+          </dir-pagination-controls>
+        </div>
+        <script type="text/javascript">
+          var phieum=[];
+        </script>
+        <%for(var i=0;i< surveys[0].length;i++){
+        if(surveys[0][i].isopen){ %>
+        <script type="text/javascript">
+          phieum.push({
+            "tieudepm":"<%=surveys[0][i].title%>",
+            "motapm":"<%=surveys[0][i].description%>",
+            "linkpm":"/survey?id="+<%=surveys[0][i].survey_id%>,
+            "authorpm":"<%=surveys[0][i].name%>",
+            "phanhoipm":"<%=surveys[0][i].num_re%>",
+            "viewpm":"<%=surveys[0][i].views%>"
+          });
+        </script>
+        <%}
+      }%>
+      <script type="text/javascript">
+        var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
+        app.controller('listapppm', function($scope){
+          $scope.phieum=phieum;
+        });
+
+      </script>
+
+
+
+    </div>
+  </div>
+</div>
+
+<!-- Phiếu đã đóng -->
+<div class="card-body" id="four">
+  <div class="card">
+    <div class="card-header d-flex align-items-start">
+      <img src="images/icons/lock.png" style="width: 50px;" class="pr-2">
+      <h5 class="pt-2 pb-2">Các phiếu khảo sát đã đóng</h5>
+    </div>
+
+    <!-- Nội dung -->
+    <div class="card-body">
+
+      <div id="4" ng-module="paginationApppd"  ng-controller="listapppd">
+        <form id="search4" class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiếu khảo sát đã đóng" style="width: 50%" aria-label="Search" required>
+        </form>
+        <div  ng-click="sort('tieudepd')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudepd'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+        <div class="row post" style="margin-top: 20px;" dir-paginate="vlues in phieud|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+          <div class="col-md-1" style="padding-left: 25px;">
+            <div class="thumb" style="background-image:url(./images/logo3.jpg);width: 40px;height: 40px">
+            </div>
+          </div>
+          <div class="col-md-6">
+           <a href="{{vlues.linkpd}}"><h4>{{vlues.tieudepd}}</h4></a>
+           <p>{{vlues.motapd}}</p>
+         </div>
+         <div class="col-md-5" style="display: flex;">
+          <table style="text-align: center;">
+            <tr>
+              <td><img src="./images/icons/view.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+              <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+              <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+            </tr>
+            <tr>
+              <td><p>{{vlues.viewpd}} lượt xem</p></td>
+              <td><p>{{vlues.phoipd}} phản hồi</p></td>
+              <td><p>Tác giả: {{vlues.authorpd}}</p></td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+      <dir-pagination-controls
+      max-size="1"
+      direction-links="true"
+      boundary-links="true"  >
+    </dir-pagination-controls>
+  </div>
+  <script type="text/javascript">
+    var phieud=[];
+  </script>
+  <%for(var i=0;i< surveys[0].length;i++){
+  if(!surveys[0][i].isopen){ %>
+  <script type="text/javascript">
+    phieud.push({
+      "tieudepd":"<%=surveys[0][i].title%>",
+      "motapd":"<%=surveys[0][i].description%>",
+      "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"',
+      "authorpd":"<%=surveys[0][i].name%>",
+      "phoipd":"<%=surveys[0][i].num_re%>",
+      "viewpd":"<%=surveys[0][i].views%>"
+    });
+  </script>
+  <%}
+}%>
+<script type="text/javascript">
+  var app = angular.module('paginationApppd', ['angularUtils.directives.dirPagination']);
+  app.controller('listapppd', function($scope){
+    $scope.phieud=phieud;
+  });
+
+</script>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<br>
+
+</div>
+</div>
 
 <!-- Cập nhật tài khoản -->
-        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
+<div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="UserModalLabel">Tài khoản: <%=session.name%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
 
-                <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
+        <form method="POST" action="/yourprofile?id=<%=session.user_id%>">
 
-                  <div class="form-group">
-                    <label for="InputUserName">Họ tên:</label>
-                    <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
+          <div class="form-group">
+            <label for="InputUserName">Họ tên:</label>
+            <input type="text" name="newname" class="form-control" id="InputUserName" aria-describedby="Username" placeholder="" required>
 
-                  </div>
-                  <div class="form-group">
-                    <label for="InputPassword">Mật khẩu mới:</label>
-                    <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
-                    <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
-                  </div>
-                  <div class="modal-footer">
-                <button type="submit" class="btn btn-success" >Cập nhật</button>
-
-              </div>
-
-                </form>
-              </div>
-
-
-            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="InputPassword">Mật khẩu mới:</label>
+            <input type="password" name="newpass" class="form-control" id="InputPassword" placeholder="" required>
+          </div>
+
+          <div class="form-group">
+            <label for="InputRePassword">Nhập lại mật khẩu mới:</label>
+            <input type="password" name="newrepass" class="form-control" id="InputRePassword" onblur="javascript: checkpass()" placeholder="" required>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" >Cập nhật</button>
+
+          </div>
+
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>
 
 <!-- Tạo phiên hỏi đáp -->
 <div class="modal fade" id="SessionModal" tabindex="-1" role="dialog" aria-labelledby="SessionModalLabel" aria-hidden="true">
@@ -551,25 +548,23 @@
 
             <div id="collapsePas" aria-expanded="false" class="collapse">
               <div>
-                 <input style="display:none">
-                <input type="password" name="sec_pass" class="form-control" id="InputPas" placeholder="Nhập mật khẩu...">
-              </div>
-            </div>
+               <input style="display:none">
+               <input type="password" name="sec_pass" class="form-control" id="InputPas" placeholder="Nhập mật khẩu...">
+             </div>
+           </div>
 
-            <div class="checkbox">
-              <input type="checkbox"/> Không đặt mật khẩu
-            </div>
+           <div class="checkbox">
+            <input type="checkbox"/> Không đặt mật khẩu
           </div>
-          <div class="modal-footer">
-            <input type="submit" class="btn btn-success" value="Xác nhận">
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-success" value="Xác nhận">
 
-          </div>
-        </form>
-      </div>
-
-
+        </div>
+      </form>
     </div>
   </div>
+</div>
 </div>
 
 <!-- Tạo phiếu khảo sát -->
@@ -583,52 +578,60 @@
         </button>
       </div>
       <div class="modal-body">
-
         <form action="/home?type=2" method="POST">
           <div>
-
-                  <label for="title" class="col-form-label">
-                    Tên phiếu khảo sát </label>
-
-
-                  <input type="text" name="title" class="form-control"    placeholder="Tiêu đề phiếu khảo sát" required >
-
+            <label for="title" class="col-form-label">Tên phiếu khảo sát </label>
+            <input type="text" name="title" class="form-control"    placeholder="Tiêu đề phiếu khảo sát" required >
           </div>
 
-                 <div >
-                  <label for="description" class="col-form-label">Mô tả khảo sát </label>
-
-
-                  <textarea name="description" rows="3"  class="form-control pb-4" placeholder="Mô tả, Giới thiệu phiếu khảo sát của bạn" required ></textarea>
-                </div>
+          <div >
+            <label for="description" class="col-form-label">Mô tả khảo sát </label>
+            <textarea name="description" rows="3"  class="form-control pb-4" placeholder="Mô tả, Giới thiệu phiếu khảo sát của bạn" required ></textarea>
+          </div>
 
           <div class="form-group w-50">
+            <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
+            <input type="date" name="datebegin" class="form-control" id="date1" disabled="on">
+            <script>var now = new Date();
 
-                  <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
+            var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
 
-                  <input type="date" name="datebegin" class="form-control" id="date1" disabled="on">
-                  <script>var now = new Date();
-
-                      var day = ("0" + now.getDate()).slice(-2);
-                      var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-                      var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-
-                      $('#date1').val(today);</script>
-                </div>
-
-           <input type="submit" class="btn btn-success"  value="Xác nhận">
-           
-          </div>
-          </form>
-          </div><br>
-      </div>
-
-
+          $('#date1').val(today);</script>
+        </div>
+        <input type="submit" class="btn btn-success"  value="Xác nhận">
+      </form>
+    </div><br>
+  </div>
 </div>
+</div>
+
+<!-- Kiểm tra mật khẩu câu hỏi -->
+<div class="modal fade" id="checkpassword" tabindex="-1" role="dialog" aria-labelledby="CheckPassQuestion" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="CheckPassQuestion">Vui lòng nhập mật khẩu</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/" method="POST">
+          <div class="form-group">
+            <label>Nhập mật khẩu cho phiên hỏi đáp:</label>
+            <input type="text" name="QuestionPass" class="form-control" id="QuestionPass" placeholder="Mật khẩu...">
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-success" value="Xác nhận">
+          </div>
+        </form>
+      </div>
     </div>
   </div>
+</div>
 
 </main>
 
@@ -684,7 +687,7 @@
       $('#three').hide("fast");
     });
   });
-   function check(itt){
+  function check(itt){
     var date1 = new Date();
     var date2 = new Date(itt.value);
 
