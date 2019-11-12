@@ -40,7 +40,6 @@
    <!-- Container - Collapse -->
    <div class="container"><br><br>
     <div id="accordion">
-
       <% if(session.isadmin){%>
       <!-- Tạo hoạt động mới -->
       <div class="card">
@@ -114,7 +113,6 @@
 
               <!-- Nội dung -->
               <div class="card-body">
-
                 <div id="1" ng-module="paginationApp" ng-controller="listdata" >
                   <form id="search1" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiên hỏi đáp đang mở" style="width: 50%" aria-label="Search" required>
@@ -125,145 +123,147 @@
                       <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
                     </div>
                     <div class="col-md-6">
-                      <a href="{{val.link}}" data-toggle="modal" data-target="#checkpassword1">
+                      <a href="{{val.link}}" data-toggle="modal" data-target="#{{val.id}}">
+                        
                         <h4>{{val.chude}}</h4></a>
-                      <p>{{val.mota}}</p>
+                        <p>{{val.mota}}</p>
+                      </div>
+                      <div class="col-md-5" style="display: flex;">
+                        <table style="text-align: center;">
+                          <tr>
+                            <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                            <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                          </tr>
+                          <tr>
+                            <td><p>{{val.phanhoi}} phản hồi</p></td>
+                            <td><p>tác giả: {{val.author}}</p></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <p style="padding-left: 20px; font-size: 12px">{{val.time}}</p>
                     </div>
-                    <div class="col-md-5" style="display: flex;">
-                      <table style="text-align: center;">
-                        <tr>
-                          <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                          <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                        </tr>
-                        <tr>
-                          <td><p>{{val.phanhoi}} phản hồi</p></td>
-                          <td><p>tác giả: {{val.author}}</p></td>
-                        </tr>
-                      </table>
-                    </div>
-                    <p style="padding-left: 20px; font-size: 12px">{{val.time}}</p>
-                  </div>
-                  <dir-pagination-controls
-                  max-size="1"
-                  direction-links="true"
-                  boundary-links="true"  >
-                </dir-pagination-controls>
+                    <dir-pagination-controls
+                    max-size="1"
+                    direction-links="true"
+                    boundary-links="true"  >
+                  </dir-pagination-controls>
 
-              </div>
-              <script type="text/javascript">
-                var data=[];
-              </script>
-              <% var count = 0;
-              for(var i=0;i< surveys[1].length;i++){
-              if(surveys[1][i].sec_isopen == 1){ 
-              if (surveys[2]) {
-              for (var j = 0; j < surveys[2].length; j++) {
-              if (surveys[2][j].section_id == surveys[1][i].section_id)
-              count = count + 1;}}%>
-              <script type="text/javascript">
-                data.push({
-                  "phanhoi":"<%=count%>",
-                  "time":"<%=surveys[1][i].sec_time%>",
-                  "chude":"<%=surveys[1][i].sec_title%>",
-                  "mota":"<%=surveys[1][i].sec_desc%>",
-                  "link":"/new_session?id="+<%=surveys[1][i].section_id%>,
-                  "author":"<%=surveys[1][i].name%>"
+                </div>
+                <script type="text/javascript">
+                  var data=[];
+                </script>
+                <% var count = 0;
+                for(var i=0;i< surveys[1].length;i++){
+                if(surveys[1][i].sec_isopen == 1){ 
+                if (surveys[2]) {
+                for (var j = 0; j < surveys[2].length; j++) {
+                if (surveys[2][j].section_id == surveys[1][i].section_id)
+                count = count + 1;}}%>
+                <script type="text/javascript">
+                  data.push({
+                    "id":"checkpassword<%=surveys[1][i].section_id%>",
+                    "phanhoi":"<%=count%>",
+                    "time":"<%=surveys[1][i].sec_time%>",
+                    "chude":"<%=surveys[1][i].sec_title%>",
+                    "mota":"<%=surveys[1][i].sec_desc%>",
+                    "link":"/new_session?id="+<%=surveys[1][i].section_id%>,
+                    "author":"<%=surveys[1][i].name%>"
 
+                  });
+                </script>
+                <%} count = 0;
+              }%>
+              <script type="text/javascript">
+                var app = angular.module('paginationApp', ['angularUtils.directives.dirPagination']);
+
+                app.controller('listdata', function($scope) {
+                  $scope.data=data;
                 });
+
               </script>
-              <%} count = 0;
-            }%>
-            <script type="text/javascript">
-              var app = angular.module('paginationApp', ['angularUtils.directives.dirPagination']);
 
-              app.controller('listdata', function($scope) {
-                $scope.data=data;
-              });
-
-            </script>
-
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Phiên hỏi đáp đã đóng-->
-      <div class="card-body" id="two">
-        <div class="card">
-          <div class="card-header d-flex align-items-start">
-            <img src="images/icons/lock.png" style="width: 50px;" class="pr-2">
-            <h5 class="pt-2 pb-2">Các phiên hỏi đáp đã đóng</h5>
-          </div>
+        <!-- Phiên hỏi đáp đã đóng-->
+        <div class="card-body" id="two">
+          <div class="card">
+            <div class="card-header d-flex align-items-start">
+              <img src="images/icons/lock.png" style="width: 50px;" class="pr-2">
+              <h5 class="pt-2 pb-2">Các phiên hỏi đáp đã đóng</h5>
+            </div>
 
-          <!-- Nội dung -->
-          <div class="card-body">
+            <!-- Nội dung -->
+            <div class="card-body">
 
-            <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
-              <form id="search2" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiên hỏi đáp đã đóng" style="width: 50%" aria-label="Search" required>
-              </form>
-              <div  ng-click="sort('chuded')" class=" glyphicon sort-icon" ng-show="sortKey=='chuded'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
-              <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
-                <div class="col-md-1" style="padding-left: 25px;">
-                  <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
+              <div id="2" ng-module="paginationAppd"  ng-controller="listapp">
+                <form id="search2" class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" ng-model="search" placeholder="Tìm phiên hỏi đáp đã đóng" style="width: 50%" aria-label="Search" required>
+                </form>
+                <div  ng-click="sort('chuded')" class=" glyphicon sort-icon" ng-show="sortKey=='chuded'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                <div class="row post" style="margin-top: 20px;" dir-paginate="value in name_|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
+                  <div class="col-md-1" style="padding-left: 25px;">
+                    <div class="thumb" style="background-image:url(./images/logo2.jpg);width: 40px;height: 40px"></div>
+                  </div>
+                  <div class="col-md-6">
+                    <a href="{{value.linkd}}"><h4>{{value.chuded}}</h4></a>
+                    <p>{{value.motad}}</p>
+                  </div>
+                  <div class="col-md-5" style="display: flex;">
+                    <table style="text-align: center;">
+                      <tr>
+                        <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                        <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
+                      </tr>
+                      <tr>
+                        <td><p>{{value.phanhoid}} phản hồi</p></td>
+                        <td><p>tác giả: {{value.authord}}</p></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <p style="padding-left: 20px; font-size: 12px">{{value.timed}} giờ trước</p>
                 </div>
-                <div class="col-md-6">
-                  <a href="{{value.linkd}}"><h4>{{value.chuded}}</h4></a>
-                  <p>{{value.motad}}</p>
-                </div>
-                <div class="col-md-5" style="display: flex;">
-                  <table style="text-align: center;">
-                    <tr>
-                      <td><img src="./images/icons/reply.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                      <td><img src="./images/icons/author.png" width="30" height="30" style="border-radius: 100%; border: 2px solid"></td>
-                    </tr>
-                    <tr>
-                      <td><p>{{value.phanhoid}} phản hồi</p></td>
-                      <td><p>tác giả: {{value.authord}}</p></td>
-                    </tr>
-                  </table>
-                </div>
-                <p style="padding-left: 20px; font-size: 12px">{{value.timed}} giờ trước</p>
-              </div>
-              <dir-pagination-controls
-              max-size="1"
-              direction-links="true"
-              boundary-links="true"  >
-            </dir-pagination-controls>
-          </div>
+                <dir-pagination-controls
+                max-size="1"
+                direction-links="true"
+                boundary-links="true"  >
+              </dir-pagination-controls>
+            </div>
+            <script type="text/javascript">
+              var name_=[];
+            </script>
+            <% var countd = 0;
+            for(var i=0;i < surveys[1].length;i++){
+            if(surveys[1][i].sec_isopen == 0){ 
+            if (surveys[2]) {
+            for (var j = 0; j < surveys[2].length; j++) {
+            if (surveys[2][j].section_id == surveys[1][i].section_id)
+            countd = countd + 1;}}%>
+            <script type="text/javascript">
+              name_.push({
+                "phanhoid": "<%=countd%>",
+                "timed":"<%=surveys[1][i].sec_time%>",
+                "chuded":"<%=surveys[1][i].sec_title%>",
+                "motad":"<%=surveys[1][i].sec_desc%>",
+                "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>,
+                "authord":"<%=surveys[1][i].name%>"
+              });
+            </script>
+            <%} countd = 0;
+          }%>
           <script type="text/javascript">
-            var name_=[];
-          </script>
-          <% var countd = 0;
-          for(var i=0;i < surveys[1].length;i++){
-          if(surveys[1][i].sec_isopen == 0){ 
-          if (surveys[2]) {
-          for (var j = 0; j < surveys[2].length; j++) {
-          if (surveys[2][j].section_id == surveys[1][i].section_id)
-          countd = countd + 1;}}%>
-          <script type="text/javascript">
-            name_.push({
-              "phanhoid": "<%=countd%>",
-              "timed":"<%=surveys[1][i].sec_time%>",
-              "chuded":"<%=surveys[1][i].sec_title%>",
-              "motad":"<%=surveys[1][i].sec_desc%>",
-              "linkd":"/new_session?id="+<%=surveys[1][i].section_id%>,
-              "authord":"<%=surveys[1][i].name%>"
-            });
-          </script>
-          <%} countd = 0;
-        }%>
-        <script type="text/javascript">
-          var app = angular.module('paginationAppd', ['angularUtils.directives.dirPagination']);
-          app.controller('listapp', function($scope){
-           $scope.name_=name_;
-         });
-       </script>
+            var app = angular.module('paginationAppd', ['angularUtils.directives.dirPagination']);
+            app.controller('listapp', function($scope){
+             $scope.name_=name_;
+           });
+         </script>
 
+       </div>
      </div>
    </div>
- </div>
 
-</div>
+ </div>
 </div>
 <br>
 
@@ -608,31 +608,35 @@
   </div>
 </div>
 </div>
-
 <!-- Kiểm tra mật khẩu câu hỏi -->
-<div class="modal fade" id="checkpassword1" tabindex="-1" role="dialog" aria-labelledby="CheckPassQuestion" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="CheckPassQuestion">Vui lòng nhập mật khẩu</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/" method="POST">
-          <div class="form-group">
-            <label>Nhập mật khẩu cho phiên hỏi đáp:</label>
-            <input type="text" name="QuestionPass" class="form-control" id="QuestionPass" placeholder="Mật khẩu...">
-          </div>
-          <div class="modal-footer">
-            <input type="submit" class="btn btn-success" value="Xác nhận">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+                        <%for(var i=0;i< surveys[1].length;i++){ %>
+                        <div class="modal fade" id="checkpassword<%=surveys[1][i].section_id%>" tabindex="-1" role="dialog" aria-labelledby="CheckPassQuestion" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="CheckPassQuestion">Vui lòng nhập mật khẩu</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="/ghim?id=<%=surveys[1][i].section_id%>" method="POST">
+                                  <div class="form-group">
+                                    <label>Nhập mật khẩu cho phiên hỏi đáp:</label>
+                                    <input type="text" name="QuestionPass" class="form-control" id="QuestionPass" placeholder="Mật khẩu...">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <input type="submit" class="btn btn-success" value="Xác nhận">
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <%}%>
+
+
+
 
 </main>
 
