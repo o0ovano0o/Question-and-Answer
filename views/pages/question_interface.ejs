@@ -114,14 +114,19 @@
             <div class="card-body">
              <%question[2].forEach(function(q) {%>
               <div class="card">
-
+                <%if (q.ghim == 1) {%>
+                  <p>Bình luận đã ghim</p>
+                  <%}%>
                 <div class="card-header row" style="background-color: #99ccff">
                  <div class="col-md-11"><h6><b><%=q.name%></b></h6></div>
                  <div style="float: right;" class="col-md-1 dropdown">
                     <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                   <div class="dropdown-menu"> 
-                    <% if (question[1][0].author == session.username) { %>
-                    <a class="dropdown-item" href="#">Ghim</a>
+                    <% if (question[1][0].author == session.username && q.ghim == 0) { %>
+                    <a class="dropdown-item" href="/ghim?type=1&ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>>">Ghim</a>
+                    <%}%>
+                    <% if (question[1][0].author == session.username && q.ghim == 1) { %>
+                    <a class="dropdown-item" href="/ghim?type=0&ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>>">Bỏ Ghim</a>
                     <%}%>
                     <% if (q.username == session.username) { %>
                     <a class="dropdown-item" id="show_update1_<%=q.ans_id%>">Chỉnh sửa</a>
