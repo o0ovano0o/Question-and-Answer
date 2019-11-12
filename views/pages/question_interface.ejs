@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="index&manage.css">
   <link rel="stylesheet" href="./bootstrap/bootstrap-4.0.0.min.js">
   <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <title>Hiển thị câu hỏi</title>
 
@@ -74,12 +75,12 @@
             <div class="card-body">
               <h5><%=question[0][0].context%></h5>
               <form class="form-inline" style="padding-top: 8px;">
-                <small style="font-size: 15px;">03 lượt thích</small>
-                <small style="font-size: 15px;padding-left: 20px;">07 bình luận</small>
+                 <small style="font-size: 15px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small>
+                <small style="font-size: 15px;padding-left: 5%;"><i class="fa fa-commenting-o" aria-hidden="true"></i> 07 bình luận</small>
               </form>
               <hr id = "phienhoidap" class="featurette-divider">
-               <a href="">Thích</a>
-               <a href="" style="padding-left: 2%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl">Trả lời</a><br>
+               <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a>
+               <a href="" style="padding-left: 6%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl"><i class="fa fa-comment-o" aria-hidden="true"></i> Bình luận</a><br>
               <form method="POST" action="/question?cmt=0">
                <p>
                 <div class="collapse" id="tl">
@@ -111,31 +112,36 @@
             <div class="card-header"><h5><b>Nội dung bình luận</b></h5></div>
 
             <div class="card-body">
-             <%var i=0; question[2].forEach(function(q) { i++;%>
+             <%question[2].forEach(function(q) {%>
               <div class="card">
-
+                <%if (q.ghim == 1) {%>
+                  <p>Bình luận đã ghim</p>
+                  <%}%>
                 <div class="card-header row" style="background-color: #99ccff">
                  <div class="col-md-11"><h6><b><%=q.name%></b></h6></div>
                  <div style="float: right;" class="col-md-1 dropdown">
                     <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                   <div class="dropdown-menu"> 
-                    <% if (question[1][0].author == session.username) { %>
-                    <a class="dropdown-item" href="#">Ghim</a>
+                    <% if (question[1][0].author == session.username && q.ghim == 0) { %>
+                    <a class="dropdown-item" href="/ghim?type=1&ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>>">Ghim</a>
+                    <%}%>
+                    <% if (question[1][0].author == session.username && q.ghim == 1) { %>
+                    <a class="dropdown-item" href="/ghim?type=0&ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>>">Bỏ Ghim</a>
                     <%}%>
                     <% if (q.username == session.username) { %>
-                    <a class="dropdown-item" id="show_update<%=i%>">Chỉnh sửa</a>
-                    <a class="dropdown-item" href="#">Xóa</a>
+                    <a class="dropdown-item" id="show_update1_<%=q.ans_id%>">Chỉnh sửa</a>
+                    <a class="dropdown-item" href="/deletesection?ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>">Xóa</a>
                     <%}%>
                   </div>
                 </div>
                 </div>
 
                 <div class="card-body">
-                  <h6 id="cont1_<%=i%>"><%=q.content%></h6>
-                  <form method="POST" action="/session?ans_id=<%=q.ans_id%>">
-                  <div class="row" style="display: none;" id="cont2_<%=i%>">
+                  <h6 id="cont1_<%=q.ans_id%>"><%=q.content%></h6>
+                  <form method="POST" action="/session?ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>">
+                  <div class="row" style="display: none;" id="cont2_<%=q.ans_id%>">
                     <div class="col-9 col-sm-10 col-md-11">
-                      <input type="nhap" class="form-control" value="<%=q.content%>" >
+                      <input type="nhap" name="suaans" class="form-control" value="<%=q.content%>" >
                     </div>
                     <div class="col-3 col-sm-2 col-md-1">
                       <button class="btn btn-outline-secondary" type="submit">Sửa</button>
@@ -144,12 +150,12 @@
                   </form>
 
               <form class="form-inline" style="padding-top: 8px;">
-                <small style="font-size: 14px;">03 lượt thích</small>
-                <small style="font-size: 14px;padding-left: 20px;">05 phản hồi</small>
+                <small style="font-size: 14px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small>
+                <small style="font-size: 14px;padding-left: 20px;"><i class="fa fa-commenting-o" aria-hidden="true"></i> 05 phản hồi</small>
               </form>
                     <hr id = "phienhoidap" class="featurette-divider">
 
-               <a href="">Thích</a>
+               <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a>
                      <form method="POST" action="/question?cmt=<%=q.ans_id%>">
                       <p>
                     <div>
@@ -175,19 +181,19 @@
                      <div style="float: right;" class="col-md-1 dropdown">
                         <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" id="show_update2">Chỉnh sửa</a>
-                        <a class="dropdown-item" href="#">Xóa</a>
+                        <a class="dropdown-item" id="show_update2_<%=questions.cmt_id%>">Chỉnh sửa</a>
+                        <a class="dropdown-item" href="/deletesection?cmt_id=<%=questions.cmt_id%>&question_id=<%=question[0][0].question_id%>">Xóa</a>
                       </div>
                     </div>
                     <%}%>
                   </div>
 
                     <div class="card-body">
-                      <p id="in_cont1"><%=questions.cmt%></p>
-                      <form method="POST" action="/session?cmt_id=<%=questions.cmt_id%>">
-                      <div class="row" style="display: none;" id="in_cont2">
+                      <p id="in_cont1_<%=questions.cmt_id%>"><%=questions.cmt%></p>
+                      <form method="POST" action="/session?cmt_id=<%=questions.cmt_id%>&question_id=<%=question[0][0].question_id%>">
+                      <div class="row" style="display: none;" id="in_cont2_<%=questions.cmt_id%>">
                         <div class="col-9 col-sm-10 col-md-11">
-                          <input type="nhap" class="form-control" value="<%=questions.cmt%>" >
+                          <input type="nhap" name="suacmt" class="form-control" value="<%=questions.cmt%>" >
                         </div>
                         <div class="col-3 col-sm-2 col-md-1">
                           <button class="btn btn-outline-secondary" type="submit">Sửa</button>
@@ -195,9 +201,9 @@
                       </div>
                       </form>
                       
-                      <small style="font-size: 14px;">03 lượt thích</small>
+                      <small style="font-size: 14px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small>
                       <hr id = "phienhoidap" class="featurette-divider">
-                      <a href="" style="">Thích</a>
+                      <a href="" style=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a>
                     </div>
                   </div>
                   <%}
@@ -232,16 +238,20 @@
   </footer>
 
 <script type="text/javascript">
-   <% var i=1 ;question[2].forEach(function(q) {
-    if (q.username == session.username){ %>
+   <%question[2].forEach(function(q) {
+    question[3].forEach(function(questions) { %>
   $(document).ready(function(){
-    $('#show_update<%=i%>').click(function() {
-      $('#cont2_<%=i%>').show("fast");
-      $('#cont1_<%=i%>').hide("fast");
+    $('#show_update1_<%=q.ans_id%>').click(function() {
+      $('#cont2_<%=q.ans_id%>').show("fast");
+      $('#cont1_<%=q.ans_id%>').hide("fast");
+    }); 
+    $('#show_update2_<%=questions.cmt_id%>').click(function() {
+      $('#in_cont2_<%=questions.cmt_id%>').show("fast");
+      $('#in_cont1_<%=questions.cmt_id%>').hide("fast");
     }); });
-    <%}i++;});%>
- 
+    <%});});%>
+   
 </script>
-
+ 
 </body>
 </html>

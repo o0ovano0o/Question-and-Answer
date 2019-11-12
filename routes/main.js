@@ -6,7 +6,7 @@ var q = require('q');
 
 router.get('/', function (req, res) {
 	if(req.session.user) {
-		var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+		var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by startdate DESC;SELECT * FROM section join user on user.username = section.author;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id",  (err, surveys) => {
 			if(err) throw err;
 			else{
 				res.render('main',{session: req.session.user, surveys}); } 
@@ -49,7 +49,7 @@ router.post('/', function (req, res) {
 				alert("Không thể tạo phiên");
 			}
 			else {
-				var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+				var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by startdate DESC;SELECT * FROM section join user on user.username = section.author;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id",  (err, surveys) => {
 					if(err) throw err;
 					else{
 						res.render('main',{session: req.session.user, surveys}); } 
@@ -71,14 +71,10 @@ router.post('/', function (req, res) {
 				if (err) throw err;
 				else {
 
-					var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section", (err, surveys) => {
-						if (err) throw err;
-						else {
-							res.render('main', {
-								session: req.session.user,
-								surveys: surveys
-							});
-						}
+					var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by startdate DESC;SELECT * FROM section join user on user.username = section.author;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id",  (err, surveys) => {
+					if(err) throw err;
+					else{
+						res.render('main',{session: req.session.user, surveys}); } 
 					});
 				}
 			});

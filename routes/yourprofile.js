@@ -46,7 +46,6 @@ router.post('/', function (req, res) {
 	var newname = req.body.newname;
 	var newpass = req.body.newpass;
 	var id = req.query.id;
-	console.log(newpass, newname, id);
 	var query1 = "UPDATE user SET name = ?, password = ? WHERE user.user_id = ?";
 	conn.query(query1,[newname, newpass, id], function(err, question) {	
 		if (err) {

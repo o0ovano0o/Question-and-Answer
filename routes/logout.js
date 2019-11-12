@@ -5,7 +5,7 @@ var conn = db.getConnection();
 
 router.get('/', function (req, res) {
 	if(req.session.user){
-		req.session = null;
+		req.session.destroy();
 		res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 		
 	}	

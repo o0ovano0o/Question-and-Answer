@@ -95,7 +95,9 @@ router.get('/auth/google/callback', passport.authenticate('google', { successRed
 router.use('/login', require(__dirname + '/login.js'));
 router.use('/home', require(__dirname + '/main.js'));
 router.use('/signin', require(__dirname + '/signin.js'));
+router.use('/deletesection', require(__dirname + '/deletesection.js'));
 // router.use('/createsession', require(__dirname + '/new_session.js'));
+router.use('/ghim', require(__dirname + '/ghim.js'));
 router.use('/session', require(__dirname + '/session.js'));
 router.use('/new_session', require(__dirname + '/new_session.js'));
 router.use('/question', require(__dirname + '/question.js'));
