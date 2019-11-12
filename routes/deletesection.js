@@ -3,15 +3,33 @@ var router = express.Router();
 var db = require('../model/database');
 var conn = db.getConnection(); 
 
-router.post('/', function (req, res) {
+router.get('/', function (req, res) {
 	if(req.session.user){
 		var cmt_id = req.query.cmt_id;
 		var ans_id = req.query.ans_id;
 		var id = req.query.question_id;
-		if (cmt_id) {
-			cmt = req.body.suacmt;
-			var query = "UPDATE cmt_ans SET cmt = ? WHERE cmt_id = ?";
-			conn.query(query, [cmt, cmt_id], function(err, result) {	
+		var section_id = req.query.section_id;
+		if (!cmt_id && !ans_id && id) {
+			var query = "DELETE FROM aquest WHERE question_id = ?;DELETE FROM ans_quest WHERE question_id = ?;DELETE FROM cmt_ans WHERE question_id = ?";
+			conn.query(query, [id,id,id], function(err, result) {	
+				if (err) {
+					throw(err);
+				}
+				else {
+					var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ?"
+					conn.query(sql,[section_id,section_id], function(err, results) {	
+						if(err) throw err;
+						else{
+							var sections = results;
+							res.render('session_interface', {session:req.session.user, sections: sections});
+						}
+					});
+				}
+			});
+		}
+		else if (cmt_id) {
+			var query = "DELETE FROM cmt_ans WHERE cmt_id = ?";
+			conn.query(query, [cmt_id], function(err, result) {	
 				if (err) {
 					throw(err);
 				}
@@ -26,9 +44,8 @@ router.post('/', function (req, res) {
 			});
 		}
 		else if (ans_id) {
-			var content = req.body.suaans;
-			var query = "UPDATE ans_quest SET content = ? WHERE ans_id = ?";
-			conn.query(query, [content, ans_id], function(err, result) {	
+			var query = "DELETE FROM ans_quest WHERE ans_id = ?;DELETE FROM cmt_ans WHERE ans_id = ?";
+			conn.query(query, [ans_id,ans_id], function(err, result) {	
 				if (err) {
 					throw(err);
 				}
@@ -42,10 +59,12 @@ router.post('/', function (req, res) {
 				}
 			});
 		}
+
 	}
 	else{
 		res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 	}
-});
 
+
+});
 module.exports = router;

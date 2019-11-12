@@ -139,7 +139,7 @@
             </form>
             </div>
           </div>
-          <% sections[1].forEach(function(sections) { %>
+          <% sections[1].forEach(function(section) { %>
           <div class="card">
             <div class="row padding">
               <div class="col-3 col-sm-3 col-md-2">
@@ -152,19 +152,19 @@
              <div class="col-9 col-sm-9 col-md-9">
               
               <div class="card-body">
-                <h5 class="card-title"><a href="/question?question_id=<%=sections.question_id%>"><%= sections.context%></a></h5>
+                <h5 class="card-title"><a href="/question?question_id=<%=section.question_id%>"><%= section.context%></a></h5>
                 <p class="card-text"><br>
-                  Đăng bởi: <a href="/yourprofile?id=<%=sections.user_id%>"> <%= sections.name%></a>
-                  <%= sections.date_posted%>
+                  Đăng bởi: <a href="/yourprofile?id=<%=section.user_id%>"> <%= section.name%></a>
+                  <%= section.date_posted%>
                 </p>
               </div>
             </div>
-            <% if (sections.username == session.username) { %>
+            <% if (section.username == session.username) { %>
             <div style="float: right;" class="dropdown">
                   <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                  <a class="dropdown-item" href="#">Xóa</a>
+                  <a class="dropdown-item" href="/deletesection?question_id=<%=section.question_id%>&section_id=<%=sections[0][0].section_id%>">Xóa</a>
                 </div>
               </div>
               <% } %>
