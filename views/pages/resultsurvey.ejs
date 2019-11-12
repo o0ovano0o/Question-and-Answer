@@ -110,8 +110,9 @@ evt.currentTarget.className += " active";
                         Đăng bởi: <%=survey.author%><br>
                       </p>
                       <p id="date1"></p>
-                      
-                    <p>Số người tham gia: <%=number[0].total%></p>
+                      <%if(number[0]){%>
+                    <p>Số người tham gia: <%=number[0].total%></p><%}else{%>
+                       <p>Số người tham gia: 0</p><%}%>
                     </div>
                   </div>
                 </div>

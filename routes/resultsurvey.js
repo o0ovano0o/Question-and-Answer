@@ -30,7 +30,7 @@ router.get('/', function (req, res) {
 							});
 						});
 					
-		}
+	}
 		else {
 					res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
 		}
