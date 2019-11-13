@@ -34,7 +34,8 @@ router.post('/', function (req, res) {
 			question_id: id,
 			author: req.session.user.username,
 			content: data.cmt,
-			ans_time: dateTime	
+			ans_time: dateTime	,
+			ghim:0,
 			};
 			var query1 = conn.query("INSERT INTO ans_quest SET ?", cmt, function(err,results) {
 				if (err) {

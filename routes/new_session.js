@@ -8,7 +8,7 @@ var id;
 router.get('/', function (req, res) {
 	if(req.session.user){
 		id = req.query.id;
-		var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ?"
+		var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ? order by question_id DESC;"
 		conn.query(sql,[id,id], function(err, results) {	
 			if(err) throw err;
 			else{
@@ -28,7 +28,7 @@ router.post('/', function (req, res) {
 	var today = new Date();
 	var dateTime = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
 	
-	
+	id=req.query.id;
 	if(req.session.user){
 		sectionQuest = {
 		sections_id: id,
@@ -57,14 +57,7 @@ router.post('/', function (req, res) {
 			alert("Không thể tạo câu hỏi");
 		}
 		else {
-			var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ?"
-			conn.query(sql,[id,id], function(err, results) {	
-				if(err) throw err;
-				else{
-					var sections = results;
-					res.render('session_interface', {session:req.session.user, sections: sections});
-				}
-			});
+			 res.redirect('/new_session?id='+id);
 		}
 		
 	}
