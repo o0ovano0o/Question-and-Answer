@@ -116,9 +116,9 @@
         </div>
         <div class="card-body" style="background-color: #dddddd;border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;">
           <div class="row" style="margin-bottom: 3%;">
-            <div class="col-12 col-sm-6 col-md-6" >
-              <div class="row" style="margin-top: 22px;">
-                  <div class="col-8 col-sm-7 col-md-7" style="margin-bottom: 3%;">
+            <div class="col-12 col-sm-5 col-md-5" >
+              <div class="row" >
+                  <div class="col-9 col-sm-8 col-md-8" >
                     <input type="tim" class="form-control" id="search2" placeholder="Tìm kiếm ...">
                   </div>
                   <div class="col-1 col-sm-1 col-md-1">
@@ -126,14 +126,14 @@
                   </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6">
+            <div class="col-12 col-sm-7 col-md-7">
             <form method="POST" action="/new_session?id=<%=sections[0][0].section_id%>">
               <div class="row">
                   <div class="col-8 col-sm-9 col-md-9">
-                    <textarea type="text" name="context" rows="3" class="form-control" id="search2" placeholder="Đặt câu hỏi ..."></textarea> 
+                    <textarea type="text" name="context" rows="1" class="form-control" id="search2" placeholder="Đặt câu hỏi ..."></textarea> 
                   </div>
                   <div class="col-1 col-sm-1 col-md-1">
-                    <input class="btn btn-outline-secondary" type="submit" value="Gửi" style="margin-top: 22px;">
+                    <input class="btn btn-outline-secondary" type="submit" value="Gửi" >
                   </div>
               </div>
             </form>
@@ -187,5 +187,20 @@
     <p style="font-size: 12px"> @2019 design by Team 5</p>
   </ul>
 </footer>
+<script type="text/javascript">
+  var textarea = document.querySelector('textarea');
+
+textarea.addEventListener('keydown', autosize);
+             
+function autosize(){
+  var el = this;
+  setTimeout(function(){
+    el.style.cssText = 'height:auto; padding:6px';
+    // for box-sizing other than "content-box" use:
+    // el.style.cssText = '-moz-box-sizing:content-box';
+    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+</script>
 </body>
 </html>
