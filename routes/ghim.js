@@ -40,14 +40,7 @@ router.post('/', function (req, res) {
 			}
 			else {
 				if (result[0].sec_pass == pass) {
-					var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ?"
-					conn.query(sql,[id,id], function(err, results) {	
-						if(err) throw err;
-						else{
-							var sections = results;
-							res.render('session_interface', {session:req.session.user, sections: sections});
-						}
-					});
+					  res.redirect('/new_session?id='+id);
 				}
 				else {
 					var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by startdate DESC;SELECT * FROM section join user on user.username = section.author;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id",  (err, surveys) => {
