@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 12, 2019 lúc 04:25 PM
--- Phiên bản máy phục vụ: 10.1.38-MariaDB
--- Phiên bản PHP: 7.3.2
+-- Thời gian đã tạo: Th10 13, 2019 lúc 05:46 PM
+-- Phiên bản máy phục vụ: 10.1.37-MariaDB
+-- Phiên bản PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -46,7 +46,25 @@ INSERT INTO `ans_quest` (`ans_id`, `question_id`, `content`, `author`, `ans_time
 (2, 1, 'bình luận', 'giaovien1', '5/11/2019', 0),
 (6, 3, 'bình luận', 'VanVan', '5/11/2019', 0),
 (8, 3, 'bình luận', 'van1199anh@gmail.com', '9/11/2019', 0),
-(9, 3, 'test nào', 'giaovien1', '11/11/2019', 0);
+(9, 3, 'test ', 'giaovien1', '11/11/2019', 1),
+(10, 3, 'tao thử bình luận', '12345van', '13/11/2019', 0),
+(11, 3, 'trả lời cậu nhé', '12345van', '13/11/2019', 0),
+(12, 15, 'ok', 'giaovien1', '13/11/2019', 0),
+(13, 3, 'trả lời đc này', 'o0ovano0o', '13/11/2019', 0);
+
+--
+-- Bẫy `ans_quest`
+--
+DELIMITER $$
+CREATE TRIGGER `traloi` BEFORE INSERT ON `ans_quest` FOR EACH ROW INSERT INTO `tbao`
+ SET mes ="",
+     link=NEW.question_id,
+     tbao.date = NOW(),
+     tbao.type=3,
+     tbao.text=(SELECT context from aquest WHERE aquest.question_id=NEW.question_id),
+     tbao.user=(SELECT author from aquest where aquest.question_id= NEW.question_id)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -77,8 +95,26 @@ INSERT INTO `aquest` (`sections_id`, `question_id`, `author`, `context`, `date_p
 (2, 7, 'van005618@gmail.com', 'aaaa', '9/11/2019', 0),
 (2, 8, 'van1199', 'thử', '9/11/2019', 0),
 (2, 9, 'van005618@gmail.com', 'đặt câu hỏi này', '9/11/2019', 0),
+(2, 12, 'giaovien1', 'đặt', '13/11/2019', 0),
+(2, 13, '12345van', 'okkkkkkkkkkkkk', '13/11/2019', 0),
+(2, 14, '12345van', 'thử nhé', '13/11/2019', 0),
+(2, 15, '12345van', 'thử này', '13/11/2019', 0),
 (5, 11, 'hay', 'dc ko', '12/11/2019', 0),
 (6, 10, 'hay', 'hay ko', '12/11/2019', 0);
+
+--
+-- Bẫy `aquest`
+--
+DELIMITER $$
+CREATE TRIGGER `lol` BEFORE INSERT ON `aquest` FOR EACH ROW INSERT INTO `tbao`
+ SET mes =(SELECT COUNT(*) FROM `aquest` a GROUP BY `sections_id` HAVING a.sections_id= NEW.sections_id),
+     link="/survey?id="+NEW.sections_id,
+     tbao.date = NOW(),
+     tbao.type=2,
+     tbao.text=(SELECT sec_title from section WHERE section.section_id=NEW.sections_id),
+     tbao.user=(SELECT author from section where section.section_id= NEW.sections_id)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -212,7 +248,13 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 (545, 60, 356),
 (546, 59, 356),
 (546, 60, 356),
-(547, 60, 356);
+(547, 60, 356),
+(568, 66, 364),
+(568, 67, 364),
+(568, 68, 364),
+(569, 67, 364),
+(570, 68, 364),
+(571, 66, 364);
 
 --
 -- Bẫy `choice_multichoices`
@@ -253,7 +295,25 @@ INSERT INTO `cmt_ans` (`cmt_id`, `question_id`, `ans_id`, `author`, `cmt`, `cmt_
 (5, 3, 6, 'van005618@gmail.com', 'test thử', '9/11/2019'),
 (6, 3, 6, 'van1199', 'comment', '9/11/2019'),
 (7, 3, 6, 'van005618@gmail.com', 'bình luận thử này', '9/11/2019'),
-(8, 3, 6, 'van005618@gmail.com', 'ok', '9/11/2019');
+(8, 3, 6, 'van005618@gmail.com', 'ok', '9/11/2019'),
+(10, 15, 12, 'giaovien1', 'ok', '13/11/2019'),
+(11, 15, 12, 'giaovien1', 'ok', '13/11/2019'),
+(12, 15, 12, 'o0ovano0o', 'ok', '13/11/2019'),
+(13, 3, 10, 'o0ovano0o', 'đíu đc chắc t đi ngủ quá', '13/11/2019');
+
+--
+-- Bẫy `cmt_ans`
+--
+DELIMITER $$
+CREATE TRIGGER `cmt` BEFORE INSERT ON `cmt_ans` FOR EACH ROW INSERT INTO `tbao`
+ SET mes ="",
+     link=NEW.question_id,
+     tbao.date = NOW(),
+     tbao.type=4,
+     tbao.text=(SELECT content from ans_quest a WHERE a.ans_id=NEW.ans_id),
+     tbao.user=(SELECT author from ans_quest where ans_quest.ans_id= NEW.ans_id)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -344,7 +404,10 @@ INSERT INTO `multichoices` (`reponse_id`, `quest_id`) VALUES
 (62, 340),
 (63, 352),
 (64, 331),
-(64, 332);
+(64, 332),
+(66, 364),
+(67, 364),
+(68, 364);
 
 -- --------------------------------------------------------
 
@@ -390,9 +453,10 @@ CREATE TABLE `section` (
 
 INSERT INTO `section` (`section_id`, `sec_title`, `sec_desc`, `author`, `sec_time`, `sec_pass`, `sec_isopen`) VALUES
 (2, 'phiên hỏi đáp lần 2', 'phiên hỏi đáp', 'giaovien1', '2019-10-16', 'giaovien1', 1),
-(4, 'ffjghvh', 'ytfghc', 'giaovien1', '2019-10-16', 'giaovien1', 1),
+(4, 'okkkkkkk', 'ytfghc', 'giaovien1', '2019-10-16', 'giaovien1', 1),
 (5, 'thử', 'ok', 'giaovien1', '2019-10-18', 'giaovien1', 0),
-(6, 'phiên hỏi đáp lần 1', 'mô tả', 'giaovien1', '2019-11-05', 'abc123', 1);
+(6, 'phiên hỏi đáp lần 1', 'mô tả', 'giaovien1', '2019-11-05', 'abc123', 1),
+(7, 'phiên hỏi đáp lần 1', 'okkkk', 'giaovien1', '2019-11-12', 'giaovien1', 1);
 
 -- --------------------------------------------------------
 
@@ -481,7 +545,10 @@ INSERT INTO `singlechoicereponse` (`reponse_id`, `quest_id`, `choice_id`) VALUES
 (63, 350, 521),
 (63, 351, 525),
 (64, 329, 469),
-(64, 330, 473);
+(64, 330, 473),
+(66, 363, 566),
+(67, 363, 564),
+(68, 363, 565);
 
 --
 -- Bẫy `singlechoicereponse`
@@ -712,7 +779,11 @@ INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`
 (24, 357, 'Bạn là gì ?', 1),
 (24, 358, 'Bạn thích gì ?', 2),
 (24, 361, 'Bạn là gì ?', 1),
-(24, 362, 'Bạn thích gì ?', 2);
+(24, 362, 'Bạn thích gì ?', 2),
+(29, 363, 'Bạn là gì ?', 1),
+(29, 364, 'Bạn thích gì ?', 2),
+(29, 365, 'Bạn là nam?', 3),
+(29, 366, 'Bạn có suy nghĩ gì?', 4);
 
 -- --------------------------------------------------------
 
@@ -756,10 +827,11 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (22, 'Khảo sát 1', 'huhuhu', '2019-11-07', '0000-00-00', 0, '', 16, 'giaovien1', 0),
 (23, 'thêm phiếu để test', 'chán lỗi lắm rồi ', '2019-11-07', '0000-00-00', 1, '', 20, 'giaovien1', 0),
 (24, 'thêm  2', 'ok', '2019-11-07', '0000-00-00', 1, '', 45, 'giaovien1', 0),
-(25, 'tự luận', 'ok', '2019-11-07', '0000-00-00', 1, '', 10, 'giaovien1', 0),
+(25, 'tự luận', 'ok', '2019-11-07', '0000-00-00', 1, '', 13, 'giaovien1', 0),
 (26, 'loại 1', '1', '2019-11-07', '0000-00-00', 1, '', 11, 'giaovien1', 0),
 (27, 'loại 2', '2', '2019-11-07', '0000-00-00', 1, '', 10, 'giaovien1', 0),
-(28, 'thu', 'thuas', '2019-11-12', '0000-00-00', 1, '', 2, 'hay', 0);
+(28, 'thu', 'thuas', '2019-11-12', '0000-00-00', 1, '', 3, 'hay', 0),
+(29, 'phieu phieu ', 'okikikik', '2019-11-12', '0000-00-00', 1, '', 16, 'giaovien1', 3);
 
 -- --------------------------------------------------------
 
@@ -1113,7 +1185,50 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (362, 560, 'kem', 0),
 (362, 561, 'me', 0),
 (362, 562, 'xoài', 0),
-(362, 563, 'bim bim', 0);
+(362, 563, 'bim bim', 0),
+(363, 564, 'học sinh', 1),
+(363, 565, 'giáo viên', 1),
+(363, 566, 'người thứ 3', 1),
+(364, 567, 'kẹo', 0),
+(364, 568, 'kem', 3),
+(364, 569, 'me', 1),
+(364, 570, 'xoài', 1),
+(364, 571, 'bim bim', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbao`
+--
+
+CREATE TABLE `tbao` (
+  `id` int(11) NOT NULL,
+  `mes` text COLLATE utf8_vietnamese_ci NOT NULL,
+  `link` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL,
+  `user` varchar(225) COLLATE utf8_vietnamese_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `type` int(11) NOT NULL,
+  `text` text COLLATE utf8_vietnamese_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbao`
+--
+
+INSERT INTO `tbao` (`id`, `mes`, `link`, `user`, `date`, `type`, `text`) VALUES
+(1, '1', '29', 'giaovien1', '2019-11-12 23:24:42', 1, 'phieu phieu '),
+(2, '2', '29', 'giaovien1', '2019-11-12 23:28:21', 1, 'phieu phieu '),
+(3, '3', '29', 'giaovien1', '2019-11-13 00:09:15', 1, 'phieu phieu '),
+(4, '', '3', 'VanVan', '2019-11-13 21:16:45', 3, 'câu hỏi thử'),
+(5, '9', '2', 'giaovien1', '2019-11-13 21:54:18', 2, 'phiên hỏi đáp lần 2'),
+(6, '10', '2', 'giaovien1', '2019-11-13 21:54:54', 2, 'phiên hỏi đáp lần 2'),
+(7, '11', '2', 'giaovien1', '2019-11-13 21:56:22', 2, 'phiên hỏi đáp lần 2'),
+(8, '12', '2', 'giaovien1', '2019-11-13 21:57:24', 2, 'phiên hỏi đáp lần 2'),
+(9, '', '15', '12345van', '2019-11-13 22:21:35', 3, 'thử này'),
+(10, '', '15', 'giaovien1', '2019-11-13 23:17:06', 4, 'ok'),
+(11, '', '3', 'VanVan', '2019-11-13 23:39:27', 3, 'câu hỏi thử'),
+(12, '', '15', 'giaovien1', '2019-11-13 23:44:33', 4, 'ok'),
+(13, '', '3', '12345van', '2019-11-13 23:46:04', 4, 'tao thử bình luận');
 
 -- --------------------------------------------------------
 
@@ -1175,7 +1290,10 @@ INSERT INTO `textreponse` (`reponse_id`, `quest_id`, `textreponse`) VALUES
 (62, 342, 'kkk'),
 (62, 343, 'k'),
 (62, 344, 'k'),
-(64, 334, 'jkjk');
+(64, 334, 'jkjk'),
+(66, 366, 'kkoooo'),
+(67, 366, 'aaaaaaaaa'),
+(68, 366, 'cô gái ấy');
 
 -- --------------------------------------------------------
 
@@ -1186,8 +1304,8 @@ INSERT INTO `textreponse` (`reponse_id`, `quest_id`, `textreponse`) VALUES
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `name` varchar(25) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `name` varchar(25) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
   `email` varchar(50) NOT NULL,
   `date` varchar(50) NOT NULL,
   `isadmin` tinyint(1) NOT NULL
@@ -1200,16 +1318,19 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `username`, `name`, `password`, `email`, `date`, `isadmin`) VALUES
 (2, 'VanVan', 'Vân Anh', '12345', 'van005618@gmail.com', '0000-00-00', 0),
 (8, 'o0ovano0o', 'Van Anh ', '12345', 'van0056@gmail.com', '1999-11-11', 0),
-(9, 'vanvan1199', 'Vân Vân ', '12345', 'van@gmail.com', '1999-11-11', 0),
+(9, 'vanvan1199', 'Vân Vân', '12345', 'van@gmail.com', '1999-11-11', 0),
 (10, '12345van', 'O0ovano0o ', '12345', 'van@gmail.com', '1999-11-11', 0),
-(11, 'van1199', 'Vân Xinh Gái ', '12345', 'van@gmail.com', '1999-11-11', 0),
-(12, 'giaovien1', 'Giáo Viên 1', 'giaovien1', 'GiaoVien@gmail.com', '1967-01-01', 1),
+(11, 'van1199', 'Vân Xinh Gái', '12345', 'van@gmail.com', '1999-11-11', 0),
+(12, 'giaovien1', 'Giáo viên 1', 'giaovien1', 'GiaoVien@gmail.com', '1967-01-01', 1),
 (13, 'hay', 'Hay', '123456', 'truong@gmail.com', '1999-01-01', 1),
 (14, 'pho', 'May Con Pho ', '123456', 'tr@gmail.com', '1999-01-01', 0),
 (15, 'ngu', 'Doan Xem ', '123456', 'tee@gmail.com', '1999-01-01', 0),
-(16, 'giaovien', 'Giáo Viên 3 ', 'giaovien1', 'van@gmail.com', '1997-11-11', 0),
+(16, 'giaovien', 'Giáo viên 3', 'giaovien1', 'van@gmail.com', '1997-11-11', 0),
 (22, 'van005618@gmail.com', 'van nguyen', 'fb', 'van005618@gmail.com', '', 0),
-(23, 'beminah1999@gmail.co', 'Park Minhanh', 'fb', 'beminah1999@gmail.com', '', 0);
+(23, 'beminah1999@gmail.co', 'Park Minhanh', 'fb', 'beminah1999@gmail.com', '', 0),
+(24, 'Nguyen', 'Giaovien222 ', 'giaovien1', 'van123123@gmail.com', '1999-11-11', 0),
+(25, 'Nguyen123', 'Giáo viên giả dối', 'giaovien1', 'va231n@gmail.com', '1999-11-11', 0),
+(26, '12323hoaroi', 'Test Tên Đây ', 'giaovien1', 'van434@gmail.com', '1992-11-11', 0);
 
 -- --------------------------------------------------------
 
@@ -1276,7 +1397,32 @@ INSERT INTO `user_reponse` (`surveyid`, `user_id`, `reponse_id`, `reponse_date`)
 (26, 2, 61, '2019-11-09'),
 (25, 11, 62, '2019-11-09'),
 (26, 11, 63, '2019-11-09'),
-(23, 22, 64, '2019-11-09');
+(23, 22, 64, '2019-11-09'),
+(29, 2, 66, '2019-11-12'),
+(29, 10, 67, '2019-11-12'),
+(29, 8, 68, '2019-11-13');
+
+--
+-- Bẫy `user_reponse`
+--
+DELIMITER $$
+CREATE TRIGGER `mess_song` AFTER INSERT ON `user_reponse` FOR EACH ROW BEGIN
+DECLARE number INT;
+DECLARE tex  VARCHAR(255);
+SEt number= (SELECT num_re FROM survey WHERE `survey_id`=NEW.surveyid)+1;
+
+Set tex= "Có thêm 1 người đã tham gia khảo sát của bạn. Tổng số người tham gia hiện giờ là "+number;
+UPDATE `survey` SET `num_re`=`num_re`+1 WHERE `survey_id`=NEW.surveyid;
+INSERT INTO `tbao`
+ SET mes = tex,
+     link="/survey?id="+NEW.surveyid,
+     tbao.date = NOW(),
+     tbao.type=1,
+     tbao.text=(SELECT title from survey WHERE survey.survey_id=NEW.surveyid),
+     tbao.user=(SELECT author from survey where `survey_id`= NEW.surveyid); 
+ end
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1348,7 +1494,10 @@ INSERT INTO `yesnoreponse` (`reponse_id`, `quest_id`, `yesnovalue`) VALUES
 (56, 341, 1),
 (57, 341, 0),
 (62, 341, 0),
-(64, 333, 0);
+(64, 333, 0),
+(66, 365, 1),
+(67, 365, 0),
+(68, 365, 0);
 
 -- --------------------------------------------------------
 
@@ -1469,6 +1618,12 @@ ALTER TABLE `s_ans`
   ADD KEY `question_id` (`question_id`);
 
 --
+-- Chỉ mục cho bảng `tbao`
+--
+ALTER TABLE `tbao`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `textreponse`
 --
 ALTER TABLE `textreponse`
@@ -1504,55 +1659,61 @@ ALTER TABLE `yesnoreponse`
 -- AUTO_INCREMENT cho bảng `ans_quest`
 --
 ALTER TABLE `ans_quest`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `aquest`
 --
 ALTER TABLE `aquest`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `cmt_ans`
 --
 ALTER TABLE `cmt_ans`
-  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `section`
 --
 ALTER TABLE `section`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `squest`
 --
 ALTER TABLE `squest`
-  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=363;
+  MODIFY `squest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
 
 --
 -- AUTO_INCREMENT cho bảng `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=564;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=572;
+
+--
+-- AUTO_INCREMENT cho bảng `tbao`
+--
+ALTER TABLE `tbao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `user_reponse`
 --
 ALTER TABLE `user_reponse`
-  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
