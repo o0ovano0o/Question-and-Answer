@@ -94,6 +94,7 @@ router.use('/sendmail', require(__dirname + '/sendmail.js'))
 router.get('/auth/google/callback', passport.authenticate('google', { successRedirect : '/homefb', failureRedirect: '/login' }));
 router.use('/login', require(__dirname + '/login.js'));
 router.use('/home', require(__dirname + '/main.js'));
+router.use('/thongbao', require(__dirname + '/thongbao.js'));
 router.use('/signin', require(__dirname + '/signin.js'));
 router.use('/deletesection', require(__dirname + '/deletesection.js'));
 // router.use('/createsession', require(__dirname + '/new_session.js'));

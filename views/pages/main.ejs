@@ -426,6 +426,7 @@
   </div>
   <script type="text/javascript">
     var phieud=[];
+
   </script>
   <%for(var i=0;i< surveys[0].length;i++){
   if(!surveys[0][i].isopen){ %>
@@ -434,9 +435,9 @@
       "tieudepd":"<%=surveys[0][i].title%>",
       "motapd":"<%=surveys[0][i].description%>",
       "linkpd":"/survey?id="+<%=surveys[0][i].survey_id%>+'"',
-      "authorpd":"<%=surveys[0][i].name%>",
       "phoipd":"<%=surveys[0][i].num_re%>",
-      "viewpd":"<%=surveys[0][i].views%>"
+      "viewpd":"<%=surveys[0][i].views%>",
+      "authorpd":"<%=surveys[0][i].name%>"
     });
   </script>
   <%}

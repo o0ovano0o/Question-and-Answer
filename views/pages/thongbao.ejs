@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<!-- HEAD -->
+<head>
+  <!-- Cần thiết cho 1 web -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/index&manage.css">
+  <link rel="stylesheet" href="/bootstrap/bootstrap-4.0.0.min.js">
+  <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+
+
+  <title>Trang chủ</title>
+
+  <!-- Thư viện online cho Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- Xử lý Navigation -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
+  <script src="/angular.ng-modules.js"></script> <!--nguồn code tham khảo https://github.com/luisperezphd/ngModule-->
+  <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+</head>
+
+<!-- BODY -->
+<body>
+
+  <%- include header %>
+<div class="card" style="margin:10px;">
+  <div class="card-header">Thông báo của bạn</div>
+  <div class="card-body">
+   
+
+
+    <%if(tbao[0]){%> 
+    <ul class="list-group">
+      <%for(var i=0;i< tbao.length;i++){%>
+    <%if(tbao[i].type==1){%>
+        <li class="list-group-item">Lúc <%=tbao[i].date%> Có thêm 1 người phản hồi phiếu khảo sát của bạn.Tổng số người phản hồi hiện giờ là <%=tbao[i].mes%><a href="/survey?id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+      <%}%>
+
+  <%}%>
+      </ul>
+    <%}else{%>
+    <h4>Bạn chưa có thông báo nào cả!</h4>
+    <%}%>
+
+  </div>
+
+</div>
+<!-- Quay về đầu trang -->
+<br>
+<br>
+<div class="text-center">
+  <a href="#"><h5>Back to top</h5></a>
+</div>
+
+
+<!-- FOOTER -->
+<footer id="footer">
+  <ul style="padding: 15px; margin-bottom: 0px;">
+    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+    <p style="font-size: 12px"> @2019 design by Team 5</p>
+  </ul>
+</footer>
+
+</body>
+</html>
