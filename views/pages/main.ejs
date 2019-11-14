@@ -155,7 +155,7 @@
                 </script>
                 <% var count = 0;
                 for(var i=0;i< surveys[1].length;i++){
-                if(surveys[1][i].sec_isopen == 1){ 
+                if(surveys[1][i].sec_isopen == 1 ){ 
                 if (surveys[2]) {
                 for (var j = 0; j < surveys[2].length; j++) {
                 if (surveys[2][j].section_id == surveys[1][i].section_id)
@@ -616,7 +616,7 @@
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="CheckPassQuestion">Vui lòng nhập mật khẩu</h5>
+                                <h5 class="modal-title" id="CheckPassQuestion">Vui lòng nhập mật khẩu. Để trống nếu phiên hỏi đáp không có mật khẩu</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
