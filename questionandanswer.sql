@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 13, 2019 lúc 05:46 PM
+-- Thời gian đã tạo: Th10 14, 2019 lúc 06:11 AM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -50,7 +50,11 @@ INSERT INTO `ans_quest` (`ans_id`, `question_id`, `content`, `author`, `ans_time
 (10, 3, 'tao thử bình luận', '12345van', '13/11/2019', 0),
 (11, 3, 'trả lời cậu nhé', '12345van', '13/11/2019', 0),
 (12, 15, 'ok', 'giaovien1', '13/11/2019', 0),
-(13, 3, 'trả lời đc này', 'o0ovano0o', '13/11/2019', 0);
+(13, 3, 'trả lời đc này', 'o0ovano0o', '13/11/2019', 0),
+(14, 15, 'tao vẫn phản hồi đc mà', 'giaovien1', '14/11/2019', 0),
+(15, 15, 'vâng', '12345van', '14/11/2019', 0),
+(16, 15, 't bình luận nhé', 'okimfine', '14/11/2019', 0),
+(17, 15, 'thử thôi mà', 'giaovien1', '14/11/2019', 0);
 
 --
 -- Bẫy `ans_quest`
@@ -99,15 +103,18 @@ INSERT INTO `aquest` (`sections_id`, `question_id`, `author`, `context`, `date_p
 (2, 13, '12345van', 'okkkkkkkkkkkkk', '13/11/2019', 0),
 (2, 14, '12345van', 'thử nhé', '13/11/2019', 0),
 (2, 15, '12345van', 'thử này', '13/11/2019', 0),
+(2, 16, '12345van', 'đặt câu hỏi ', '14/11/2019', 0),
 (5, 11, 'hay', 'dc ko', '12/11/2019', 0),
-(6, 10, 'hay', 'hay ko', '12/11/2019', 0);
+(6, 10, 'hay', 'hay ko', '12/11/2019', 0),
+(6, 17, '12345van', 'thử', '14/11/2019', 0),
+(7, 18, '12345van', 'thth', '14/11/2019', 0);
 
 --
 -- Bẫy `aquest`
 --
 DELIMITER $$
 CREATE TRIGGER `lol` BEFORE INSERT ON `aquest` FOR EACH ROW INSERT INTO `tbao`
- SET mes =(SELECT COUNT(*) FROM `aquest` a GROUP BY `sections_id` HAVING a.sections_id= NEW.sections_id),
+ SET mes ='',
      link="/survey?id="+NEW.sections_id,
      tbao.date = NOW(),
      tbao.type=2,
@@ -299,7 +306,17 @@ INSERT INTO `cmt_ans` (`cmt_id`, `question_id`, `ans_id`, `author`, `cmt`, `cmt_
 (10, 15, 12, 'giaovien1', 'ok', '13/11/2019'),
 (11, 15, 12, 'giaovien1', 'ok', '13/11/2019'),
 (12, 15, 12, 'o0ovano0o', 'ok', '13/11/2019'),
-(13, 3, 10, 'o0ovano0o', 'đíu đc chắc t đi ngủ quá', '13/11/2019');
+(13, 3, 10, 'o0ovano0o', 'đíu đc chắc t đi ngủ quá', '13/11/2019'),
+(14, 15, 12, 'giaovien1', 'thử thôi', '14/11/2019'),
+(15, 15, 14, 'giaovien1', 'phải không', '14/11/2019'),
+(16, 15, 15, '12345van', 'vâng ạ', '14/11/2019'),
+(17, 15, 15, 'giaovien1', 'vâng', '14/11/2019'),
+(18, 15, 16, 'okimfine', 't trả lời này', '14/11/2019'),
+(19, 15, 16, 'okimfine', 'comment', '14/11/2019'),
+(20, 15, 15, 'okimfine', 'thử nhé', '14/11/2019'),
+(21, 15, 14, 'okimfine', 'comment', '14/11/2019'),
+(22, 15, 17, 'giaovien1', 'vâng', '14/11/2019'),
+(23, 15, 17, 'giaovien1', 'vâng', '14/11/2019');
 
 --
 -- Bẫy `cmt_ans`
@@ -1208,27 +1225,53 @@ CREATE TABLE `tbao` (
   `user` varchar(225) COLLATE utf8_vietnamese_ci NOT NULL,
   `date` datetime NOT NULL,
   `type` int(11) NOT NULL,
-  `text` text COLLATE utf8_vietnamese_ci NOT NULL
+  `text` text COLLATE utf8_vietnamese_ci NOT NULL,
+  `seen` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbao`
 --
 
-INSERT INTO `tbao` (`id`, `mes`, `link`, `user`, `date`, `type`, `text`) VALUES
-(1, '1', '29', 'giaovien1', '2019-11-12 23:24:42', 1, 'phieu phieu '),
-(2, '2', '29', 'giaovien1', '2019-11-12 23:28:21', 1, 'phieu phieu '),
-(3, '3', '29', 'giaovien1', '2019-11-13 00:09:15', 1, 'phieu phieu '),
-(4, '', '3', 'VanVan', '2019-11-13 21:16:45', 3, 'câu hỏi thử'),
-(5, '9', '2', 'giaovien1', '2019-11-13 21:54:18', 2, 'phiên hỏi đáp lần 2'),
-(6, '10', '2', 'giaovien1', '2019-11-13 21:54:54', 2, 'phiên hỏi đáp lần 2'),
-(7, '11', '2', 'giaovien1', '2019-11-13 21:56:22', 2, 'phiên hỏi đáp lần 2'),
-(8, '12', '2', 'giaovien1', '2019-11-13 21:57:24', 2, 'phiên hỏi đáp lần 2'),
-(9, '', '15', '12345van', '2019-11-13 22:21:35', 3, 'thử này'),
-(10, '', '15', 'giaovien1', '2019-11-13 23:17:06', 4, 'ok'),
-(11, '', '3', 'VanVan', '2019-11-13 23:39:27', 3, 'câu hỏi thử'),
-(12, '', '15', 'giaovien1', '2019-11-13 23:44:33', 4, 'ok'),
-(13, '', '3', '12345van', '2019-11-13 23:46:04', 4, 'tao thử bình luận');
+INSERT INTO `tbao` (`id`, `mes`, `link`, `user`, `date`, `type`, `text`, `seen`) VALUES
+(1, '1', '29', 'giaovien1', '2019-11-12 23:24:42', 1, 'phieu phieu ', 1),
+(2, '2', '29', 'giaovien1', '2019-11-12 23:28:21', 1, 'phieu phieu ', 1),
+(3, '3', '29', 'giaovien1', '2019-11-13 00:09:15', 1, 'phieu phieu ', 1),
+(4, '', '3', 'VanVan', '2019-11-13 21:16:45', 3, 'câu hỏi thử', 0),
+(5, '9', '2', 'giaovien1', '2019-11-13 21:54:18', 2, 'phiên hỏi đáp lần 2', 1),
+(6, '10', '2', 'giaovien1', '2019-11-13 21:54:54', 2, 'phiên hỏi đáp lần 2', 1),
+(7, '11', '2', 'giaovien1', '2019-11-13 21:56:22', 2, 'phiên hỏi đáp lần 2', 1),
+(8, '12', '2', 'giaovien1', '2019-11-13 21:57:24', 2, 'phiên hỏi đáp lần 2', 1),
+(9, '', '15', '12345van', '2019-11-13 22:21:35', 3, 'thử này', 1),
+(10, '', '15', 'giaovien1', '2019-11-13 23:17:06', 4, 'ok', 1),
+(11, '', '3', 'VanVan', '2019-11-13 23:39:27', 3, 'câu hỏi thử', 0),
+(12, '', '15', 'giaovien1', '2019-11-13 23:44:33', 4, 'ok', 1),
+(13, '', '3', '12345van', '2019-11-13 23:46:04', 4, 'tao thử bình luận', 1),
+(14, '', '15', 'giaovien1', '2019-11-14 00:45:40', 4, 'ok', 1),
+(15, '', '15', '12345van', '2019-11-14 00:46:00', 3, 'thử này', 1),
+(16, '', '15', 'giaovien1', '2019-11-14 00:46:09', 4, 'tao vẫn phản hồi đc mà', 1),
+(17, '', '15', '12345van', '2019-11-14 00:48:25', 3, 'thử này', 1),
+(18, '', '15', '12345van', '2019-11-14 00:48:35', 4, 'vâng', 1),
+(19, '', '15', '12345van', '2019-11-14 00:50:30', 4, 'vâng', 1),
+(20, '', '15', '12345van', '2019-11-14 01:10:26', 3, 'thử này', 1),
+(21, '', '15', 'okimfine', '2019-11-14 01:10:38', 4, 't bình luận nhé', 0),
+(22, '', '15', 'okimfine', '2019-11-14 01:12:39', 4, 't bình luận nhé', 0),
+(23, '', '15', '12345van', '2019-11-14 01:12:48', 4, 'vâng', 1),
+(24, '', '15', 'giaovien1', '2019-11-14 01:12:57', 4, 'tao vẫn phản hồi đc mà', 1),
+(25, '', '15', '12345van', '2019-11-14 11:18:47', 3, 'thử này', 1),
+(26, '', '15', 'giaovien1', '2019-11-14 11:19:01', 4, 'thử thôi mà', 1),
+(27, '', '15', 'giaovien1', '2019-11-14 11:20:13', 4, 'thử thôi mà', 1),
+(28, '13', '2', 'giaovien1', '2019-11-14 11:59:32', 2, 'phiên hỏi đáp lần 2', 0),
+(29, '1', '6', 'giaovien1', '2019-11-14 12:06:48', 2, 'phiên hỏi đáp lần 1', 0),
+(30, '', '7', 'giaovien1', '2019-11-14 12:10:33', 2, 'phiên hỏi đáp lần 1', 0);
+
+--
+-- Bẫy `tbao`
+--
+DELIMITER $$
+CREATE TRIGGER `lol1` AFTER UPDATE ON `tbao` FOR EACH ROW UPDATE `user` SET `tbao`=(select count(*) FROM tbao where `seen`=0 GROUP BY user having user=NEW.user) WHERE `username`=NEW.user
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1308,29 +1351,31 @@ CREATE TABLE `user` (
   `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
   `email` varchar(50) NOT NULL,
   `date` varchar(50) NOT NULL,
-  `isadmin` tinyint(1) NOT NULL
+  `isadmin` tinyint(1) NOT NULL,
+  `tbao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `name`, `password`, `email`, `date`, `isadmin`) VALUES
-(2, 'VanVan', 'Vân Anh', '12345', 'van005618@gmail.com', '0000-00-00', 0),
-(8, 'o0ovano0o', 'Van Anh ', '12345', 'van0056@gmail.com', '1999-11-11', 0),
-(9, 'vanvan1199', 'Vân Vân', '12345', 'van@gmail.com', '1999-11-11', 0),
-(10, '12345van', 'O0ovano0o ', '12345', 'van@gmail.com', '1999-11-11', 0),
-(11, 'van1199', 'Vân Xinh Gái', '12345', 'van@gmail.com', '1999-11-11', 0),
-(12, 'giaovien1', 'Giáo viên 1', 'giaovien1', 'GiaoVien@gmail.com', '1967-01-01', 1),
-(13, 'hay', 'Hay', '123456', 'truong@gmail.com', '1999-01-01', 1),
-(14, 'pho', 'May Con Pho ', '123456', 'tr@gmail.com', '1999-01-01', 0),
-(15, 'ngu', 'Doan Xem ', '123456', 'tee@gmail.com', '1999-01-01', 0),
-(16, 'giaovien', 'Giáo viên 3', 'giaovien1', 'van@gmail.com', '1997-11-11', 0),
-(22, 'van005618@gmail.com', 'van nguyen', 'fb', 'van005618@gmail.com', '', 0),
-(23, 'beminah1999@gmail.co', 'Park Minhanh', 'fb', 'beminah1999@gmail.com', '', 0),
-(24, 'Nguyen', 'Giaovien222 ', 'giaovien1', 'van123123@gmail.com', '1999-11-11', 0),
-(25, 'Nguyen123', 'Giáo viên giả dối', 'giaovien1', 'va231n@gmail.com', '1999-11-11', 0),
-(26, '12323hoaroi', 'Test Tên Đây ', 'giaovien1', 'van434@gmail.com', '1992-11-11', 0);
+INSERT INTO `user` (`user_id`, `username`, `name`, `password`, `email`, `date`, `isadmin`, `tbao`) VALUES
+(2, 'VanVan', 'Vân Anh', '12345', 'van005618@gmail.com', '0000-00-00', 0, 2),
+(8, 'o0ovano0o', 'Van Anh ', '12345', 'van0056@gmail.com', '1999-11-11', 0, 0),
+(9, 'vanvan1199', 'Vân Vân', '12345', 'van@gmail.com', '1999-11-11', 0, 0),
+(10, '12345van', 'O0ovano0o ', '12345', 'van@gmail.com', '1999-11-11', 0, 0),
+(11, 'van1199', 'Vân Xinh Gái', '12345', 'van@gmail.com', '1999-11-11', 0, 0),
+(12, 'giaovien1', 'Giáo viên 1', 'giaovien1', 'GiaoVien@gmail.com', '1967-01-01', 1, 0),
+(13, 'hay', 'Hay', '123456', 'truong@gmail.com', '1999-01-01', 1, 0),
+(14, 'pho', 'May Con Pho ', '123456', 'tr@gmail.com', '1999-01-01', 0, 0),
+(15, 'ngu', 'Doan Xem ', '123456', 'tee@gmail.com', '1999-01-01', 0, 0),
+(16, 'giaovien', 'Giáo viên 3', 'giaovien1', 'van@gmail.com', '1997-11-11', 0, 0),
+(22, 'van005618@gmail.com', 'van nguyen', 'fb', 'van005618@gmail.com', '', 0, 0),
+(23, 'beminah1999@gmail.co', 'Park Minhanh', 'fb', 'beminah1999@gmail.com', '', 0, 0),
+(24, 'Nguyen', 'Giaovien222 ', 'giaovien1', 'van123123@gmail.com', '1999-11-11', 0, 0),
+(25, 'Nguyen123', 'Giáo viên giả dối', 'giaovien1', 'va231n@gmail.com', '1999-11-11', 0, 0),
+(26, '12323hoaroi', 'Test Tên Đây ', 'giaovien1', 'van434@gmail.com', '1992-11-11', 0, 0),
+(27, 'okimfine', 'Tài Khoản Mới ', 'giaovien1', 'van23123@gmail.com', '0299-01-01', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -1659,19 +1704,19 @@ ALTER TABLE `yesnoreponse`
 -- AUTO_INCREMENT cho bảng `ans_quest`
 --
 ALTER TABLE `ans_quest`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `aquest`
 --
 ALTER TABLE `aquest`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `cmt_ans`
 --
 ALTER TABLE `cmt_ans`
-  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `section`
@@ -1701,13 +1746,13 @@ ALTER TABLE `s_ans`
 -- AUTO_INCREMENT cho bảng `tbao`
 --
 ALTER TABLE `tbao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT cho bảng `user_reponse`

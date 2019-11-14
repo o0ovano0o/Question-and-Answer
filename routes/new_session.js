@@ -28,7 +28,7 @@ router.post('/', function (req, res) {
 	var today = new Date();
 	var dateTime = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
 	
-	id=req.query.id;
+	var id=req.query.id;
 	if(req.session.user){
 		sectionQuest = {
 		sections_id: id,

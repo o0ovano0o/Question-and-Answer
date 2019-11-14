@@ -24,7 +24,7 @@
         <% if (session.username) {%>
         <ul class="navbar-nav" style="display: contents;">
           <li class="nav-item">
-            <a class="nav-link" href="/thongbao"><img src="/images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"></a>
+            <a class="nav-link" href="/thongbao"><img src="/images/icons/bell.jpg" width="40" height="40" style="border-radius: 100%"><span class="badge badge-danger"><%=session.tbao%></span></a>
           </li>
           <li>
           <%if(session.password.length>30){%>

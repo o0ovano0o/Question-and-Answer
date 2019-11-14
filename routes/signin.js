@@ -20,7 +20,8 @@ router.post('/', function(req, res) {
 		email: signup.useremail,
 		password: signup.userpassword,
 		date: signup.date,
-		isadmin: 0
+		isadmin: 0,
+		tbao:0,
 	};
 
 	if (signup.mauser=='123456') users.isadmin=1;
