@@ -121,7 +121,11 @@
                 <%if (q.ghim == 1) {%>
                 <p>Bình luận đã ghim</p>
                 <%}%>
-                <div class="card-header form-inline" style="background-color: #99ccff;border-top-right-radius: 6px;border-top-left-radius: 6px;">
+
+                <%if (q.isadmin) {%>
+                <div class="card-header form-inline" style="background-color: #ff9933;border-top-right-radius: 6px;border-top-left-radius: 6px;"><%}%>
+                <%if (!q.isadmin) {%>
+                <div class="card-header form-inline" style="background-color: #33ccff;border-top-right-radius: 6px;border-top-left-radius: 6px;"><%}%>  
                  <div class="col-md-11" style="padding-left: 0px;"><h6><b><%=q.name%></b></h6></div>
                  <%if(question[1][0].sec_isopen==1){%>
                  <div style="float: right;" class="col-md-1 dropdown">
