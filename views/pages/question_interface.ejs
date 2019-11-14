@@ -127,21 +127,29 @@
                 <%if (!q.isadmin) {%>
                 <div class="card-header form-inline" style="background-color: #33ccff;border-top-right-radius: 6px;border-top-left-radius: 6px;"><%}%>  
                  <div class="col-md-11" style="padding-left: 0px;"><h6><b><%=q.name%></b></h6></div>
-                 <%if(question[1][0].sec_isopen==1&&q.author == session.username ){%>
+                 <%if(question[1][0].sec_isopen==1 ){%>
                  <div style="float: right;" class="col-md-1 dropdown">
-                  <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                  <div class="dropdown-menu"> 
+                 <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                     <% if (question[1][0].author == session.username && q.ghim == 0) { %>
+                   
+                  <div class="dropdown-menu"> 
                     <a class="dropdown-item" href="/ghim?type=1&ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>>">Ghim</a>
+                    </div>
                     <%}%>
                     <% if (question[1][0].author == session.username && q.ghim == 1) { %>
+                   
+                  <div class="dropdown-menu"> 
                     <a class="dropdown-item" href="/ghim?type=0&ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>>">Bỏ Ghim</a>
+                    </div>
                     <%}%>
                     <% if (q.username == session.username) { %>
+                     
+                  <div class="dropdown-menu"> 
                     <a class="dropdown-item" id="show_update1_<%=q.ans_id%>">Chỉnh sửa</a>
                     <a class="dropdown-item" href="/deletesection?ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>">Xóa</a>
+                    </div>
                     <%}%>
-                  </div>
+                  
                 </div>
                 <%}%>
               </div>
