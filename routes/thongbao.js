@@ -22,6 +22,14 @@ router.get('/', function (req, res) {
 											}
 							    		else;
 									});
+		    					var query = conn.query("UPDATE user SET `tbao`=0 WHERE ?",{username:req.session.user.username}, (err, num) => {
+							    		if(err) {
+										
+												defer.reject(err);
+
+											}
+							    		else;
+									});
 								req.session.user.tbao=0;
 								res.render('thongbao', {session: req.session.user,tbao:num});
 					  }

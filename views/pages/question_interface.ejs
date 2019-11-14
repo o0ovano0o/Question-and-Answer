@@ -78,13 +78,14 @@
            </form>
            <hr id = "phienhoidap" class="featurette-divider">
            <!-- <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a> -->
-           <a href="" style="padding-left: 45%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl"><i class="fa fa-comment-o" aria-hidden="true"></i> Bình luận</a><br>
+           <a href="" style="padding-left: 45%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl" ><i class="fa fa-comment-o" aria-hidden="true" ></i> Bình luận</a><br>
+            <%if(question[1][0].sec_isopen==1){%>
            <form method="POST" action="/question?cmt=0">
              <p>
               <div class="collapse" id="tl">
                 <div class="row">
                   <div class="col-9 col-sm-10 col-md-11">
-                    <input type="nhap" name="cmt" class="form-control" id="search2" placeholder="Viết bình luận ...">
+                    <input type="nhap" name="cmt"  class="form-control" id="search2" placeholder="Viết bình luận ...">
                   </div>
                   <div class="col-3 col-sm-2 col-md-1">
                     <button class="btn btn-outline-secondary" type="submit">Gửi</button>
@@ -93,6 +94,7 @@
               </div>
             </p>
           </form>
+          <%}%>
         </div>
       </div>
 
@@ -118,6 +120,7 @@
                 <%}%>
                 <div class="card-header form-inline" style="background-color: #99ccff;border-top-right-radius: 6px;border-top-left-radius: 6px;">
                  <div class="col-md-11" style="padding-left: 0px;"><h6><b><%=q.name%></b></h6></div>
+                  <%if(question[1][0].sec_isopen==1){%>
                  <div style="float: right;" class="col-md-1 dropdown">
                   <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                   <div class="dropdown-menu"> 
@@ -133,6 +136,7 @@
                     <%}%>
                   </div>
                 </div>
+                <%}%>
               </div>
 
               <div class="card-body">
@@ -155,6 +159,7 @@
                 <hr id = "phienhoidap" class="featurette-divider">
 
                 <!-- <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a> -->
+                 <%if(question[1][0].sec_isopen==1){%>
                 <form method="POST" action="/question?cmt=<%=q.ans_id%>">
                   <p>
                     <div>
@@ -169,7 +174,7 @@
                     </div>
                   </p>
                 </form>
-
+                <%}%>
                 <!-- comment trả lời cho 1 comment khác-->
                 <% question[3].forEach(function(questions) {
                 if (questions.ans_id == q.ans_id) { %>
@@ -177,6 +182,7 @@
                   <div class="card-header form-inline" style="background-color: #dddddd;border-top-right-radius: 6px;border-top-left-radius: 6px;">
                    <div class="col-md-11" style="padding-left: 0px;"><h6><b><%=questions.name%></b></h6></div>
                    <% if (questions.username == session.username) { %>
+                    <%if(question[1][0].sec_isopen==1){%>
                    <div style="float: right;" class="col-md-1 dropdown">
                     <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                     <div class="dropdown-menu">
@@ -184,7 +190,7 @@
                       <a class="dropdown-item" href="/deletesection?cmt_id=<%=questions.cmt_id%>&question_id=<%=question[0][0].question_id%>">Xóa</a>
                     </div>
                   </div>
-                  <%}%>
+                  <%}}%>
                 </div>
 
                 <div class="card-body">

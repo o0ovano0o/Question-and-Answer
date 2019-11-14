@@ -62,6 +62,7 @@
               </div>
             </div>
              <%if(session.username==sections[0][0].username){%>
+
               <div class=" col-1 dropdown" >
                 <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 </button>
@@ -126,6 +127,7 @@
                   </div>
               </div>
             </div>
+             <%if (sections[0][0].sec_isopen==1){%>
             <div class="col-12 col-sm-7 col-md-7">
             <form method="POST" action="/new_session?id=<%=sections[0][0].section_id%>">
               <div class="row">
@@ -138,6 +140,7 @@
               </div>
             </form>
             </div>
+            <%}%>
           </div>
           <% sections[1].forEach(function(section) { %>
           <div class="card" style="border-radius: 6px;">
