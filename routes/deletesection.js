@@ -34,12 +34,12 @@ router.get('/', function (req, res) {
 					throw(err);
 				}
 				else {
-					var sql = "SELECT * FROM aquest join user on aquest.author = user.username  WHERE question_id =  ?;SELECT * FROM aquest  join section on section.section_id = aquest.sections_id join user on section.author = user.username WHERE question_id = ?;SELECT * FROM ans_quest join user on ans_quest.author = user.username  WHERE question_id =  ? order by ghim desc;SELECT * FROM cmt_ans join user on cmt_ans.author = user.username  WHERE question_id =  ?"
+					var sql = "SELECT * FROM aquest join user on aquest.author = user.username  WHERE question_id =  ?;SELECT * FROM aquest  join section on section.section_id = aquest.sections_id join user on section.author = user.username WHERE question_id = ?;SELECT * FROM ans_quest join user on ans_quest.author = user.username  WHERE question_id =  ? order by ans_quest.ghim desc,ans_quest.ans_id asc;SELECT * FROM cmt_ans join user on cmt_ans.author = user.username  WHERE question_id =  ? order by cmt_ans.cmt_id asc"
 					conn.query(sql,[id, id, id, id], function(err, question) {	
 						if(err) throw err;
 						else{
 							res.render('question_interface',{session: req.session.user, question}); } 
-					});
+						});
 				}
 			});
 		}
@@ -50,12 +50,12 @@ router.get('/', function (req, res) {
 					throw(err);
 				}
 				else {
-					var sql = "SELECT * FROM aquest join user on aquest.author = user.username  WHERE question_id =  ?;SELECT * FROM aquest  join section on section.section_id = aquest.sections_id join user on section.author = user.username WHERE question_id = ?;SELECT * FROM ans_quest join user on ans_quest.author = user.username  WHERE question_id =  ? order by ghim desc;SELECT * FROM cmt_ans join user on cmt_ans.author = user.username  WHERE question_id =  ?"
+					var sql = "SELECT * FROM aquest join user on aquest.author = user.username  WHERE question_id =  ?;SELECT * FROM aquest  join section on section.section_id = aquest.sections_id join user on section.author = user.username WHERE question_id = ?;SELECT * FROM ans_quest join user on ans_quest.author = user.username  WHERE question_id =  ? order by ans_quest.ghim desc,ans_quest.ans_id asc;SELECT * FROM cmt_ans join user on cmt_ans.author = user.username  WHERE question_id =  ? order by cmt_ans.cmt_id asc"
 					conn.query(sql,[id, id, id, id], function(err, question) {	
 						if(err) throw err;
 						else{
 							res.render('question_interface',{session: req.session.user, question}); } 
-					});
+						});
 				}
 			});
 		}
