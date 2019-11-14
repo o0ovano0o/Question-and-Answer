@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2019 lúc 07:16 AM
+-- Thời gian đã tạo: Th10 14, 2019 lúc 07:23 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -56,7 +56,20 @@ INSERT INTO `ans_quest` (`ans_id`, `question_id`, `content`, `author`, `ans_time
 (16, 15, 't bình luận nhé', 'okimfine', '14/11/2019', 0),
 (17, 15, 'thử thôi mà', 'giaovien1', '14/11/2019', 0),
 (18, 18, 'thử thôi mà', '12345van', '14/11/2019', 0),
-(19, 16, 'tự trả lời mình sẽ k có thông báo', '12345van', '14/11/2019', 0);
+(19, 16, 'tự trả lời mình sẽ k có thông báo', '12345van', '14/11/2019', 0),
+(20, 11, 'được cậu ạ', 'giaovien1', '14/11/2019', 0),
+(21, 11, 'cũng bình thường', 'giaovien1', '14/11/2019', 0),
+(22, 19, 'thử thôi mà', 'giaovien1', '14/11/2019', 0),
+(23, 19, 'ừ', 'giaovien1', '14/11/2019', 0),
+(24, 19, 'yeahhhh', 'giaovien1', '14/11/2019', 1),
+(25, 19, 'đã ghim rồi nhé', 'giaovien1', '14/11/2019', 1),
+(26, 19, '213', 'giaovien1', '14/11/2019', 0),
+(27, 19, 'test nào', 'giaovien1', '14/11/2019', 0),
+(28, 19, 'học sinh bình luận', '12345van', '14/11/2019', 0),
+(29, 19, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '12345van', '14/11/2019', 0),
+(30, 9, 'bóng người ra đi', '12345van', '14/11/2019', 0),
+(31, 16, 'giáo viên bình luận', 'giaovien1', '14/11/2019', 1),
+(32, 15, 'tao cũng muốn trả lời', 'van1199', '14/11/2019', 0);
 
 --
 -- Bẫy `ans_quest`
@@ -108,6 +121,7 @@ INSERT INTO `aquest` (`sections_id`, `question_id`, `author`, `context`, `date_p
 (2, 14, '12345van', 'thử nhé', '13/11/2019', 0),
 (2, 15, '12345van', 'thử này', '13/11/2019', 0),
 (2, 16, '12345van', 'đặt câu hỏi ', '14/11/2019', 0),
+(2, 19, 'giaovien1', 'thử ', '14/11/2019', 0),
 (5, 11, 'hay', 'dc ko', '12/11/2019', 0),
 (6, 10, 'hay', 'hay ko', '12/11/2019', 0),
 (6, 17, '12345van', 'thử', '14/11/2019', 0),
@@ -271,7 +285,9 @@ INSERT INTO `choice_multichoices` (`ans_id`, `response_id`, `quest_id`) VALUES
 (575, 70, 368),
 (576, 69, 368),
 (576, 70, 368),
-(577, 69, 368);
+(577, 69, 368),
+(577, 71, 368),
+(578, 71, 368);
 
 --
 -- Bẫy `choice_multichoices`
@@ -329,7 +345,11 @@ INSERT INTO `cmt_ans` (`cmt_id`, `question_id`, `ans_id`, `author`, `cmt`, `cmt_
 (23, 15, 17, 'giaovien1', 'vâng', '14/11/2019'),
 (24, 18, 18, '12345van', 'ko căng', '14/11/2019'),
 (25, 16, 19, '12345van', 'phản hồi mình sẽ k có thông báo', '14/11/2019'),
-(26, 16, 19, '12345van', 'để test coi nào', '14/11/2019');
+(26, 16, 19, '12345van', 'để test coi nào', '14/11/2019'),
+(27, 11, 20, 'giaovien1', 'trả lời ngu vậy', '14/11/2019'),
+(28, 19, 22, 'giaovien1', 'no quá ', '14/11/2019'),
+(29, 19, 22, 'giaovien1', 'đâu có', '14/11/2019'),
+(30, 19, 23, 'giaovien1', 'test thử', '14/11/2019');
 
 --
 -- Bẫy `cmt_ans`
@@ -441,7 +461,8 @@ INSERT INTO `multichoices` (`reponse_id`, `quest_id`) VALUES
 (67, 364),
 (68, 364),
 (69, 368),
-(70, 368);
+(70, 368),
+(71, 368);
 
 -- --------------------------------------------------------
 
@@ -560,10 +581,6 @@ INSERT INTO `singlechoicereponse` (`reponse_id`, `quest_id`, `choice_id`) VALUES
 (49, 330, 473),
 (50, 329, 468),
 (50, 330, 473),
-(51, 335, 485),
-(52, 335, 486),
-(53, 335, 485),
-(54, 335, 486),
 (55, 339, 494),
 (56, 339, 494),
 (57, 339, 493),
@@ -586,7 +603,9 @@ INSERT INTO `singlechoicereponse` (`reponse_id`, `quest_id`, `choice_id`) VALUES
 (69, 367, 573),
 (69, 371, 580),
 (70, 367, 573),
-(70, 371, 580);
+(70, 371, 580),
+(71, 367, 573),
+(71, 371, 582);
 
 --
 -- Bẫy `singlechoicereponse`
@@ -794,8 +813,6 @@ INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`
 (23, 332, 'Bạn thích gì ?', 2),
 (23, 333, 'Bạn là nam?', 3),
 (23, 334, 'Bạn có suy nghĩ gì?', 4),
-(24, 335, 'Bạn là gì i dont ?', 1),
-(24, 338, 'Bạn có suy nghĩ gì?', 4),
 (25, 339, 'Bạn là gì ?', 1),
 (25, 340, 'Bạn thích gì ?', 2),
 (25, 341, 'Bạn là nam?', 3),
@@ -814,10 +831,6 @@ INSERT INTO `squest` (`surveysq_id`, `squest_id`, `squest_text`, `quest_type_id`
 (27, 354, 'Bạn thích gì ?', 2),
 (27, 355, 'Bạn là gì ?', 2),
 (27, 356, 'Bạn thích gì ?', 2),
-(24, 357, 'Bạn là gì ?', 1),
-(24, 358, 'Bạn thích gì ?', 2),
-(24, 361, 'Bạn là gì ?', 1),
-(24, 362, 'Bạn thích gì ?', 2),
 (29, 363, 'Bạn là gì ?', 1),
 (29, 364, 'Bạn thích gì ?', 2),
 (29, 365, 'Bạn là nam?', 3),
@@ -855,27 +868,26 @@ INSERT INTO `survey` (`survey_id`, `title`, `description`, `startdate`, `enddate
 (1, 'Khảo sát khóa 64', 'Khảo sát thông tin về nguyện vọng, ước mơ...', '2019-09-30', '2019-10-03', 0, '', 1, 'taikhoan1', 0),
 (2, 'Khảo sát sinh viên', 'Khảo sát việc làm thêm của sinh viên', '2019-10-02', '2019-10-19', 1, '', 4, '1234', 0),
 (3, 'Khảo sát ngành CNTT', 'Khảo sát dành cho các sinh viên khoa CNTT', '2019-10-02', '2019-10-23', 1, '', 0, '12345', 0),
-(5, 'Khảo sát 1', 'Mô tả này', '0000-00-00', '2019-11-11', 1, '', 0, 'giaovien1', 0),
-(6, '123', 'Khảo sát aaaaaa', '0000-00-00', '2020-12-11', 1, '', 0, 'giaovien1', 0),
+(5, 'Khảo sát 1', 'Mô tả này', '0000-00-00', '2019-11-11', 1, '', 1, 'giaovien1', 0),
+(6, '123', 'Khảo sát aaaaaa', '0000-00-00', '2020-12-11', 1, '', 2, 'giaovien1', 0),
 (7, 'phiếu khảo sát 3', 'dugfwdgfkljwef', '0000-00-00', '2019-11-11', 0, '', 2, 'giaovien1', 0),
 (8, 'Khảo sát 1', '231232', '0000-00-00', '2019-10-11', 0, '', 2, 'giaovien1', 0),
 (10, 'phiếu khảo sát 5', 'Mô tả', '0000-00-00', '2091-11-11', 0, '', 10, 'giaovien1', 0),
 (11, 'Phiếu khảo sát ', 'Mô tả về phiếu khảo sát', '2019-10-18', '2019-11-11', 1, '', 85, 'giaovien1', 5),
 (12, 'Khảo sát 1', 'okkkk', '2019-10-18', '2019-11-11', 1, '', 33, 'giaovien1', 0),
 (13, 'okkk', 'okkk', '2019-10-18', '2019-11-11', 1, '', 14, 'giaovien1', 4),
-(15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 0, '', 43, 'giaovien1', 2),
+(15, 'Khảo sát môn học', 'Khảo sát với các Khóa học sinh về  đánh giá một số môn học và Yêu cầu các môn học trong kỳ tới', '2019-11-04', '0000-00-00', 0, '', 45, 'giaovien1', 2),
 (16, 'Khảo sát test chỉnh sửa', 'mô tả', '2019-11-05', '0000-00-00', 1, '', 48, 'giaovien1', 3),
-(20, 'test lỗi nhiều đáp án', 'test lỗi ', '2019-11-07', '0000-00-00', 0, '', 23, 'giaovien1', 4),
+(20, 'test lỗi nhiều đáp án', 'test lỗi ', '2019-11-07', '0000-00-00', 0, '', 26, 'giaovien1', 4),
 (21, 'test lỗi', 'test lỗi nhiều đáp án', '2019-11-07', '0000-00-00', 0, '', 11, 'giaovien1', 3),
 (22, 'Khảo sát 1', 'huhuhu', '2019-11-07', '0000-00-00', 0, '', 16, 'giaovien1', 4),
 (23, 'thêm phiếu để test', 'chán lỗi lắm rồi ', '2019-11-07', '0000-00-00', 1, '', 21, 'giaovien1', 5),
-(24, 'thêm  2', 'ok', '2019-11-07', '0000-00-00', 1, '', 46, 'giaovien1', 4),
 (25, 'tự luận', 'ok', '2019-11-07', '0000-00-00', 1, '', 14, 'giaovien1', 4),
 (26, 'loại 1', '1', '2019-11-07', '0000-00-00', 1, '', 11, 'giaovien1', 2),
 (27, 'loại 2', '2', '2019-11-07', '0000-00-00', 1, '', 10, 'giaovien1', 3),
 (28, 'thu', 'thuas', '2019-11-12', '0000-00-00', 1, '', 4, 'hay', 0),
-(29, 'phieu phieu ', 'okikikik', '2019-11-12', '0000-00-00', 1, '', 17, 'giaovien1', 3),
-(30, '123', 'test xem có tăng phản hồi k', '2019-11-14', '0000-00-00', 1, '', 7, 'giaovien1', 2);
+(29, 'phieu phieu ', 'okikikik', '2019-11-12', '0000-00-00', 1, '', 18, 'giaovien1', 3),
+(30, '123', 'test xem có tăng phản hồi k', '2019-11-14', '0000-00-00', 0, '', 15, 'giaovien1', 3);
 
 -- --------------------------------------------------------
 
@@ -887,6 +899,17 @@ CREATE TABLE `survey_section` (
   `section_id` int(11) NOT NULL,
   `survey_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `survey_section`
+--
+
+INSERT INTO `survey_section` (`section_id`, `survey_id`) VALUES
+(2, 5),
+(2, 6),
+(2, 7),
+(4, 24),
+(4, 30);
 
 -- --------------------------------------------------------
 
@@ -1155,9 +1178,6 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (332, 481, 'me', 3),
 (332, 482, 'xoài', 1),
 (332, 483, 'bim bim', 2),
-(335, 484, 'học sinh', 0),
-(335, 485, 'giáo viên', 2),
-(335, 486, 'người thứ 3', 2),
 (339, 492, 'học sinh', 0),
 (339, 493, 'giáo viên', 2),
 (339, 494, 'người thứ 3', 2),
@@ -1214,22 +1234,6 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (356, 545, 'me', 1),
 (356, 546, 'xoài', 2),
 (356, 547, 'bim bim', 1),
-(357, 548, 'học sinh', 0),
-(357, 549, 'giáo viên', 0),
-(357, 550, 'người thứ 3', 0),
-(358, 551, 'kẹo', 0),
-(358, 552, 'kem', 0),
-(358, 553, 'me', 0),
-(358, 554, 'xoài', 0),
-(358, 555, 'bim bim', 0),
-(361, 556, 'học sinh', 0),
-(361, 557, 'giáo viên', 0),
-(361, 558, 'người thứ 3', 0),
-(362, 559, 'kẹo', 0),
-(362, 560, 'kem', 0),
-(362, 561, 'me', 0),
-(362, 562, 'xoài', 0),
-(362, 563, 'bim bim', 0),
 (363, 564, 'học sinh', 1),
 (363, 565, 'giáo viên', 1),
 (363, 566, 'người thứ 3', 1),
@@ -1239,16 +1243,16 @@ INSERT INTO `s_ans` (`question_id`, `ans_id`, `ans_text`, `number`) VALUES
 (364, 570, 'xoài', 1),
 (364, 571, 'bim bim', 1),
 (367, 572, 'học sinh', 0),
-(367, 573, 'giáo viên', 2),
+(367, 573, 'giáo viên', 3),
 (367, 574, 'người thứ 3', 0),
 (368, 575, 'kẹo', 1),
 (368, 576, 'kem', 2),
-(368, 577, 'me', 1),
-(368, 578, 'xoài', 0),
+(368, 577, 'me', 2),
+(368, 578, 'xoài', 1),
 (368, 579, 'bim bim', 0),
 (371, 580, 'ừ kệ cm cậu', 2),
 (371, 581, 'mee too', 0),
-(371, 582, 'aaaaa', 0),
+(371, 582, 'aaaaa', 1),
 (371, 583, '', 0);
 
 -- --------------------------------------------------------
@@ -1300,14 +1304,24 @@ INSERT INTO `tbao` (`id`, `mes`, `link`, `user`, `date`, `type`, `text`, `seen`)
 (25, '', '15', '12345van', '2019-11-14 11:18:47', 3, 'thử này', 1),
 (26, '', '15', 'giaovien1', '2019-11-14 11:19:01', 4, 'thử thôi mà', 1),
 (27, '', '15', 'giaovien1', '2019-11-14 11:20:13', 4, 'thử thôi mà', 1),
-(28, '13', '2', 'giaovien1', '2019-11-14 11:59:32', 2, 'phiên hỏi đáp lần 2', 0),
-(29, '1', '6', 'giaovien1', '2019-11-14 12:06:48', 2, 'phiên hỏi đáp lần 1', 0),
-(30, '', '7', 'giaovien1', '2019-11-14 12:10:33', 2, 'phiên hỏi đáp lần 1', 0),
+(28, '13', '2', 'giaovien1', '2019-11-14 11:59:32', 2, 'phiên hỏi đáp lần 2', 1),
+(29, '1', '6', 'giaovien1', '2019-11-14 12:06:48', 2, 'phiên hỏi đáp lần 1', 1),
+(30, '', '7', 'giaovien1', '2019-11-14 12:10:33', 2, 'phiên hỏi đáp lần 1', 1),
 (31, '', '18', '12345van', '2019-11-14 12:12:12', 3, 'thth', 1),
 (32, '', '18', '12345van', '2019-11-14 12:12:19', 4, 'thử thôi mà', 1),
 (33, '', '16', '12345van', '2019-11-14 13:04:10', 4, 'tự trả lời mình sẽ k có thông báo', 1),
-(34, '1', '30', 'giaovien1', '2019-11-14 13:12:31', 1, '123', 0),
-(35, '2', '30', 'giaovien1', '2019-11-14 13:16:12', 1, '123', 0);
+(34, '1', '30', 'giaovien1', '2019-11-14 13:12:31', 1, '123', 1),
+(35, '2', '30', 'giaovien1', '2019-11-14 13:16:12', 1, '123', 1),
+(36, '', '11', 'hay', '2019-11-14 15:37:21', 3, 'dc ko', 0),
+(37, '', '11', 'hay', '2019-11-14 15:37:44', 3, 'dc ko', 0),
+(38, '', '19', 'giaovien1', '2019-11-14 20:50:31', 3, 'thử ', 0),
+(39, '', '19', 'giaovien1', '2019-11-14 20:50:56', 3, 'thử ', 0),
+(40, '', '9', 'van005618@gmail.com', '2019-11-14 20:51:54', 3, 'đặt câu hỏi này', 0),
+(41, '', '3', 'VanVan', '2019-11-14 20:55:56', 4, 'bình luận', 0),
+(42, '', '2', 'giaovien1', '2019-11-14 20:56:47', 2, 'phiên hỏi đáp lần 2', 0),
+(43, '', '16', '12345van', '2019-11-14 21:04:35', 3, 'đặt câu hỏi ', 1),
+(44, '', '15', '12345van', '2019-11-14 21:09:40', 3, 'thử này', 1),
+(45, '3', '30', 'giaovien1', '2019-11-14 21:18:49', 1, '123', 0);
 
 --
 -- Bẫy `tbao`
@@ -1382,7 +1396,8 @@ INSERT INTO `textreponse` (`reponse_id`, `quest_id`, `textreponse`) VALUES
 (67, 366, 'aaaaaaaaa'),
 (68, 366, 'cô gái ấy'),
 (69, 370, 'okkkkkkkkkkk'),
-(70, 370, 'kokokok');
+(70, 370, 'kokokok'),
+(71, 370, 'kkk');
 
 -- --------------------------------------------------------
 
@@ -1406,17 +1421,17 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `name`, `password`, `email`, `date`, `isadmin`, `tbao`) VALUES
-(2, 'VanVan', 'Vân Anh', '12345', 'van005618@gmail.com', '0000-00-00', 0, 2),
+(2, 'VanVan', 'Vân Anh', '12345', 'van005618@gmail.com', '0000-00-00', 0, 3),
 (8, 'o0ovano0o', 'Van Anh ', '12345', 'van0056@gmail.com', '1999-11-11', 0, 0),
 (9, 'vanvan1199', 'Vân Vân', '12345', 'van@gmail.com', '1999-11-11', 0, 0),
 (10, '12345van', 'O0ovano0o ', '12345', 'van@gmail.com', '1999-11-11', 0, 0),
 (11, 'van1199', 'Vân Xinh Gái', '12345', 'van@gmail.com', '1999-11-11', 0, 0),
-(12, 'giaovien1', 'Giáo viên 1', 'giaovien1', 'GiaoVien@gmail.com', '1967-01-01', 1, 5),
-(13, 'hay', 'Hay', '123456', 'truong@gmail.com', '1999-01-01', 1, 0),
+(12, 'giaovien1', 'Giáo viên 1', 'giaovien1', 'GiaoVien@gmail.com', '1967-01-01', 1, 4),
+(13, 'hay', 'Hay', '123456', 'truong@gmail.com', '1999-01-01', 1, 2),
 (14, 'pho', 'May Con Pho ', '123456', 'tr@gmail.com', '1999-01-01', 0, 0),
 (15, 'ngu', 'Doan Xem ', '123456', 'tee@gmail.com', '1999-01-01', 0, 0),
 (16, 'giaovien', 'Giáo viên 3', 'giaovien1', 'van@gmail.com', '1997-11-11', 0, 0),
-(22, 'van005618@gmail.com', 'van nguyen', 'fb', 'van005618@gmail.com', '', 0, 0),
+(22, 'van005618@gmail.com', 'van nguyen', 'fb', 'van005618@gmail.com', '', 0, 1),
 (23, 'beminah1999@gmail.co', 'Park Minhanh', 'fb', 'beminah1999@gmail.com', '', 0, 0),
 (24, 'Nguyen', 'Giaovien222 ', 'giaovien1', 'van123123@gmail.com', '1999-11-11', 0, 0),
 (25, 'Nguyen123', 'Giáo viên giả dối', 'giaovien1', 'va231n@gmail.com', '1999-11-11', 0, 0),
@@ -1493,7 +1508,8 @@ INSERT INTO `user_reponse` (`surveyid`, `user_id`, `reponse_id`, `reponse_date`)
 (29, 10, 67, '2019-11-12'),
 (29, 8, 68, '2019-11-13'),
 (30, 10, 69, '2019-11-14'),
-(30, 2, 70, '2019-11-14');
+(30, 2, 70, '2019-11-14'),
+(30, 11, 71, '2019-11-14');
 
 --
 -- Bẫy `user_reponse`
@@ -1592,7 +1608,8 @@ INSERT INTO `yesnoreponse` (`reponse_id`, `quest_id`, `yesnovalue`) VALUES
 (67, 365, 0),
 (68, 365, 0),
 (69, 369, 0),
-(70, 369, 0);
+(70, 369, 0),
+(71, 369, 0);
 
 -- --------------------------------------------------------
 
@@ -1699,13 +1716,6 @@ ALTER TABLE `survey`
   ADD PRIMARY KEY (`survey_id`);
 
 --
--- Chỉ mục cho bảng `survey_section`
---
-ALTER TABLE `survey_section`
-  ADD PRIMARY KEY (`section_id`,`survey_id`),
-  ADD KEY `survey_id` (`survey_id`);
-
---
 -- Chỉ mục cho bảng `s_ans`
 --
 ALTER TABLE `s_ans`
@@ -1754,19 +1764,19 @@ ALTER TABLE `yesnoreponse`
 -- AUTO_INCREMENT cho bảng `ans_quest`
 --
 ALTER TABLE `ans_quest`
-  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `aquest`
 --
 ALTER TABLE `aquest`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `cmt_ans`
 --
 ALTER TABLE `cmt_ans`
-  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `cmt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `section`
@@ -1796,7 +1806,7 @@ ALTER TABLE `s_ans`
 -- AUTO_INCREMENT cho bảng `tbao`
 --
 ALTER TABLE `tbao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
@@ -1808,7 +1818,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `user_reponse`
 --
 ALTER TABLE `user_reponse`
-  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `reponse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -1860,13 +1870,6 @@ ALTER TABLE `singlechoicereponse`
 ALTER TABLE `squest`
   ADD CONSTRAINT `squest_ibfk_2` FOREIGN KEY (`quest_type_id`) REFERENCES `questiontype` (`quest_type_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `squest_ibfk_3` FOREIGN KEY (`surveysq_id`) REFERENCES `survey` (`survey_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Các ràng buộc cho bảng `survey_section`
---
-ALTER TABLE `survey_section`
-  ADD CONSTRAINT `survey_section_ibfk_3` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`),
-  ADD CONSTRAINT `survey_section_ibfk_4` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`);
 
 --
 -- Các ràng buộc cho bảng `s_ans`

@@ -8,8 +8,8 @@ var id;
 router.get('/', function (req, res) {
 	if(req.session.user){
 		id = req.query.id;
-		var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ? order by question_id DESC;"
-		conn.query(sql,[id,id], function(err, results) {	
+		var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ? order by question_id DESC;SELECT * FROM `survey_section` INNER JOIN survey on survey.survey_id=survey_section.survey_id where section_id = ? ;"
+		conn.query(sql,[id,id,id], function(err, results) {	
 			if(err) throw err;
 			else{
 				var sections = results;

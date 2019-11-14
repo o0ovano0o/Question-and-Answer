@@ -97,6 +97,7 @@ router.use('/home', require(__dirname + '/main.js'));
 router.use('/thongbao', require(__dirname + '/thongbao.js'));
 router.use('/signin', require(__dirname + '/signin.js'));
 router.use('/deletesection', require(__dirname + '/deletesection.js'));
+router.use('/addsurvey', require(__dirname + '/addsurvey.js'));
 // router.use('/createsession', require(__dirname + '/new_session.js'));
 router.use('/ghim', require(__dirname + '/ghim.js'));
 router.use('/session', require(__dirname + '/session.js'));

@@ -31,13 +31,15 @@
 
     <div class="container marketing">
       <br>
+      <div class="row">
+        <div class="col-sm-8">
       <div class="card" style="border-radius: 6px;">
         <div class="card-header" style="background-color: #888;border-top-left-radius: 6px;border-top-right-radius: 6px;">
           <h5><b>Phiên hỏi đáp</b></h5>
         </div>
         <div class="card-body" style="background-color: #dddddd;border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;">
           <div class="row padding">
-            <div class="col-3 col-sm-2 col-md-2">
+            <div class="col-3 col-sm-3 col-md-3">
               <div class="card" style="border-radius: 6px;">
                 <img class="card-img-top" src="./images/avatar2.jpg" style="border-radius: 6px;">
               </div>
@@ -73,6 +75,33 @@
               </div>
             <%}%>
           </div>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+          
+          <div class="card" style="border-radius: 6px;">
+        <div class="card-header" style="background-color: #888;border-top-left-radius: 6px;border-top-right-radius: 6px;">
+          <h5><b>Phiếu khảo sát liên quan</b></h5>
+        </div>
+        <div class="card-body" style="background-color: #dddddd;border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;">
+         
+            <ul class="list-group">
+            <%if(sections[2][0]){%>
+            <%sections[2].forEach(function(survey) {%>
+             <li class="list-group-item" style="width: 100%;"><a style="width: 100%;" href="/survey?id=<%=survey.survey_id%>"><%=survey.title%></a></li>
+             <%})%>
+           </ul>
+           <%}else{%>
+           <p style="padding: 7px;">Chưa có phiếu khảo sát nào trong phiên hỏi đáp này</p>
+           <%}%>
+            <%if(session.username==sections[0][0].username){%>
+            <a href="/addsurvey?id=<%=sections[0][0].section_id%>" class="btn btn-success" role="button" style="width: 100%;margin-top: 10px;" >+ Thêm phiếu khảo sát</a>
+           <%}%>
+        
+      </div>
+    </div>
+
         </div>
       </div><br>
  <div class="modal fade" id="updatesection" tabindex="-1" role="dialog" aria-labelledby="SectionModalLabel" aria-hidden="true">
