@@ -30,8 +30,13 @@
           <%if(session.password.length>30){%>
             <div class="thumb" style="background-image:url(<%=session.password%>);width: 40px;height: 40px"></div>
             <%} else{%>
+            <%if(session.isadmin){%>
             <div class="thumb" style="background-image:url(/images/avatar2.jpg );width: 40px;height: 40px"></div>
             <%}%>
+            <%if(!session.isadmin){%>
+            <div class="thumb" style="background-image:url(/images/avatar1.png );width: 40px;height: 40px"></div>
+            <%}%>
+          <%}%>
           </li>
 
           <li class="nav-item dropdown">
