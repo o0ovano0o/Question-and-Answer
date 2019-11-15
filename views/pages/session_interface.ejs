@@ -216,7 +216,7 @@
             <div style="float: right;" class="dropdown">
                   <a class="nav-link dropdown-toggle" style="color: black" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#EditQuestion_Modal">Chỉnh sửa</a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#EditQuestion_Modal<%=section.question_id%>">Chỉnh sửa</a>
                   <a class="dropdown-item" href="/deletesection?question_id=<%=section.question_id%>&section_id=<%=sections[0][0].section_id%>">Xóa</a>
                 </div>
               </div>
@@ -233,7 +233,8 @@
 <%- include update_inf_user %>
 
 <!-- Modal cho chỉnh sửa câu hỏi -->
-<div class="modal fade" id="EditQuestion_Modal" tabindex="-1" role="dialog" aria-labelledby="EditQuestion_ModalLabel" aria-hidden="true">
+<% sections[1].forEach(function(section) { %>
+<div class="modal fade" id="EditQuestion_Modal<%=section.question_id%>" tabindex="-1" role="dialog" aria-labelledby="EditQuestion_ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -243,7 +244,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/" method="POST">
+        <form action="/deletesection?question_id=<%=section.question_id%>&id=<%=section.sections_id%>" method="POST">
           <div class="form-group">
             <label for="InputTitle">Nội dung:</label>
             <input type="text" name="sec_title" class="form-control" id="InputTitle" aria-describedby="title" placeholder="Nhập....">
@@ -256,6 +257,7 @@
   </div>
 </div>
 </div>
+<% }); %>
 
 
 </main>
