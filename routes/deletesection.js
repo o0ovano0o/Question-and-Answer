@@ -16,14 +16,7 @@ router.get('/', function (req, res) {
 					throw(err);
 				}
 				else {
-					var sql = "SELECT * FROM section join user on section.author = user.username  WHERE  section_id = ?;SELECT * FROM section left join aquest on section.section_id = aquest.sections_id join user on aquest.author = user.username  WHERE section_id =  ?"
-					conn.query(sql,[section_id,section_id], function(err, results) {	
-						if(err) throw err;
-						else{
-							var sections = results;
-							res.render('session_interface', {session:req.session.user, sections: sections});
-						}
-					});
+					res.redirect('/new_session?id='+section_id);
 				}
 			});
 		}
@@ -60,6 +53,29 @@ router.get('/', function (req, res) {
 			});
 		}
 
+	}
+	else{
+		res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
+	}
+
+
+});
+
+router.post('/', function (req, res) {
+	if(req.session.user){
+		var id = req.query.id;
+		var question_id = req.query.question_id;
+		var title = req.body.sec_title;
+		var query1 = "UPDATE aquest SET context = ? WHERE question_id = ?";
+		conn.query(query1,[title, question_id], function(err, question) {	
+			if (err) {
+				throw(err);
+			}
+			else {
+				res.redirect('/new_session?id='+id);
+
+			}
+		});
 	}
 	else{
 		res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
