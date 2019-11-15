@@ -104,6 +104,7 @@ router.use('/session', require(__dirname + '/session.js'));
 router.use('/new_session', require(__dirname + '/new_session.js'));
 router.use('/question', require(__dirname + '/question.js'));
 router.use('/delete', require(__dirname + '/delete.js'));
+router.use('/deletere', require(__dirname + '/deletere.js'));
 router.use('/deletes', require(__dirname + '/deletes.js'));
 router.use('/survey', require(__dirname + '/new_survey.js'));
 router.use('/resultsurvey', require(__dirname + '/resultsurvey.js'));

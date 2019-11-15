@@ -7,7 +7,7 @@ var q = require('q');
 router.get('/', function (req, res) {
   if(req.session.user) {
      var id = req.query.id;
-      var query = conn.query("select * from survey WHERE ? ", {author: req.session.user.username}, (err, result) => {
+      var query = conn.query("SELECT survey.* FROM `survey` LEFT JOIN survey_section ON survey_section.survey_id=survey.survey_id WHERE survey_section.survey_id IS NULL and author= ? ", [ req.session.user.username], (err, result) => {
             if (err) throw err;
             else {
              res.render('addsurvey',{session: req.session.user, result,id:id}); } 
