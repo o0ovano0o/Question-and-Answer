@@ -27,43 +27,46 @@
 </head>
 
 <!-- BODY -->
-<body>
+<body style="background-color: #eeeeee;">
 
   <%- include header %>
-<div class="card" style="margin:10px;">
-  <div class="card-header">Khảo sát của bạn</div>
-  <div class="card-body">
-    <form action="/addsurvey?id=<%=id%>" method="POST">
-    <ul class="list-group">
-   <%result.forEach(function(survey) {%>
-  <li class="list-group-item">
-<input type="checkbox" name="ids" value="<%=survey.survey_id%>">
-    <a href="/survey?id=<%=survey.survey_id%>"><%=survey.title%></a><p><%=survey.description%></p></li>
-<%})%>
-</ul>
-   <input type="submit" name="sub" value="Thêm" class="btn btn-success" style="margin:10px;width: 200px;">
-</form>
+  <div class="container"><br>
+    <div class="card" style="margin:10px;">
+      <div class="card-header" style="background-color: #cccccc;">
+        <h4>Khảo sát của bạn</h4>
+      </div>
+      <div class="card-body">
+        <form action="/addsurvey?id=<%=id%>" method="POST">
+          <ul class="list-group">
+           <%result.forEach(function(survey) {%>
+           <li class="list-group-item">
+            <input type="checkbox" name="ids" value="<%=survey.survey_id%>">
+            <a href="/survey?id=<%=survey.survey_id%>"><%=survey.title%></a><p style="padding-left: 18px;"><%=survey.description%></p></li>
+            <%})%>
+          </ul>
+          <input type="submit" name="sub" value="Thêm" class="btn btn-success" style="width: 200px;margin-left: 40%;margin-top: 15px;">
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Quay về đầu trang -->
+  <br>
+  <br>
+  <div class="text-center">
+    <a href="#"><h5>Back to top</h5></a>
   </div>
 
-</div>
-<!-- Quay về đầu trang -->
-<br>
-<br>
-<div class="text-center">
-  <a href="#"><h5>Back to top</h5></a>
-</div>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <ul style="padding: 15px; margin-bottom: 0px;">
+      <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+      <p style="font-size: 12px"> @2019 design by Team 5</p>
+    </ul>
+  </footer>
+  <script type="text/javascript">
 
 
-<!-- FOOTER -->
-<footer id="footer">
-  <ul style="padding: 15px; margin-bottom: 0px;">
-    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-    <p style="font-size: 12px"> @2019 design by Team 5</p>
-  </ul>
-</footer>
-<script type="text/javascript">
-  
-    
-</script>
+  </script>
 </body>
 </html>

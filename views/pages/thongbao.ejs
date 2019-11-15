@@ -27,67 +27,67 @@
 </head>
 
 <!-- BODY -->
-<body>
+<body style="background-color: #eeeeee;">
 
   <%- include header %>
-<div class="card" style="margin:10px;">
-  <div class="card-header">Thông báo của bạn</div>
-  <div class="card-body">
-   
+  <div class="container"><br>
+    <div class="card" style="margin:10px;">
+      <div class="card-header" style="background-color: #cccccc;">
+        <h4>Thông báo của bạn</h4>
+      </div>
+      <div class="card-body">
+        <%if(tbao[0]){%> 
+        <ul class="list-group">
+          <%for(var i=0;i< tbao.length;i++){%>
+          <%if(tbao[i].type==1){%>
+          <li class="list-group-item">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi phiếu khảo sát <span style="color:#ff6633;">  "<%=tbao[i].text%>" </span> của bạn. Tổng số người phản hồi hiện giờ là <%=tbao[i].mes%>. <a href="/survey?id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+          <%}%>
+          <%if(tbao[i].type==2){%>
+          <li class="list-group-item">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người đặt câu hỏi trong phiên hỏi đáp <span style="color:#ff6633;">  "<%=tbao[i].text%>" </span> của bạn. <a href="/new_session?id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+          <%}%>
 
+          <%if(tbao[i].type==3){%>
+          <li class="list-group-item">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người trả lời câu hỏi <span style="color:#ff6633;"> "<%=tbao[i].text%>" </span> của bạn. <a href="/question?question_id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+          <%}%>
+          <%if(tbao[i].type==4){%>
+          <li class="list-group-item">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi câu trả lời <span style="color:#ff6633;"> "<%=tbao[i].text%>" </span> của bạn. <a href="/question?question_id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+          <%}%>
 
-    <%if(tbao[0]){%> 
-    <ul class="list-group">
-      <%for(var i=0;i< tbao.length;i++){%>
-    <%if(tbao[i].type==1){%>
-        <li class="list-group-item">Lúc <span id="time<%=i%>"></span> Có thêm 1 người phản hồi phiếu khảo sát <span style="color:blue;">  <%=tbao[i].text%> </span> của bạn.Tổng số người phản hồi hiện giờ là <%=tbao[i].mes%><a href="/survey?id=<%=tbao[i].link%>">Xem chi tiết</a></li>
-      <%}%>
- <%if(tbao[i].type==2){%>
-        <li class="list-group-item">Lúc <span id="time<%=i%>"></span>  Có thêm 1 người đặt câu hỏi trong phiên hỏi đáp <span style="color:blue;">  <%=tbao[i].text%> </span> của bạn.<a href="/new_session?id=<%=tbao[i].link%>">Xem chi tiết</a></li>
-      <%}%>
+          <%}%>
+        </ul>
+        <%}else{%>
+        <h4>Bạn chưa có thông báo nào cả!</h4>
+        <%}%>
 
- <%if(tbao[i].type==3){%>
-        <li class="list-group-item">Lúc <span id="time<%=i%>"></span>  Có thêm 1 người trả lời câu hỏi<span style="color:blue;"> <%=tbao[i].text%> </span> của bạn.<a href="/question?question_id=<%=tbao[i].link%>">Xem chi tiết</a></li>
-      <%}%>
- <%if(tbao[i].type==4){%>
-        <li class="list-group-item">Lúc <span id="time<%=i%>"></span>  Có thêm 1 người phản hồi câu trả lời <span style="color:blue;"> <%=tbao[i].text%> </span> của bạn.<a href="/question?question_id=<%=tbao[i].link%>">Xem chi tiết</a></li>
-      <%}%>
-
-  <%}%>
-      </ul>
-    <%}else{%>
-    <h4>Bạn chưa có thông báo nào cả!</h4>
-    <%}%>
-
+      </div>
+    </div>
+  </div>
+  <!-- Quay về đầu trang -->
+  <br>
+  <br>
+  <div class="text-center">
+    <a href="#"><h5>Back to top</h5></a>
   </div>
 
-</div>
-<!-- Quay về đầu trang -->
-<br>
-<br>
-<div class="text-center">
-  <a href="#"><h5>Back to top</h5></a>
-</div>
 
+  <!-- FOOTER -->
+  <footer id="footer">
+    <ul style="padding: 15px; margin-bottom: 0px;">
+      <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+      <p style="font-size: 12px"> @2019 design by Team 5</p>
+    </ul>
+  </footer>
+  <script type="text/javascript">
 
-<!-- FOOTER -->
-<footer id="footer">
-  <ul style="padding: 15px; margin-bottom: 0px;">
-    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-    <p style="font-size: 12px"> @2019 design by Team 5</p>
-  </ul>
-</footer>
-<script type="text/javascript">
-  
     <%if(tbao[0]){
       for(var i=0;i< tbao.length;i++){%>
         var x= 'time'+<%=i%>;
- var t= document.getElementById(x);
-var date=new Date("<%=tbao[i].date%>").toLocaleString();
-date=date.substring(0,25);
-console.log(date);
-t.innerHTML=date;
-<%}}%>
-</script>
-</body>
-</html>
+        var t= document.getElementById(x);
+        var date=new Date("<%=tbao[i].date%>").toLocaleString();
+        date=date.substring(0,25);
+        console.log(date);
+        t.innerHTML=date;
+        <%}}%>
+      </script>
+    </body>
+    </html>
