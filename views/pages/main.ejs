@@ -525,7 +525,7 @@
           </div>
           <div class="form-group w-50">
             <label for="DateBegin">Ngày bắt đầu:</label>
-            <input type="date" name="date_begin" class="form-control" id="DateBegin" >
+            <input type="date" name="date_begin" class="form-control" id="DateBegin" disabled="on" >
             <script>
               var now = new Date();
 
@@ -537,15 +537,14 @@
               $('#DateBegin').val(today);
             </script>
 
-            <label for="Date2">Ngày kết thúc:</label>
-            <input type="date" name="date_end" class="form-control" id="Date2" onblur="check(this);">
+           
           </div>
 
           <div class="form">
-            <div class="checkbox">
+            <div>
               <label data-toggle="collapse" data-target="#collapsePas" aria-expanded="false" aria-controls="collapsePas">
 
-                <input type="checkbox"/> Đặt mật khẩu
+                <input type="checkbox" name="passornot"/> Đặt mật khẩu
               </label>
             </div>
 
@@ -556,8 +555,8 @@
              </div>
            </div>
 
-           <div class="checkbox">
-            <input type="checkbox"/> Không đặt mật khẩu
+           <div >
+           <p>Nếu bạn không đặt mật khẩu Hệ thống sẽ tự hiểu là phiên bạn muốn tạo sẽ không có mật khẩu
           </div>
         </div>
         <div class="modal-footer">
