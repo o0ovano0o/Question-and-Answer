@@ -90,12 +90,13 @@
             <%if(sections[2][0]){%>
             <%sections[2].forEach(function(survey) {%>
              <li class="list-group-item" style="width: 100%;"><a style="width: 100%;" href="/survey?id=<%=survey.survey_id%>"><%=survey.title%></a>
+               <%if(session.username==sections[0][0].username){%>
                <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton11" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton11">
                   <a class="dropdown-item" href="/deletere?id=<%=sections[0][0].section_id%>&sid=<%=survey.survey_id%>">Xóa</a>
                 </div>
-
+<%}%>
              </li>
              <%})%>
            </ul>

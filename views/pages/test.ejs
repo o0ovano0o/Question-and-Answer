@@ -74,8 +74,9 @@
                  <%}else{%>
                     <p>Tổng số câu hỏi: 0</p>
                  <%}%>
-
-
+                  <% if(survey.isopen==0){
+                 %>
+                 <p style="font-weight: bold;">Đã đóng</p><%}%>
                  <%if(session.username==survey.author){
 
                 if(survey.isopen==0){
