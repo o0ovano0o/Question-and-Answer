@@ -25,7 +25,13 @@
   <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
 </head>
+<style type="text/css">
+  #id:hover {
+    background: #ff6633;
+    color: #fff;
+}
 
+</style>
 <!-- BODY -->
 <body style="background-color: #eeeeee;">
 
@@ -40,17 +46,17 @@
         <ul class="list-group">
           <%for(var i=0;i< tbao.length;i++){%>
           <%if(tbao[i].type==1){%>
-          <li class="list-group-item">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi phiếu khảo sát <span style="color:#ff6633;">  "<%=tbao[i].text%>" </span> của bạn. Tổng số người phản hồi hiện giờ là <%=tbao[i].mes%>. <a href="/survey?id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+          <li class="list-group-item"><a href="/survey?id=<%=tbao[i].link%>" id = "id";> Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi phiếu khảo sát <span><b>  "<%=tbao[i].text%>" </b></span> của bạn. Tổng số người phản hồi hiện giờ là <%=tbao[i].mes%>. </a></li>
           <%}%>
           <%if(tbao[i].type==2){%>
-          <li class="list-group-item">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người đặt câu hỏi trong phiên hỏi đáp <span style="color:#ff6633;">  "<%=tbao[i].text%>" </span> của bạn. <a href="/new_session?id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+          <li class="list-group-item"><a href="/new_session?id=<%=tbao[i].link%>" id = "id";>Lúc <span id="time<%=i%>"></span>: Có thêm 1 người đặt câu hỏi trong phiên hỏi đáp <span><b>  "<%=tbao[i].text%>" </b></span> của bạn. </a></li>
           <%}%>
 
           <%if(tbao[i].type==3){%>
-          <li class="list-group-item">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người trả lời câu hỏi <span style="color:#ff6633;"> "<%=tbao[i].text%>" </span> của bạn. <a href="/question?question_id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+          <li class="list-group-item"><a href="/question?question_id=<%=tbao[i].link%>" id = "id";>Lúc <span id="time<%=i%>"></span>: Có thêm 1 người trả lời câu hỏi <span><b> "<%=tbao[i].text%>" </b></span> của bạn. </a></li>
           <%}%>
           <%if(tbao[i].type==4){%>
-          <li class="list-group-item">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi câu trả lời <span style="color:#ff6633;"> "<%=tbao[i].text%>" </span> của bạn. <a href="/question?question_id=<%=tbao[i].link%>">Xem chi tiết</a></li>
+          <li class="list-group-item"><a href="/question?question_id=<%=tbao[i].link%>" id = "id";>Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi câu trả lời <span><b> "<%=tbao[i].text%>" </b></span> của bạn. </a></li>
           <%}%>
 
           <%}%>
