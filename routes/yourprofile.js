@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
 				var user = results[0];
 
 				if (user.isadmin == 1) {
-					var sql = "SELECT * FROM user WHERE user_id = ?;SELECT * FROM user join section on section.author = user.username WHERE user.user_id = ?;SELECT * FROM user join survey on survey.author = user.username WHERE user.user_id = ?;SELECT * FROM user join ans_quest on ans_quest.author = user.username WHERE user.user_id = ?;SELECT * FROM user join cmt_ans on cmt_ans.author = user.username WHERE user.user_id = ?;";
+					var sql = "SELECT * FROM user WHERE user_id = ?;SELECT * FROM user join section on section.author = user.username WHERE user.user_id = ?;SELECT * FROM user join survey on survey.author = user.username WHERE user.user_id = ?;SELECT * FROM user join ans_quest on ans_quest.author = user.username WHERE user.user_id = ?;SELECT * FROM user join cmt_ans on cmt_ans.author = user.username WHERE user.user_id = ? order by cmt_id DESC;";
 					conn.query(sql,[id, id, id, id, id], function(err, result) {	
 						if(err) throw err;
 						else{
