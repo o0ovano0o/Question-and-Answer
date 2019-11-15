@@ -92,8 +92,11 @@
             <%sections[2].forEach(function(survey) {%>
              <li class="list-group-item" style="text-align: left;">
               <div class="row">
-                <div class="col-9 col-sm-9 col-md-9">
-                   <a style="width: 100%;" href="/survey?id=<%=survey.survey_id%>" class ="col-md-11"><%=survey.title%></a>             
+                <div class="col-9 col-sm-9 col-md-9" style=" white-space: nowrap; 
+  width: 50px; 
+  overflow: hidden;
+  text-overflow: ellipsis; ">
+                   <a style="width: 80%; " href="/survey?id=<%=survey.survey_id%>" class ="col-md-11"><%=survey.title%></a>             
                 </div>
 
                <%if(session.username==sections[0][0].username){%>
