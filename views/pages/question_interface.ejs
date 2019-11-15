@@ -74,10 +74,13 @@
             </h5>
           </div>
           <div class="card-body">
+            <% numberans= 0;for(var i = 0; i < question[2].length; i++) {
+            numberans++;
+          }%>
             <h5><%=question[0][0].context%></h5>
             <form class="form-inline" style="padding-top: 8px;">
              <!-- <small style="font-size: 15px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small> -->
-             <small style="font-size: 15px;"><i class="fa fa-commenting-o" aria-hidden="true"></i> 07 bình luận</small>
+             <small style="font-size: 15px;"><i class="fa fa-commenting-o" aria-hidden="true"></i> <%=numberans%> bình luận</small>
            </form>
            <hr id = "phienhoidap" class="featurette-divider">
            <!-- <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a> -->
@@ -154,6 +157,11 @@
                 </div>
                 <%}%>
               </div>
+              <% numbercmt= 0;for(var i = 0; i < question[3].length; i++) {
+              if (question[3][i].ans_id == q.ans_id) {
+              numbercmt++;
+            }
+          }%>
 
               <div class="card-body">
                 <h6 id="cont1_<%=q.ans_id%>"><%=q.content%></h6>
@@ -170,7 +178,7 @@
 
                 <form class="form-inline" style="padding-top: 8px;">
                   <!-- <small style="font-size: 14px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small> -->
-                  <small style="font-size: 14px;"><i class="fa fa-commenting-o" aria-hidden="true"></i> 05 phản hồi</small>
+                  <small style="font-size: 14px;"><i class="fa fa-commenting-o" aria-hidden="true"></i> <%=numbercmt%> phản hồi</small>
                 </form>
                 <hr id = "phienhoidap" class="featurette-divider">
 

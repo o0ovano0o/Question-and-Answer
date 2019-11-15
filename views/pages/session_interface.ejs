@@ -92,11 +92,8 @@
             <%sections[2].forEach(function(survey) {%>
              <li class="list-group-item" style="text-align: left;">
               <div class="row">
-                <div class="col-9 col-sm-9 col-md-9" style=" white-space: nowrap; 
-  width: 50px; 
-  overflow: hidden;
-  text-overflow: ellipsis; ">
-                   <a style="width: 80%; " href="/survey?id=<%=survey.survey_id%>" class ="col-md-11"><%=survey.title%></a>             
+                <div class="col-9 col-sm-9 col-md-9">
+                   <a style="width: 100%;" href="/survey?id=<%=survey.survey_id%>" class ="col-md-11"><%=survey.title%></a>             
                 </div>
 
                <%if(session.username==sections[0][0].username){%>
@@ -247,7 +244,7 @@
         <form action="/deletesection?question_id=<%=section.question_id%>&id=<%=section.sections_id%>" method="POST">
           <div class="form-group">
             <label for="InputTitle">Nội dung:</label>
-            <input type="text" name="sec_title" value="<%=section.context%>" class="form-control" id="InputTitle" aria-describedby="title">
+            <input type="text" name="sec_title" value="<%=section.context%>" class="form-control" id="InputTitle" aria-describedby="title" >
           </div>
       <div class="modal-footer">
         <input type="submit" class="btn btn-success" value="Xác nhận">
