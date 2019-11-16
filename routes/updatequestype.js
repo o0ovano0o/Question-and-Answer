@@ -33,7 +33,7 @@ router.post('/', function (req, res) {
              s_ans = {
                question_id: ids ,
                ans_text: req.body[ans],
-               number: type
+               number: 0,
              }
              if(s_ans.ans_text!=""){
                var query = conn.query("INSERT INTO s_ans SET ?", s_ans, (err, ress) => {

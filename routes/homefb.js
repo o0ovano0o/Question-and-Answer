@@ -30,7 +30,7 @@ router.get('/',function(req,res){
 		var userr = usercheck[0];
 
 		if (userr != null) {
-					var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+					var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by survey_id DESC;SELECT * FROM section join user on user.username = section.author Order by section_id DESC;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id  Order by section_id DESC",  (err, surveys) => {
 				      if(err) throw err;
 				      else{
 				        res.render('main',{session: req.session.user, surveys}); } 
@@ -45,7 +45,7 @@ router.get('/',function(req,res){
 						throw(err);
 					}
 					else {
-						var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+						var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by survey_id DESC;SELECT * FROM section join user on user.username = section.author Order by section_id DESC;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id  Order by section_id DESC",  (err, surveys) => {
 				      if(err) throw err;
 				      else{
 				        res.render('main',{session: req.session.user, surveys}); } 

@@ -14,12 +14,11 @@ router.get('/', function (req, res) {
 router.post('/',function(req,res){
   userr=req.body.mail;
   var transporter = nodemailer.createTransport({
- service: 'gmail',
-  auth: {
-    user: 'nhom05web@gmail.com',
-    pass: 'A0379685354'
-  }
-});
+service: 'Gmail',
+auth: {
+    user: 'beminah1999@gmail.com',
+    pass: 'min921999'
+}});
   var query = conn.query("Select * from user WHERE ?", {email: userr}, (err, squests) => {
             if (err) throw err;
             else {
@@ -30,9 +29,9 @@ router.post('/',function(req,res){
               else{
               var text="Chào bạn, Chúng tôi là QA. Đây là thứ bạn muốn: \n";
               for (var i = 0; i < squests.length; i++) {
-                text+="Username: "+squests[i].username+"\n" + "Password:"+squests[i].password+"\n"+
-                "Cảm ơn vì đã truy cập hệ thống của chúng tôi!";
+                text+="Username: "+squests[i].username+"\n" + "Password:"+squests[i].password+"\n";
               }
+              text+= "Cảm ơn vì đã truy cập hệ thống của chúng tôi!";
                 let mailOptions = {
                   from: 'nhom05web@gmail.com',
                   to: userr,

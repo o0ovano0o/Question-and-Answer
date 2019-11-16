@@ -25,7 +25,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 		isadmin: 0
 	};
 	var defer = q.defer();
-		var query = conn.query("SELECT * FROM user WHERE ?", {name :user.name}, function(err,results) {
+		var query = conn.query("SELECT * FROM user WHERE ?", {email :user.email}, function(err,results) {
 			if (err) {
 				defer.reject(err);
 			}
@@ -38,7 +38,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 		var userr = usercheck[0];
 
 		if (userr != null) {
-					var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+					var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by survey_id DESC;SELECT * FROM section join user on user.username = section.author Order by section_id DESC;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id  Order by section_id DESC",  (err, surveys) => {
 				      if(err) throw err;
 				      else{
 				      	userscheck = {
@@ -63,7 +63,7 @@ router.get('/homefb',isLoggedIn,function(req,res){
 						throw(err);
 					}
 					else {
-						var query = conn.query("SELECT * FROM survey Order by startdate DESC;SELECT * FROM section",  (err, surveys) => {
+						var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by survey_id DESC;SELECT * FROM section join user on user.username = section.author Order by section_id DESC;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id  Order by section_id DESC",  (err, surveys) => {
 				      if(err) throw err;
 				      else{
 				      	userscheck = {
