@@ -43,11 +43,7 @@ router.post('/', function (req, res) {
 					  res.redirect('/new_session?id='+id);
 				}
 				else {
-					var query = conn.query("SELECT * FROM survey JOIN user on user.username = survey.author Order by startdate DESC;SELECT * FROM section join user on user.username = section.author;SELECT * from section JOIN aquest on section.section_id = aquest.sections_id LEFT JOIN ans_quest on ans_quest.question_id = aquest.question_id LEFT join cmt_ans on cmt_ans.ans_id = ans_quest.ans_id",  (err, surveys) => {
-					if(err) throw err;
-					else{
-						res.render('main',{session: req.session.user, surveys}); } 
-					});
+					 res.redirect('/home');
 				}
 			}
 		});
