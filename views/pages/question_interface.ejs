@@ -123,9 +123,9 @@
                <div class="card" style="border-radius: 6px;">
 
                 <%if (q.isadmin) {%>
-                <div class="card-header form-inline" style="background-color: #ff9933;border-top-right-radius: 6px;border-top-left-radius: 6px;"><%}%>
+                <div class="card-header form-inline" style="background-color: #ff9933;border-top-right-radius: 6px;border-top-left-radius: 6px;padding-top: 5px;padding-bottom: 5px;"><%}%>
                   <%if (!q.isadmin) {%>
-                  <div class="card-header form-inline" style="background-color: #33ccff;border-top-right-radius: 6px;border-top-left-radius: 6px;"><%}%>  
+                  <div class="card-header form-inline" style="background-color: #33ccff;border-top-right-radius: 6px;border-top-left-radius: 6px;padding-top: 5px;padding-bottom: 5px;"><%}%>  
                    <div class="col-md-11" style="padding-left: 0px;">
                     <div class="form-inline">
                      <h6><b><%=q.name%></b></h6>
@@ -168,7 +168,7 @@
             }
           }%>
 
-          <div class="card-body">
+          <div class="card-body" style="padding-bottom: 0px;">
             <h6 id="cont1_<%=q.ans_id%>"><%=q.content%></h6>
             <form method="POST" action="/session?ans_id=<%=q.ans_id%>&question_id=<%=question[0][0].question_id%>">
               <div class="row" style="display: none;" id="cont2_<%=q.ans_id%>">
@@ -208,7 +208,7 @@
             <% question[3].forEach(function(questions) {
             if (questions.ans_id == q.ans_id) { %>
             <div class="card" style="border-radius: 6px;margin-bottom: 8px;">
-              <div class="card-header form-inline" style="background-color: #dddddd;border-top-right-radius: 6px;border-top-left-radius: 6px;">
+              <div class="card-header form-inline" style="background-color: #dddddd;border-top-right-radius: 6px;border-top-left-radius: 6px;padding-top: 5px;padding-bottom: 5px;">
                <div class="col-md-11" style="padding-left: 0px;"><h6><b><%=questions.name%></b></h6></div>
                <% if (questions.username == session.username) { %>
                <%if(question[1][0].sec_isopen==1){%>
