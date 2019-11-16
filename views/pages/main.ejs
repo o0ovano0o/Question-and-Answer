@@ -523,10 +523,15 @@
             <label for="InputDes">Mô tả:</label>
             <input type="text" name="sec_desc" class="form-control pb-4" id="InputDes" placeholder="Mô tả" aria-describedby="desc" autocomplete="off">
           </div>
+          <div class="form-group">
+            
+            <input type="text" name="sec" class="form-control" id="sss"  aria-describedby="desc" autocomplete="off" hidden="on">
+          </div>
           <div class="form-group w-50">
             <label for="DateBegin">Ngày bắt đầu:</label>
             <input type="date" name="date_begin" class="form-control" id="DateBegin" disabled="on" >
             <script>
+              $("#sss").prop('disabled', true);
               var now = new Date();
 
               var day = ("0" + now.getDate()).slice(-2);
@@ -539,25 +544,28 @@
 
            
           </div>
-
+  
           <div class="form">
-            <div>
+            <div class="checkbox">
               <label data-toggle="collapse" data-target="#collapsePas" aria-expanded="false" aria-controls="collapsePas">
 
-                <input type="checkbox" name="passornot"/> Đặt mật khẩu
+                <input type="checkbox" /> Đặt mật khẩu
               </label>
             </div>
 
             <div id="collapsePas" aria-expanded="false" class="collapse">
               <div>
-               <input style="display:none">
+
+               <input type="password" hidden="on">
                <input type="password" name="sec_pass" class="form-control" id="InputPas" placeholder="Nhập mật khẩu...">
              </div>
            </div>
 
-           <div >
-           <p>Nếu bạn không đặt mật khẩu Hệ thống sẽ tự hiểu là phiên bạn muốn tạo sẽ không có mật khẩu
-          </div>
+ 
+           <div class="checkbox">
+            <input type="checkbox"/> Không đặt mật khẩu
+           </div>
+     
         </div>
         <div class="modal-footer">
           <input type="submit" class="btn btn-success" value="Xác nhận">
