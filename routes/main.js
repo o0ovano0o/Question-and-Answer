@@ -22,35 +22,24 @@ router.post('/', function (req, res) {
 	var create = req.body;
 	if(req.session.user){
 		if(req.query.type==1){
+			var now = new Date();
 			sections = {
 			sec_title: create.sec_title,
 			sec_desc: create.sec_desc,
 			author: req.session.user.username,
-			sec_time: create.date_begin,
+			sec_time: now,
 			sec_pass: create.sec_pass,
 			sec_isopen: 1
 			};
 			if (sections) {
-				var defer1 = q.defer();
 				var query1 = conn.query("INSERT INTO section SET ?", sections, function(err,results) {
 					if (err) {
-						defer1.reject(err);
+						throw err; 
 					}
 					else {
-						defer1.resolve(results);
+						 res.redirect('/home');
 					}
 				});
-				var checkInsert = defer1.promise;
-			}
-			else {
-				var checkInsert = false;
-			}
-
-			if (!checkInsert) {
-				alert("Không thể tạo phiên");
-			}
-			else {
-				  res.redirect('/home');
 			}
 		}
 		else

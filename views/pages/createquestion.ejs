@@ -85,7 +85,7 @@
   <!-- Nội dung các tabs-->
   <div class="tab-content">
       <div id="tn1" class="tab-pane active">
-         <form action="/createquestion/?id=<%=survey.survey_id%>&qtype=1" id="form1" method="POST">
+         <form action="/createquestion?id=<%=survey.survey_id%>&qtype=1" id="form1" method="POST">
               <div class="row post" style="margin-top: 20px;">
                    <input  type="number" class='form-control' name="number"  style="border-radius: 5px; margin: 10px; width: 50%;padding: 5px;" placeholder="Số câu hỏi" onchange="checknumber(this);socauhoi(this.value);" value="1" min="1" max="30" >
                    <div style="border-radius: 5px; margin: 10px; width: 40%;padding: 5px;">
