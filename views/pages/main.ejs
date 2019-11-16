@@ -125,7 +125,7 @@
                     </div>
                     <div class="col-md-6">
                       <a href="{{val.link}}" data-toggle="modal" data-target="#{{val.id}}">
-                        
+
                         <h4>{{val.chude}}</h4></a>
                         <p>{{val.mota}}</p>
                       </div>
@@ -155,7 +155,7 @@
                 </script>
                 <% var count = 0;
                 for(var i=0;i< surveys[1].length;i++){
-                if(surveys[1][i].sec_isopen == 1 ){ 
+                if(surveys[1][i].sec_isopen == 1 ){
                 if (surveys[2]) {
                 for (var j = 0; j < surveys[2].length; j++) {
                 if (surveys[2][j].section_id == surveys[1][i].section_id)
@@ -236,7 +236,7 @@
             </script>
             <% var countd = 0;
             for(var i=0;i < surveys[1].length;i++){
-            if(surveys[1][i].sec_isopen == 0){ 
+            if(surveys[1][i].sec_isopen == 0){
             if (surveys[2]) {
             for (var j = 0; j < surveys[2].length; j++) {
             if (surveys[2][j].section_id == surveys[1][i].section_id)
@@ -524,7 +524,7 @@
             <input type="text" name="sec_desc" class="form-control pb-4" id="InputDes" placeholder="Mô tả" aria-describedby="desc" autocomplete="off">
           </div>
           <div class="form-group">
-            
+
             <input type="text" name="sec" class="form-control" id="sss"  aria-describedby="desc" autocomplete="off" hidden="on">
           </div>
           <div class="form-group w-50">
@@ -542,9 +542,9 @@
               $('#DateBegin').val(today);
             </script>
 
-           
+
           </div>
-  
+
           <div class="form">
             <div class="checkbox">
               <label data-toggle="collapse" data-target="#collapsePas" aria-expanded="false" aria-controls="collapsePas">
@@ -629,7 +629,7 @@
                                 <form action="/ghim?id=<%=surveys[1][i].section_id%>" method="POST">
                                   <div class="form-group">
                                     <label>Nhập mật khẩu cho phiên hỏi đáp:</label>
-                                    <input type="text" name="QuestionPass" class="form-control" id="QuestionPass" placeholder="Mật khẩu...">
+                                    <input type="password" name="QuestionPass" class="form-control" id="QuestionPass" placeholder="Mật khẩu...">
                                   </div>
                                   <div class="modal-footer">
                                     <input type="submit" class="btn btn-success" value="Xác nhận">
