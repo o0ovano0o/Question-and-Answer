@@ -23,6 +23,18 @@
   <script>
     window.history.pushState("", "", '/survey?id=<%=survey.survey_id%>');
   </script>
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 
 <!-- CSS tự định nghĩa -->
@@ -44,7 +56,7 @@
   }
 </style>
 
-<body style="background-color: #EEEEEE">
+<body style="background-color: #EEEEEE" id = "backtotop">
 
   <%- include header %>
   <main role="main">
@@ -67,383 +79,387 @@
                 <h4 class="card-title"><%=survey.title%></h4>
                 <p class="card-text"><%=survey.description%><br><br>
                   Đăng bởi: <%=survey.author%><br>
-                 </p>
-                 <p id="date1"></p>
-                 <%if(numb[0]){%>
-                 <p>Tổng số câu hỏi: <%=numb[0].total%></p>
-                 <%}else{%>
-                    <p>Tổng số câu hỏi: 0</p>
-                 <%}%>
-                  <% if(survey.isopen==0){
-                 %>
-                 <p style="font-weight: bold;">Đã đóng</p><%}%>
-                 <%if(session.username==survey.author){
+                </p>
+                <p id="date1"></p>
+                <%if(numb[0]){%>
+                <p>Tổng số câu hỏi: <%=numb[0].total%></p>
+                <%}else{%>
+                <p>Tổng số câu hỏi: 0</p>
+                <%}%>
+                <% if(survey.isopen==0){
+                %>
+                <p style="font-weight: bold;">Đã đóng</p><%}%>
+                <%if(session.username==survey.author){
 
                 if(survey.isopen==0){
-                 %>
+                %>
                 
-                  <a href="/resurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Mở lại phiếu khảo sát</a>
-                  <%}else{%>
+                <a href="/resurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Mở lại phiếu khảo sát</a>
+                <%}else{%>
 
-                 <a href="/closesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Đóng phiếu khảo sát</a>
-                 <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
-                 <a href="/createquestions/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi bằng văn bản</a>
-                 <%}}%>
+                <a href="/closesurvey?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Đóng phiếu khảo sát</a>
+                <a href="/createquestion/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi</a>
+                <a href="/createquestions/?id=<%=survey.survey_id%>" class="btn btn-primary" role="button">Tạo câu hỏi bằng văn bản</a>
+                <%}}%>
               </div>
             </div>
             <%if(session.username==survey.author){%>
-              <div class=" col-1 dropdown" >
-                <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" data-toggle="modal" data-target="#updatesurvey" href="#updatesurvey">Sửa</a>
-                  <a class="dropdown-item" href="/deletesurvey?id=<%=survey.survey_id%>">Xóa</a>
-                </div>
+            <div class=" col-1 dropdown" >
+              <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" data-toggle="modal" data-target="#updatesurvey" href="#updatesurvey">Sửa</a>
+                <a class="dropdown-item" href="/deletesurvey?id=<%=survey.survey_id%>">Xóa</a>
               </div>
+            </div>
             <%}%>
           </div>
         </div>
       </div><br>
-       <div class="modal fade" id="updatesurvey" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
-                                 <div class="modal-dialog" role="document">
-                                     <div class="modal-content">
-                                         <div class="modal-header">
-                                           <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa phiếu khảo sát</h5>
-                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                 <span aria-hidden="true">&times;</span>
-                                             </button>
-                                         </div>
-                                         <div class="modal-body">
-                                               <form action="/updatesurvey?id=<%=survey.survey_id%>" method="POST">
-                                                     <div>
-                                                         <label for="title" class="col-form-label">Tiêu đề:</label>
-                                                         <input type="text" name="title" class="form-control" value="<%=survey.title%>" required>
-                                                     </div>
-                                                     <div>
-                                                         <label for="des" class="col-form-label">Mô tả:</label>
-                                                         <input type="text" name="des" class="form-control" value="<%=survey.description%>" required>
-                                                     </div>
-                                                     <div class="modal-footer">
-                                                       <input type="submit" class="btn btn-success" value="Xác nhận">
-                                                     </div>
-                                               </form>
-                                         </div><br>
-                                     </div>
-                                 </div>
-                             </div>
-      <div class="card">
-          <div class="card-header" style="background-color: #00cccc">
-              <h5><b>Đăng bởi: <%=survey.author%></b></h5>
-          </div>
-          <div class="card-body">
-
-            <div class="row">
-                <div class="col-6 col-sm-6 col-md-6">
-                    <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-primary"><ion-icon name="arrow-round-back"></ion-icon> Trở về danh sách phiếu</a>
-                </div>
-                 <%if((check==0&&survey.isopen==1)||session.u){%>
-                <div class="col-6 col-sm-6 col-md-6">
-
-                  <a data-toggle="collapse" href="#start" id="st" style="margin-left: -8%;"role="button" class="btn btn-primary">Bắt đầu</a>
-
-                </div>
-            </div><br>
-              <div class="collapse" id="start" aria-labelledby="st">
-                  <%if(session.username==survey.author){%>
-                <form action="/deletes?id=<%=survey.survey_id%>" id="del" method="POST">
-                  <%}else{%>
-                    <form action="/survey/?id=<%=survey.survey_id%>" method="POST">
-                      <%}%>
-                <div class="card">
-       <div style="visibility: hidden;">
-         <form><input type="submit" name=""></form>
+      <div class="modal fade" id="updatesurvey" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa phiếu khảo sát</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+             <form action="/updatesurvey?id=<%=survey.survey_id%>" method="POST">
+               <div>
+                 <label for="title" class="col-form-label">Tiêu đề:</label>
+                 <input type="text" name="title" class="form-control" value="<%=survey.title%>" required>
+               </div>
+               <div>
+                 <label for="des" class="col-form-label">Mô tả:</label>
+                 <input type="text" name="des" class="form-control" value="<%=survey.description%>" required>
+               </div>
+               <div class="modal-footer">
+                 <input type="submit" class="btn btn-success" value="Xác nhận">
+               </div>
+             </form>
+           </div><br>
+         </div>
        </div>
-                   <div class="card-header" style="background-color: #99ccff">
-                       <h6><b>Danh sách câu hỏi khảo sát</b></h6>
-                   </div><br>
-                   <div class="container" >
+     </div>
+     <div class="card">
+      <div class="card-header" style="background-color: #00cccc">
+        <h5><b>Đăng bởi: <%=survey.author%></b></h5>
+      </div>
+      <div class="card-body">
 
-                       <% var dem=0;
-                       for(var i=0;i< squest.length;i++){
-                         dem++;
-                          if(squest[i].quest_type_id==1){ cauhoi+=1;%>
-                                  <div id="c1" class="tab-pane active" >
-                                      <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                        <div class="row">
-                                          <p class="col-11"> <%if(session.username==survey.author){%>
-                                          <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
-                                          <%}%> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                          <%if(session.username==survey.author){%>
-                                            <div class=" col-1 dropdown" >
-                                               <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                               </button>
-                                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#update_1" data-toggle="modal" data-target="#update_<%= squest[i].squest_id%>">Sửa</a>
-                                                <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
-                                               </div>
-                                             </div>
-                                           <%}%>
-                                         </div>
-                                <% var count=0;
-                                   for(var j=0;j< s_ans.length;j++){
-                                     if(s_ans[j].question_id==squest[i].squest_id){
-                                       count++;
-                                       %>
-                                         <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="1_<%=squest[i].squest_id%>" value="<%=s_ans[j].ans_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
-                                 <%}}
-                                       %>
-                                       </div>
-                                     </div>
-                                     <div class="modal fade" id="update_<%= squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi một đáp án</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                      <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=1" method="POST">
-                                                            <div>
-                                                                <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                                <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
-                                                            </div>
-                                                            <div>
-                                                                <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
-                                                                <input  type="number" max="10" min="1" id="1_<%= squest[i].squest_id%>" class="form-control" name="numans" value ="<%=count%>" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this, <%=count%>);" >
-                                                                <% var n=0;
-                                                                for(var j=0;j< s_ans.length;j++){
-                                                                   if(s_ans[j].question_id==squest[i].squest_id){
-                                                                     n++;
-                                                                     %>
-                                                                     <div style="width: 90%;">
-                                                                         <input type='text' name='answer1_<%= squest[i].squest_id%>_<%=n%>' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
-                                                                     </div>
-                                                                <%}}%>
-                                                                <div id="dapan1_<%= squest[i].squest_id%>" style="width: 90%;"></div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                              <input type="submit" class="btn btn-success" value="Xác nhận">
-                                                            </div>
-                                                      </form>
-                                                </div><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                          <%}
-                          if(squest[i].quest_type_id==3){ cauhoi+=1;%>
-                                <div id="c3" class="tab-pane active" >
-                                    <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                      <div class="row">
+        <div class="row">
+          <div class="col-6 col-sm-6 col-md-6">
+            <a href="/home" style="margin-left: 0%;" role="button" class="btn btn-primary"><ion-icon name="arrow-round-back"></ion-icon> Trở về danh sách phiếu</a>
+          </div>
+          <%if((check==0&&survey.isopen==1)||session.u){%>
+          <div class="col-6 col-sm-6 col-md-6">
 
-                                        <p class="col-11">
-                                           <%if(session.username==survey.author){%>
-                                          <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
-                                          <%}%>
-                                         <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                        <%if(session.username==survey.author){%>
-                                          <div class=" col-1 dropdown" >
-                                             <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                             </button>
-                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                              <a class="dropdown-item" href="" data-toggle="modal" data-target="#update_<%=squest[i].squest_id%>">Sửa</a>
-                                              <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
-                                             </div>
-                                           </div>
-                                        <%}%>
-                                       </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.1" value="1" >
-                                            <label class="form-check-label" for="Radios1.1">Đúng.</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.2" value="0"  >
-                                            <label class="form-check-label" for="Radios1.2">Sai.</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal fade" id="update_<%=squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
-                                   <div class="modal-dialog" role="document">
-                                       <div class="modal-content">
-                                           <div class="modal-header">
-                                             <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi thuộc loại Đúng/Sai</h5>
-                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                   <span aria-hidden="true">&times;</span>
-                                               </button>
-                                           </div>
-                                           <div class="modal-body">
-                                                 <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=3" method="POST">
-                                                       <div>
-                                                           <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                           <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>">
-                                                        </div>
-                                                     <div class="modal-footer">
-                                                       <input type="submit" class="btn btn-success" value="Xác nhận">
-                                                     </div>
-                                                 </form>
-                                           </div><br>
-                                       </div>
-                                   </div>
-                               </div>
-                          <%}
-                          if(squest[i].quest_type_id==2){ cauhoi+=1;%>
-                              <div id="c2" class="tab-pane active" >
-                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                      <div class="row">
-                                        <p class="col-11">
-                                            <%if(session.username==survey.author){%>
-                                          <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
-                                          <%}%><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                        <%if(session.username==survey.author){%>
-                                          <div class=" col-1 dropdown" >
-                                             <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                             </button>
-                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                              <a class="dropdown-item" href="" data-toggle="modal" data-target="#update_<%= squest[i].squest_id%>">Sửa</a>
-                                              <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
-                                             </div>
-                                          </div>
-                                       <%}%>
-                                     </div>
-                                      <% var count_2=0;
-                                       for(var j=0;j< s_ans.length;j++){
-                                         if(s_ans[j].question_id==squest[i].squest_id){
-                                            count_2++;
-                                           %>
-                                          <div class="form-check"> <input type="checkbox" style="margin: 4.8px 0px 0px -20px;" value="<%=s_ans[j].ans_id%>" name="2_<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
-                                    <%}}%>
-                                </div>
-                              </div>
-                              <div class="modal fade" id="update_<%= squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
-                                 <div class="modal-dialog" role="document">
-                                     <div class="modal-content">
-                                         <div class="modal-header">
-                                           <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi nhiều đáp án</h5>
-                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                 <span aria-hidden="true">&times;</span>
-                                             </button>
-                                         </div>
-                                         <div class="modal-body">
-                                               <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=2" method="POST">
-                                                     <div>
-                                                         <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                         <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
-                                                     </div>
-                                                     <div>
-                                                         <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
-                                                         <input  type="number" max="10" min="1" id="2_<%= squest[i].squest_id%>" class="form-control" name="numans" value ="<%=count_2%>" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this, <%=count_2%>);" >
-                                                         <% var n=0;
-                                                         for(var j=0;j< s_ans.length;j++){
-                                                            if(s_ans[j].question_id==squest[i].squest_id){
-                                                              n++;
-                                                              %>
-                                                              <div style="width: 90%;">
-                                                                  <input type='text' name='answer2_<%= squest[i].squest_id%>_<%=n%>' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
-                                                              </div>
-                                                         <%}}%>
-                                                         <div id="dapan2_<%= squest[i].squest_id%>" style="width: 90%;"></div>
-                                                     </div>
-                                                     <div class="modal-footer">
-                                                       <input type="submit" class="btn btn-success" value="Xác nhận">
-                                                     </div>
-                                               </form>
-                                         </div><br>
-                                     </div>
-                                 </div>
-                             </div>
+            <a data-toggle="collapse" href="#start" id="st" style="margin-left: -8%;"role="button" class="btn btn-primary">Bắt đầu</a>
 
-                          <%}
-                          if(squest[i].quest_type_id==4){ cauhoi+=1;%>
-                              <div id="c4" class="tab-pane active" >
-                                  <div class="card card body" style="margin-top: 20px;padding:15px;">
-                                    <div class="row">
-                                      <p class="col-11">
-                                         <%if(session.username==survey.author){%>
-                                          <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
-                                          <%}%>
-                                          <b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
-                                      <%if(session.username==survey.author){%>
-                                        <div class=" col-1 dropdown" >
-                                           <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                           </button>
-                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#update_4<%=squest[i].squest_id%>" data-toggle="modal" data-target="#update_<%=squest[i].squest_id%>">Sửa</a>
-                                            <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
-                                           </div>
-                                        </div>
-                                     <%}%>
-                                   </div>
-                                      <textarea name="4_<%=squest[i].squest_id%>" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
-                                  </div>
-                              </div>
-                              <div class="modal fade" id="update_<%=squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
-                                 <div class="modal-dialog" role="document">
-                                     <div class="modal-content">
-                                         <div class="modal-header">
-                                           <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi thuộc loại câu hỏi tự luận</h5>
-                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                 <span aria-hidden="true">&times;</span>
-                                             </button>
-                                         </div>
-                                         <div class="modal-body">
-                                               <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=4" method="POST">
-                                                     <div>
-                                                         <label for="title" class="col-form-label">Câu hỏi:</label>
-                                                         <input type="text" name="title" class="form-control" value="<%=squest[i].squest_text%>" >
-                                                     </div>
-                                                   <div class="modal-footer">
-                                                     <input type="submit" class="btn btn-success" value="Xác nhận">
-                                                   </div>
-                                               </form>
-                                             </select>
-                                         </div><br>
-                                     </div>
-                                 </div>
-                             </div>
-                          <%}
+          </div>
+        </div><br>
+        <div class="collapse" id="start" aria-labelledby="st">
+          <%if(session.username==survey.author){%>
+          <form action="/deletes?id=<%=survey.survey_id%>" id="del" method="POST">
+            <%}else{%>
+            <form action="/survey/?id=<%=survey.survey_id%>" method="POST">
+              <%}%>
+              <div class="card">
+               <div style="visibility: hidden;">
+                 <form><input type="submit" name=""></form>
+               </div>
+               <div class="card-header" style="background-color: #99ccff">
+                 <h6><b>Danh sách câu hỏi khảo sát</b></h6>
+               </div><br>
+               <div class="container" >
 
-                      }%>
+                 <% var dem=0;
+                 for(var i=0;i< squest.length;i++){
+                 dem++;
+                 if(squest[i].quest_type_id==1){ cauhoi+=1;%>
+                 <div id="c1" class="tab-pane active" >
+                  <div class="card card body" style="margin-top: 20px;padding:15px;">
+                    <div class="row">
+                      <p class="col-11"> <%if(session.username==survey.author){%>
+                        <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
+                        <%}%> <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                        <%if(session.username==survey.author){%>
+                        <div class=" col-1 dropdown" >
+                         <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         </button>
+                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#update_1" data-toggle="modal" data-target="#update_<%= squest[i].squest_id%>">Sửa</a>
+                          <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
+                        </div>
+                      </div>
+                      <%}%>
+                    </div>
+                    <% var count=0;
+                    for(var j=0;j< s_ans.length;j++){
+                    if(s_ans[j].question_id==squest[i].squest_id){
+                    count++;
+                    %>
+                    <div class="form-check"><input type="radio" style="margin: 4.8px 0px 0px -20px;" name="1_<%=squest[i].squest_id%>" value="<%=s_ans[j].ans_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
+                    <%}}
+                    %>
+                  </div>
+                </div>
+                <div class="modal fade" id="update_<%= squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi một đáp án</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=1" method="POST">
+                          <div>
+                            <label for="title" class="col-form-label">Câu hỏi:</label>
+                            <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
+                          </div>
+                          <div>
+                            <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
+                            <input  type="number" max="10" min="1" id="1_<%= squest[i].squest_id%>" class="form-control" name="numans" value ="<%=count%>" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this, <%=count%>);" >
+                            <% var n=0;
+                            for(var j=0;j< s_ans.length;j++){
+                            if(s_ans[j].question_id==squest[i].squest_id){
+                            n++;
+                            %>
+                            <div style="width: 90%;">
+                             <input type='text' name='answer1_<%= squest[i].squest_id%>_<%=n%>' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
+                           </div>
+                           <%}}%>
+                           <div id="dapan1_<%= squest[i].squest_id%>" style="width: 90%;"></div>
+                         </div>
+                         <div class="modal-footer">
+                          <input type="submit" class="btn btn-success" value="Xác nhận">
+                        </div>
+                      </form>
+                    </div><br>
+                  </div>
+                </div>
+              </div>
+              <%}
+              if(squest[i].quest_type_id==3){ cauhoi+=1;%>
+              <div id="c3" class="tab-pane active" >
+                <div class="card card body" style="margin-top: 20px;padding:15px;">
+                  <div class="row">
 
-                       <%if(cauhoi>=1&&(!session.isadmin)){ %>
-                       <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><%}%><br><br>
-                     <%if(cauhoi>=1&&(session.username==survey.author)){ %>
-                       <button type="submit" form="del" class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Xóa nhiều</button><%}%><br><br>
+                    <p class="col-11">
+                     <%if(session.username==survey.author){%>
+                     <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
+                     <%}%>
+                     <b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                     <%if(session.username==survey.author){%>
+                     <div class=" col-1 dropdown" >
+                       <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       </button>
+                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="" data-toggle="modal" data-target="#update_<%=squest[i].squest_id%>">Sửa</a>
+                        <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
+                      </div>
+                    </div>
+                    <%}%>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.1" value="1" >
+                    <label class="form-check-label" for="Radios1.1">Đúng.</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="3_<%=squest[i].squest_id%>" id="Radios1.2" value="0"  >
+                    <label class="form-check-label" for="Radios1.2">Sai.</label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="update_<%=squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi thuộc loại Đúng/Sai</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                     </button>
                    </div>
+                   <div class="modal-body">
+                     <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=3" method="POST">
+                       <div>
+                         <label for="title" class="col-form-label">Câu hỏi:</label>
+                         <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>">
+                       </div>
+                       <div class="modal-footer">
+                         <input type="submit" class="btn btn-success" value="Xác nhận">
+                       </div>
+                     </form>
+                   </div><br>
+                 </div>
+               </div>
+             </div>
+             <%}
+             if(squest[i].quest_type_id==2){ cauhoi+=1;%>
+             <div id="c2" class="tab-pane active" >
+              <div class="card card body" style="margin-top: 20px;padding:15px;">
+                <div class="row">
+                  <p class="col-11">
+                    <%if(session.username==survey.author){%>
+                    <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
+                    <%}%><b>Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+                    <%if(session.username==survey.author){%>
+                    <div class=" col-1 dropdown" >
+                     <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="" data-toggle="modal" data-target="#update_<%= squest[i].squest_id%>">Sửa</a>
+                      <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
+                    </div>
+                  </div>
+                  <%}%>
+                </div>
+                <% var count_2=0;
+                for(var j=0;j< s_ans.length;j++){
+                if(s_ans[j].question_id==squest[i].squest_id){
+                count_2++;
+                %>
+                <div class="form-check"> <input type="checkbox" style="margin: 4.8px 0px 0px -20px;" value="<%=s_ans[j].ans_id%>" name="2_<%=squest[i].squest_id%>"><label class="form-check-label" style ="margin-left: 5px;"><%=s_ans[j].ans_text%></label></input><br/></div>
+                <%}}%>
+              </div>
+            </div>
+            <div class="modal fade" id="update_<%= squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi nhiều đáp án</h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                   </button>
+                 </div>
+                 <div class="modal-body">
+                   <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=2" method="POST">
+                     <div>
+                       <label for="title" class="col-form-label">Câu hỏi:</label>
+                       <input type="text" name="title" class="form-control" value="<%= squest[i].squest_text%>" >
+                     </div>
+                     <div>
+                       <label for="title" class="col-form-label">Các phương án lựa chọn:</label>
+                       <input  type="number" max="10" min="1" id="2_<%= squest[i].squest_id%>" class="form-control" name="numans" value ="<%=count_2%>" style="border-radius: 5px; margin:  10px; width: 31%;padding: 5px;" placeholder="Số đáp án" onchange="checknumber(this);sodapan(this, <%=count_2%>);" >
+                       <% var n=0;
+                       for(var j=0;j< s_ans.length;j++){
+                       if(s_ans[j].question_id==squest[i].squest_id){
+                       n++;
+                       %>
+                       <div style="width: 90%;">
+                        <input type='text' name='answer2_<%= squest[i].squest_id%>_<%=n%>' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' value="<%=s_ans[j].ans_text%>" />
+                      </div>
+                      <%}}%>
+                      <div id="dapan2_<%= squest[i].squest_id%>" style="width: 90%;"></div>
+                    </div>
+                    <div class="modal-footer">
+                     <input type="submit" class="btn btn-success" value="Xác nhận">
+                   </div>
+                 </form>
+               </div><br>
+             </div>
+           </div>
+         </div>
+
+         <%}
+         if(squest[i].quest_type_id==4){ cauhoi+=1;%>
+         <div id="c4" class="tab-pane active" >
+          <div class="card card body" style="margin-top: 20px;padding:15px;">
+            <div class="row">
+              <p class="col-11">
+               <%if(session.username==survey.author){%>
+               <input type="checkbox" name="del" value="<%=squest[i].squest_id%>" form="del"/>
+               <%}%>
+               <b> Câu <%=dem%>: <%= squest[i].squest_text%></b></p>
+               <%if(session.username==survey.author){%>
+               <div class=" col-1 dropdown" >
+                 <button class="btn dropdown-toggle"  type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 </button>
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#update_4<%=squest[i].squest_id%>" data-toggle="modal" data-target="#update_<%=squest[i].squest_id%>">Sửa</a>
+                  <a class="dropdown-item" href="/delete?ids=<%= squest[i].squest_id%>&id=<%= squest[i].surveysq_id%>">Xóa</a>
+                </div>
+              </div>
+              <%}%>
+            </div>
+            <textarea name="4_<%=squest[i].squest_id%>" rows="4" class="col-11 col-sm-11 col-md-11" style="border-radius: 5px; margin: 10px;" placeholder="Nhập vào đây..." ></textarea>
+          </div>
+        </div>
+        <div class="modal fade" id="update_<%=squest[i].squest_id%>" tabindex="-1" role="dialog" aria-labelledby="SurveyModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="SessionModalLabel">Chỉnh sửa câu hỏi thuộc loại câu hỏi tự luận</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body">
+               <form action="/updatequestype?id=<%=survey.survey_id%>&ids=<%=squest[i].squest_id%>&type=4" method="POST">
+                 <div>
+                   <label for="title" class="col-form-label">Câu hỏi:</label>
+                   <input type="text" name="title" class="form-control" value="<%=squest[i].squest_text%>" >
+                 </div>
+                 <div class="modal-footer">
+                   <input type="submit" class="btn btn-success" value="Xác nhận">
                  </div>
                </form>
-             </div>
-             <br>
-             <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a><br><br><br>
+             </select>
+           </div><br>
+         </div>
+       </div>
+     </div>
+     <%}
 
-        </div><br>
+   }%>
 
-   </div>
-   <p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+   <%if(cauhoi>=1&&(!session.isadmin)){ %>
+   <button class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Kết thúc</button><%}%><br><br>
+   <%if(cauhoi>=1&&(session.username==survey.author)){ %>
+   <button type="submit" form="del" class="btn btn-primary" style="float: right;margin-right: 45%; margin-top: 5px;">Xóa nhiều</button><%}%><br><br>
  </div>
-           <%}else {%>
-           <br/><br/>
-           <%if(survey.isopen==1){%>
-                   <div class="alert alert-primary" role="alert" style="width: 100%;">
-                    Bạn đã làm bài khảo sát này rồi.
-                  </div>
-                  <div class="row" style="width: 100%">
-                  <div class="col-6 col-sm-6 col-md-6">
-                  </div>
-                 <div class="col-6 col-sm-6 col-md-6">
-                    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a>
-                  </div>
-                </div>
-                  <%}else{%>
-                  <div class="row" style="width: 100%">
-                  <div class="col-6 col-sm-6 col-md-6">
-                  </div>
-                 <div class="col-6 col-sm-6 col-md-6">
-                    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a>
-                  </div>
-                </div>
+</div>
+</form>
+</div>
+<br>
+<a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a><br><br><br>
 
-                   <%}}%>
+</div><br>
+
+</div>
+<br>
+<br>
+<div id="lentren">
+  <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
+</div>
+<hr id = "phienhoidap" class="featurette-divider"> </div>
+<%}else {%>
+<br/><br/>
+<%if(survey.isopen==1){%>
+<div class="alert alert-primary" role="alert" style="width: 100%;">
+  Bạn đã làm bài khảo sát này rồi.
+</div>
+<div class="row" style="width: 100%">
+  <div class="col-6 col-sm-6 col-md-6">
+  </div>
+  <div class="col-6 col-sm-6 col-md-6">
+    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a>
+  </div>
+</div>
+<%}else{%>
+<div class="row" style="width: 100%">
+  <div class="col-6 col-sm-6 col-md-6">
+  </div>
+  <div class="col-6 col-sm-6 col-md-6">
+    <a href="/resultsurvey/?id=<%=survey.survey_id%>" style="margin-right: 3%;float: right;" role="button" class="btn btn-primary">Xem kết quả khảo sát <ion-icon name="arrow-round-forward"></ion-icon></a>
+  </div>
+</div>
+
+<%}}%>
 <%- include update_inf_user %>
 </main>
 <footer id="footer">
@@ -456,36 +472,36 @@
 
 
 <script type="text/javascript">
-    <% var n =  JSON.stringify(survey.startdate)%>;
-    var text1 = <%- n%> ;
-    var date1 = new Date(text1);
-    document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
-    function checknumber(inp){
-      if(inp.value=="")
-        inp.value=1;
-      if(inp.value>30)
-      {
-        alert("Tối đa 30 thôi bạn!!");
-        inp.value=30;
-      }
+  <% var n =  JSON.stringify(survey.startdate)%>;
+  var text1 = <%- n%> ;
+  var date1 = new Date(text1);
+  document.getElementById("date1").innerHTML="Ngày tạo: "+formatdate(date1);
+  function checknumber(inp){
+    if(inp.value=="")
+      inp.value=1;
+    if(inp.value>30)
+    {
+      alert("Tối đa 30 thôi bạn!!");
+      inp.value=30;
     }
-    function sodapan(sodapan, num1){
-      var i=0;
-      var num=sodapan.value-num1;
-      var dapan="<input type='text' name='answer";
-      var dap= "' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' />";
-      var code="";
-      var key = sodapan.id;
+  }
+  function sodapan(sodapan, num1){
+    var i=0;
+    var num=sodapan.value-num1;
+    var dapan="<input type='text' name='answer";
+    var dap= "' class='form-control' class='col-sm-12' style='border-radius: 5px; margin:  10px; padding: 5px;' placeholder='Đáp án' />";
+    var code="";
+    var key = sodapan.id;
 
-      for(i=0;i<num;i++){
-        var m= i+num1+1;
-        code+=(dapan+key+"_"+m+dap);
-      }
-      var res="dapan" + key;
-      document.getElementById(res).innerHTML=code;
+    for(i=0;i<num;i++){
+      var m= i+num1+1;
+      code+=(dapan+key+"_"+m+dap);
     }
-function formatdate(d){
-  var dd = d.getDate();
+    var res="dapan" + key;
+    document.getElementById(res).innerHTML=code;
+  }
+  function formatdate(d){
+    var dd = d.getDate();
   var mm = d.getMonth() + 1; //January is 0!
 
   var yyyy = d.getFullYear();
@@ -498,5 +514,5 @@ function formatdate(d){
   var today = dd + '/' + mm + '/' + yyyy;
   return today;
 }
-  </script>
+</script>
 </html>

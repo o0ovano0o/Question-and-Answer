@@ -23,11 +23,22 @@
   <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
   <script src="/angular.ng-modules.js"></script> <!--nguồn code tham khảo https://github.com/luisperezphd/ngModule-->
   <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 
 <!-- BODY -->
-<body style="background-color: #eeeeee;">
+<body style="background-color: #eeeeee;" id = "backtotop">
 
   <%- include header %>
   <div class="container"><br>
@@ -48,25 +59,28 @@
         </form>
       </div>
     </div>
+    <!-- Quay về đầu trang -->
+    <br>
+    <br>
+    <div id="lentren">
+      <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
+    </div>
+    <hr id = "phienhoidap" class="featurette-divider">
   </div>
-  <!-- Quay về đầu trang -->
-  <br>
-  <br>
-  <div class="text-center">
-    <a href="#"><h5>Back to top</h5></a>
-  </div>
+</div>
 
 
-  <!-- FOOTER -->
-  <footer id="footer">
-    <ul style="padding: 15px; margin-bottom: 0px;">
-      <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-      <p style="font-size: 12px"> @2019 design by Team 5</p>
-    </ul>
-  </footer>
-  <script type="text/javascript">
+
+<!-- FOOTER -->
+<footer id="footer">
+  <ul style="padding: 15px; margin-bottom: 0px;">
+    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+    <p style="font-size: 12px"> @2019 design by Team 5</p>
+  </ul>
+</footer>
+<script type="text/javascript">
 
 
-  </script>
+</script>
 </body>
 </html>

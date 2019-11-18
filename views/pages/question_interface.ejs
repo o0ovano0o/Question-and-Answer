@@ -22,87 +22,100 @@
   <script>
     window.history.pushState("", "", '/question?question_id=<%=question[0][0].question_id%>');
   </script>
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 
-<body style="background-color: #EEEEEE">
+<body style="background-color: #EEEEEE" id = "backtotop">
 
   <%- include header %>
   
   <main role="main">
-
+    
     <div class="container marketing">
-      <a href="/new_session?id=<%=question[1][0].section_id%>" style="margin-bottom: 10px;" role="button" class="btn btn-primary"><ion-icon name="arrow-round-back"></ion-icon> Trở về danh sách câu hỏi</a>
-      <!-- Phiên hỏi đáp -->
-      <div class="card" style = "border-radius: 6px;">
-        <div class="card-header" style="background-color: #999; border-top-right-radius: 6px;border-top-left-radius: 6px;">
-          <h5><b>Phiên hỏi đáp</b></h5>
-        </div>
-        <div class="card-body" style="background-color: #dddddd; border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;">
-          <div class="row padding">
-            <div class="col-3 col-sm-2 col-md-2">
-              <div class="card" style="border-radius: 5px;">
-                <img class="card-img-top" src="./images/logo2.jpg" style="border-radius: 5px;">
+      <div class="container">
+        <a href="/new_session?id=<%=question[1][0].section_id%>" style="margin-bottom: 10px;" role="button" class="btn btn-primary"><ion-icon name="arrow-round-back"></ion-icon> Trở về danh sách câu hỏi</a>
+        <!-- Phiên hỏi đáp -->
+        <div class="card" style = "border-radius: 6px;">
+          <div class="card-header" style="background-color: #999; border-top-right-radius: 6px;border-top-left-radius: 6px;">
+            <h5><b>Phiên hỏi đáp</b></h5>
+          </div>
+          <div class="card-body" style="background-color: #dddddd; border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;">
+            <div class="row padding">
+              <div class="col-3 col-sm-2 col-md-2">
+                <div class="card" style="border-radius: 5px;">
+                  <img class="card-img-top" src="./images/logo2.jpg" style="border-radius: 5px;">
+                </div>
               </div>
-            </div>
-            <div class="col-9 col-sm-9 col-md-9">
-              <div class="card-body" style="margin-top: -20px;">
-                <h4 class="card-title"><%=question[1][0].sec_title%></h4>
-                <p class="card-text"><%=question[1][0].sec_desc%><br>
-                  Đăng bởi: <a href="/yourprofile?id=<%=question[1][0].user_id%>"><%=question[1][0].name%></a><br>
-                  Thời gian tạo: <%=question[1][0].sec_time%>
-                </p>
+              <div class="col-9 col-sm-9 col-md-9">
+                <div class="card-body" style="margin-top: -20px;">
+                  <h4 class="card-title"><%=question[1][0].sec_title%></h4>
+                  <p class="card-text"><%=question[1][0].sec_desc%><br>
+                    Đăng bởi: <a href="/yourprofile?id=<%=question[1][0].user_id%>"><%=question[1][0].name%></a><br>
+                    Thời gian tạo: <%=question[1][0].sec_time%>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <br>
+        <br>
 
-      <!-- Nội dung câu hỏi -->
-      <div class="card" style = "border-radius: 6px;">
+        <!-- Nội dung câu hỏi -->
+        <div class="card" style = "border-radius: 6px;">
 
-        <div class="card-header" style="background-color: #999;border-top-right-radius: 6px;border-top-left-radius: 6px;">
-          <h5><b>Câu hỏi đăng bởi: <a href="/yourprofile?id=<%=question[0][0].user_id%>" style="color: #000099;"> <%=question[0][0].name%></a></b></h5>
-        </div>
-
-        <div class="card-body" style="background-color: #dddddd; border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;">
-
-          <div class="card" style="border-radius: 6px;">
-            <div class="card-header" style="background-color: #33ccff;border-top-right-radius: 6px;border-top-left-radius: 6px;">
-             <h5>
-              <b>Nội dung câu hỏi</b>
-            </h5>
+          <div class="card-header" style="background-color: #999;border-top-right-radius: 6px;border-top-left-radius: 6px;">
+            <h5><b>Câu hỏi đăng bởi: <a href="/yourprofile?id=<%=question[0][0].user_id%>" style="color: #000099;"> <%=question[0][0].name%></a></b></h5>
           </div>
-          <div class="card-body">
-            <% numberans= 0;for(var i = 0; i < question[2].length; i++) {
-            numberans++;
-          }%>
-          <h5><%=question[0][0].context%></h5>
-          <form class="form-inline" style="padding-top: 8px;">
-           <!-- <small style="font-size: 15px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small> -->
-           <small style="font-size: 15px;"><i class="fa fa-commenting-o" aria-hidden="true"></i> <%=numberans%> bình luận</small>
-         </form>
-         <hr id = "phienhoidap" class="featurette-divider">
-         <!-- <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a> -->
-         <a href="" style="padding-left: 45%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl" ><i class="fa fa-comment-o" aria-hidden="true" ></i> Bình luận</a><br>
-         <%if(question[1][0].sec_isopen==1){%>
-         <form method="POST" action="/question?cmt=0">
-           <p>
-            <div class="collapse" id="tl">
-              <div class="row">
-                <div class="col-9 col-sm-10 col-md-11">
-                  <input type="nhap" name="cmt"  class="form-control" id="search2" placeholder="Viết bình luận ...">
-                </div>
-                <div class="col-3 col-sm-2 col-md-1">
-                  <button class="btn btn-outline-secondary" type="submit">Gửi</button>
+
+          <div class="card-body" style="background-color: #dddddd; border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;">
+
+            <div class="card" style="border-radius: 6px;">
+              <div class="card-header" style="background-color: #33ccff;border-top-right-radius: 6px;border-top-left-radius: 6px;">
+               <h5>
+                <b>Nội dung câu hỏi</b>
+              </h5>
+            </div>
+            <div class="card-body">
+              <% numberans= 0;for(var i = 0; i < question[2].length; i++) {
+              numberans++;
+            }%>
+            <h5><%=question[0][0].context%></h5>
+            <form class="form-inline" style="padding-top: 8px;">
+             <!-- <small style="font-size: 15px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 03 lượt thích</small> -->
+             <small style="font-size: 15px;"><i class="fa fa-commenting-o" aria-hidden="true"></i> <%=numberans%> bình luận</small>
+           </form>
+           <hr id = "phienhoidap" class="featurette-divider">
+           <!-- <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Thích</a> -->
+           <a href="" style="padding-left: 45%;" data-toggle="collapse" data-target="#tl" aria-expanded="false" aria-controls="tl" ><i class="fa fa-comment-o" aria-hidden="true" ></i> Bình luận</a><br>
+           <%if(question[1][0].sec_isopen==1){%>
+           <form method="POST" action="/question?cmt=0">
+             <p>
+              <div class="collapse" id="tl">
+                <div class="row">
+                  <div class="col-9 col-sm-10 col-md-11">
+                    <input type="nhap" name="cmt"  class="form-control" id="search2" placeholder="Viết bình luận ...">
+                  </div>
+                  <div class="col-3 col-sm-2 col-md-1">
+                    <button class="btn btn-outline-secondary" type="submit">Gửi</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </p>
-        </form>
-        <%}%>
+            </p>
+          </form>
+          <%}%>
+        </div>
       </div>
-    </div>
 
           <!-- <br>
           <a href="" style="padding-left: 2%;">Thích</a>
@@ -253,15 +266,18 @@
 
 </div>
 </div>
-
-<%- include update_inf_user %>
-
-</main>
 <!-- Quay về đầu trang -->
 <br>
-<div class="text-center">
-  <a href="#"><h5>Back to top</h5></a>
+<br>
+<div id="lentren">
+  <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
 </div>
+<hr id = "phienhoidap" class="featurette-divider">
+</div>
+<%- include update_inf_user %>
+</div>
+</main>
+
 
 <!-- FOOTER -->
 <footer id="footer">

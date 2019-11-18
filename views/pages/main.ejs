@@ -18,7 +18,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="https://kit.fontawesome.com/0ca24b5ab9.js" crossorigin="anonymous"></script>
   <!-- Xử lý Navigation -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
@@ -27,10 +26,22 @@
   <script>
     window.history.pushState("", "", '/home');
   </script>
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 
 <!-- BODY -->
-<body>
+<body id = "backtotop">
 
   <%- include header %>
 
@@ -459,6 +470,13 @@
 <br>
 
 </div>
+<!-- Quay về đầu trang -->
+<br>
+<br>
+<div id="lentren">
+  <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
+</div>
+<hr id = "phienhoidap" class="featurette-divider">
 </div>
 
 <!-- Cập nhật tài khoản -->
@@ -521,11 +539,11 @@
                <input type="password" name="sec_pass" class="form-control" id="InputPas" placeholder="Nhập mật khẩu...">
              </div>
            </div>
-     <div>
-       <p>Nếu bạn không đặt mật khẩu, Hệ thống sẽ tự động hiểu là phiên hỏi đáp của bạn sẽ không có mật khẩu</p>
-     </div>
-        </div>
-        <div class="modal-footer">
+           <div>
+             <p>Nếu bạn không đặt mật khẩu, Hệ thống sẽ tự động hiểu là phiên hỏi đáp của bạn sẽ không có mật khẩu</p>
+           </div>
+         </div>
+         <div class="modal-footer">
           <input type="submit" class="btn btn-success" value="Xác nhận">
 
         </div>
@@ -576,45 +594,39 @@
 </div>
 </div>
 <!-- Kiểm tra mật khẩu câu hỏi -->
-                        <%for(var i=0;i< surveys[1].length;i++){ %>
-                        <div class="modal fade" id="checkpassword<%=surveys[1][i].section_id%>" tabindex="-1" role="dialog" aria-labelledby="CheckPassQuestion" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="CheckPassQuestion">Vui lòng nhập mật khẩu. Để trống nếu phiên hỏi đáp không có mật khẩu</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <form action="/ghim?id=<%=surveys[1][i].section_id%>" method="POST">
-                                  <div class="form-group">
-                                    <label>Nhập mật khẩu cho phiên hỏi đáp:</label>
-                                    <input type="password" name="QuestionPass" class="form-control" id="QuestionPass" placeholder="Mật khẩu...">
-                                  </div>
-                                  <div class="modal-footer">
-                                    <input type="submit" class="btn btn-success" value="Xác nhận">
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <%}%>
+<%for(var i=0;i< surveys[1].length;i++){ %>
+<div class="modal fade" id="checkpassword<%=surveys[1][i].section_id%>" tabindex="-1" role="dialog" aria-labelledby="CheckPassQuestion" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="CheckPassQuestion">Vui lòng nhập mật khẩu. Để trống nếu phiên hỏi đáp không có mật khẩu</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/ghim?id=<%=surveys[1][i].section_id%>" method="POST">
+          <div class="form-group">
+            <label>Nhập mật khẩu cho phiên hỏi đáp:</label>
+            <input type="password" name="QuestionPass" class="form-control" id="QuestionPass" placeholder="Mật khẩu...">
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-success" value="Xác nhận">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%}%>
 
 
 
 
 </main>
 
-<!-- Quay về đầu trang -->
-<br>
-<br>
-<div class="text-center">
-  <a href="#"><h5>Back to top</h5></a>
-</div>
 
-
+</body>
 <!-- FOOTER -->
 <footer id="footer">
   <ul style="padding: 15px; margin-bottom: 0px;">

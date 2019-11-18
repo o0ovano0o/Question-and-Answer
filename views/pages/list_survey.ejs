@@ -17,13 +17,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 
 
 <!-- CSS tự định nghĩa -->
 
-<body style="background-color: #EEEEEE">
-<%- include header %>
+<body style="background-color: #EEEEEE" id="backtotop">
+  <%- include header %>
   <main role="main">
     <div class="container marketing">
       <br>
@@ -80,34 +92,14 @@
               <div class="card-body">
                 <h5 class="card-title"><a href="/createsurvey">Khảo sát, đánh giá sự khác biệt giữa C và C++</a></h5>
                 <p class="card-text">Có: 1999 lượt khảo sát<br>
-                   <small>4 giờ trước</small>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div><br>
-
-        <div class="card">
-          <div class="row padding">
-            <div class="col-3 col-sm-3 col-md-2">
-              <div class="card">
-                <a href="/createsurvey">
-                 <img class= "card-img-top" src="./images/logo2.jpg" >
-               </a>
+                 <small>4 giờ trước</small>
+               </p>
              </div>
            </div>
-           <div class="col-9 col-sm-9 col-md-9">
-            <div class="card-body">
-              <h5 class="card-title"><a href="/createsurvey">Khảo sát, đánh giá sự khác biệt giữa C và C++</a></h5>
-              <p class="card-text">Có: 1999 lượt khảo sát<br>
-                  <small>4 giờ trước</small>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div><br>
-<%- include update_inf_user %>
-      <div class="card">
+         </div>
+       </div><br>
+
+       <div class="card">
         <div class="row padding">
           <div class="col-3 col-sm-3 col-md-2">
             <div class="card">
@@ -125,10 +117,36 @@
           </div>
         </div>
       </div>
+    </div><br>
+    <%- include update_inf_user %>
+    <div class="card">
+      <div class="row padding">
+        <div class="col-3 col-sm-3 col-md-2">
+          <div class="card">
+            <a href="/createsurvey">
+             <img class= "card-img-top" src="./images/logo2.jpg" >
+           </a>
+         </div>
+       </div>
+       <div class="col-9 col-sm-9 col-md-9">
+        <div class="card-body">
+          <h5 class="card-title"><a href="/createsurvey">Khảo sát, đánh giá sự khác biệt giữa C và C++</a></h5>
+          <p class="card-text">Có: 1999 lượt khảo sát<br>
+            <small>4 giờ trước</small>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+</div>
+<!-- Quay về đầu trang -->
+<br>
+<br>
+<div id="lentren">
+  <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
+</div>
+<hr id = "phienhoidap" class="featurette-divider">
 </div>
 <%- include update_inf_user %>
 </main>

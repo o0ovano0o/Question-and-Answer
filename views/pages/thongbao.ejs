@@ -23,57 +23,67 @@
   <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
   <script src="/angular.ng-modules.js"></script> <!--nguồn code tham khảo https://github.com/luisperezphd/ngModule-->
   <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 <style type="text/css">
   #id:hover {
-    background: #ff6633;
-    color: #fff;
-}
+    background: #dddddd;
+  }
 
 </style>
 <!-- BODY -->
-<body style="background-color: #eeeeee;">
+<body style="background-color: #eeeeee;" id = "backtotop">
 
   <%- include header %>
   <div class="container"><br>
-    <div class="card" style="margin:10px;">
-      <div class="card-header" style="background-color: #cccccc;">
+    <div class="card" style="margin:10px;min-height: 250px;">
+      <div class="card-header" style="background-color: #bbbbbb;">
         <h4>Thông báo của bạn</h4>
       </div>
       <div class="card-body">
         <%if(tbao[0]){%> 
-        <ul class="list-group">
+        <div class="list-group">
           <%for(var i=0;i< tbao.length;i++){%>
           <%if(tbao[i].type==1){%>
-          <li class="list-group-item"><a href="/survey?id=<%=tbao[i].link%>" id = "id";> Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi phiếu khảo sát <span><b>  "<%=tbao[i].text%>" </b></span> của bạn. Tổng số người phản hồi hiện giờ là <%=tbao[i].mes%>. </a></li>
+          <a href="/survey?id=<%=tbao[i].link%>" class="list-group-item list-group-item-action" id="id">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi phiếu khảo sát <span><b>  "<%=tbao[i].text%>" </b></span> của bạn. Tổng số người phản hồi hiện giờ là <%=tbao[i].mes%>. </a>
           <%}%>
           <%if(tbao[i].type==2){%>
-          <li class="list-group-item"><a href="/new_session?id=<%=tbao[i].link%>" id = "id";>Lúc <span id="time<%=i%>"></span>: Có thêm 1 người đặt câu hỏi trong phiên hỏi đáp <span><b>  "<%=tbao[i].text%>" </b></span> của bạn. </a></li>
+          <a href="/new_session?id=<%=tbao[i].link%>" class="list-group-item list-group-item-action" id="id">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người đặt câu hỏi trong phiên hỏi đáp <span><b>  "<%=tbao[i].text%>" </b></span> của bạn.</a>
           <%}%>
-
           <%if(tbao[i].type==3){%>
-          <li class="list-group-item"><a href="/question?question_id=<%=tbao[i].link%>" id = "id";>Lúc <span id="time<%=i%>"></span>: Có thêm 1 người trả lời câu hỏi <span><b> "<%=tbao[i].text%>" </b></span> của bạn. </a></li>
+          <a href="/question?question_id=<%=tbao[i].link%>" class="list-group-item list-group-item-action" id="id">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người trả lời câu hỏi <span><b> "<%=tbao[i].text%>" </b></span> của bạn.</a>
           <%}%>
           <%if(tbao[i].type==4){%>
-          <li class="list-group-item"><a href="/question?question_id=<%=tbao[i].link%>" id = "id";>Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi câu trả lời <span><b> "<%=tbao[i].text%>" </b></span> của bạn. </a></li>
+          <a href="/question?question_id=<%=tbao[i].link%>" class="list-group-item list-group-item-action" id="id">Lúc <span id="time<%=i%>"></span>: Có thêm 1 người phản hồi câu trả lời <span><b> "<%=tbao[i].text%>" </b></span> của bạn.</a>
           <%}%>
 
           <%}%>
-        </ul>
+        </div>
         <%}else{%>
         <h4>Bạn chưa có thông báo nào cả!</h4>
         <%}%>
-<%- include update_inf_user %>
+        <%- include update_inf_user %>
       </div>
     </div>
+    <br>
+    <br>
+    <div id="lentren">
+      <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
+    </div>
+    <hr id = "phienhoidap" class="featurette-divider">
   </div>
-  <!-- Quay về đầu trang -->
-  <br>
-  <br>
-  <div class="text-center">
-    <a href="#"><h5>Back to top</h5></a>
-  </div>
+
 
 
   <!-- FOOTER -->

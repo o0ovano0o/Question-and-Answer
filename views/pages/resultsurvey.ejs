@@ -46,6 +46,18 @@ evt.currentTarget.className += " active";
 }
 
 </script>
+<script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+<SCRIPT LANGUAGE = "Javascript">
+  $(document).ready(function() {
+    $("a[href*='#']:not([href='#])").click(function() {
+      let target = $(this).attr("href");
+      $('html,body').stop().animate({
+        scrollTop: $(target).offset().top
+      }, 1000);
+      event.preventDefault();
+    });
+  });
+</SCRIPT>
 </head>
 
 <!-- CSS tự định nghĩa -->
@@ -81,14 +93,14 @@ evt.currentTarget.className += " active";
     </div>
   </style>
 
-  <body style="background-color: #EEEEEE">
+  <body style="background-color: #EEEEEE" id="backtotop">
 
     <%- include header %>
-    <main role="main" style="margin-bottom: 620px;">
+    <main role="main" >
       <div class="container marketing">
         <br>
         <p>
-        <a href="/survey?id=<%=survey.survey_id%>"  role="button" class="btn btn-primary"><ion-icon name="arrow-round-back"></ion-icon> Trở về phiếu khảo sát</a>
+          <a href="/survey?id=<%=survey.survey_id%>"  role="button" class="btn btn-primary"><ion-icon name="arrow-round-back"></ion-icon> Trở về phiếu khảo sát</a>
         </p>
         <div id="accordion">
           <div class="card">
@@ -111,8 +123,8 @@ evt.currentTarget.className += " active";
                       </p>
                       <p id="date1"></p>
                       <%if(number[0]){%>
-                    <p>Số người tham gia: <%=number[0].total%></p><%}else{%>
-                       <p>Số người tham gia: 0</p><%}%>
+                      <p>Số người tham gia: <%=number[0].total%></p><%}else{%>
+                      <p>Số người tham gia: 0</p><%}%>
                     </div>
                   </div>
                 </div>
@@ -124,15 +136,15 @@ evt.currentTarget.className += " active";
         
         <div class="tab">
           <div class="scroll" style="width:325px; display:block; border: 1px solid #999; padding:5px; height:498px; overflow:scroll;">
-          <%
-          var dem=0;
-          for(var i=0;i< squest.length;i++){
-          dem++;
-          if(i==0){%>
-          <button  id="defaultOpen" class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
-          <% }else {%>
-          <button class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
-          <%}}%>
+            <%
+            var dem=0;
+            for(var i=0;i< squest.length;i++){
+            dem++;
+            if(i==0){%>
+            <button  id="defaultOpen" class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
+            <% }else {%>
+            <button class="tablinks" onclick="openCity(event, '<%= squest[i].squest_id%>')">Câu <%=dem%></button>
+            <%}}%>
           </div>
         </div>
         
@@ -146,28 +158,28 @@ evt.currentTarget.className += " active";
           <h3>Câu <%=dem%></h3>
           <p><%= squest[j].squest_text%></p>
           <div class="scroll" style=" display:block; height: 390px; overflow:scroll;">
-          <div id="accordion">
-            <%
-            var de=0;
-            for(var k=0;k< texts.length;k++){
+            <div id="accordion">
+              <%
+              var de=0;
+              for(var k=0;k< texts.length;k++){
 
-            if(squest[j].squest_id==texts[k].quest_id){ de++; %>
-            <div class="card">
-              <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#collapseOne<%=k%>">
-                 Câu trả lời <%=de%>:
-               </a>
-             </div>
-             <div id="collapseOne<%=k%>" class="collapse show" data-parent="#accordion">
-              <div class="card-body">
-               <%=texts[k].textreponse%>
+              if(squest[j].squest_id==texts[k].quest_id){ de++; %>
+              <div class="card">
+                <div class="card-header">
+                  <a class="card-link" data-toggle="collapse" href="#collapseOne<%=k%>">
+                   Câu trả lời <%=de%>:
+                 </a>
+               </div>
+               <div id="collapseOne<%=k%>" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                 <%=texts[k].textreponse%>
+               </div>
              </div>
            </div>
-         </div>
 
-         <%}}%>
+           <%}}%>
+         </div>
        </div>
-      </div>
      </div>
      <%}if(squest[j].quest_type_id==3){ var de3=0;%>
      <div id="<%=squest[j].squest_id%>" class="tabcontent">
@@ -432,7 +444,14 @@ evt.currentTarget.className += " active";
 // });
 </script>
 
-<p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+
+<!-- Quay về đầu trang -->
+
+<div >
+  <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%;padding-top: 60px; "></i></a>
+</div>
+<hr id = "phienhoidap" class="featurette-divider">
+
 </div>
 <%- include update_inf_user %>
 </main>
@@ -447,7 +466,7 @@ evt.currentTarget.className += " active";
 
 <script type="text/javascript">
   <% var n =  JSON.stringify(survey.startdate)%>;
- 
+  
   var text1 = <%- n%> ;
   
   var date1 = new Date(text1);

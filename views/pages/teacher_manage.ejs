@@ -21,234 +21,246 @@
   <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
   <script src="/angular.ng-modules.js"></script>
   <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 
 <!-- BODY -->
-<body style="background-color: #EEEEEE">
+<body style="background-color: #EEEEEE" id = "backtotop">
 
   <%- include header %>
   <!-- MAIN -->
-    <main role="main">
+  <main role="main">
+    
+    <!-- Tài khoản -->
+    <% var numbersurvey = info[2].length; %>
+    <% var numbersection = info[1].length; %>
+    <div class="container"><br>
+      <div class="card">
+        <div class="card-body">
+          <div class="row padding">
+            <div class="col-3 col-sm-2 col-md-2">
+              <div class="card">
+                <img class="card-img-top" src="./images/avatar2.jpg">
+              </div>
+            </div>
+            <div class="col-9 col-sm-9 col-md-9">
+              <div class="card-body">
+                <h4 class="card-title"><%=info[0][0].name%></h4>
+                <p class="card-text">Chức vụ: Giảng viên<br>
+                  Tổng số phiên khảo sát: <%=numbersurvey%><br>
+                  Tổng số phiên hỏi đáp: <%=numbersection%>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
 
-      <!-- Tài khoản -->
-      <% var numbersurvey = info[2].length; %>
-      <% var numbersection = info[1].length; %>
-        <div class="container"><br>
-          <div class="card">
-            <div class="card-body">
-              <div class="row padding">
-                  <div class="col-3 col-sm-2 col-md-2">
-                    <div class="card">
-                      <img class="card-img-top" src="./images/avatar2.jpg">
+    <!-- Nội dung -->
+    <div class="container">
+      <div class="card">
+        <div class="card-header" >
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#comment" data-toggle="tab">Bình luận</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#session" data-toggle="tab">Phiên hỏi đáp</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#survey" data-toggle="tab">Phiếu khảo sát</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body" >
+          <div class="tab-content">
+            <div id="comment" class="tab-pane active" role="tabpanel">
+              <%for (var i = 0; i < info[3].length; i++) { %>
+
+              <div class="card-body">
+                <div class="card" id="cmt">
+                  <div class="card-body d-inline" >
+                    <div class="row">
+                      <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-6">
+                        Bạn đã bình luận "<%=info[3][i].content%>""
+                        <br>
+                        <a href="/question?question_id=<%=info[3][i].question_id%>" class="card-link">Chi tiết-></a>
+                      </div>
                     </div>
                   </div>
-                <div class="col-9 col-sm-9 col-md-9">
-                  <div class="card-body">
-                    <h4 class="card-title"><%=info[0][0].name%></h4>
-                      <p class="card-text">Chức vụ: Giảng viên<br>
-                        Tổng số phiên khảo sát: <%=numbersurvey%><br>
-                        Tổng số phiên hỏi đáp: <%=numbersection%>
-                      </p>
+                </div>
+
+                <br>
+
+              </div>
+              <%}%>
+              <%for (var i = 0; i < info[4].length; i++) { %>
+              <div class="card-body">
+                <div class="card" id="cmt">
+                  <div class="card-body d-inline">
+                    <div class="row">
+                      <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-6">
+                        Bạn đã bình luận "<%=info[4][i].cmt%>""
+                        <br>
+                        <a href="/question?question_id=<%=info[4][i].question_id%>" class="card-link">Chi tiết-></a>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                <br>
+
+              </div>
+              <%}%>
+            </div>
+
+            <br>
+            <div id="survey" class="tab-pane" role="tabpanel">
+              <div class="card-body" ng-module="paginationApppm"  ng-controller="listapppm">
+                <form id="search1" class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px;"placeholder="Tìm kiếm phiếu khảo sát" aria-label="Search" required>
+                </form>
+                <div  ng-click="sort('tieude')" class=" glyphicon sort-icon" ng-show="sortKey=='tieude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+                <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+                  <div class="row padding">
+                    <div class="col-3 col-sm-3 col-md-2"  >
+                     <img class="card-img-top" style="max-width: 80px; max-height: 80px; margin:auto;" src="./images/logo3.jpg" >
+                   </div>
+                   <div class="col-8 col-sm-5 col-md-7">
+                    <div class="card-body">
+                      <h5 class="card-title"><a href="{{vlue.link}}">{{vlue.tieude}}</a></h5>
+                      <p class="card-text">{{vlue.mota}}<br>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <dir-pagination-controls
+              max-size="1"
+              direction-links="true"
+              boundary-links="true"  >
+            </dir-pagination-controls>
+          </div>
+          <script type="text/javascript">
+           var phieum=[];
+         </script>
+         <%for (var i = 0; i < info[2].length; i++) { %>
+         <script type="text/javascript">
+           phieum.push({
+             "tieude": "<%=info[2][i].title%>",
+             "mota":"<%=info[2][i].description%>",
+             "link": "/survey?id="+<%=info[2][i].survey_id%>,
+           });
+         </script>
+         <%}%>
+         <script type="text/javascript">
+           var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
+           app.controller('listapppm', function($scope){
+             $scope.phieum=phieum;
+           });
+         </script>
+       </div>
+
+       <div id="session" class="tab-pane" role="tabpanel">
+        <div class="card-body" ng-module="paginationses"  ng-controller="listses">
+          <form id="search1" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px;"placeholder="Tìm kiếm phiếu hỏi đáp" aria-label="Search" required>
+          </form>
+          <div  ng-click="sort('tieudes')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudes'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
+          <div class="card" id="ses" style="margin-bottom:10px;" dir-paginate="value in ses|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+            <div class="row padding">
+              <div class="col-3 col-sm-3 col-md-2">
+                <div class="card">
+                 <img class="card-img-top" src="./images/logo2.jpg" >
+               </div>
+             </div>
+             <div class="col-5 col-sm-5 col-md-6">
+              <div class="card-body">
+                <h5 class="card-title"><a href="{{value.links}}">{{value.tieudes}}
+                </a></h5>
+                <p class="card-text">Mô tả: {{value.motas}}<br>
+                </p>
               </div>
             </div>
           </div>
         </div>
         <br>
-
-      <!-- Nội dung -->
-        <div class="container">
-          <div class="card">
-            <div class="card-header" >
-              <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#comment" data-toggle="tab">Bình luận</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#session" data-toggle="tab">Phiên hỏi đáp</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#survey" data-toggle="tab">Phiếu khảo sát</a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body" >
-              <div class="tab-content">
-                <div id="comment" class="tab-pane active" role="tabpanel">
-                <%for (var i = 0; i < info[3].length; i++) { %>
-
-                  <div class="card-body">
-                    <div class="card" id="cmt">
-                      <div class="card-body d-inline" >
-                        <div class="row">
-                          <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-6">
-                            Bạn đã bình luận "<%=info[3][i].content%>""
-                            <br>
-                            <a href="/question?question_id=<%=info[3][i].question_id%>" class="card-link">Chi tiết-></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <br>
-
-                  </div>
-                <%}%>
-                <%for (var i = 0; i < info[4].length; i++) { %>
-                  <div class="card-body">
-                    <div class="card" id="cmt">
-                      <div class="card-body d-inline">
-                        <div class="row">
-                          <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-6">
-                            Bạn đã bình luận "<%=info[4][i].cmt%>""
-                            <br>
-                            <a href="/question?question_id=<%=info[4][i].question_id%>" class="card-link">Chi tiết-></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <br>
-
-                  </div>
-                <%}%>
-                </div>
-
-                <br>
-                <div id="survey" class="tab-pane" role="tabpanel">
-                  <div class="card-body" ng-module="paginationApppm"  ng-controller="listapppm">
-                    <form id="search1" class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px;"placeholder="Tìm kiếm phiếu khảo sát" aria-label="Search" required>
-                    </form>
-                    <div  ng-click="sort('tieude')" class=" glyphicon sort-icon" ng-show="sortKey=='tieude'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
-                    <div class="card" id="sur"  style="margin-bottom:10px;" dir-paginate="vlue in phieum|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
-                          <div class="row padding">
-                            <div class="col-3 col-sm-3 col-md-2"  >
-                               <img class="card-img-top" style="max-width: 80px; max-height: 80px; margin:auto;" src="./images/logo3.jpg" >
-                            </div>
-                            <div class="col-8 col-sm-5 col-md-7">
-                              <div class="card-body">
-                                <h5 class="card-title"><a href="{{vlue.link}}">{{vlue.tieude}}</a></h5>
-                                <p class="card-text">{{vlue.mota}}<br>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-                    <br>
-                    <dir-pagination-controls
-                      max-size="1"
-                      direction-links="true"
-                      boundary-links="true"  >
-                    </dir-pagination-controls>
-                  </div>
-                  <script type="text/javascript">
-                       var phieum=[];
-                   </script>
-                   <%for (var i = 0; i < info[2].length; i++) { %>
-                       <script type="text/javascript">
-                         phieum.push({
-                           "tieude": "<%=info[2][i].title%>",
-                           "mota":"<%=info[2][i].description%>",
-                           "link": "/survey?id="+<%=info[2][i].survey_id%>,
-                         });
-                         </script>
-                         <%}%>
-                   <script type="text/javascript">
-                     var app = angular.module('paginationApppm', ['angularUtils.directives.dirPagination']);
-                      app.controller('listapppm', function($scope){
-                       $scope.phieum=phieum;
-                       });
-                   </script>
-                </div>
-
-                 <div id="session" class="tab-pane" role="tabpanel">
-                  <div class="card-body" ng-module="paginationses"  ng-controller="listses">
-                    <form id="search1" class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="search" ng-model="search" style ="margin-bottom: 10px; width: 500px;"placeholder="Tìm kiếm phiếu hỏi đáp" aria-label="Search" required>
-                    </form>
-                    <div  ng-click="sort('tieudes')" class=" glyphicon sort-icon" ng-show="sortKey=='tieudes'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':reverse}"  ></div>
-                    <div class="card" id="ses" style="margin-bottom:10px;" dir-paginate="value in ses|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
-                          <div class="row padding">
-                            <div class="col-3 col-sm-3 col-md-2">
-                              <div class="card">
-                               <img class="card-img-top" src="./images/logo2.jpg" >
-                              </div>
-                            </div>
-                            <div class="col-5 col-sm-5 col-md-6">
-                              <div class="card-body">
-                                <h5 class="card-title"><a href="{{value.links}}">{{value.tieudes}}
-                                </a></h5>
-                                <p class="card-text">Mô tả: {{value.motas}}<br>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-                    <br>
-                    <dir-pagination-controls
-                      max-size="1"
-                      direction-links="true"
-                      boundary-links="true"  >
-                    </dir-pagination-controls>
-                  </div>
-                  <script type="text/javascript">
-                       var ses=[];
-                   </script>
-                   <%for (var i = 0; i < info[1].length; i++) { %>
-                       <script type="text/javascript">
-                         ses.push({
-                           "tieudes": "<%=info[1][i].sec_title%>",
-                           "motas":"<%=info[1][i].sec_desc%>",
-                           "links": "/new_session?id="+<%=info[1][i].section_id%>,
-                         });
-                         </script>
-                         <%}%>
-                   <script type="text/javascript">
-                     var app = angular.module('paginationses', ['angularUtils.directives.dirPagination']);
-                      app.controller('listses', function($scope){
-                       $scope.ses=ses;
-                       });
-                   </script>
-                </div>
-
-
-
-              </div>
-            </div>
-          </div>
-            <!-- Quay về đầu trang -->
-    <br>
-    <div class="text-center">
-    <a href="#"><h5>Back to top</h5></a>
+        <dir-pagination-controls
+        max-size="1"
+        direction-links="true"
+        boundary-links="true"  >
+      </dir-pagination-controls>
     </div>
-        </div>
-
-    </main>
-
-  <!-- FOOTER -->
-    <footer id="footer">
-      <ul style="padding: 15px; margin-bottom: 0px;">
-        <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
-        <p style="font-size: 12px"> @2019 design by Team 5</p>
-      </ul>
-    </footer>
-
-
-  <!-- Nút xóa -->
     <script type="text/javascript">
-      $("#button1").click(function(){
-      $("#cmt").remove();
-      });
-      $("#button3").click(function(){
-      $("#ses").remove();
-      });
-      $("#button4").click(function(){
-      $("#sur").remove();
-      });
-    </script>
+     var ses=[];
+   </script>
+   <%for (var i = 0; i < info[1].length; i++) { %>
+   <script type="text/javascript">
+     ses.push({
+       "tieudes": "<%=info[1][i].sec_title%>",
+       "motas":"<%=info[1][i].sec_desc%>",
+       "links": "/new_session?id="+<%=info[1][i].section_id%>,
+     });
+   </script>
+   <%}%>
+   <script type="text/javascript">
+     var app = angular.module('paginationses', ['angularUtils.directives.dirPagination']);
+     app.controller('listses', function($scope){
+       $scope.ses=ses;
+     });
+   </script>
+ </div>
+
+
+
+</div>
+</div>
+</div>
+<br>
+<br>
+<div id="lentren">
+  <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
+</div>
+<hr id = "phienhoidap" class="featurette-divider">
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <ul style="padding: 15px; margin-bottom: 0px;">
+    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+    <p style="font-size: 12px"> @2019 design by Team 5</p>
+  </ul>
+</footer>
+
+
+<!-- Nút xóa -->
+<script type="text/javascript">
+  $("#button1").click(function(){
+    $("#cmt").remove();
+  });
+  $("#button3").click(function(){
+    $("#ses").remove();
+  });
+  $("#button4").click(function(){
+    $("#sur").remove();
+  });
+</script>
 
 </body>
 </html>
