@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<!-- HEAD -->
+<head>
+  <!-- Cần thiết cho 1 web -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/index&manage.css">
+  <link rel="stylesheet" href="/bootstrap/bootstrap-4.0.0.min.js">
+  <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+
+
+  <title>Lỗi</title>
+
+  <!-- Thư viện online cho Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- Xử lý Navigation -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
+  <script src="/angular.ng-modules.js"></script> <!--nguồn code tham khảo https://github.com/luisperezphd/ngModule-->
+  <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
+</head>
+
+<!-- BODY -->
+<body style="background-color: #eeeeee;" id = "backtotop">
+
+  <%- include header %>
+  <div class="container"><br>
+   <h3>Oops, Trang bạn muốn đã không còn tồn tại rồi!!!!</h3>
+    </div>
+   
+
+
+
+<!-- FOOTER -->
+<footer id="footer">
+  <ul style="padding: 15px; margin-bottom: 0px;">
+    <h2 style="padding-bottom: 0px;text-decoration: none;">Hệ thống hỏi - đáp Q&A</h2>
+    <p style="font-size: 12px"> @2019 design by Team 5</p>
+  </ul>
+</footer>
+<script type="text/javascript">
+
+
+</script>
+</body>
+</html>

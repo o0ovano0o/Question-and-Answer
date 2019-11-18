@@ -90,7 +90,8 @@ router.get(
     scope: ['profile', 'email']
   })
 );
-router.use('/sendmail', require(__dirname + '/sendmail.js'))
+router.use('/sendmail', require(__dirname + '/sendmail.js'));
+router.use('/oop', require(__dirname + '/oop.js'))
 router.get('/auth/google/callback', passport.authenticate('google', { successRedirect : '/homefb', failureRedirect: '/login' }));
 router.use('/login', require(__dirname + '/login.js'));
 router.use('/home', require(__dirname + '/main.js'));

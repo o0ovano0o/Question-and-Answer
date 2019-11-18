@@ -102,20 +102,21 @@
       <div class="card-header"><h3>Nhập câu hỏi bằng văn bản</h3></div>
       <div class="card-body">
         <form action="/createquestions/?id=<%=survey.survey_id%>" method="POST">
-          <textarea rows="15" id="text" name="text" style="width: 100%;" >Bạn là gì ?{
-            học sinh/
-            giáo viên/
-            người thứ 3
-          }(1);
-          Bạn thích gì ?{
-          kẹo/
-          kem/
-          me/
-          xoài/
-          bim bim
-        }(2);
-        Bạn là nam?(3);
-      Bạn có suy nghĩ gì?(4);</textarea>
+          <textarea rows="15" id="text" name="text" style="width: 100%;" >
+Bạn là gì ?{
+học sinh/
+giáo viên/
+người thứ 3
+}(1);
+Bạn thích gì ?{
+kẹo/
+kem/
+me/
+xoài/
+bim bim
+}(2);
+Bạn là nam?(3);
+Bạn có suy nghĩ gì?(4);</textarea>
       
       <input type="submit" name="submit"  value="Tạo" class="btn btn-success">
     </form>
