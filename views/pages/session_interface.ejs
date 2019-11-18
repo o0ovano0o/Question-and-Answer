@@ -161,7 +161,7 @@
        </div>
      </div>
    </div>
-   <div class="card" style="border-radius: 10px;width: 100%;">
+   <div class="card" style="border-radius: 10px;width: 100%;margin-top: 10px;">
     <div class="card-header d-inline" style="background-color: #888;border-top-left-radius: 6px;border-top-right-radius: 6px;">
       <h5>Danh sách câu hỏi</h5>
           <!-- <div class="dropdown" class="text-right">
@@ -174,24 +174,24 @@
           </div> -->
 
         </div>
-        <div class="card-body" style="background-color: #dddddd;border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;width: 100%;">
+        <div class="card-body" style="border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;width: 100%;background-color: #dddddd;">
          <%if (sections[0][0].sec_isopen==1){%>
          
          <form method="POST" action="/new_session?id=<%=sections[0][0].section_id%>">
           <div class="row">
-            <div class="col-10 col-sm-10 col-md-10">
+            <div class="col-1 col-sm-1 col-md-1"></div>
+            <div class="col-9 col-sm-9 col-md-9">
               <textarea type="text" name="context" rows="1" class="form-control" id="search2" placeholder="Đặt câu hỏi ..."></textarea> 
             </div>
-            <div class="col-2 col-sm-2 col-md-2">
-              <input class="btn btn-outline-secondary" type="submit" value="Gửi" style="margin-left: 15px;">
+            <div class="col-1 col-sm-1 col-md-1">
+              <input class="btn btn-outline-secondary" type="submit" value="Gửi" style="margin-left: -15px;margin-bottom: 20px;">
             </div>
           </div>
         </form>
         
         <%}%>
-      </div>
       <% sections[1].forEach(function(section) { %>
-      <div class="card" style="border-radius: 6px;margin-top: 10px;">
+      <div class="card" style="border-radius: 6px;margin-top: 3px;">
         <div class="row padding">
           <div class="col-3 col-sm-3 col-md-2">
             <div class="card" style="border-top-left-radius: 6px;border-bottom-left-radius: 6px;">
@@ -222,7 +222,7 @@
       </div>
     </div><br>
     <% }); %>
-
+  </div>
   </div>
   <!-- Quay về đầu trang -->
   <br>
