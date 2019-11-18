@@ -7,11 +7,13 @@ router.post('/', function(req, res) {
   if (req.session.user) {
     var id = req.query.id;
     var ids=req.body.del;
-    for (var i = 0; i < ids.length; i++) {
-      ids[i]
-       var query = conn.query("DELETE FROM squest WHERE ? ", {squest_id: ids[i]}, (err, num) => {
-      if (err) {throw err;}
-      else;});
+    if(typeof ids!="undefined"){
+      for (var i = 0; i < ids.length; i++) {
+        ids[i]
+         var query = conn.query("DELETE FROM squest WHERE ? ", {squest_id: ids[i]}, (err, num) => {
+        if (err) {throw err;}
+        else;});
+      }
     }
    res.redirect('/survey?id=' + req.query.id );
   }
