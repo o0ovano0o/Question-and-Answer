@@ -13,8 +13,13 @@ router.get('/', function (req, res) {
 			if(err) throw err;
 			else{
 				var sections = results;
+				if(!sections[0][0]){
+					res.redirect('oop');
+				}
+				else{
 				res.render('session_interface', {session:req.session.user, sections: sections});
 			}
+		}
 		});
 	}
 	else {

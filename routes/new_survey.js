@@ -12,8 +12,13 @@ router.get('/', function(req, res) {
       if (err) {defer.reject(err);}
 			else {
         survey = num[0];
+        if(!survey){
+          res.redirect('oop');
+        }
+        else{
         squest = num;
         defer.resolve(num);
+      }
       }
     });
 

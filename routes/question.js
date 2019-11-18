@@ -14,8 +14,13 @@ router.get('/', function (req, res) {
 		conn.query(sql,[id, id, id, id], function(err, question) {	
 			if(err) throw err;
 			else{
+				if(!question[0][0]){
+					res.redirect('oop');
+				}
+				else{
 				res.render('question_interface',{session: req.session.user, question}); } 
-		});
+		}
+	});
 	}
 	else{
 		res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});

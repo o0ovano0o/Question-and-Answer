@@ -8,11 +8,8 @@ router.get('/', function (req, res) {
   if(req.session.user) {
      
              res.render('oop',{session: req.session.user}); 
-
-     
   }
-
-  else{
+else{
     res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
   }
 });
