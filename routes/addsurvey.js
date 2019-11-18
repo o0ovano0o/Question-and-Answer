@@ -10,8 +10,8 @@ router.get('/', function (req, res) {
       var query = conn.query("SELECT survey.* FROM `survey` LEFT JOIN survey_section ON survey_section.survey_id=survey.survey_id WHERE survey_section.survey_id IS NULL and author= ? ", [ req.session.user.username], (err, result) => {
             if (err) throw err;
             else {
-             res.render('addsurvey',{session: req.session.user, result,id:id}); } 
-            
+             res.render('addsurvey',{session: req.session.user, result,id:id}); }
+
         });
   }
 
@@ -21,34 +21,36 @@ router.get('/', function (req, res) {
 });
 router.post('/', function (req, res) {
   if(req.session.user) {
-     var id = req.query.id;
-     var sid= req.body.ids;
-     if(Array.isArray(sid)){
-     for (var i = 0; i < sid.length; i++) {
-      ss = {
-        section_id:id,
-        survey_id:sid[i]
-      };
-        
-      var query = conn.query("insert into survey_section set ?",ss, (err, squests) => {
-            if (err) throw err;
-            else;
-        });
-     }
+       var id = req.query.id;
+       var sid= req.body.ids;
+    if(typeof sid!="undefined"){
+       if(Array.isArray(sid)){
+
+           for (var i = 0; i < sid.length; i++) {
+            ss = {
+              section_id:id,
+              survey_id:sid[i]
+            };
+            var query = conn.query("insert into survey_section set ?",ss, (err, squests) => {
+                  if (err) throw err;
+                  else;
+              });
+           }
+
+       }
+       else{
+         ss = {
+            section_id:id,
+            survey_id:sid
+          };
+         var query = conn.query("insert into survey_section set ?",ss, (err, squests) => {
+                if (err) throw err;
+                else;
+            });
+       }
+    }
+     res.redirect('/new_session?id='+id );
    }
-   else{
-     ss = {
-        section_id:id,
-        survey_id:sid
-      };
-     
-     var query = conn.query("insert into survey_section set ?",ss, (err, squests) => {
-            if (err) throw err;
-            else;
-        });
-     }
-   res.redirect('/new_session?id='+id );
-  }
 
   else{
     res.render('login',{data: {error:  "Mời bạn đăng nhập!"}});
