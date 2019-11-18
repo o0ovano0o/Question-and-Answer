@@ -23,20 +23,31 @@
   <script src="/dirPagination.js"> </script> <!-- nguồn code tham khảo https://www.youtube.com/watch?v=wee_si2U3M4-->
   <script src="/angular.ng-modules.js"></script> <!--nguồn code tham khảo https://github.com/luisperezphd/ngModule-->
   <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 <style type="text/css">
   #id:hover {
     background: #dddddd;
-}
+  }
 
 </style>
 <!-- BODY -->
-<body style="background-color: #eeeeee;">
+<body style="background-color: #eeeeee;" id = "backtotop">
 
   <%- include header %>
   <div class="container"><br>
-    <div class="card" style="margin:10px;">
+    <div class="card" style="margin:10px;min-height: 250px;">
       <div class="card-header" style="background-color: #bbbbbb;">
         <h4>Thông báo của bạn</h4>
       </div>
@@ -62,16 +73,17 @@
         <%}else{%>
         <h4>Bạn chưa có thông báo nào cả!</h4>
         <%}%>
-<%- include update_inf_user %>
+        <%- include update_inf_user %>
       </div>
     </div>
+    <br>
+    <br>
+    <div id="lentren">
+      <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
+    </div>
+    <hr id = "phienhoidap" class="featurette-divider">
   </div>
-  <!-- Quay về đầu trang -->
-  <br>
-  <br>
-  <div class="text-center">
-    <a href="#"><h5>Back to top</h5></a>
-  </div>
+
 
 
   <!-- FOOTER -->

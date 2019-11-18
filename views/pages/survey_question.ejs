@@ -17,6 +17,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src = "https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
+  <SCRIPT LANGUAGE = "Javascript">
+    $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
+  </SCRIPT>
 </head>
 
 
@@ -39,67 +51,72 @@
   }
 </style>
 
-<body style="background-color: #EEEEEE">
+<body style="background-color: #EEEEEE" id = "backtotop">
 
   <%- include header %>
   
-    <main role="main">
+  <main role="main">
 
-      <div class="container marketing">
+    <div class="container marketing">
 
-       <div class="container" style="margin-top: 50px; background-color: white;border-radius: 35px;">
-        <form action="/createsurvey"  method="POST">
-          <div >
-                 <div >
-                  <br>
-                  <label for="title" class="col-form-label">
-                    <h3>Tên phiếu khảo sát </h3></label>
-                </div>
-                <div >
-                  <input type="text" name="title" class="form-control"    style="width:90%;border-radius: 5px; margin: 15px;padding: 5px;" placeholder="Tiêu đề phiếu khảo sát" required >
-                </div>
+     <div class="container" style="margin-top: 50px; background-color: white;border-radius: 35px;">
+      <form action="/createsurvey"  method="POST">
+        <div >
+         <div >
+          <br>
+          <label for="title" class="col-form-label">
+            <h3>Tên phiếu khảo sát </h3></label>
           </div>
           <div >
-                 <div >
-                  <label for="description" class="col-form-label"><h4>Mô tả khảo sát</h4> </label>
-                </div>
-                <div >
-                  <textarea name="description" rows="3" style="padding: 5px; border-radius: 5px; margin: 15px;width: 90%;" placeholder="Mô tả, Giới thiệu phiếu khảo sát của bạn" required ></textarea>
-                </div>
-          </div><br>
+            <input type="text" name="title" class="form-control"    style="width:90%;border-radius: 5px; margin: 15px;padding: 5px;" placeholder="Tiêu đề phiếu khảo sát" required >
+          </div>
+        </div>
+        <div >
+         <div >
+          <label for="description" class="col-form-label"><h4>Mô tả khảo sát</h4> </label>
+        </div>
+        <div >
+          <textarea name="description" rows="3" style="padding: 5px; border-radius: 5px; margin: 15px;width: 90%;" placeholder="Mô tả, Giới thiệu phiếu khảo sát của bạn" required ></textarea>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
           <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-              <div class="row">
-                <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3 text-right">
-                  <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
-                </div>
-                <div class="col-7 col-sm-7 col-md-7 col-xl-7 col-lg-7">
-                  <input type="date" name="date_begin" class="form-control" id="date1" onblur="check();" disabled>
-                  <script>var now = new Date();
-
-                      var day = ("0" + now.getDate()).slice(-2);
-                      var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-                      var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-
-                      $('#date1').val(today);</script>
-                </div>
-              </div>
+            <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3 text-right">
+              <label for="date_begin" class="col-form-label">Ngày bắt đầu: </label>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-              <div class="row">
-                <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3 text-right">
-                  <label for="date_end" class="col-form-label">Ngày kết thúc: </label>
-                </div>
-                <div class="col-7 col-sm-7 col-md-7 col-xl-7 col-lg-7">
-                  <input type="date" name="date_end" class="form-control" onblur="check();" id="date2" required >
-                </div>
-              </div>
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary" style="margin-top: 30px;margin-left: 40%;">Tạo phiếu khảo sát</button>
-          </div><br>
-</div>
-<p style="padding-top: 50px; float: right;"><a href="#">Back to top</a></p>
+            <div class="col-7 col-sm-7 col-md-7 col-xl-7 col-lg-7">
+              <input type="date" name="date_begin" class="form-control" id="date1" onblur="check();" disabled>
+              <script>var now = new Date();
+
+              var day = ("0" + now.getDate()).slice(-2);
+              var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+              var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+            $('#date1').val(today);</script>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="row">
+          <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3 text-right">
+            <label for="date_end" class="col-form-label">Ngày kết thúc: </label>
+          </div>
+          <div class="col-7 col-sm-7 col-md-7 col-xl-7 col-lg-7">
+            <input type="date" name="date_end" class="form-control" onblur="check();" id="date2" required >
+          </div>
+        </div>
+      </div>
+      <button type="submit" name="submit" class="btn btn-primary" style="margin-top: 30px;margin-left: 40%;">Tạo phiếu khảo sát</button>
+    </div><br>
+  </div>
+  <br>
+  <br>
+  <div id="lentren">
+    <a href="#backtotop"><i class="fas fa-angle-double-up" style="font-size: 35px;color: #555;margin-left: 90%; "></i></a>
+  </div>
+  <hr id = "phienhoidap" class="featurette-divider">
 </div>
 <%- include update_inf_user %>
 </main>
