@@ -27,17 +27,7 @@
     window.history.pushState("", "", '/home');
   </script>
   <script src="https://kit.fontawesome.com/a9ea3721b5.js" crossorigin="anonymous"></script>
-  <SCRIPT LANGUAGE = "Javascript">
-    $(document).ready(function() {
-      $("a[href*='#']:not([href='#])").click(function() {
-        let target = $(this).attr("href");
-        $('html,body').stop().animate({
-          scrollTop: $(target).offset().top
-        }, 1000);
-        event.preventDefault();
-      });
-    });
-  </SCRIPT>
+  
 </head>
 
 <!-- BODY -->
@@ -689,6 +679,15 @@
       return false;
     }
   }
+  $(document).ready(function() {
+      $("a[href*='#']:not([href='#])").click(function() {
+        let target = $(this).attr("href");
+        $('html,body').stop().animate({
+          scrollTop: $(target).offset().top
+        }, 1000);
+        event.preventDefault();
+      });
+    });
 </script>
 
 </body>
