@@ -18,7 +18,7 @@
   "homepage": "https://github.com/o0ovano0o/Question-and-Answer#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "config": "^3.2.2",
+    "config": "^3.3.8",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-generator": "^4.16.1",
